@@ -1,0 +1,13 @@
+// 颜色定义
+$system-color: #fff; // 系统色
+$system1-color: green; // 系统色
+// 页面高度
+html, body, #app {
+    height: 100%;
+    background-color: pink;
+}
+.test{
+    width: 75px;
+    height: 75px;
+    background-color: yellow;
+}
