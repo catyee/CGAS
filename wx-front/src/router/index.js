@@ -8,15 +8,19 @@ const routes = [
   {
     path: '/',
     name: 'Video-list',
+    meta: { title: '养老照料', keepAlive: false },
+   // component: () => import(/* webpackChunkName: "video" */ '../views/video')
     component: () =>  import(/* webpackChunkName: "video-list" */ '../views/video-list')
   },
   {
-    path: '/about',
-    name: 'About',
+    //path: '/video:id',
+    path: '/video',
+    name: 'video',
+    meta: { title: '', keepAlive: false },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "video" */ '../views/video')
   }
 ]
 

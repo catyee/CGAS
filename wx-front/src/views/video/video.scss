@@ -1,0 +1,26 @@
+.video{
+    padding: 24px 16px;
+    .video-title{
+        color: rgba(17, 17, 17, 0.9);
+        font-weight: 600;
+    }
+    .video-tag{
+        padding-top: 14px;
+        display: flex;
+        font-size: 14px;
+        align-items: center;
+        .tag{
+            color: #4566A4;
+        }
+        .time{
+            color: rgba(17, 17, 17, 0.65);
+        }
+    }
+    .video-desc{
+        padding: 24px 0;
+        text-indent: 2em; 
+        line-height: 32px;
+        color: #000;
+        font-weight: 400;
+    }
+}
