@@ -1,5 +1,8 @@
 .video{
     padding: 24px 16px;
+    .color-blue{
+        color: #4566A4;
+    }
     .video-title{
         color: rgba(17, 17, 17, 0.9);
         font-weight: 600;
@@ -9,9 +12,6 @@
         display: flex;
         font-size: 14px;
         align-items: center;
-        .tag{
-            color: #4566A4;
-        }
         .time{
             color: rgba(17, 17, 17, 0.65);
         }
@@ -22,5 +22,43 @@
         line-height: 32px;
         color: #000;
         font-weight: 400;
+    }
+    .video-tip{
+        display: flex;
+        justify-content: space-between;
+    }
+    .reader{
+        color: rgba(17, 17, 17, 0.5);
+    }
+    .good-job{
+        display: flex;
+        justify-content: center;
+        color: rgba(17, 17, 17, 0.5);
+        &.active{
+            color: #4566A4;
+        }
+    }
+    .related-video{
+        padding: 40px 0;
+    }
+    .related-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .all-video{
+        display: flex;
+        align-items: center;
+    }
+    .show-video{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        flex-wrap: nowrap;
+
+    }
+    .show-item{
+        flex: 1;
+        flex-shrink: 1;
     }
 }

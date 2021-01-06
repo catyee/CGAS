@@ -12,8 +12,10 @@
     "fastclick": "^1.0.6",
     "postcss-plugin-px2rem": "^0.8.1",
     "vant": "^2.12.1",
+    "videojs-contrib-hls.js": "^3.2.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "vue-video-player": "^5.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

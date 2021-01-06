@@ -70,10 +70,9 @@ export default {
     onLoad() {
        this.finished = true;
       setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 50; i++) {
           this.list.push(this.list.length + 1);
         }
-
         // 加载状态结束
         this.loading = false;
 
