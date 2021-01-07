@@ -26,18 +26,31 @@
     <div class="related-video">
       <div class="related-header">
         <span class="bold f16">相关推荐</span>
-        <span class="all-video color-tip pr-3"
+        <span class="all-video color-tip pr-3" @click="allVideo"
           >全部视频<van-icon name="arrow"
         /></span>
       </div>
-      <div class="show-video">
-        <div v-for="value in 3" :key="value" class="show-item">
-          <!-- <van-image
-           
-            src=""
-          /> -->
-          <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt="">
-          <div class="van-ellipsis pr-8 pl-8">这是一段最多显示一行的文字，多余的内容会被省略这是一段最多显示一行的文字，多余的内容会被省略</div>
+      <div class="show-video pt-16">
+        <div
+          v-for="value in 3"
+          :key="value"
+          class="show-item"
+          @click="showVideo()"
+        >
+          <div class="img-container">
+            <van-image
+              class="video-img"
+              src="https://img.yzcdn.cn/vant/cat.jpeg"
+              fit="fill"
+            >
+              <!-- 图片遮罩层 -->
+              <div class="bg"></div>
+            </van-image>
+          </div>
+          <!-- <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt=""> -->
+          <div class="van-ellipsis pr-8 pl-8">
+            这是一段最多显示一行的文字，多余的内容会被省略这是一段最多显示一行的文字，多余的内容会被省略
+          </div>
         </div>
       </div>
     </div>
@@ -97,6 +110,24 @@ export default {
     //   duration: 300,
     // });
   },
-  methods: {},
+  methods: {
+    showVideo() {
+      this.$router.push({
+        path: "/video/3",
+        query: {
+          type: "all",
+        },
+      });
+      //  this.$router.push({ path: '/user/deduce/' + id, query: { create: 1 } })
+    },
+    allVideo() {
+      this.$router.push({
+        path: "/",
+        query: {
+          type: "all",
+        },
+      });
+    },
+  },
 };
 </script>

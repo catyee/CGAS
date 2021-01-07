@@ -3,7 +3,7 @@
     <div class="list-title">
       <div>
         <span class="f14 c-111">老人状态 / </span
-        ><span class="f20 bold">自理老人</span>
+        ><span class="f20 bold" @click="toTest">自理老人</span>
       </div>
       <van-search v-model="searchKey" placeholder="按内容搜索" />
     </div>
@@ -67,6 +67,9 @@ export default {
     // });
   },
   methods: {
+    toTest() {
+      window.location.href = 'http://localhost:8080/video/1'
+    },
     onLoad() {
        this.finished = true;
       setTimeout(() => {
