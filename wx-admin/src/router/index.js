@@ -11,6 +11,24 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/login')
   },
   {
+    path: '/main',
+    main: 'main',
+    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
+    redirect: '/main/index',
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import(/* webpackChunkName: "index" */ '../views/index')
+      },
+      {
+        path: 'video-list',
+        name: 'video-list',
+        component: () => import(/* webpackChunkName: "index" */ '../views/video-list')
+      }
+    ]
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting

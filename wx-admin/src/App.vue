@@ -15,6 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
   min-width: 1200px;
   overflow: auto;
+
   // text-align: center;
   // color: #2c3e50;
 }

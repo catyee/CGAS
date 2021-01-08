@@ -1,0 +1,122 @@
+<template>
+  <div class="menu-container">
+    <el-menu :default-active="element.active" :router="true" class="menu-list" :unique-opened="true">
+      <el-menu-item index="/main/index">
+        <i class="el-icon-location"></i>
+        <span slot="title">首页</span>
+      </el-menu-item>
+      <el-submenu index="/main/video-list">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>视频管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/main/video-list">视频列表</el-menu-item>
+          <el-menu-item index="/main/2">上传视频</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="/main">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>关系管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/main">标签管理</el-menu-item>
+          <el-menu-item index="/main">新建关系</el-menu-item>
+          <el-menu-item index="/main">管理关系</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="/main">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>信息管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/main">意见反馈</el-menu-item>
+          <el-menu-item index="/main">合作洽谈</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="/main">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>管理员管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/main">修改密码</el-menu-item>
+          <el-menu-item index="/main">管理员列表</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+    </el-menu>
+  </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+      element: {
+        router: true, // 是否使用vue-router的模式 启用该模式会在激活导航时以index作为path进行路由跳转
+        // 当前激活菜单的index
+        active: ''
+      }
+    }
+  },
+  mounted () {
+    this.element.active = this.$route.path
+  }
+}
+</script>
+<style lang="scss" scoped>
+.menu-container {
+  width: $menu-width;
+  min-height: 100%;
+  background-color: #fff;
+}
+
+.menu-item {
+  background-color: yellow;
+}
+.menu-container /deep/ .el-submenu__title,
+.menu-container /deep/ .el-menu-item {
+  height: 64px;
+  line-height: 64px;
+  font-size: 16px;
+  color: #111;
+  &:hover {
+    background: $body-deep-color;
+    color: $system-color;
+    .iconfont {
+      color: $system-color;
+    }
+  }
+  &.is-active {
+    background-color: $body-deep-color;
+    color: $system-color;
+    .iconfont {
+      color: $system-color;
+    }
+
+  }
+   &:focus {
+    background-color: $body-deep-color;
+    color: $system-color;
+    .iconfont {
+      color: $system-color;
+    }
+  }
+}
+.menu-list /deep/ .el-menu-item-group .el-menu-item {
+  padding-left: 50px !important;
+}
+/deep/ .el-menu-item-group__title {
+  padding: 0;
+}
+/deep/ .is-active .el-submenu__title {
+  color: $system-color;
+  .iconfont {
+    color: $system-color;
+  }
+  i {
+    color: $system-color;
+  }
+}
+</style>

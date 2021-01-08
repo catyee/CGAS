@@ -26,13 +26,22 @@
     .content-bg{
         width: 786px;
         height: 641px;
+        background-image: url('../../assets/login-bg.png');
         border: 1px solid red;
         
     }
     .input-panel{
         margin-left: 88px;
         width: 404px;
-        height: 348px;
+        // height: 348px;
         background: #F4F4F4;
+        padding: 32px;
+        box-sizing: border-box;
+    }
+    .el-button{
+        width: 100%;
+    }
+    .el-form-item__content{
+        margin-left: 0;
     }
 }

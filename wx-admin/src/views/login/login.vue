@@ -6,10 +6,10 @@
     </div>
     <div class="login-content">
       <div class="content-bg">
-        <img src="../..//assets/login-bg.png" alt="" />
+        <!-- <img src="../..//assets/login-bg.png" alt="" /> -->
       </div>
       <div class="input-panel">
-        <div class="input-title">密码登录</div>
+        <div class="input-title bold f24 pb-39">密码登录</div>
         <el-form
           :model="ruleForm"
           status-icon
@@ -17,27 +17,25 @@
           ref="loginForm"
           label-width="80px"
         >
-          <el-form-item label="用户名" prop="username">
+          <el-form-item prop="username" label-width="0">
             <el-input
               type="text"
               v-model="ruleForm.username"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password">
+          <el-form-item prop="password" label-width="0">
             <el-input
               type="password"
               v-model="ruleForm.password"
               autocomplete="off"
             ></el-input>
-            <router-link to="/forget-password">
-              <div class="forget-pwd">忘记密码？</div>
-            </router-link>
           </el-form-item>
-          <el-form-item>
+          <el-form-item label-width="0" class="pt-22">
             <el-button
               type="primary"
               class="submit"
+              :loading="false"
               @click="submitForm('loginForm')"
             >
               <span v-if="!loading">登 录</span>
