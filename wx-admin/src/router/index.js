@@ -24,7 +24,42 @@ const routes = [
       {
         path: 'video-list',
         name: 'video-list',
-        component: () => import(/* webpackChunkName: "index" */ '../views/video-list')
+        component: () => import(/* webpackChunkName: "video-list" */ '../views/video-list')
+      },
+      {
+        path: 'cooperation',
+        name: 'cooperation',
+        component: () => import(/* webpackChunkName: "cooperation" */ '../views/cooperation')
+      },
+      {
+        path: 'suggest',
+        name: 'suggest',
+        component: () => import(/* webpackChunkName: "suggest" */ '../views/suggest')
+      },
+      {
+        path: 'administrator',
+        name: 'administrator',
+        component: () => import(/* webpackChunkName: "administrator" */ '../views/administrator')
+      },
+      {
+        path: 'tag-list',
+        name: 'tag-list',
+        component: () => import(/* webpackChunkName: "tag-list" */ '../views/tag-list')
+      },
+      {
+        path: 'relation-list',
+        name: 'relation-list',
+        component: () => import(/* webpackChunkName: "relation-list" */ '../views/relation-list')
+      },
+      {
+        path: 'video',
+        name: 'video',
+        component: () => import(/* webpackChunkName: "video" */ '../views/video')
+      },
+      {
+        path: 'add-video',
+        name: 'video',
+        component: () => import(/* webpackChunkName: "add-video" */ '../views/add-video')
       }
     ]
   },

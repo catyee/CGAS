@@ -6,12 +6,13 @@
       <div class="time">今天</div>
     </div>
     <div class="video-content">
-      <video-player
-        class="vjs-custom-skin"
-        :options="playerOptions"
-        :playsinline="true"
-      >
-      </video-player>
+       <video-player class="vjs-custom-skin"
+                        ref="videoPlayer"
+                        :options="playerOptions"
+                        customEventName="changed"
+                        @ready="playerIsReady"
+                        @changed="playerStateChanged($event)">
+          </video-player>
     </div>
     <div class="video-desc">
       随着年龄的增长，人身体的各项生理机能都会发生退化，抵抗力变弱，因此，老年人很容易被一些疾病困扰，且不易恢复，例如感冒。感冒对于普通人群来说可能是小病，但对于老年人(特别是高龄老人)则属大病，因为感冒的并发症和继发感染严重者可危及老人生命。
@@ -83,6 +84,7 @@ export default {
       loading: false,
       finished: false,
       playerOptions: {
+         height: '360',
         // videojs options
         //width: document.documentElement.clientWidth,
         //height: '360',
@@ -99,6 +101,7 @@ export default {
             src: "http://vjs.zencdn.net/v/oceans.mp4",
           },
         ],
+          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-6.jpg"
         // poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg", //封面地址
       },
     };

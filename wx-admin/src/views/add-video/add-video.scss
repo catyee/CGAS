@@ -1,0 +1,35 @@
+.add-video{
+    .selector{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 23px;
+
+    }
+    .title-line{
+        width: 3px;
+        height: 16px;
+        background: #C23731;
+    }
+    .color-green{
+        color: #1F9875;
+    }
+    .color-red{
+        color: #FF5F58;
+    }
+    .color-grey{
+        color:#7E888A;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    .content{
+        background-color: #fff;
+        padding: 32px;
+        margin: 0px 0 0 16px;
+        max-width: 704px;
+        box-sizing: border-box;
+    }
+}

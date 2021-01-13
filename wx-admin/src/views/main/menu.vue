@@ -12,38 +12,38 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/main/video-list">视频列表</el-menu-item>
-          <el-menu-item index="/main/2">上传视频</el-menu-item>
+          <el-menu-item index="/main/add-video">上传视频</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main">
+      <el-submenu index="/main/tag-list">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>关系管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main">标签管理</el-menu-item>
-          <el-menu-item index="/main">新建关系</el-menu-item>
-          <el-menu-item index="/main">管理关系</el-menu-item>
+          <el-menu-item index="/main/tag-list">标签管理</el-menu-item>
+          <el-menu-item index="/main/relation-list">新建关系</el-menu-item>
+          <el-menu-item index="/main/relation-list">管理关系</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main">
+      <el-submenu index="/main/cooperation">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>信息管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main">意见反馈</el-menu-item>
-          <el-menu-item index="/main">合作洽谈</el-menu-item>
+          <el-menu-item index="/main/cooperation">合作洽谈</el-menu-item>
+          <el-menu-item index="/main/suggest">意见反馈</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main">
+      <el-submenu index="/main/administrator">
         <template slot="title">
           <i class="el-icon-location"></i>
           <span>管理员管理</span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="/main">修改密码</el-menu-item>
-          <el-menu-item index="/main">管理员列表</el-menu-item>
+          <el-menu-item index="/main/administrator">管理员列表</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

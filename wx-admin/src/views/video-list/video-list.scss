@@ -1,0 +1,44 @@
+.video-list{
+    .selector{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 23px;
+
+    }
+    .title-line{
+        width: 3px;
+        height: 16px;
+        background: #C23731;
+    }
+    .color-grey{
+        color:#7E888A;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    .no-wrap{
+        white-space: nowrap;
+    }
+    .el-select{
+        width: 120px;
+    }
+    .oper-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .list-container{
+        background-color: #fff;
+        padding: 8px 16px;
+    }
+    .color-green{
+        color: #1F9875;
+    }
+    .color-red{
+        color: #FF5F58;
+    }
+  
+}
