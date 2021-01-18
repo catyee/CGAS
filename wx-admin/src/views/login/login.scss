@@ -27,7 +27,7 @@
         width: 786px;
         height: 641px;
         background-image: url('../../assets/login-bg.png');
-        border: 1px solid red;
+        background-size: contain;
         
     }
     .input-panel{
@@ -43,5 +43,9 @@
     }
     .el-form-item__content{
         margin-left: 0;
+    }
+    .forget-pwd{
+        text-align: right;
+        cursor: pointer;
     }
 }

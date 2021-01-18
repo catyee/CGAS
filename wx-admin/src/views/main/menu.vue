@@ -2,12 +2,12 @@
   <div class="menu-container">
     <el-menu :default-active="element.active" :router="true" class="menu-list" :unique-opened="true">
       <el-menu-item index="/main/index">
-        <i class="el-icon-location"></i>
+        <i class="iconindex-normal iconfont"></i>
         <span slot="title">首页</span>
       </el-menu-item>
       <el-submenu index="/main/video-list">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="iconvideo-normal iconfont"></i>
           <span>视频管理</span>
         </template>
         <el-menu-item-group>
@@ -17,7 +17,7 @@
       </el-submenu>
       <el-submenu index="/main/tag-list">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="iconrelation-normal iconfont"></i>
           <span>关系管理</span>
         </template>
         <el-menu-item-group>
@@ -28,7 +28,7 @@
       </el-submenu>
       <el-submenu index="/main/cooperation">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="iconmessage-normal iconfont"></i>
           <span>信息管理</span>
         </template>
         <el-menu-item-group>
@@ -38,7 +38,7 @@
       </el-submenu>
       <el-submenu index="/main/administrator">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="iconuser-normal iconfont"></i>
           <span>管理员管理</span>
         </template>
         <el-menu-item-group>
@@ -66,6 +66,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.iconfont{
+ font-size: 16px;
+  padding-right: 20px;
+  color: #B7C2CF;
+}
 .menu-container {
   width: $menu-width;
   min-height: 100%;
@@ -105,7 +110,7 @@ export default {
   }
 }
 .menu-list /deep/ .el-menu-item-group .el-menu-item {
-  padding-left: 50px !important;
+  padding-left: 59px !important;
 }
 /deep/ .el-menu-item-group__title {
   padding: 0;

@@ -53,7 +53,7 @@
         </el-table-column>
         <el-table-column label="操作" show-overflow-tooltip>
           <template>
-            <span class="color-green pr-10 pointer">修改关系</span>
+            <!-- <span class="color-green pr-10 pointer">修改关系</span> -->
             <span class="color-red pointer">删除关系</span>
           </template>
         </el-table-column>

@@ -31,6 +31,7 @@
               autocomplete="off"
             ></el-input>
           </el-form-item>
+
           <el-form-item label-width="0" class="pt-22">
             <el-button
               type="primary"
@@ -41,6 +42,7 @@
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
             </el-button>
+              <div class="forget-pwd color-danger pt-10" @click="resetPwd">忘记密码？</div>
           </el-form-item>
         </el-form>
       </div>
@@ -86,6 +88,49 @@ export default {
       }
     }
   },
-  created () {}
+  created () {},
+  methods: {
+    resetPwd () {
+      this.$prompt('请输入用户名', '申请重置密码', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^[^\s*$]/,
+        inputErrorMessage: '请输入用户名'
+      }).then(({ value }) => {
+        // console.log(this.submitRest)
+        this.submitReset()
+        // this.$message({
+        //   type: 'success',
+        //   message: '你的邮箱是: ' + value
+        // })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        })
+      })
+    },
+    submitReset () {
+      console.log(44444444444444)
+      this.$confirm('您确定要重置密码吗？', '确认信息', {
+        distinguishCancelAndClose: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(() => {
+          this.$message({
+            type: 'info',
+            message: '保存修改'
+          })
+        })
+        .catch(action => {
+          this.$message({
+            type: 'info',
+            message: '取消操作'
+          })
+        })
+    }
+  }
+
 }
 </script>
