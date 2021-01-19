@@ -21,7 +21,7 @@
         <div class="color-grey pr-5 f14 no-wrap">关键字:</div>
         <el-input v-model="keyword" placeholder="请输入内容"></el-input>
       </div>
-      <div class="flex">
+      <div class="flex pr-16">
         <div class="color-grey pl-12 pr-5 f14">选择日期:</div>
         <el-date-picker
           v-model="date"
@@ -47,7 +47,7 @@
           </el-option>
         </el-select>
       </div>
-      <div class="flex pr-16">
+      <div class="flex pr-10">
         <span class="color-grey pr-5 f14">选择照料类型:</span>
         <el-select v-model="type" placeholder="请选择">
           <el-option
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="list-container ml-16">
-      <div class="oper-container">
+      <div class="oper-container pb-15">
         <el-button type="primary">删除选中视频</el-button>
         <el-button type="primary">上传新视频</el-button>
       </div>
@@ -102,12 +102,14 @@
         </el-table-column>
         <el-table-column prop="status" label="状态" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column label="操作" show-overflow-tooltip>
+        <el-table-column label="操作">
           <template>
-            <span class="color-green pr-10 pointer">查看</span>
-            <span class="color-red  pr-10 pointer">删除</span>
-            <span class="color-green  pr-10 pointer">修改</span>
-            <span class="color-green pointer">下架</span>
+            <div class="oper-btns">
+              <span class="color-green pointer">查看</span>
+              <span class="color-red pointer">删除</span>
+              <span class="color-green pointer">修改</span>
+              <span class="color-green pointer">下架</span>
+            </div>
           </template>
         </el-table-column>
       </el-table>

@@ -40,5 +40,13 @@
     .color-red{
         color: #FF5F58;
     }
-  
+    .oper-btns{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    thead th{
+        background-color: #F8F8F8;
+        padding: 20px 0;
+    }
 }

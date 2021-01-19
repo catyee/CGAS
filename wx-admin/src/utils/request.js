@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 
-// import baseUrl from './baseUrl'
+import baseUrl from './baseUrl'
 import { getToken } from '@/utils/auth'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
@@ -10,7 +10,7 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
 
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: baseUrl,
   // 超时
   timeout: 10000
 })

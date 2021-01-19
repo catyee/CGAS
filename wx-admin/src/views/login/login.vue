@@ -37,7 +37,7 @@
               type="primary"
               class="submit"
               :loading="false"
-              @click="submitForm('loginForm')"
+              @click.native.prevent="submitForm"
             >
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -51,27 +51,11 @@
 </template>
 <script>
 import './login.scss'
-
+// import Cookies from 'js-cookie'
 export default {
   name: 'login',
   components: {},
   data () {
-    // 检验用户名
-    var validateUsername = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入用户名'))
-      } else {
-        callback()
-      }
-    }
-    // 检验密码
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'))
-      } else {
-        callback()
-      }
-    }
     return {
       loading: false, // 是否登录中
       // 显示log
@@ -83,13 +67,18 @@ export default {
       },
       // login表单验证规则
       rules: {
-        username: [{ validator: validateUsername, trigger: 'blur' }],
-        password: [{ validator: validatePass, trigger: 'blur' }]
+        username: [
+          { required: true, trigger: 'blur', message: '用户名不能为空' }
+        ],
+        password: [
+          { required: true, trigger: 'blur', message: '密码不能为空' }
+        ]
       }
     }
   },
   created () {},
   methods: {
+    // 点击忘记密码 弹框
     resetPwd () {
       this.$prompt('请输入用户名', '申请重置密码', {
         confirmButtonText: '确定',
@@ -110,8 +99,8 @@ export default {
         })
       })
     },
+    // 输入用户名 重置密码
     submitReset () {
-      console.log(44444444444444)
       this.$confirm('您确定要重置密码吗？', '确认信息', {
         distinguishCancelAndClose: true,
         confirmButtonText: '确定',
@@ -129,6 +118,28 @@ export default {
             message: '取消操作'
           })
         })
+    },
+    // 点击登录
+    submitForm () {
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          // if (this.loginForm.rememberMe) {
+          //   Cookies.set('username', this.loginForm.username, { expires: 30 })
+          //   Cookies.set('password', encrypt(this.loginForm.password), { expires: 30 })
+          //   Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 })
+          // } else {
+          //   Cookies.remove('username')
+          //   Cookies.remove('password')
+          //   Cookies.remove('rememberMe')
+          // }
+          this.$store.dispatch('Login', this.ruleForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' }).catch(() => {})
+          }).catch(() => {
+            this.loading = false
+          })
+        }
+      })
     }
   }
 
