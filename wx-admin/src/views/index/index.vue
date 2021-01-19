@@ -9,7 +9,7 @@
       <div class="pl-32">
         <span class="date-picker-title">选择日期：</span>
         <el-date-picker
-          v-model="date"
+          v-model="duration"
           type="daterange"
           align="right"
           unlink-panels
@@ -28,11 +28,12 @@
         <div class="trend-chart" id="trend"></div>
         <div class="chart-gap"></div>
         <div class="top-chart" id="top"></div>
+        <div class="top-chart" id="care-top"></div>
       </div>
 
       <div class="content-r ml-16">
-        <div class="click-number-title ">总视频点击量排名</div>
-        <div class="click-number-content pt-20">
+        <div class="click-number-title pt-10">总视频点击量排名</div>
+        <div class="click-number-content">
           <div class="item" v-for="i in 10" :key="i">
            <div class="item-left">
               <i>1</i>
@@ -47,6 +48,9 @@
 </template>
 <script>
 import './index.scss'
+
+// 导入常量
+import { olderTypes, careTypes } from '@/libs/constant.js'
 const echarts = require('echarts/lib/echarts')
 // 引入柱状图组件
 require('echarts/lib/chart/bar')
@@ -59,42 +63,18 @@ export default {
     return {
       duration: 'year',
       date: '',
+      // 设置日期范围不能大于今天
       pickerOptions: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick (picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick (picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick (picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }
-        ]
+        disabledDate: function (date) {
+          return date.getTime() > new Date().getTime()
+        }
       }
     }
   },
   mounted () {
     this.createTrendChart()
     this.createTopChart()
+    this.createCareTopChart()
   },
   methods: {
     createTrendChart () {
@@ -105,9 +85,9 @@ export default {
           left: '60'
         },
         tooltip: {},
-        legend: {
-          data: ['点击数']
-        },
+        // legend: {
+        //   data: ['点击数']
+        // },
         xAxis: {
           data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
         },
@@ -127,7 +107,7 @@ export default {
       const topChart = echarts.init(document.getElementById('top'))
       var option = {
         title: {
-          text: '视频分类点击量TOP5',
+          text: '老人类型视频点击量TOP5',
           left: '60'
         },
         tooltip: {
@@ -138,8 +118,8 @@ export default {
           formatter: '{a}<br/>{c}'
         },
         legend: {
-          top: '20',
-          data: ['身体照顾', '康复老人', '自理老人', '失能老人', '高龄老人']
+          top: '40',
+          data: olderTypes
 
         },
         xAxis: {
@@ -147,17 +127,17 @@ export default {
           type: 'category'
         },
         grid: {
-          top: '80'
+          top: '100'
         },
         yAxis: {},
         series: [
           {
-            name: '身体照顾',
+            name: '失智老人',
             type: 'bar',
             data: [100]
           },
           {
-            name: '康复老人',
+            name: '半失能老人',
             type: 'bar',
             data: [200]
           },
@@ -173,6 +153,64 @@ export default {
           },
           {
             name: '高龄老人',
+            type: 'bar',
+            data: [600]
+          }
+        ],
+        color: ['#C23731', '#2F4655', '#62A1A8', '#D48266', '#94C6AF']
+      }
+      topChart.setOption(option)
+    },
+    createCareTopChart () {
+      const topChart = echarts.init(document.getElementById('care-top'))
+      var option = {
+        title: {
+          text: '老人类型视频点击量TOP5',
+          left: '60'
+        },
+        tooltip: {
+          // trigger: 'item',
+          // axisPointer: { // 坐标轴指示器，坐标轴触发有效
+          //   type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          // },
+          formatter: '{a}<br/>{c}'
+        },
+        legend: {
+          top: '40',
+          data: careTypes
+
+        },
+        xAxis: {
+          // data: ['身体照顾', '康复老人', '自理老人', '失能老人', '高龄老人']
+          type: 'category'
+        },
+        grid: {
+          top: '100'
+        },
+        yAxis: {},
+        series: [
+          {
+            name: '生活照料',
+            type: 'bar',
+            data: [100]
+          },
+          {
+            name: '身体照护',
+            type: 'bar',
+            data: [200]
+          },
+          {
+            name: '慢病管理',
+            type: 'bar',
+            data: [50]
+          },
+          {
+            name: '康复修护',
+            type: 'bar',
+            data: [90]
+          },
+          {
+            name: '心理健康',
             type: 'bar',
             data: [600]
           }

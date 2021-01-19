@@ -26,7 +26,7 @@
     }
     .trend-chart, .top-chart{
         width: 100%;
-        height: 358px;
+        height: 400px;
         background-color: #fff;
         padding: 20px;
         box-sizing: border-box;
@@ -38,6 +38,7 @@
     .click-number-title{
         font-size: 14px;
         color: #000;
+        font-weight: 600;
     }
     .item{
         display: flex;

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 
-import baseUrl from './baseUrl'
+// import baseUrl from './baseUrl'
 import { getToken } from '@/utils/auth'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
@@ -10,28 +10,28 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
   // axios中请求配置有baseURL选项，表示请求URL公共部分
 
-  // baseURL: baseUrl,
+  baseURL: process.env.VUE_APP_BASE_API,
   // 超时
-  timeout: 600000
+  timeout: 10000
 })
 // request拦截器  // config.baseURL = 'http://' + window.location.host + '/python' // 生产环境url
 service.interceptors.request.use(
   config => {
-    if (/\/api\/v1/.test(config.url)) {
-      // config.baseURL = 'http://39.99.152.221'
-      config.baseURL = 'http://' + window.location.host + '/python'
-    } else {
-      // if (/http:/.test(config.url)) { // 文献下载 请求
-      //   config.baseURL = ''
-      //   config.headers['responseType'] = 'arraybuffer'
-      // } else { // 普通接口请求
-      config.baseURL = baseUrl
-      if (getToken()) {
-        config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-      }
-      // }
-    }
-
+    // if (/\/api\/v1/.test(config.url)) {
+    //   // config.baseURL = 'http://39.99.152.221'
+    //   config.baseURL = 'http://' + window.location.host + '/python'
+    // } else {
+    //   // if (/http:/.test(config.url)) { // 文献下载 请求
+    //   //   config.baseURL = ''
+    //   //   config.headers['responseType'] = 'arraybuffer'
+    //   // } else { // 普通接口请求
+    //   config.baseURL = baseUrl
+    //   if (getToken()) {
+    //     config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    //   }
+    //   // }
+    // }
+    config.headers.Authorization = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     return config
   },
   error => {

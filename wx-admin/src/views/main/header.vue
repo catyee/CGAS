@@ -8,7 +8,7 @@
 
        <el-menu mode="horizontal">
         <el-submenu index="1">
-          <template slot="title">{{userName}} <img class="icon-user" src="@/assets/user.svg" /></template>
+          <template slot="title">{{userName}} <i class="iconfont iconyonghu icon-user"></i><span class=" username">用户名</span></template>
           <!-- <el-menu-item index="1-1" @click="updatePwd">修改密码</el-menu-item> -->
           <el-menu-item index="1-2" @click="logout">退出登录</el-menu-item>
           <!-- <el-menu-item index="1-2">选项2</el-menu-item>
@@ -53,18 +53,31 @@ export default {
 }
 </script>
 <style  lang="scss" scoped>
-/deep/.el-submenu__icon-arrow.el-icon-arrow-down{
-    display: none;
+// /deep/.el-submenu__icon-arrow.el-icon-arrow-down{
+//     display: none;
+// }
+/deep/.el-submenu__title{
+ display: flex;
+ align-items: center;
 }
 .header {
   display: flex;
   align-items: center;
 }
+.username{
+  font-size: 20px;
+  padding-left:10px ;
+}
 .icon-user {
-  display: inline-block;
-  width: 32px;
-  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border:1px  solid #595959;
+  border-radius: 50%;;
   cursor: pointer;
+  font-size: 20px;
 }
 .header-title {
   color: #fff;
