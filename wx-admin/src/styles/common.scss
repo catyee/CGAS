@@ -20,6 +20,11 @@ html, body, #app {
     height: 100%;
   
 }
+.flex{
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
 
 // icon
 // @font-face {
@@ -119,4 +124,32 @@ body {
     color: $color-edit;
 }
 
+.page-title{
+ 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 23px;
+
+    .title-line{
+        width: 3px;
+        height: 16px;
+        background: #C23731;
+    }
+}
+.pagenation {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 50px;
+    background-color: #fff;
+    padding-bottom: 100px;
+  }
+  .table-content{
+    min-height: 400px;
+    background-color: #fff;
+}
+.el-table__header-wrapper thead th{
+    background-color: #F8F8F8;
+    padding: 20px 0;
+}
 

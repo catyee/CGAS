@@ -24,4 +24,11 @@
         display: flex;
         justify-content: flex-end;
     }
+    .message-content{
+       
+    }
+    .content-width{
+       height: 150px;
+        overflow-y: auto;
+    }
 }

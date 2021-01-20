@@ -1,6 +1,6 @@
 <template>
   <div class="cooperation">
-    <div class="selector">
+    <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
         <span class="pl-2 f14">合作信息列表</span>
@@ -15,88 +15,86 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
+        :fit="true"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column label="视频" prop="pic">
+        <el-table-column label="项目简介/介绍" prop="cooperateContent" >
           <template slot-scope="scope">
-            <el-image
-              style="width: 100px; height: 100px"
-              :src="scope.row.pic"
-              :fit="fit"
-            ></el-image> </template
-          >>
+            <happy-scroll color="rgba(0,0,0,0.5)" size="5">
+              <div class="content-width">{{ scope.row.cooperateContent }}</div>
+            </happy-scroll>
+          </template>
         </el-table-column>
-        <el-table-column prop="length" label="视频长度"> </el-table-column>
-        <el-table-column prop="title" label="视频标题" show-overflow-tooltip>
+        <el-table-column prop="contactOrganize" label="单位名称">
         </el-table-column>
         <el-table-column
-          prop="olderType"
-          label="老人类型"
+          prop="contactName"
+          label="联系人"
           show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="careType" label="照料类型" show-overflow-tooltip>
+        <el-table-column prop="phone" label="手机号" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="tag" label="标签" show-overflow-tooltip>
+        <el-table-column prop="email" label="邮箱" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="date" label="日期" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="status" label="状态" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column label="操作" show-overflow-tooltip>
-          <template>
-            <span class="color-green pr-10 pointer">查看</span>
-            <span class="color-red pr-10 pointer">删除</span>
-            <span class="color-green pr-10 pointer">修改</span>
-            <span class="color-green pointer">下架</span>
-          </template>
+        <el-table-column prop="updateTime" label="时间" show-overflow-tooltip>
         </el-table-column>
       </el-table>
+    </div>
+    <!-- 分页 -->
+    <div class="pagenation">
+      <el-pagination
+        background
+        @size-change="initList"
+        @current-change="initList"
+        :page-sizes="[20, 30, 50, 100]"
+        :current-page.sync="queryParams.pageNum"
+        :page-size.sync="queryParams.pageSize"
+        layout="total,sizes, prev, pager, next"
+        :total="total"
+      ></el-pagination>
     </div>
   </div>
 </template>
 <script>
 import './cooperation.scss'
+import { getCooperationList } from '@/api/cooperation'
 export default {
   data () {
     return {
-      // 视频类型
-      type: '0',
-      options: [
-        {
-          value: '0',
-          label: '正常视频'
-        },
-        {
-          value: '1',
-          label: '下架视频'
-        }
-      ],
-      tableData: [
-        {
-          pic:
-            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          length: "3'20''",
-          title: '如何预防老人感冒',
-          olderType: '自理老人',
-          careType: '生活照料',
-          tag: '防护、慢性病管理、健康管理',
-          date: '2019-07-06',
-          status: '正常'
-        },
-        {
-          pic:
-            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          length: "3'20''",
-          title: '如何预防老人感冒',
-          olderType: '自理老人',
-          careType: '生活照料',
-          tag: '防护、慢性病管理、健康管理',
-          date: '2019-07-06',
-          status: '正常'
-        }
-      ]
+      tableData: [],
+      selectedIds: [], // 选中项的id
+      selectedIdsStr: '', // 选中项id的拼接字符串
+      // getList查询参数
+      queryParams: {
+        // 页数
+        pageNum: 1,
+        // 每页的大小
+        pageSize: 20
+      },
+      // 总条数
+      total: 0
+    }
+  },
+  mounted () {
+    // 获取合作列表
+    this.initList()
+  },
+  methods: {
+    // 获取用户列表
+    initList () {
+      getCooperationList(this.queryParams).then((res) => {
+        this.tableData = res.rows
+        this.total = parseInt(res.total)
+      })
+    },
+    // 选中表格中的每一项
+    handleSelectionChange (value) {
+      this.selectedIds = value.map((item) => {
+        return item.userId
+      })
+      this.selectedIdsStr = this.selectedIds.join(',')
     }
   }
 }

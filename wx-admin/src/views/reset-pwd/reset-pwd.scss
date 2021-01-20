@@ -1,0 +1,32 @@
+.reset-pwd{
+  .content{
+      background-color: #fff;
+      padding: 40px;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 500px;
+  }
+  .title{
+      font-size: 14px;
+      font-weight: 600;
+      width: 62px;
+  }
+  .flex{
+      line-height: 22px;
+  }
+  .value {
+      font-size: 14px;
+  }
+  .dialog-header{
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding-top: 20px;
+  }
+  .el-form-item__label{
+      font-weight: 600;
+  }
+  .opers{
+      text-align: right;
+  }
+}

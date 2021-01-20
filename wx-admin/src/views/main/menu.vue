@@ -42,7 +42,7 @@
           <span>管理员管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main">修改密码</el-menu-item>
+          <el-menu-item index="/main/reset-pwd">修改密码</el-menu-item>
           <el-menu-item index="/main/administrator">管理员列表</el-menu-item>
         </el-menu-item-group>
       </el-submenu>

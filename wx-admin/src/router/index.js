@@ -11,6 +11,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/login')
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/login')
+  },
+  {
     path: '/main',
     main: 'main',
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
@@ -40,6 +45,11 @@ const routes = [
         path: 'administrator',
         name: 'administrator',
         component: () => import(/* webpackChunkName: "administrator" */ '../views/administrator')
+      },
+      {
+        path: 'reset-pwd',
+        name: 'reset-pwd',
+        component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/reset-pwd')
       },
       {
         path: 'tag-list',

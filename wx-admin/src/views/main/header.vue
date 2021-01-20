@@ -34,17 +34,13 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store
-          .dispatch('LogOut', this.ruleForm)
+          .dispatch('LogOut')
           .then(res => {
             this.msgSuccess('退出成功')
             this.$router.push({ path: '/login' })
-          // })
-          // this.loading = false
-          // this.$router.push({ path: this.redirect || '/user' })
           })
         // eslint-disable-next-line handle-callback-err
           .catch(error => {
-            this.loading = false
           })
       }).catch(() => {
       })

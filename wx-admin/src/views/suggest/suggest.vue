@@ -1,6 +1,6 @@
 <template>
   <div class="cooperation">
-    <div class="selector">
+    <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
         <span class="pl-2 f14">用户留言列表</span>

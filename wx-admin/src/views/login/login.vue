@@ -37,7 +37,7 @@
               type="primary"
               class="submit"
               :loading="false"
-              @click.native.prevent="submitForm"
+              @click.native.prevent="submitForm('loginForm')"
             >
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -51,28 +51,42 @@
 </template>
 <script>
 import './login.scss'
+import { requestReset } from '@/api/user'
 // import Cookies from 'js-cookie'
 export default {
   name: 'login',
   components: {},
   data () {
+    // 检验用户名
+    var validateUsername = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'))
+      } else {
+        callback()
+      }
+    }
+    // 检验密码
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else {
+        callback()
+      }
+    }
     return {
+      resetUserName: '', // 需要重置的用户名
       loading: false, // 是否登录中
       // 显示log
       dialogVisible: false,
       // login表单数据
       ruleForm: {
         username: 'admin',
-        password: '123456789'
+        password: 'admin123'
       },
       // login表单验证规则
       rules: {
-        username: [
-          { required: true, trigger: 'blur', message: '用户名不能为空' }
-        ],
-        password: [
-          { required: true, trigger: 'blur', message: '密码不能为空' }
-        ]
+        username: [{ validator: validateUsername, trigger: 'blur' }],
+        password: [{ validator: validatePass, trigger: 'blur' }]
       }
     }
   },
@@ -87,6 +101,7 @@ export default {
         inputErrorMessage: '请输入用户名'
       }).then(({ value }) => {
         // console.log(this.submitRest)
+        this.resetUserName = value
         this.submitReset()
         // this.$message({
         //   type: 'success',
@@ -107,9 +122,8 @@ export default {
         cancelButtonText: '取消'
       })
         .then(() => {
-          this.$message({
-            type: 'info',
-            message: '保存修改'
+          requestReset({ userName: this.resetUserName }).then(() => {
+            this.msgSuccess('操作成功')
           })
         })
         .catch(action => {
@@ -120,26 +134,35 @@ export default {
         })
     },
     // 点击登录
-    submitForm () {
-      this.$refs.loginForm.validate(valid => {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
+          // 提示登录中...
           this.loading = true
-          // if (this.loginForm.rememberMe) {
-          //   Cookies.set('username', this.loginForm.username, { expires: 30 })
-          //   Cookies.set('password', encrypt(this.loginForm.password), { expires: 30 })
-          //   Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 })
-          // } else {
-          //   Cookies.remove('username')
-          //   Cookies.remove('password')
-          //   Cookies.remove('rememberMe')
-          // }
-          this.$store.dispatch('Login', this.ruleForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' }).catch(() => {})
-          }).catch(() => {
-            this.loading = false
-          })
+          // 登录
+          this.login()
+        } else {
+        //  console.log('error submit!!')
+          return false
         }
       })
+    },
+    // 登录
+
+    login () {
+      this.$store
+        .dispatch('Login', this.ruleForm)
+        .then(res => {
+          // 登录的同时 获取菜单信息
+          // this.$store.dispatch('getMenuByUser').then(res => {
+          this.loading = false
+          this.$router.push({ path: '/main' })
+        //  })
+        })
+        // eslint-disable-next-line handle-callback-err
+        .catch(error => {
+          this.loading = false
+        })
     }
   }
 
