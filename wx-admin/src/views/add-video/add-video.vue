@@ -8,25 +8,25 @@
     </div>
     <div class="content">
       <el-form
-        :model="ruleForm"
+        :model="videoForm"
         :rules="rules"
         ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="视频标题" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="视频标题" prop="videoName">
+          <el-input v-model="videoForm.videoName"></el-input>
         </el-form-item>
-        <el-form-item label="视频简介" prop="region">
+        <el-form-item label="视频简介" prop="desc">
           <el-input
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
             placeholder="请输入内容"
-            v-model="ruleForm.region"
+            v-model="videoForm.desc"
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="上传封面" required>
+        <!-- <el-form-item label="上传封面" required>
           <el-col>
             <el-form-item prop="date1">
               <el-upload
@@ -48,55 +48,92 @@
               </el-upload>
             </el-form-item>
           </el-col>
-        </el-form-item>
-        <el-form-item label="视频分类" prop="delivery">
-          <el-select v-model="olderType" placeholder="请选择老人类型">
-            <el-option
-              v-for="item in olderTypes"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+        </el-form-item> -->
+        <div class="inline-form">
+          <el-form-item label="视频分类" prop="oldManType">
+            <el-select
+              v-model="videoForm.oldManType"
+              placeholder="请选择老人类型"
             >
-            </el-option>
-          </el-select>
-          <el-select
-            v-model="olderType"
-            class="ml-20"
-            placeholder="请选择照料类型"
-          >
-            <el-option
-              v-for="item in olderTypes"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              <el-option
+                v-for="item in olderTypes"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label-width="0" prop="takeCareType">
+            <el-select
+              v-model="videoForm.takeCareType"
+              class="ml-20"
+              placeholder="请选择照料类型"
             >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="视频标签" prop="type">
+              <el-option
+                v-for="item in careTypes"
+                :key="item"
+                :label="item"
+                :value="item"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </div>
+        <el-form-item label="视频标签" prop="tags">
           <div class="tag-selector">
-            <el-select v-model="tag" filterable multiple placeholder="请选择">
+            <el-select
+              v-model="videoForm.tags"
+              filterable
+              multiple
+              placeholder="请选择"
+            >
               <el-option
                 v-for="item in tagOptions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
-
               >
               </el-option>
             </el-select>
-             <el-button class="ml-20" type="primary">添加新标签</el-button>
-             <div class="tag-list pt-10 pb-10">
-                 <el-tag>标签一</el-tag>
-             </div>
+            <el-button class="ml-20" type="primary">添加新标签</el-button>
+            <div class="tag-list pt-10 pb-10">
+              <el-tag>标签一</el-tag>
+            </div>
           </div>
         </el-form-item>
-        <el-form-item label="上传视频" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="线上品牌商赞助"></el-radio>
-            <el-radio label="线下场地免费"></el-radio>
-          </el-radio-group>
-        </el-form-item>
+        <!-- <el-form-item label="上传视频" prop="resource">
+          <el-upload
+            drag
+            class="upload-video"
+            :on-progress="uploadVideoProcess"
+            :before-upload="beforeUploadVideo"
+            :show-file-list="false"
+            :headers="upload.headers"
+            :on-success="handleVideoSuccess"
+            :action="upload.url"
+          >
+            <video
+              v-if="videoForm.showVideoPath != '' && !videoFlag"
+              v-bind:src="videoForm.showVideoPath"
+              class="avatar video-avatar"
+              controls="controls"
+            >
+              您的浏览器不支持视频播放
+            </video>
+            <el-progress
+              v-if="videoFlag == true"
+              type="circle"
+              v-bind:percentage="videoUploadPercent"
+              style="margin-top: 7px"
+            ></el-progress>
+              <i v-else-if="videoForm.showVideoPath =='' && !videoFlag"
+                       class="el-icon-plus avatar-uploader-icon">点击上传</i>
+            <div slot="tip" class="el-upload__tip">
+              最多可以上传1个视频，建议时长不大于10分钟，推荐格式mp4
+            </div>
+          </el-upload>
+        </el-form-item> -->
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')"
             >保存</el-button
@@ -109,11 +146,15 @@
 </template>
 <script>
 import './add-video.scss'
+import { olderTypes, careTypes } from '@/libs/constant.js'
+import { getToken } from '@/utils/auth'
 export default {
   data () {
     return {
-      olderType: [],
-      tag: '',
+      // 老人类型列表
+      olderTypes: [],
+      // 照料类型列表
+      careTypes: [],
       tagOptions: [
         { label: '1', value: 1 },
         { label: '2', value: 2 },
@@ -122,23 +163,34 @@ export default {
         { label: '5', value: 5 },
         { label: '6', value: 6 }
       ],
-      ruleForm: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      videoForm: {
+        // 视频标题
+        videoName: '',
+        // 老人类型
+        oldManType: '',
+        // 照料类型
+        takeCareType: '',
+        // 视频简介
+        desc: '',
+        // 封面地址
+        imagAddr: '',
+        // 所属标签 至少选择三个
+        tags: '',
+        // 视频地址
+        videoAddr: ''
       },
       rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        // 视频标题校验
+        videoName: [
+          { required: true, message: '请输入视频标题', trigger: 'blur' }
         ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
+        // 老人类型校验
+        oldManType: [
+          { required: true, message: '请选择老人类型', trigger: 'change' }
+        ],
+        // 照料类型校验
+        takeCareType: [
+          { required: true, message: '请选择照料类型', trigger: 'change' }
         ],
         date1: [
           {
@@ -157,19 +209,40 @@ export default {
           }
         ],
         type: [
-          {
-            type: 'array',
-            required: true,
-            message: '请至少选择一个活动性质',
-            trigger: 'change'
-          }
+          // {
+          //   type: 'array',
+          //   required: true,
+          //   message: '请至少选择一个活动性质',
+          //   trigger: 'change'
+          // }
         ],
         resource: [
           { required: true, message: '请选择活动资源', trigger: 'change' }
         ],
-        desc: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
+        desc: [{ required: true, message: '请填写视频简介', trigger: 'blur' }]
+      },
+      /// ////////////////////
+      // 是否显示进度条
+      videoFlag: false,
+      // 进度条的进度，
+      videoUploadPercent: '',
+      isShowUploadVideo: false,
+      // 显示上传按钮
+      // videoForm: {
+      //   showVideoPath: ''
+      // },
+      // 上传文件地址
+      upload: {
+        headers: { Authorization: 'Bearer ' + getToken() },
+        // 上传的地址
+        url: process.env.VUE_APP_BASE_API + '/common/video/upload',
+        loading: false
       }
     }
+  },
+  created () {
+    this.olderTypes = olderTypes
+    this.careTypes = careTypes
   },
   methods: {
     submitForm (formName) {
@@ -184,6 +257,52 @@ export default {
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()
+    },
+    beforeUploadVideo (file) {
+      var fileSize = file.size / 1024 / 1024 < 50
+      if (
+        [
+          'video/mp4',
+          'video/ogg',
+          'video/flv',
+          'video/avi',
+          'video/wmv',
+          'video/rmvb',
+          'video/mov'
+        ].indexOf(file.type) === -1
+      ) {
+        this.msgSuccess('请上传正确的视频格式')
+        return false
+      }
+      if (!fileSize) {
+        this.msgError('视频大小不能超过50MB')
+        return false
+      }
+      this.isShowUploadVideo = false
+    },
+    // 进度条
+    uploadVideoProcess (event, file, fileList) {
+      this.videoFlag = true
+      this.videoUploadPercent = file.percentage.toFixed(0) * 1
+    },
+    handleVideoSuccess (res, file) {
+      this.isShowUploadVideo = true
+      this.videoFlag = false
+      this.videoUploadPercent = 0
+
+      // 前台上传地址
+      // if (file.status == 'success' ) {
+      //    this.videoForm.showVideoPath = file.url;
+      // } else {
+      //     layer.msg("上传失败，请重新上传");
+      // }
+
+      // 后台上传地址
+      // if (res.Code === 200) {
+      //   this.videoForm.showVideoPath = res.Data
+      // } else {
+      //   layer.msg(res.Message)
+      // }
     }
   }
 }

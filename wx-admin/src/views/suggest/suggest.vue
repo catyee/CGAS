@@ -8,7 +8,7 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
-        <el-button type="primary">批量下载</el-button>
+        <el-button type="primary" :disabled="!selectedIds.length" @click.prevent="download">批量下载</el-button>
       </div>
       <el-table
         ref="multipleTable"
@@ -18,85 +18,82 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column label="视频" prop="pic">
-          <template slot-scope="scope">
-            <el-image
-              style="width: 100px; height: 100px"
-              :src="scope.row.pic"
-              :fit="fit"
-            ></el-image> </template
-          >>
+        <el-table-column label="反馈内容" prop="suggestContent">
+         <template slot-scope="scope">
+            <happy-scroll color="rgba(0,0,0,0.5)" size="5">
+              <div class="content-width">{{ scope.row.suggestContent }}</div>
+            </happy-scroll>
+          </template>
         </el-table-column>
-        <el-table-column prop="length" label="视频长度"> </el-table-column>
-        <el-table-column prop="title" label="视频标题" show-overflow-tooltip>
+        <el-table-column prop="contactName" label="联系人"> </el-table-column>
+        <el-table-column prop="phone" label="手机号" show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-          prop="olderType"
-          label="老人类型"
+          prop="email"
+          label="邮箱"
           show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="careType" label="照料类型" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="tag" label="标签" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="date" label="日期" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="status" label="状态" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column label="操作" show-overflow-tooltip>
-          <template>
-            <span class="color-green pr-10 pointer">查看</span>
-            <span class="color-red pr-10 pointer">删除</span>
-            <span class="color-green pr-10 pointer">修改</span>
-            <span class="color-green pointer">下架</span>
+        <el-table-column prop="updateTime" label="反馈时间" show-overflow-tooltip>
+           <template slot-scope="scope">
+            <div>{{scope.row.updateTime|formatDate('YYYY-mm-dd')}}</div>
           </template>
         </el-table-column>
       </el-table>
     </div>
+          <!-- 分页 -->
+    <pagination :total="total" :queryParams="queryParams"  @initList="initList"></pagination>
   </div>
 </template>
 <script>
 import './suggest.scss'
+import { getSuggestList, exportSuggestList } from '@/api/cooperation'
+import pagination from '@/components/pagination.vue'
 export default {
+  components: {
+    pagination
+  },
   data () {
     return {
-      // 视频类型
-      type: '0',
-      options: [
-        {
-          value: '0',
-          label: '正常视频'
-        },
-        {
-          value: '1',
-          label: '下架视频'
-        }
-      ],
       tableData: [
-        {
-          pic:
-            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          length: "3'20''",
-          title: '如何预防老人感冒',
-          olderType: '自理老人',
-          careType: '生活照料',
-          tag: '防护、慢性病管理、健康管理',
-          date: '2019-07-06',
-          status: '正常'
-        },
-        {
-          pic:
-            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-          length: "3'20''",
-          title: '如何预防老人感冒',
-          olderType: '自理老人',
-          careType: '生活照料',
-          tag: '防护、慢性病管理、健康管理',
-          date: '2019-07-06',
-          status: '正常'
-        }
-      ]
+      ],
+      selectedIds: [], // 选中项的id
+      selectedIdsStr: '', // 选中项id的拼接字符串
+      // getList查询参数
+      queryParams: {
+        // 页数
+        pageNum: 1,
+        // 每页的大小
+        pageSize: 20
+      },
+      // 总条数
+      total: 0
+    }
+  },
+  mounted () {
+    // 获取合作列表
+    this.initList()
+  },
+  methods: {
+    // 获取用户列表
+    initList () {
+      getSuggestList(this.queryParams).then((res) => {
+        this.tableData = res.rows
+        this.total = parseInt(res.total)
+      })
+    },
+    // 选中表格中的每一项
+    handleSelectionChange (value) {
+      this.selectedIds = value.map((item) => {
+        return item.suggestId
+      })
+      this.selectedIdsStr = this.selectedIds.join(',')
+    },
+    // 导出建议列表
+    download () {
+      exportSuggestList(this.selectedIds).then((res) => {
+        window.open(`${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`)
+      })
     }
   }
 }

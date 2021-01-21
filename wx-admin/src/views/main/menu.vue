@@ -74,6 +74,7 @@ export default {
 .menu-container {
   width: $menu-width;
   min-height: 100%;
+  box-sizing: border-box;
   background-color: #fff;
 }
 

@@ -8,7 +8,7 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
-        <el-button type="primary">批量下载</el-button>
+        <el-button type="primary" :disabled="!selectedIds.length" @click.prevent="download">批量下载</el-button>
       </div>
       <el-table
         ref="multipleTable"
@@ -19,7 +19,7 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column label="项目简介/介绍" prop="cooperateContent" >
+        <el-table-column label="项目简介/介绍" prop="cooperateContent" width="400">
           <template slot-scope="scope">
             <happy-scroll color="rgba(0,0,0,0.5)" size="5">
               <div class="content-width">{{ scope.row.cooperateContent }}</div>
@@ -39,28 +39,24 @@
         <el-table-column prop="email" label="邮箱" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="updateTime" label="时间" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <div>{{scope.row.updateTime|formatDate('YYYY-mm-dd')}}</div>
+          </template>
         </el-table-column>
       </el-table>
     </div>
-    <!-- 分页 -->
-    <div class="pagenation">
-      <el-pagination
-        background
-        @size-change="initList"
-        @current-change="initList"
-        :page-sizes="[20, 30, 50, 100]"
-        :current-page.sync="queryParams.pageNum"
-        :page-size.sync="queryParams.pageSize"
-        layout="total,sizes, prev, pager, next"
-        :total="total"
-      ></el-pagination>
-    </div>
+        <!-- 分页 -->
+    <pagination :total="total" :queryParams="queryParams"  @initList="initList"></pagination>
   </div>
 </template>
 <script>
 import './cooperation.scss'
-import { getCooperationList } from '@/api/cooperation'
+import { getCooperationList, exportCooperationList } from '@/api/cooperation'
+import pagination from '@/components/pagination.vue'
 export default {
+  components: {
+    pagination
+  },
   data () {
     return {
       tableData: [],
@@ -92,9 +88,15 @@ export default {
     // 选中表格中的每一项
     handleSelectionChange (value) {
       this.selectedIds = value.map((item) => {
-        return item.userId
+        return item.cooperateId
       })
       this.selectedIdsStr = this.selectedIds.join(',')
+    },
+    // 导出合作列表
+    download () {
+      exportCooperationList(this.selectedIds).then((res) => {
+        window.open(`${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`)
+      })
     }
   }
 }

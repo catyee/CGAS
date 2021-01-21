@@ -45,3 +45,33 @@
         color: #2B3940;
     }
 }
+.confirm-pannel .el-message-box__message p{
+    font-size: 20px;
+    font-weight: bold;
+}
+.relation-panel{
+    .title{
+        text-align: center;
+        color: #2B3940;
+        font-weight: 600;
+        font-size: 18px;
+       
+    }
+    .el-dialog__header{
+        padding: 32px 0;
+    }
+    .el-dialog__body{
+        padding: 0 32px 32px 32px;
+    }
+    .form{
+        display: flex;
+    }
+    .el-form-item{
+        flex: 1;
+    }
+    .el-form-item__label{
+        box-sizing: border-box;
+        padding-left: 16px;
+        color: #7E888A;
+    }
+}

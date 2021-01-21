@@ -84,19 +84,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- 分页 -->
-    <div class="pagenation">
-      <el-pagination
-        background
-        @size-change="initList"
-        @current-change="initList"
-        :page-sizes="[20, 30, 50, 100]"
-        :current-page.sync="queryParams.pageNum"
-        :page-size.sync="queryParams.pageSize"
-        layout="total,sizes, prev, pager, next"
-        :total="total"
-      ></el-pagination>
-    </div>
+     <!-- 分页 -->
+    <pagination :total="total" :queryParams="queryParams"  @initList="initList"></pagination>
     <!-- 新增管理员 -->
     <div class="add-panel">
       <el-dialog
@@ -153,7 +142,11 @@
 <script>
 import './administrator.scss'
 import { addUser, getUserList, deleteUser, enableUser, disableUser, resetPwd } from '@/api/user'
+import pagination from '@/components/pagination.vue'
 export default {
+  components: {
+    pagination
+  },
   data () {
     return {
       selectedIds: [], // 选中项的id
@@ -202,8 +195,10 @@ export default {
       this.$prompt('请输入新密码', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputPattern: /^[^\s*$]/,
-        inputErrorMessage: '请输入新密码'
+        inputValidator: function (value) {
+          value = value.trim()
+          if (!value.length) return '请输入新密码'
+        }
       }).then(({ value }) => {
         resetPwd({ userId: userId, password: value }).then((res) => {
           this.$alert('', '新密码为' + value, {

@@ -36,6 +36,7 @@ export default {
 .main-content {
   flex: 1;
   height: 100%;
+  box-sizing: border-box;
   background-color: $body-deep-color;
 }
 </style>

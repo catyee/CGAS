@@ -1,4 +1,4 @@
-export function getRecentlyDate (num) {
+function getRecentlyDate (num) {
   const now = new Date().getTime()
   const ms = num * 24 * 60 * 60 * 1000
   const resultms = now - ms
@@ -6,7 +6,9 @@ export function getRecentlyDate (num) {
   return result
 }
 
-export function formatDate (fmt, date) {
+function formatDate (date, fmt) {
+  console.log(date, '000000000')
+  date = new Date(date)
   let ret
   const opt = {
     'Y+': date.getFullYear().toString(),
@@ -24,4 +26,8 @@ export function formatDate (fmt, date) {
     }
   }
   return fmt
+}
+export default {
+  formatDate,
+  getRecentlyDate
 }

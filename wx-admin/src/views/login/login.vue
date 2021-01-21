@@ -97,8 +97,10 @@ export default {
       this.$prompt('请输入用户名', '申请重置密码', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputPattern: /^[^\s*$]/,
-        inputErrorMessage: '请输入用户名'
+        inputValidator: function (value) {
+          value = value.trim()
+          if (!value.length) return '请输入用户名'
+        }
       }).then(({ value }) => {
         // console.log(this.submitRest)
         this.resetUserName = value
