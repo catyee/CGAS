@@ -21,7 +21,7 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-8 pr-16">
-        <el-button type="primary" @click="addNewTag">添加新标签</el-button>
+        <newTag @addedTag="handleQuery"></newTag>
       </div>
       <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
         <el-table-column prop="tagName" label="标签名称"> </el-table-column>
@@ -38,7 +38,7 @@
               @click="updateTag(scope.row.tagId)"
               >修改名称</span
             >
-            <span class="color-green pr-10 pointer" @click="addRelation"
+            <span class="color-green pr-10 pointer" @click="addRelation(scope.row.tagId)"
               >添加关系</span
             >
             <span class="color-red pointer" @click="deleteTag(scope.row.tagId)"
@@ -54,79 +54,25 @@
       :queryParams="queryParams"
       @initList="initList"
     ></pagination>
-
-    <!-- 修改关系弹框 -->
-    <div class="relation-panel">
-      <el-dialog
-        :visible.sync="showRelationPanel"
-        width="50%"
-        :close-on-click-modal="false"
-      >
-        <div slot="title" class="title">{{ panelTitle }}</div>
-        <div>
-          <el-form
-            label-position="top"
-            :inline="true"
-            ref="ruleForm"
-            class="form"
-          >
-            <el-form-item label="标签1">
-               <el-select v-model="value" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in allTagList"
-                  :key="item.tagId"
-                  :label="item.tagName"
-                  :value="item.tagId"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="关系名称">
-              <el-select v-model="value" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in allTagList"
-                  :key="item.tagId"
-                  :label="item.tagName"
-                  :value="item.tagId"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="标签2">
-                <el-select v-model="value" filterable placeholder="请选择">
-                <el-option
-                  v-for="item in allTagList"
-                  :key="item.tagId"
-                  :label="item.tagName"
-                  :value="item.tagId"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-form>
-        </div>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="showRelationPanel = false">取 消</el-button>
-          <el-button type="primary" @click.prevent="submitUser('ruleForm')"
-            >确 定</el-button
-          >
-        </span>
-      </el-dialog>
-    </div>
+    <addRelationPanel :showRelationPanel="showRelationPanel" :editTagId="currentTagId" :panelTitle="'添加关系'" @closeModal="showRelationPanel= false"></addRelationPanel>
   </div>
 </template>
 <script>
 import './tag-list.scss'
-import { getTagList, addTag, updateTag, deleteTag } from '@/api/relation'
+import { getTagList, updateTag, deleteTag } from '@/api/relation'
 import pagination from '@/components/pagination.vue'
+import newTag from '@/components/add-tag.vue'
+import addRelationPanel from '@/components/add-relation.vue'
 export default {
   components: {
-    pagination
+    pagination,
+    newTag,
+    addRelationPanel
   },
   data () {
     return {
       // 关系弹框
-      showRelationPanel: true,
+      showRelationPanel: false,
       panelTitle: '添加关系', // 关系弹框 title
       allTagList: [], // 所有的标签
       // getList查询参数
@@ -140,7 +86,10 @@ export default {
       },
       // 总条数
       total: 0,
-      tableData: []
+      // 标签列表
+      tableData: [],
+      // 当前正在编辑的标签id
+      currentTagId: null
     }
   },
   mounted () {
@@ -159,25 +108,7 @@ export default {
         }
       })
     },
-    // 添加新标签
-    addNewTag () {
-      this.inputTagName('添加标签')
-        .then(({ value }) => {
-          const data = {
-            tagName: value
-          }
-          addTag(data).then((res) => {
-            this.msgSuccess('添加成功')
-            this.handleQuery()
-          })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          })
-        })
-    },
+
     // 按关键字搜索
     handleQuery () {
       this.queryParams.pageNum = 1
@@ -232,9 +163,10 @@ export default {
         })
     },
     // 添加关系
-    addRelation () {
-      //  this.$router.push({ path: '/user/deduce/' + id, query: { create: 1 } })
-      // this.$route.push('/')
+    addRelation (id) {
+      // 给弹框组件所需值 赋值
+      this.showRelationPanel = true
+      this.currentTagId = id
     }
   }
 }

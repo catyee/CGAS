@@ -14,3 +14,8 @@ export const careTypes = [
   '康复修护',
   '心理健康'
 ]
+// 关系类型
+export const relations = [
+  '相关',
+  '隶属于'
+]

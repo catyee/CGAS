@@ -1,25 +1,122 @@
 <template>
-  <div>
+  <div class="upload-container">
     <el-upload
       class="upload"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="3"
-      :on-exceed="handleExceed"
-      :file-list="fileList"
+      :on-progress="uploadProcess"
+      :before-upload="beforeUpload"
+      :show-file-list="false"
+      :headers="uploadHeaders"
+      :on-success="handleSuccess"
+       :on-error="handleError"
+      :action="uploadUrl"
     >
-      <el-button size="small" type="primary">点击上传</el-button>
-      <div slot="tip" class="el-upload__tip">
-        只能上传jpg/png文件，且不超过500kb
+      <div class="upload-opers">
+        <el-button size="small" type="primary" :disabled="!enableUpload">选择文件</el-button>
+        <div slot="tip" class="el-upload__tip">
+           {{type === 'video' ? '（建议时长：0.5-15分钟 建议格式.mp4）': '（建议尺寸：宽720px 高360px 支持扩展名：png、jpg,大小限制：不超过3M）'}}
+        </div>
       </div>
+
+      <el-progress
+        v-if="showProgress"
+        :percentage="uploadPercent"
+        style="margin-top: 7px"
+      ></el-progress>
     </el-upload>
+    <slot></slot>
+    <!-- <video
+      v-if="videoForm.showVideoPath != '' && !videoFlag"
+      v-bind:src="videoForm.showVideoPath"
+      class="avatar video-avatar"
+      controls="controls"
+    >
+      您的浏览器不支持视频播放
+    </video> -->
   </div>
 </template>
 <script>
-export default {}
+// 目前仅支持特定格式的图片和视频
+export default {
+  props: ['uploadUrl', 'uploadHeaders', 'type'],
+  data () {
+    return {
+      // 是否显示进度条
+      showProgress: false,
+      // 视频进度条的进度，
+      uploadPercent: '',
+      // 是否允许上传
+      enableUpload: true
+    }
+  },
+  methods: {
+    beforeUpload (file) {
+      // 上传到服务器之前 禁止再次上传
+      this.enableUpload = false
+      let types
+      if (this.type === 'video') {
+        types = [
+          'video/mp4',
+          'video/ogg',
+          'video/flv',
+          'video/avi',
+          'video/wmv',
+          'video/rmvb',
+          'video/mov'
+        ]
+      } else {
+        types = ['image/jpeg', 'image/jpg', 'image/png']
+      }
+      if (
+        types.indexOf(file.type) === -1
+      ) {
+        this.msgError('请上传正确的格式')
+        // 允许再次上传
+        this.enableUpload = true
+        return false
+      }
+    },
+    // // 进度条
+    uploadProcess (event, file, fileList) {
+      // 显示进度条
+      this.showProgress = true
+      // 计算进度
+      this.uploadPercent = file.percentage.toFixed(0) * 1
+    },
+    handleError (e) {
+      // 允许再次上传
+      this.enableUpload = true
+      // 隐藏进度条
+      this.showProgress = false
+      // 重置上传进度百分比
+      this.uploadPercent = 0
+      this.msgError(e)
+    },
+    handleSuccess (res, file) {
+      // 允许再次上传
+      this.enableUpload = true
+      // 隐藏进度条
+      this.showProgress = false
+      // 重置上传进度百分比
+      this.uploadPercent = 0
+
+      this.$emit('getUrl', res.url)
+      this.msgSuccess('上传成功')
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
+    .upload{
+        .upload-opers{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .el-upload__tip{
+          color: #2B3940;
+          font-size: 12px;
+          font-weight: 600;
+
+        }
+    }
 </style>

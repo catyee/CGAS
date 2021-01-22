@@ -35,4 +35,17 @@
     .inline-form{
         display: flex;
     }
+    .upload{
+        .upload-opers{
+            display: flex;
+            align-items: center;
+        }
+    }
+    .btn-groups{
+        text-align: right;
+    }
+    .tag-choose{
+        display: flex;
+        align-items: center;
+    }
 }

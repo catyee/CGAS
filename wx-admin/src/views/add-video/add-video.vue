@@ -1,6 +1,6 @@
 <template>
   <div class="add-video">
-    <div class="selector">
+    <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
         <span class="pl-2 f14">上传视频</span>
@@ -26,29 +26,25 @@
           >
           </el-input>
         </el-form-item>
-        <!-- <el-form-item label="上传封面" required>
+        <el-form-item label="上传封面" prop="imagAddr">
           <el-col>
             <el-form-item prop="date1">
-              <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                multiple
-                :limit="3"
-                :on-exceed="handleExceed"
-                :file-list="fileList"
+              <upload
+                :uploadHeaders="upload.headers"
+                :uploadUrl="upload.imageUrl"
+                :type="'img'"
+                @getUrl="getImgUrl"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  （建议尺寸：宽720px 高360px 支持扩展名：png、jpg
-                  大小限制：不超过3M）
-                </div>
-              </el-upload>
+                <el-image
+                  v-show="videoForm.imagAddr"
+                  :src="videoForm.imagAddr"
+                  :preview-src-list="[videoForm.imagAddr]"
+                >
+                </el-image>
+              </upload>
             </el-form-item>
           </el-col>
-        </el-form-item> -->
+        </el-form-item>
         <div class="inline-form">
           <el-form-item label="视频分类" prop="oldManType">
             <el-select
@@ -64,10 +60,9 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label-width="0" prop="takeCareType">
+          <el-form-item label-width="0" prop="takeCareType" class="ml-20">
             <el-select
               v-model="videoForm.takeCareType"
-              class="ml-20"
               placeholder="请选择照料类型"
             >
               <el-option
@@ -82,63 +77,62 @@
         </div>
         <el-form-item label="视频标签" prop="tags">
           <div class="tag-selector">
-            <el-select
-              v-model="videoForm.tags"
-              filterable
-              multiple
-              placeholder="请选择"
-            >
-              <el-option
-                v-for="item in tagOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+            <div class="tag-choose">
+              <el-select
+                v-model="videoForm.tags"
+                class="pr-20"
+                filterable
+                multiple
+                placeholder="请选择"
               >
-              </el-option>
-            </el-select>
-            <el-button class="ml-20" type="primary">添加新标签</el-button>
+                <el-option
+                  v-for="tag in tagList"
+                  :key="tag.tagId"
+                  :label="tag.tagName"
+                  :value="tag.tagId"
+                >
+                </el-option>
+              </el-select>
+              <newTag @addedTag="getTagList" ></newTag>
+            </div>
             <div class="tag-list pt-10 pb-10">
-              <el-tag>标签一</el-tag>
+              <el-tag
+              class="mr-10"
+                v-for="tag in selectedTags"
+                :key="tag.tagId"
+                closable
+              >
+                {{ tag.tagName }}
+              </el-tag>
             </div>
           </div>
         </el-form-item>
-        <!-- <el-form-item label="上传视频" prop="resource">
-          <el-upload
-            drag
-            class="upload-video"
-            :on-progress="uploadVideoProcess"
-            :before-upload="beforeUploadVideo"
-            :show-file-list="false"
-            :headers="upload.headers"
-            :on-success="handleVideoSuccess"
-            :action="upload.url"
+        <el-form-item label="上传视频" prop="videoAddr">
+          <upload
+            :uploadHeaders="upload.headers"
+            :uploadUrl="upload.videoUrl"
+            :type="'video'"
+            @getUrl="getVideoUrl"
           >
             <video
-              v-if="videoForm.showVideoPath != '' && !videoFlag"
-              v-bind:src="videoForm.showVideoPath"
-              class="avatar video-avatar"
+              v-if="videoForm.videoAddr"
+              v-bind:src="videoForm.videoAddr"
+              style="width: 100%"
+              height="200px"
+              class="avatar video-avatar mt-20"
               controls="controls"
             >
               您的浏览器不支持视频播放
             </video>
-            <el-progress
-              v-if="videoFlag == true"
-              type="circle"
-              v-bind:percentage="videoUploadPercent"
-              style="margin-top: 7px"
-            ></el-progress>
-              <i v-else-if="videoForm.showVideoPath =='' && !videoFlag"
-                       class="el-icon-plus avatar-uploader-icon">点击上传</i>
-            <div slot="tip" class="el-upload__tip">
-              最多可以上传1个视频，建议时长不大于10分钟，推荐格式mp4
-            </div>
-          </el-upload>
-        </el-form-item> -->
+          </upload>
+        </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')"
-            >保存</el-button
-          >
-          <el-button @click="resetForm('ruleForm')">取消</el-button>
+          <div class="btn-groups">
+            <el-button type="primary" @click="submitForm('ruleForm')"
+              >保存</el-button
+            >
+            <el-button @click="resetForm('ruleForm')">取消</el-button>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -148,21 +142,20 @@
 import './add-video.scss'
 import { olderTypes, careTypes } from '@/libs/constant.js'
 import { getToken } from '@/utils/auth'
+import upload from '@/components/upload'
+import newTag from '@/components/add-tag.vue'
+import { getTagList } from '@/api/relation'
 export default {
+  components: {
+    upload,
+    newTag
+  },
   data () {
     return {
       // 老人类型列表
-      olderTypes: [],
+      olderTypes: olderTypes,
       // 照料类型列表
-      careTypes: [],
-      tagOptions: [
-        { label: '1', value: 1 },
-        { label: '2', value: 2 },
-        { label: '3', value: 3 },
-        { label: '4', value: 4 },
-        { label: '5', value: 5 },
-        { label: '6', value: 6 }
-      ],
+      careTypes: careTypes,
       videoForm: {
         // 视频标题
         videoName: '',
@@ -179,6 +172,7 @@ export default {
         // 视频地址
         videoAddr: ''
       },
+      // 表单校验
       rules: {
         // 视频标题校验
         videoName: [
@@ -192,57 +186,33 @@ export default {
         takeCareType: [
           { required: true, message: '请选择照料类型', trigger: 'change' }
         ],
-        date1: [
-          {
-            type: 'date',
-            required: true,
-            message: '请选择日期',
-            trigger: 'change'
-          }
-        ],
-        date2: [
-          {
-            type: 'date',
-            required: true,
-            message: '请选择时间',
-            trigger: 'change'
-          }
-        ],
-        type: [
-          // {
-          //   type: 'array',
-          //   required: true,
-          //   message: '请至少选择一个活动性质',
-          //   trigger: 'change'
-          // }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
+        imagAddr: [{ required: true, message: '请上传封面', trigger: 'blur' }],
+        videoAddr: [{ required: true, message: '请上传视频', trigger: 'blur' }],
         desc: [{ required: true, message: '请填写视频简介', trigger: 'blur' }]
       },
-      /// ////////////////////
-      // 是否显示进度条
-      videoFlag: false,
-      // 进度条的进度，
-      videoUploadPercent: '',
-      isShowUploadVideo: false,
-      // 显示上传按钮
-      // videoForm: {
-      //   showVideoPath: ''
-      // },
       // 上传文件地址
       upload: {
         headers: { Authorization: 'Bearer ' + getToken() },
         // 上传的地址
-        url: process.env.VUE_APP_BASE_API + '/common/video/upload',
-        loading: false
-      }
+        videoUrl: process.env.VUE_APP_BASE_API + '/common/video/upload',
+        imageUrl: process.env.VUE_APP_BASE_API + '/common/upload'
+      },
+      // 标签列表
+      tagList: [],
+      // 查询标签列表参数
+      queryParams: {
+        // 页数
+        pageNum: 1,
+        // 每页的大小 一页显示 不分页
+        pageSize: 9999999
+      },
+      // 选中的标签
+      selectedTags: []
     }
   },
-  created () {
-    this.olderTypes = olderTypes
-    this.careTypes = careTypes
+  // mounted只会执行一次
+  mounted () {
+    this.getTagList()
   },
   methods: {
     submitForm (formName) {
@@ -258,51 +228,19 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     },
-    beforeUploadVideo (file) {
-      var fileSize = file.size / 1024 / 1024 < 50
-      if (
-        [
-          'video/mp4',
-          'video/ogg',
-          'video/flv',
-          'video/avi',
-          'video/wmv',
-          'video/rmvb',
-          'video/mov'
-        ].indexOf(file.type) === -1
-      ) {
-        this.msgSuccess('请上传正确的视频格式')
-        return false
-      }
-      if (!fileSize) {
-        this.msgError('视频大小不能超过50MB')
-        return false
-      }
-      this.isShowUploadVideo = false
+    // 获取图片地址
+    getImgUrl (url) {
+      this.videoForm.imagAddr = url
     },
-    // 进度条
-    uploadVideoProcess (event, file, fileList) {
-      this.videoFlag = true
-      this.videoUploadPercent = file.percentage.toFixed(0) * 1
+    // 获取视频地址
+    getVideoUrl (url) {
+      this.videoForm.videoAddr = url
     },
-    handleVideoSuccess (res, file) {
-      this.isShowUploadVideo = true
-      this.videoFlag = false
-      this.videoUploadPercent = 0
-
-      // 前台上传地址
-      // if (file.status == 'success' ) {
-      //    this.videoForm.showVideoPath = file.url;
-      // } else {
-      //     layer.msg("上传失败，请重新上传");
-      // }
-
-      // 后台上传地址
-      // if (res.Code === 200) {
-      //   this.videoForm.showVideoPath = res.Data
-      // } else {
-      //   layer.msg(res.Message)
-      // }
+    // 获取标签列表
+    getTagList () {
+      getTagList(this.queryParams).then((res) => {
+        this.tagList = res.rows
+      })
     }
   }
 }

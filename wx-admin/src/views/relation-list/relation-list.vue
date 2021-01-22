@@ -63,7 +63,7 @@
 </template>
 <script>
 import './relation-list.scss'
-import { getTagList } from '@/api/relation'
+import { getRelationList } from '@/api/relation'
 import pagination from '@/components/pagination.vue'
 export default {
   components: {
@@ -115,9 +115,9 @@ export default {
     },
     // 获取用户列表
     initList () {
-      getTagList(this.queryParams).then((res) => {
+      getRelationList().then((res) => {
         this.tableData = res.rows
-        this.total = parseInt(res.total)
+        //   this.total = parseInt(res.total)
       })
     }
   }

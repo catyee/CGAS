@@ -22,7 +22,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item index="/main/tag-list">标签管理</el-menu-item>
-          <el-menu-item index="/main/relation-list">新建关系</el-menu-item>
+          <!-- <el-menu-item index="/main/relation-list">新建关系</el-menu-item> -->
           <el-menu-item index="/main/relation-list">管理关系</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
