@@ -79,11 +79,11 @@
           <div class="tag-selector">
             <div class="tag-choose">
               <el-select
-                v-model="videoForm.tags"
+                v-model="currentSelectTag"
                 class="pr-20"
                 filterable
-                multiple
                 placeholder="请选择"
+                @change="addTagToList"
               >
                 <el-option
                   v-for="tag in tagList"
@@ -101,6 +101,7 @@
                 v-for="tag in selectedTags"
                 :key="tag.tagId"
                 closable
+                @close="removeTag(tag.tagId)"
               >
                 {{ tag.tagName }}
               </el-tag>
@@ -145,6 +146,7 @@ import { getToken } from '@/utils/auth'
 import upload from '@/components/upload'
 import newTag from '@/components/add-tag.vue'
 import { getTagList } from '@/api/relation'
+import { addVideo } from '@/api/video'
 export default {
   components: {
     upload,
@@ -152,6 +154,8 @@ export default {
   },
   data () {
     return {
+      // 当前下拉选中的标签
+      currentSelectTag: null,
       // 老人类型列表
       olderTypes: olderTypes,
       // 照料类型列表
@@ -218,7 +222,21 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          const tags = this.selectedTags.map(item => {
+            return item.tagId
+          })
+          if (tags.length < 3) {
+            this.msgError('请至少选择三个标签')
+            return
+          }
+          this.videoForm.tags = tags.join(',')
+          addVideo(this.videoForm).then(res => {
+            if (res.code === 200) {
+              this.msgSuccess('添加成功')
+            } else {
+              this.msgError('添加失败' + res.code)
+            }
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -241,6 +259,25 @@ export default {
       getTagList(this.queryParams).then((res) => {
         this.tagList = res.rows
       })
+    },
+    // 选中一个标签 加入到选中的标签列表
+    addTagToList (id) {
+      console.log(id, 'idid')
+      const tag = this.tagList.filter(item => {
+        return item.tagId === id
+      })[0]
+      const hasTag = this.selectedTags.find(item => {
+        return item.tagId === id
+      })
+      if (hasTag) return
+      this.selectedTags.push(tag)
+    },
+    // 删除一个tag
+    removeTag (id) {
+      this.selectedTags = this.selectedTags.filter(item => {
+        return item.tagId !== id
+      })
+      this.currentSelectTag = ''
     }
   }
 }

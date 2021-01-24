@@ -158,7 +158,8 @@ export default {
         // 每页的大小
         pageSize: 20,
         // 查询参数
-        nickName: ''
+        nickName: '',
+        roleIds: 1
       },
       // 总条数
       total: 0,
@@ -266,6 +267,9 @@ export default {
           })
         })
         .catch(() => {
+          if (this.selectedIdsStr.length === 1) {
+            this.selectedIdsStr = !this.selectedIdsStr
+          }
           this.msgInfo('已取消操作')
         })
     },
@@ -285,6 +289,16 @@ export default {
           })
         })
         .catch(() => {
+          this.tableData = this.tableData.map(item => {
+            console.log(item.status, '000000')
+            item.status = Number(item.status)
+            console.log(item.status, '11111')
+            console.log(this.selectedIdsStr, 'kkkkkkk')
+            // if (item.userId === this.selectedIdsStr) {
+            //   item.status = !item.status
+            // }
+            return item
+          })
           this.msgInfo('已取消操作')
         })
     },

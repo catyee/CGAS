@@ -111,7 +111,7 @@ export default {
   }
 }
 .menu-list /deep/ .el-menu-item-group .el-menu-item {
-  padding-left: 59px !important;
+  padding-left: 4em !important;
 }
 /deep/ .el-menu-item-group__title {
   padding: 0;

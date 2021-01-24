@@ -24,7 +24,6 @@ export default {
 .container {
   box-sizing: border-box;
   height: 100%;
-  box-sizing: border-box;
   padding-bottom: 60px;
 }
 .content {
@@ -35,6 +34,7 @@ export default {
 }
 .main-content {
   flex: 1;
+  //height: 100%;
   height: 100%;
   box-sizing: border-box;
   background-color: $body-deep-color;

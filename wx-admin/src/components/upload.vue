@@ -98,9 +98,12 @@ export default {
       this.showProgress = false
       // 重置上传进度百分比
       this.uploadPercent = 0
-
-      this.$emit('getUrl', res.url)
-      this.msgSuccess('上传成功')
+      if (res.code === 200) {
+        this.$emit('getUrl', res.url)
+        this.msgSuccess('上传成功')
+      } else {
+        this.msgError('上传失败')
+      }
     }
   }
 }

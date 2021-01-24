@@ -62,3 +62,25 @@ export function getRelationList () {
     method: 'get'
   })
 }
+// 修改关系
+export function updateRelation ({ tag1, tag2, currentRelation }) {
+  let data
+  // 后端要求格式 相关{relateTags: 'tag1,tag2'} 隶属于 {parentTags: 'tag2,tag1'}
+  switch (currentRelation) {
+    case relations[0]:
+      data = {
+        relateTags: `${tag1},${tag2}`
+      }
+      break
+    case relations[1]:
+      data = {
+        parentTags: `${tag2},${tag1}`
+      }
+      break
+  }
+  return request({
+    url: '/wx/tag/relate',
+    method: 'post',
+    data: data
+  })
+}

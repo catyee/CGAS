@@ -29,7 +29,8 @@
         background-color: #fff;
         padding: 32px;
         margin: 0px 0 0 16px;
-        max-width: 704px;
+        width: 60%;
+        height: 900px;
         box-sizing: border-box;
     }
     .inline-form{
@@ -47,5 +48,8 @@
     .tag-choose{
         display: flex;
         align-items: center;
+    }
+    .el-form-item__label{
+        font-weight: 600;
     }
 }

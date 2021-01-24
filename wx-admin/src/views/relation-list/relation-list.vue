@@ -8,21 +8,28 @@
       <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">关键字:</div>
         <div>
-          <el-input v-model="queryParams.nickName" placeholder="请输入标签或关系名称" ></el-input>
+          <el-input
+            v-model="queryParams.nickName"
+            placeholder="请输入标签或关系名称"
+          ></el-input>
         </div>
       </div>
-       <div class="flex pr-16">
+      <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">关系名称:</div>
         <div>
-          <el-select v-model="relation" placeholder="请选择" @change="handleQuery">
-          <el-option
-            v-for="item in relations"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+          <el-select
+            v-model="relation"
+            placeholder="请选择"
+            @change="handleQuery"
           >
-          </el-option>
-        </el-select>
+            <el-option
+              v-for="item in relations"
+              :key="item"
+              :label="item"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
         </div>
       </div>
       <div class="flex">
@@ -31,23 +38,27 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
-        <el-button type="primary">添加新关系</el-button>
+        <el-button type="primary" @click="showRelationPanel=true">添加新关系</el-button>
         <el-button type="primary">生成关系图谱</el-button>
       </div>
-      <el-table
-        :data="tableData"
-        tooltip-effect="dark"
-        style="width: 100%"
-      >
+      <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
         <!-- <el-table-column type="selection" width="55"> </el-table-column> -->
-        <el-table-column prop="preTag" label="标签名称"> </el-table-column>
-        <el-table-column prop="nextTag" label="标签名称" show-overflow-tooltip>
-        </el-table-column>
+        <el-table-column prop="tagName1" label="标签名称"> </el-table-column>
+
         <el-table-column label="关系名称" show-overflow-tooltip>
           <template slot-scope="scope">
-            <span v-if="scope.row.relation ===1">隶属于</span>
-            <span v-if="scope.row.relation ===2">相关</span>
+            <el-select v-model="scope.row.relate"  placeholder="请选择" @change="updateRelation(scope.row)">
+                <el-option
+                  v-for="item in relations"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                >
+                </el-option>
+              </el-select>
           </template>
+        </el-table-column>
+        <el-table-column prop="tagName2" label="标签名称" show-overflow-tooltip>
         </el-table-column>
         <el-table-column label="操作" show-overflow-tooltip>
           <template>
@@ -57,38 +68,34 @@
         </el-table-column>
       </el-table>
     </div>
-     <!-- 分页 -->
-    <pagination :total="total" :queryParams="queryParams"  @initList="initList"></pagination>
+    <!-- 分页 -->
+    <pagination
+      :total="total"
+      :queryParams="queryParams"
+      @initList="initList"
+    ></pagination>
+    <!-- 添加关系 -->
+     <addRelationPanel :showRelationPanel="showRelationPanel" @addedRelation="initList" :panelTitle="'添加关系'" @closeModal="showRelationPanel= false"></addRelationPanel>
   </div>
 </template>
 <script>
 import './relation-list.scss'
 import { getRelationList } from '@/api/relation'
 import pagination from '@/components/pagination.vue'
+import { relations } from '@/libs/constant'
+import addRelationPanel from '@/components/add-relation.vue'
 export default {
   components: {
-    pagination
+    pagination,
+    addRelationPanel
   },
   data () {
     return {
       relation: -1,
-      relations: [
-        { label: '全部', value: -1 },
-        { label: '隶属于', value: 1 },
-        { label: '相关', value: 2 }
-      ],
+      relations: relations,
       tableData: [
-        {
-          preTag: '自理老人',
-          nextTag: '防护',
-          relation: 1
-        },
-        {
-          preTag: '防噎食',
-          nextTag: '防护',
-          relation: 1
-        }
       ],
+      showRelationPanel: false,
       // getList查询参数
       queryParams: {
         // 页数
@@ -100,7 +107,6 @@ export default {
       },
       // 总条数
       total: 0
-
     }
   },
   mounted () {
@@ -119,6 +125,10 @@ export default {
         this.tableData = res.rows
         //   this.total = parseInt(res.total)
       })
+    },
+    // 更新关系
+    updateRelation (relation) {
+
     }
   }
 }

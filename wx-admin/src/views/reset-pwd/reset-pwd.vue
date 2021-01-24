@@ -8,12 +8,12 @@
     </div>
     <div class="content ml-16">
       <div class="flex">
-        <span class="title">姓名：</span>
-        <span class="value">张三</span>
+        <div class="title">姓名：</div>
+        <div class="value">张三</div>
       </div>
       <div class="flex">
-        <span class="title">用户名：</span>
-        <span class="value">12ui</span>
+        <div class="title">用户名：</div>
+        <div class="value">12ui</div>
       </div>
       <el-button type="primary" class="mt-27" @click="dialogVisible= true">修改密码</el-button>
     </div>

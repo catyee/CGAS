@@ -28,7 +28,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="关系名称"  prop="currentRelation">
-              <el-select v-model="relationForm.currentRelation" filterable placeholder="请选择">
+              <el-select v-model="relationForm.currentRelation"  placeholder="请选择">
                 <el-option
                   v-for="item in relations"
                   :key="item"
@@ -114,7 +114,9 @@ export default {
   // updated 数据更新并且DOM渲染完成之后 在此时组件DOM已经更新 可以执行依赖于DOM的操作 避免在此更改状态 可能会导致无限循环
   beforeUpdate () {
     // 更改tag1的状态
-    this.relationForm.tag1 = this.editTagId
+    if (this.editTagId) {
+      this.relationForm.tag1 = this.editTagId
+    }
   },
   methods: {
     // 获取全部标签
@@ -139,6 +141,7 @@ export default {
           }
           addRelation(this.relationForm).then(res => {
             this.msgSuccess('添加成功')
+            this.$emit('addedRelation')
             this.closePanel()
           })
         } else {

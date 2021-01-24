@@ -18,6 +18,7 @@ $color-edit: #5274FD;
 html, body, #app {
     box-sizing: border-box;
     height: 100%;
+    background-color: $body-deep-color;
   
 }
 .flex{
@@ -108,9 +109,9 @@ html, body, #app {
 }
 
 body {
-    background-color: $body-background-color;
+    //background-color: $body-background-color;
     // font-family: 'PingFangSC-Regular,PingFang SC';
-    font-family: 'Microsoft YaHei';
+    //font-family: 'Microsoft YaHei';
 }
 // 溢出隐藏
 .ellipsis{

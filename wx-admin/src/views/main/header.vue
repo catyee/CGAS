@@ -59,6 +59,7 @@ export default {
 .header {
   display: flex;
   align-items: center;
+  background: #fff;
 }
 .username{
   font-size: 20px;
