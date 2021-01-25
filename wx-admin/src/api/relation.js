@@ -63,24 +63,46 @@ export function getRelationList () {
   })
 }
 // 修改关系
-export function updateRelation ({ tag1, tag2, currentRelation }) {
+export function updateRelation ({ tagId1, tagId2, relate }) {
   let data
   // 后端要求格式 相关{relateTags: 'tag1,tag2'} 隶属于 {parentTags: 'tag2,tag1'}
-  switch (currentRelation) {
+  switch (relate) {
     case relations[0]:
       data = {
-        relateTags: `${tag1},${tag2}`
+        relateTags: `${tagId1},${tagId2}`
       }
       break
     case relations[1]:
       data = {
-        parentTags: `${tag2},${tag1}`
+        parentTags: `${tagId2},${tagId1}`
       }
       break
   }
   return request({
     url: '/wx/tag/relate',
-    method: 'post',
+    method: 'put',
+    data: data
+  })
+}
+// 修改关系
+export function removeRelation ({ tagId1, tagId2, relate }) {
+  let data
+  // 后端要求格式 相关{relateTags: 'tag1,tag2'} 隶属于 {parentTags: 'tag2,tag1'}
+  switch (relate) {
+    case relations[0]:
+      data = {
+        relateTags: `${tagId1},${tagId2}`
+      }
+      break
+    case relations[1]:
+      data = {
+        parentTags: `${tagId2},${tagId1}`
+      }
+      break
+  }
+  return request({
+    url: '/wx/tag/relate/remove',
+    method: 'put',
     data: data
   })
 }

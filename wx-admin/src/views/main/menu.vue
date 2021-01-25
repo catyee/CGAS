@@ -1,6 +1,11 @@
 <template>
   <div class="menu-container">
-    <el-menu :default-active="element.active" :router="true" class="menu-list" :unique-opened="true">
+    <el-menu
+      :default-active="element.active"
+      :router="true"
+      class="menu-list"
+      :unique-opened="true"
+    >
       <el-menu-item index="/main/index">
         <i class="iconindex-normal iconfont"></i>
         <span slot="title">首页</span>
@@ -11,8 +16,16 @@
           <span>视频管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main/video-list">视频列表</el-menu-item>
-          <el-menu-item index="/main/add-video">上传视频</el-menu-item>
+          <el-menu-item index="/main/video-list"
+            ><template slot="title">
+              <span>视频列表</span>
+            </template></el-menu-item
+          >
+          <el-menu-item index="/main/add-video"
+            ><template slot="title">
+              <span>上传视频</span>
+            </template></el-menu-item
+          >
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="/main/tag-list">
@@ -21,9 +34,17 @@
           <span>关系管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main/tag-list">标签管理</el-menu-item>
+          <el-menu-item index="/main/tag-list">
+            <template slot="title">
+              <span>标签管理</span>
+            </template></el-menu-item
+          >
           <!-- <el-menu-item index="/main/relation-list">新建关系</el-menu-item> -->
-          <el-menu-item index="/main/relation-list">管理关系</el-menu-item>
+          <el-menu-item index="/main/relation-list">
+            <template slot="title">
+              <span>管理关系</span>
+            </template></el-menu-item
+          >
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="/main/cooperation">
@@ -32,8 +53,16 @@
           <span>信息管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main/cooperation">合作洽谈</el-menu-item>
-          <el-menu-item index="/main/suggest">意见反馈</el-menu-item>
+          <el-menu-item index="/main/cooperation">
+            <template slot="title">
+              <span>合作洽谈</span>
+            </template></el-menu-item
+          >
+          <el-menu-item index="/main/suggest">
+            <template slot="title">
+              <span>意见反馈</span>
+            </template></el-menu-item
+          >
         </el-menu-item-group>
       </el-submenu>
       <el-submenu index="/main/administrator">
@@ -42,8 +71,16 @@
           <span>管理员管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="/main/reset-pwd">修改密码</el-menu-item>
-          <el-menu-item index="/main/administrator">管理员列表</el-menu-item>
+          <el-menu-item index="/main/reset-pwd">
+            <template slot="title">
+              <span>修改密码</span>
+            </template>
+          </el-menu-item>
+          <el-menu-item index="/main/administrator">
+            <template slot="title">
+              <span>管理员列表</span>
+            </template></el-menu-item
+          >
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -66,10 +103,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.iconfont{
- font-size: 16px;
-  padding-right: 20px;
-  color: #B7C2CF;
+.iconfont {
+  font-size: 16px;
+  // padding-right: 20px;
+  color: #b7c2cf;
 }
 .menu-container {
   width: $menu-width;
@@ -87,6 +124,9 @@ export default {
   line-height: 64px;
   font-size: 16px;
   color: #111;
+  span {
+    padding-left: 10px;
+  }
   &:hover {
     background: $body-deep-color;
     color: $system-color;
@@ -100,18 +140,14 @@ export default {
     .iconfont {
       color: $system-color;
     }
-
   }
-   &:focus {
+  &:focus {
     background-color: $body-deep-color;
     color: $system-color;
     .iconfont {
       color: $system-color;
     }
   }
-}
-.menu-list /deep/ .el-menu-item-group .el-menu-item {
-  padding-left: 4em !important;
 }
 /deep/ .el-menu-item-group__title {
   padding: 0;

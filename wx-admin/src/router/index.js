@@ -62,7 +62,7 @@ const routes = [
         component: () => import(/* webpackChunkName: "relation-list" */ '../views/relation-list')
       },
       {
-        path: 'video',
+        path: 'video/:id',
         name: 'video',
         component: () => import(/* webpackChunkName: "video" */ '../views/video')
       },

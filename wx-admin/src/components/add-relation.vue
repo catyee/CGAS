@@ -110,14 +110,20 @@ export default {
   mounted () {
     this.getTagList()
   },
-  // beforeUpdate 数据更新时会调用 此时vue实例中的数据已经是最新的 但在页面上数据还是旧的 此视可以进一步更改状态 这不会触发附加的渲染过程
-  // updated 数据更新并且DOM渲染完成之后 在此时组件DOM已经更新 可以执行依赖于DOM的操作 避免在此更改状态 可能会导致无限循环
-  beforeUpdate () {
-    // 更改tag1的状态
-    if (this.editTagId) {
+  // 监听父组件的tagId
+  watch: {
+    editTagId () {
       this.relationForm.tag1 = this.editTagId
     }
   },
+  // beforeUpdate 数据更新时会调用 此时vue实例中的数据已经是最新的 但在页面上数据还是旧的 此视可以进一步更改状态 这不会触发附加的渲染过程
+  // updated 数据更新并且DOM渲染完成之后 在此时组件DOM已经更新 可以执行依赖于DOM的操作 避免在此更改状态 可能会导致无限循环
+  // beforeUpdate () {
+  //   // 更改tag1的状态
+  //   if (this.editTagId) {
+  //     this.relationForm.tag1 = this.editTagId
+  //   }
+  // },
   methods: {
     // 获取全部标签
     getTagList () {

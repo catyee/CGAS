@@ -32,34 +32,22 @@
       <div class="content-r">
         <div class="flex item">
           <div class="title">视频标题：</div>
-          <div>如何预防老年人感冒</div>
+          <div>{{videoDetail.videoName}}</div>
         </div>
         <div class="flex item">
           <div class="title">视频简介：</div>
           <div>
-            随着年龄的增长，人身体的各项生理机能都会发生退化，抵抗力变弱，因此，老年人很容易被一些疾病困扰，且不易恢复，例如感冒。感冒对于普通人群来说可能是小病，但对于老年人(特别是高龄老人)则属大病，因为感冒的并发症和继发感染严重者可危及老人生命。
+            {{videoDetail.videoDesc}}
           </div>
         </div>
         <div class="flex item">
           <div class="title">视频分类：</div>
-          <div>自理老人、生活照料</div>
+          <div> {{videoDetail.oldManType}}、{{videoDetail.takeCareType}}</div>
         </div>
         <div class="flex item">
           <div class="title">视频标签：</div>
           <div>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
-              <el-tag class="tag-item">标签一</el-tag>
+              <el-tag class="tag-item" v-for="tag in videoDetail.tagList" :key="tag">{{tag}}</el-tag>
           </div>
         </div>
       </div>
@@ -73,54 +61,104 @@ import './custom-theme.scss'
 import './video.scss'
 
 import { videoPlayer } from 'vue-video-player'
+import { getVideo } from '@/api/video'
 export default {
   components: {
     videoPlayer
   },
   data () {
     return {
+      // videoId
+      videoId: null,
       playerOptions: {
         // videojs options
         // width: '65%',
+        height: '500',
+        preload: 'auto',
+        aspectRatio: '16:9',
+        fluid: true,
         notSupportedMessage: '此视频暂无法播放，请稍后再试',
-        muted: true,
+        muted: false,
         language: 'zh-CN',
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [
           {
-            type: 'video/mp4',
+            type: '',
             src:
-              'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+              ''
           }
         ],
-        poster: '/static/images/author.jpg'
+        poster: '',
+        controlBar: {
+          timeDivider: true,
+          durationDisplay: true,
+          remainingTimeDisplay: false,
+          fullscreenToggle: true // 全屏按钮
+        }
+      },
+      // 视频信息
+      videoDetail: {
+        videoName: '',
+        videoDesc: '',
+        oldManType: '',
+        takeCareType: '',
+        tags: '',
+        imagAddr: '',
+        videoAddr: '',
+        // 标签列表
+        tagList: ''
       }
     }
   },
+  created () {
+    // 获取用户id
+    this.videoId = this.$route.params.id
+    // 获取视频详情
+    this.getVideo()
+  },
   mounted () {
-    setTimeout(() => {
-      console.log('dynamic change options', this.player)
-      // change src
-      // this.playerOptions.sources[0].src = 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm';
-      // change item
-      // this.$set(this.playerOptions.sources, 0, {
-      //   type: "video/mp4",
-      //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
-      // })
-      // change array
-      // this.playerOptions.sources = [{
-      //   type: "video/mp4",
-      //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
-      // }]
-      this.player.muted(false)
-    }, 5000)
+    // setTimeout(() => {
+    //   console.log('dynamic change options', this.player)
+    //   // change src
+    //   // this.playerOptions.sources[0].src = 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm';
+    //   // change item
+    //   // this.$set(this.playerOptions.sources, 0, {
+    //   //   type: "video/mp4",
+    //   //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+    //   // })
+    //   // change array
+    //   // this.playerOptions.sources = [{
+    //   //   type: "video/mp4",
+    //   //   src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+    //   // }]
+    //   this.player.muted(false)
+    // }, 5000)
   },
   computed: {
-    player () {
-      return this.$refs.videoPlayer.player
-    }
+    // player () {
+    //   return this.$refs.videoPlayer.player
+    // }
   },
   methods: {
+    // 获取视频详情
+    getVideo () {
+      getVideo(this.videoId).then(res => {
+        if (!res.data) {
+          this.msgError('获取视频信息失败')
+        } else {
+          this.videoDetail = res.data
+          // 获取视频格式
+          const videoAddrArr = res.data.videoAddr.split('.')
+          const type = videoAddrArr[videoAddrArr.length - 1]
+          this.playerOptions.sources[0].type = 'video/' + type
+          // 获取视频地址
+          this.playerOptions.sources[0].src = res.data.videoAddr
+          // 获取图片地址
+          this.playerOptions.poster = res.data.imagAddr
+          this.videoDetail.tagList = res.data.tags.split(',').slice(0, -1)
+        }
+      })
+    },
     // listen event
     onPlayerPlay (player) {
       // console.log('player play!', player)

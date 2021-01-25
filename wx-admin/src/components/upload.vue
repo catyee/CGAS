@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     beforeUpload (file) {
+      console.log(file, 'typetypeeeeee')
       // 上传到服务器之前 禁止再次上传
       this.enableUpload = false
       let types
@@ -69,7 +70,17 @@ export default {
       if (
         types.indexOf(file.type) === -1
       ) {
+        console.log(file.type, 'typetypeeeeee')
         this.msgError('请上传正确的格式')
+        // 允许再次上传
+        this.enableUpload = true
+        return false
+      }
+      if (
+        file.size > 209715200
+      ) {
+        console.log(file.type, 'typetypeeeeee')
+        this.msgError('文件过大')
         // 允许再次上传
         this.enableUpload = true
         return false

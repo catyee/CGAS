@@ -230,17 +230,30 @@ export default {
       this.selectedIdsStr = this.selectedIds.join(',')
     },
     // 切换用户状态
-    changeUserStatus (user) {
-      this.selectedIdsStr = user.userId
-      // 将字符串类型转为数字类型 避免严格判断下出问题
-      const status = Number(user.status)
-      if (!status) {
-        // 启用
-        this.enableUser()
-      } else {
-        // 禁用
-        this.disableUser()
-      }
+    changeUserStatus (row) {
+      // if (user.status === '0') {
+      //   // 启用
+      //   this.enableUser()
+      // } else {
+      //   // 禁用
+      //   this.disableUser()
+      // }
+      const text = row.status === '0' ? '启用' : '停用'
+      this.$confirm('确认要"' + text + '""' + row.userName + '"用户吗?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(function () {
+        if (row.status === '0') {
+          return enableUser(row.userId)
+        } else {
+          return disableUser(row.userId)
+        }
+      }).then(() => {
+        this.msgSuccess(text + '成功')
+      }).catch(function () {
+        row.status = row.status === '0' ? '1' : '0'
+      })
     },
     // 批量删除
     deletedUsers () {
@@ -267,9 +280,6 @@ export default {
           })
         })
         .catch(() => {
-          if (this.selectedIdsStr.length === 1) {
-            this.selectedIdsStr = !this.selectedIdsStr
-          }
           this.msgInfo('已取消操作')
         })
     },
@@ -289,16 +299,6 @@ export default {
           })
         })
         .catch(() => {
-          this.tableData = this.tableData.map(item => {
-            console.log(item.status, '000000')
-            item.status = Number(item.status)
-            console.log(item.status, '11111')
-            console.log(this.selectedIdsStr, 'kkkkkkk')
-            // if (item.userId === this.selectedIdsStr) {
-            //   item.status = !item.status
-            // }
-            return item
-          })
           this.msgInfo('已取消操作')
         })
     },

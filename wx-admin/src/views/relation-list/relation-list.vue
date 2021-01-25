@@ -61,9 +61,9 @@
         <el-table-column prop="tagName2" label="标签名称" show-overflow-tooltip>
         </el-table-column>
         <el-table-column label="操作" show-overflow-tooltip>
-          <template>
+          <template slot-scope="scope">
             <!-- <span class="color-green pr-10 pointer">修改关系</span> -->
-            <span class="color-red pointer">删除关系</span>
+            <span class="color-red pointer" @click="removeRelation(scope.row)">删除关系</span>
           </template>
         </el-table-column>
       </el-table>
@@ -80,7 +80,7 @@
 </template>
 <script>
 import './relation-list.scss'
-import { getRelationList } from '@/api/relation'
+import { getRelationList, updateRelation, removeRelation } from '@/api/relation'
 import pagination from '@/components/pagination.vue'
 import { relations } from '@/libs/constant'
 import addRelationPanel from '@/components/add-relation.vue'
@@ -128,7 +128,34 @@ export default {
     },
     // 更新关系
     updateRelation (relation) {
-
+      updateRelation(relation).then(res => {
+        if (res.code === 200) {
+          this.msgSuccess('修改成功')
+        } else {
+          this.msgError('修改失败')
+        }
+      })
+    },
+    // 删除关系
+    removeRelation (relation) {
+      this.$confirm('此操作将永久删除该关系, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        customClass: 'confirm-pannel'
+      })
+        .then(() => {
+          removeRelation(relation).then((res) => {
+            this.msgSuccess('删除成功')
+            this.handleQuery()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 }

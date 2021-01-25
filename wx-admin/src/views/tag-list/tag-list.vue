@@ -151,7 +151,7 @@ export default {
       })
         .then(() => {
           deleteTag(id).then((res) => {
-            this.msgSuccess('修改成功')
+            this.msgSuccess('删除成功')
             this.handleQuery()
           })
         })

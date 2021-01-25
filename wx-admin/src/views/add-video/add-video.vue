@@ -40,6 +40,9 @@
                   :src="videoForm.imagAddr"
                   :preview-src-list="[videoForm.imagAddr]"
                 >
+                  <div slot="placeholder" class="image-slot">
+                    图片加载中<span class="dot">...</span>
+                  </div>
                 </el-image>
               </upload>
             </el-form-item>
@@ -93,11 +96,11 @@
                 >
                 </el-option>
               </el-select>
-              <newTag @addedTag="getTagList" ></newTag>
+              <newTag @addedTag="getTagList"></newTag>
             </div>
             <div class="tag-list pt-10 pb-10">
               <el-tag
-              class="mr-10"
+                class="mr-10"
                 v-for="tag in selectedTags"
                 :key="tag.tagId"
                 closable
@@ -174,7 +177,9 @@ export default {
         // 所属标签 至少选择三个
         tags: '',
         // 视频地址
-        videoAddr: ''
+        videoAddr: '',
+        // 视频状态默认都是正常0
+        status: 0
       },
       // 表单校验
       rules: {
@@ -222,7 +227,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          const tags = this.selectedTags.map(item => {
+          const tags = this.selectedTags.map((item) => {
             return item.tagId
           })
           if (tags.length < 3) {
@@ -230,7 +235,7 @@ export default {
             return
           }
           this.videoForm.tags = tags.join(',')
-          addVideo(this.videoForm).then(res => {
+          addVideo(this.videoForm).then((res) => {
             if (res.code === 200) {
               this.msgSuccess('添加成功')
             } else {
@@ -263,10 +268,10 @@ export default {
     // 选中一个标签 加入到选中的标签列表
     addTagToList (id) {
       console.log(id, 'idid')
-      const tag = this.tagList.filter(item => {
+      const tag = this.tagList.filter((item) => {
         return item.tagId === id
       })[0]
-      const hasTag = this.selectedTags.find(item => {
+      const hasTag = this.selectedTags.find((item) => {
         return item.tagId === id
       })
       if (hasTag) return
@@ -274,7 +279,7 @@ export default {
     },
     // 删除一个tag
     removeTag (id) {
-      this.selectedTags = this.selectedTags.filter(item => {
+      this.selectedTags = this.selectedTags.filter((item) => {
         return item.tagId !== id
       })
       this.currentSelectTag = ''
