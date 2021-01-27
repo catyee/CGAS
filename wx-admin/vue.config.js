@@ -13,6 +13,12 @@ function addStyleResource (rule) {
 }
 const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production' ? '/gzh/' : '/',
+  assetsDir: 'static',
+  // 是否开启eslint保存检测，有效值：ture | false | 'error'
+  lintOnSave: process.env.NODE_ENV === 'development',
+  // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
+  productionSourceMap: false,
   // devServer: {
 
   //   host: '0.0.0.0',
@@ -48,6 +54,8 @@ module.exports = {
   //   }
   // },
   chainWebpack: config => {
+    config.plugins.delete('preload') // TODO: need test
+    config.plugins.delete('prefetch') // TODO: need test
     config.resolve.alias
       .set('@', resolve('src'))
       .set('assets', resolve('src/assets'))
@@ -64,6 +72,18 @@ module.exports = {
       name: 'common-chunk',
       minChunks: 2
     })
+    config.when(process.env.NODE_ENV !== 'development',
+      config => {
+        config
+          .plugin('ScriptExtHtmlWebpackPlugin')
+          .after('html')
+          .use('script-ext-html-webpack-plugin', [{
+            // `runtime` must same as runtimeChunk name. default is `runtime`
+            inline: /runtime\..*\.js$/
+          }])
+          .end()
+      }
+    )
     // config.plugin('report').use(WebpackAnalyzer)
   },
   css: {

@@ -29,3 +29,19 @@ export function removeVideo (id) {
     method: 'delete'
   })
 }
+// 修改视频
+export function updateVideo (data) {
+  return request({
+    url: '/wx/video',
+    method: 'put',
+    data: data
+  })
+}
+// 获取视频点击量排名
+export function getVideoTrend (data) {
+  return request({
+    url: '/wx/log/count',
+    method: 'get',
+    params: data
+  })
+}

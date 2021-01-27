@@ -47,7 +47,7 @@
         <div class="flex item">
           <div class="title">视频标签：</div>
           <div>
-              <el-tag class="tag-item" v-for="tag in videoDetail.tagList" :key="tag">{{tag}}</el-tag>
+              <el-tag class="tag-item" v-for="tag in videoDetail.tagList" :key="tag.tagId">{{tag.tagName}}</el-tag>
           </div>
         </div>
       </div>
@@ -155,7 +155,6 @@ export default {
           this.playerOptions.sources[0].src = res.data.videoAddr
           // 获取图片地址
           this.playerOptions.poster = res.data.imagAddr
-          this.videoDetail.tagList = res.data.tags.split(',').slice(0, -1)
         }
       })
     },

@@ -39,7 +39,7 @@
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
         <el-button type="primary" @click="showRelationPanel=true">添加新关系</el-button>
-        <el-button type="primary">生成关系图谱</el-button>
+          <el-button type="primary" @click="getRelationChart">生成关系图谱</el-button>
       </div>
       <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
         <!-- <el-table-column type="selection" width="55"> </el-table-column> -->
@@ -101,7 +101,7 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 20,
+        pageSize: 1,
         // 查询参数
         nickName: ''
       },
@@ -114,16 +114,20 @@ export default {
     this.initList()
   },
   methods: {
+    // 生成关系图谱
+    getRelationChart () {
+      this.$router.push('/main/relation-chart')
+    },
     // 按关键字搜索
     handleQuery () {
       this.queryParams.pageNum = 1
       this.initList()
     },
-    // 获取用户列表
+    // 获取关系列表
     initList () {
-      getRelationList().then((res) => {
+      getRelationList(this.queryParams).then((res) => {
         this.tableData = res.rows
-        //   this.total = parseInt(res.total)
+        this.total = parseInt(res.total)
       })
     },
     // 更新关系

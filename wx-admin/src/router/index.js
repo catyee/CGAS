@@ -67,9 +67,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "video" */ '../views/video')
       },
       {
-        path: 'add-video',
+        path: 'add-video/:id?',
         name: 'video',
         component: () => import(/* webpackChunkName: "add-video" */ '../views/add-video')
+      },
+      {
+        path: 'relation-chart',
+        name: 'relation-chart',
+        component: () => import(/* webpackChunkName: relation-chart" */ '../views/relation-chart')
       }
     ]
   },

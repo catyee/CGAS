@@ -1,33 +1,39 @@
-function getRecentlyDate (num) {
-  const now = new Date().getTime()
-  const ms = num * 24 * 60 * 60 * 1000
-  const resultms = now - ms
-  const result = new Date(resultms)
-  return result
+import filters from './filter'
+const formatDate = filters.formatDate
+// 获取本周的第一天
+export function weekFirstDay () {
+  var nowdate = new Date()
+  var day = new Date(nowdate - (nowdate.getDay() - 1) * 86400000)
+  return formatDate(day, 'YYYY-mm-dd')
 }
-
-function formatDate (date, fmt) {
-  console.log(date, '000000000')
-  date = new Date(date)
-  let ret
-  const opt = {
-    'Y+': date.getFullYear().toString(),
-    'm+': (date.getMonth() + 1).toString(),
-    'd+': date.getDate().toString(),
-    'H+': date.getHours().toString(),
-    'M+': date.getMinutes().toString(),
-    'S+': date.getSeconds().toString()
-    // 有其他格式化字符需求可以继续添加，必须转化成字符串
-  }
-  for (const k in opt) {
-    ret = new RegExp('(' + k + ')').exec(fmt)
-    if (ret) {
-      fmt = fmt.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
-    }
-  }
-  return fmt
+// 获取下周的第一天
+export function weekLastDay () {
+  var nowdate = new Date()
+  var day = new Date(nowdate - (nowdate.getDay() - 8) * 86400000)
+  return formatDate(day, 'YYYY-mm-dd')
 }
-export default {
-  formatDate,
-  getRecentlyDate
+// 获取本月的第一天
+export function monthFirstDay () {
+  var Nowdate = new Date()
+  var day = new Date(Nowdate.getFullYear(), Nowdate.getMonth(), 1)
+  console.log(day)
+  return formatDate(day, 'YYYY-mm-dd')
+}
+// 获取下月的第一天
+export function monthLastDay () {
+  var Nowdate = new Date()
+  var day = new Date(Nowdate.getFullYear(), Nowdate.getMonth() + 1, 1)
+  return formatDate(day, 'YYYY-mm-dd')
+}
+// 获取本年的第一天
+export function yearFirstDay () {
+  var Nowdate = new Date()
+  var day = new Date(Nowdate.getFullYear(), 0, 1)
+  return formatDate(day, 'YYYY-mm-dd')
+}
+// 获取下年的第一天
+export function yearLastDay () {
+  var Nowdate = new Date()
+  var day = new Date(Nowdate.getFullYear() + 1, 0, 1)
+  return formatDate(day, 'YYYY-mm-dd')
 }

@@ -70,16 +70,15 @@ export default {
       if (
         types.indexOf(file.type) === -1
       ) {
-        console.log(file.type, 'typetypeeeeee')
         this.msgError('请上传正确的格式')
         // 允许再次上传
         this.enableUpload = true
         return false
       }
+      // 视频长度不大于20M
       if (
         file.size > 209715200
       ) {
-        console.log(file.type, 'typetypeeeeee')
         this.msgError('文件过大')
         // 允许再次上传
         this.enableUpload = true
@@ -110,7 +109,11 @@ export default {
       // 重置上传进度百分比
       this.uploadPercent = 0
       if (res.code === 200) {
-        this.$emit('getUrl', res.url)
+        if (this.type === 'video') {
+          this.$emit('getUrl', res.url, res.videoDuration)
+        } else {
+          this.$emit('getUrl', res.url, res.videoDuration)
+        }
         this.msgSuccess('上传成功')
       } else {
         this.msgError('上传失败')

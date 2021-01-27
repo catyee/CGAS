@@ -7,7 +7,7 @@ import 'lib-flexible/flexible.js'
 import { HappyScroll } from 'vue-happy-scroll'
 // 引入css
 import 'vue-happy-scroll/docs/happy-scroll.css'
-import filters from '@/utils/dateUtil.js'
+import filters from '@/utils/filter.js'
 // 自定义组件名
 Vue.component('happy-scroll', HappyScroll)
 // 注入全局过滤器

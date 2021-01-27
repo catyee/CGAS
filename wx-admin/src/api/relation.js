@@ -56,10 +56,11 @@ export function addRelation ({ tag1, tag2, currentRelation }) {
 }
 
 // 获取关系列表
-export function getRelationList () {
+export function getRelationList (data) {
   return request({
     url: '/wx/tag/relate/list',
-    method: 'get'
+    method: 'get',
+    params: data
   })
 }
 // 修改关系

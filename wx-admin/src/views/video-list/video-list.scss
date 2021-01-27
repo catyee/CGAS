@@ -33,6 +33,7 @@
     .list-container{
         background-color: #fff;
         padding: 8px 16px;
+        box-sizing: border-box;
     }
     .color-green{
         color: #1F9875;
@@ -44,6 +45,10 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+    }
+    .image-slot{
+        color: #aaa;
+        font-size: 12px;
     }
  
 }

@@ -27,7 +27,7 @@ service.interceptors.request.use(
       for (const propName of Object.keys(config.params)) {
         const value = config.params[propName]
         var part = encodeURIComponent(propName) + '='
-        if (value !== null && typeof (value) !== 'undefined') {
+        if (value !== null && typeof (value) !== 'undefined' && value !== '') {
           if (typeof value === 'object') {
             for (const key of Object.keys(value)) {
               const params = propName + '[' + key + ']'
@@ -68,7 +68,8 @@ service.interceptors.response.use(res => {
       }
     ).then(() => {
       store.dispatch('LogOut').then(() => {
-        window.location.href = location.origin + '/#/login'
+        console.log(window.location, 'llllllllllllllll')
+        window.location.href = '/'
       })
     })
   } else if (code === 500) {

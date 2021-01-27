@@ -26,7 +26,7 @@
       <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
         <el-table-column prop="tagName" label="标签名称"> </el-table-column>
         <el-table-column
-          prop="videoAccount"
+          prop="count"
           label="相关视频数"
           show-overflow-tooltip
         >

@@ -22,9 +22,9 @@
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
         <div class="oper-left">
-          <el-button type="success" class="" :disabled="!selectedIds.length"  @click.native.prevent="enableUser">批量启用</el-button>
-          <el-button type="warning" :disabled="!selectedIds.length" @click.native.prevent="disableUser">批量禁用</el-button>
-          <el-button type="primary" :disabled="!selectedIds.length"  @click.native.prevent="deletedUsers">批量删除</el-button>
+          <el-button type="success" class="" :disabled="!selectedIds.length"  @click.prevent="enableUser">批量启用</el-button>
+          <el-button type="warning" :disabled="!selectedIds.length" @click.prevent="disableUser">批量禁用</el-button>
+          <el-button type="primary" :disabled="!selectedIds.length"  @click.prevent="deletedUsers">批量删除</el-button>
         </div>
         <div class="oper-right pr-16">
           <el-button type="primary" @click="showAddUser = true">添加</el-button>

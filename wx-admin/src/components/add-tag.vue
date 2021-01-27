@@ -26,8 +26,12 @@ export default {
             tagName: value
           }
           addTag(data).then((res) => {
-            this.msgSuccess('添加成功')
-            this.$emit('addedTag')
+            if (res.code === 200) {
+              this.msgSuccess('添加成功')
+              this.$emit('addedTag', { tagId: res.data.tagId, tagName: res.data.tagName })
+            } else {
+              this.msgError('添加失败')
+            }
           })
         })
         .catch(() => {

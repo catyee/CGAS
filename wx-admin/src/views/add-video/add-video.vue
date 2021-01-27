@@ -17,12 +17,12 @@
         <el-form-item label="视频标题" prop="videoName">
           <el-input v-model="videoForm.videoName"></el-input>
         </el-form-item>
-        <el-form-item label="视频简介" prop="desc">
+        <el-form-item label="视频简介" prop="videoDesc">
           <el-input
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
             placeholder="请输入内容"
-            v-model="videoForm.desc"
+            v-model="videoForm.videoDesc"
           >
           </el-input>
         </el-form-item>
@@ -96,7 +96,7 @@
                 >
                 </el-option>
               </el-select>
-              <newTag @addedTag="getTagList"></newTag>
+              <newTag @addedTag="handleAddTag"></newTag>
             </div>
             <div class="tag-list pt-10 pb-10">
               <el-tag
@@ -121,9 +121,8 @@
             <video
               v-if="videoForm.videoAddr"
               v-bind:src="videoForm.videoAddr"
-              style="width: 100%"
-              height="200px"
               class="avatar video-avatar mt-20"
+              :poster="videoForm.imagAddr"
               controls="controls"
             >
               您的浏览器不支持视频播放
@@ -149,7 +148,7 @@ import { getToken } from '@/utils/auth'
 import upload from '@/components/upload'
 import newTag from '@/components/add-tag.vue'
 import { getTagList } from '@/api/relation'
-import { addVideo } from '@/api/video'
+import { addVideo, getVideo, updateVideo } from '@/api/video'
 export default {
   components: {
     upload,
@@ -171,7 +170,7 @@ export default {
         // 照料类型
         takeCareType: '',
         // 视频简介
-        desc: '',
+        videoDesc: '',
         // 封面地址
         imagAddr: '',
         // 所属标签 至少选择三个
@@ -179,7 +178,8 @@ export default {
         // 视频地址
         videoAddr: '',
         // 视频状态默认都是正常0
-        status: 0
+        status: 0,
+        videoDuration: 0
       },
       // 表单校验
       rules: {
@@ -197,7 +197,7 @@ export default {
         ],
         imagAddr: [{ required: true, message: '请上传封面', trigger: 'blur' }],
         videoAddr: [{ required: true, message: '请上传视频', trigger: 'blur' }],
-        desc: [{ required: true, message: '请填写视频简介', trigger: 'blur' }]
+        videoDesc: [{ required: true, message: '请填写视频简介', trigger: 'blur' }]
       },
       // 上传文件地址
       upload: {
@@ -219,11 +219,40 @@ export default {
       selectedTags: []
     }
   },
+  created () {
+    // 获取用户id
+    this.videoId = this.$route.params.id
+    if (this.videoId) {
+      // 获取视频详情
+      this.getVideo()
+    }
+  },
   // mounted只会执行一次
   mounted () {
+    // 获取标签列表
     this.getTagList()
   },
   methods: {
+    // 添加新标签之后的处理
+    handleAddTag (tag) {
+      console.log(tag)
+      // 重新获取标签列表
+      this.getTagList()
+      // 将新添加的标签放置在选中的标签列表里
+      this.selectedTags.push(tag)
+    },
+    // 获取视频详情
+    getVideo () {
+      getVideo(this.videoId).then(res => {
+        if (!res.data) {
+          this.msgError('获取视频信息失败')
+        } else {
+          this.videoForm = res.data
+          this.selectedTags = res.data.tagList
+        }
+      })
+    },
+    // 提交表单
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -235,29 +264,80 @@ export default {
             return
           }
           this.videoForm.tags = tags.join(',')
-          addVideo(this.videoForm).then((res) => {
-            if (res.code === 200) {
-              this.msgSuccess('添加成功')
-            } else {
-              this.msgError('添加失败' + res.code)
-            }
+          this.$confirm('您确定要上传该视频吗?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
           })
+            .then(() => {
+              this.addVideo()
+            })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消操作'
+              })
+            })
         } else {
           console.log('error submit!!')
           return false
         }
       })
     },
+    // add video
+    addVideo () {
+      if (this.videoId) {
+        // 修改视频
+        updateVideo(this.videoForm).then(res => {
+          if (res.code === 200) {
+            this.msgSuccess('修改成功')
+            this.$router.push({ path: '/main/video-list' })
+          } else {
+            this.msgError('修改失败' + res.code)
+          }
+        })
+      } else {
+        // 新增视频
+        addVideo(this.videoForm).then((res) => {
+          if (res.code === 200) {
+            this.msgSuccess('添加成功')
+            this.$router.push({ path: '/main/video-list' })
+          } else {
+            this.msgError('添加失败' + res.code)
+          }
+        })
+      }
+    },
+    // 清空表单
     resetForm (formName) {
-      this.$refs[formName].resetFields()
+      this.$confirm('您确定清空表单吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        customClass: 'confirm-pannel'
+      })
+        .then(() => {
+          this.$refs[formName].resetFields()
+          this.$message({
+            type: 'success',
+            message: '已清空表单'
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消操作'
+          })
+        })
     },
     // 获取图片地址
     getImgUrl (url) {
       this.videoForm.imagAddr = url
     },
     // 获取视频地址
-    getVideoUrl (url) {
+    getVideoUrl (url, videoDuration) {
       this.videoForm.videoAddr = url
+      this.videoForm.videoDuration = videoDuration
     },
     // 获取标签列表
     getTagList () {
@@ -267,7 +347,6 @@ export default {
     },
     // 选中一个标签 加入到选中的标签列表
     addTagToList (id) {
-      console.log(id, 'idid')
       const tag = this.tagList.filter((item) => {
         return item.tagId === id
       })[0]
