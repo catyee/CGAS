@@ -158,7 +158,7 @@ export default {
           // 登录的同时 获取菜单信息
           // this.$store.dispatch('getMenuByUser').then(res => {
           this.loading = false
-          this.$router.push({ path: '/main' })
+          this.$router.push({ path: '/' })
         //  })
         })
         // eslint-disable-next-line handle-callback-err

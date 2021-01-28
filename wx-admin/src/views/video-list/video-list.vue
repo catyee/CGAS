@@ -174,7 +174,9 @@ export default {
         status: null,
         videoName: null,
         beginTime: null,
-        endTime: null
+        endTime: null,
+        // 标签id
+        tags: null
       },
       keyword: '',
       // 视频类型
@@ -194,6 +196,10 @@ export default {
       tableData: [
       ]
     }
+  },
+  created () {
+    // 点击标签跳转到视频列表 获取此过程中的tagId 只显示当前标签的视频列表
+    this.queryParams.tags = this.$route.query.tagId
   },
   mounted () {
     this.initList()

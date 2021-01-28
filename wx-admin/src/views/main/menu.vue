@@ -6,12 +6,12 @@
       class="menu-list"
       :unique-opened="true"
     >
-      <el-menu-item index="/main/index">
+      <el-menu-item index="/index">
         <i class="iconindex-normal iconfont"></i>
         <span slot="title">首页</span>
       </el-menu-item>
-      <el-submenu index="/main/video-list">
-        <template slot="title">
+      <el-submenu>
+        <template slot="title" index="">
           <i class="iconvideo-normal iconfont"></i>
           <span>视频管理</span>
         </template>
@@ -28,7 +28,7 @@
           >
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main/tag-list">
+      <el-submenu>
         <template slot="title">
           <i class="iconrelation-normal iconfont"></i>
           <span>关系管理</span>
@@ -47,7 +47,7 @@
           >
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main/cooperation">
+      <el-submenu>
         <template slot="title">
           <i class="iconmessage-normal iconfont"></i>
           <span>信息管理</span>
@@ -65,7 +65,7 @@
           >
         </el-menu-item-group>
       </el-submenu>
-      <el-submenu index="/main/administrator">
+      <el-submenu >
         <template slot="title">
           <i class="iconuser-normal iconfont"></i>
           <span>管理员管理</span>

@@ -17,8 +17,6 @@
 <script>
 import './relation-chart.scss'
 import { getRelationList, getTagList } from '@/api/relation'
-import { getVideoList } from '@/api/video.js'
-import { count } from 'echarts/lib/component/dataZoom/history'
 var echarts = require('echarts')
 export default {
   data () {
@@ -33,13 +31,7 @@ export default {
       // 关系列表
       relations: [],
       // 标签列表
-      tags: [],
-      queryVideoParams: {
-        // 页数
-        pageNum: 1,
-        // 每页的大小
-        pageSize: 99999999
-      }
+      tags: []
     }
   },
   created () {
@@ -66,7 +58,6 @@ export default {
 
     // 获取图表数据
     renderChart () {
-      const _this = this
       var myChart = echarts.init(document.getElementById('chart'))
       const nodes = this.tags.map(item => {
         return {
@@ -117,24 +108,16 @@ export default {
         title: { text: '关系图谱' },
         darkMode: 'auto',
         tooltip: {
+          // 鼠标是否可以进入提示框浮层中 属性默认为false 如果不设置为true的话，无法操作提示框里的button
+          enterable: true,
           triggerOn: 'click',
           formatter: function (x) {
             if (x.data.source) {
               return x.data.source + x.data.name + x.data.target
             } else {
-              _this.queryVideoParams.tagId = x.data.tagId
-              let videos = []
-              let str = '视频列表：</br>'
-              getVideoList(_this.queryVideoParams).then(res => {
-                videos = res.rows
-                console.log(videos, 'sdddddd')
-                videos.forEach(video => {
-                  str += `${video.videoName}</br>`
-                })
-                return str
-              }).then(res => {
-                return str
-              })
+              const url = window.location.href
+              const goVideoList = url.split('#')[0] + '#/main/video-list?tagId=' + x.data.tagId
+              return `<a href="${goVideoList}" >查看标签<span class="color-danger">${x.data.name}</span>的相关视频</a>`
             }
           }
         },

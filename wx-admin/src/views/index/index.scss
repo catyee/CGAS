@@ -43,17 +43,25 @@
     .item{
         display: flex;
         justify-content:space-between ;
-        padding:30px 12px 0 12px;
+        padding:20px 12px 0 12px;
         cursor: pointer;
       
     }
     .item-left{
         display: flex;
+        align-items: center;
         color: #111;
         font-size: 14px;
         &:hover{
            // text-decoration: underline;
           color: $system-color;
+        }
+        img{
+            width: 24px;
+            height: 24px;
+        }
+        .name{
+            line-height: 16PX;
         }
     }
     .color-top{

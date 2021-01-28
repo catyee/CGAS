@@ -14,7 +14,7 @@ function addStyleResource (rule) {
 const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/gzh/' : '/',
-  assetsDir: 'static',
+  // assetsDir: 'static',
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   lintOnSave: process.env.NODE_ENV === 'development',
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。

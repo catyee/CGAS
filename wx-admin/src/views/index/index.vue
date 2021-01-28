@@ -34,12 +34,12 @@
       <div class="content-r ml-16">
         <div class="click-number-title pt-10">总视频点击量排名</div>
         <div class="click-number-content">
-          <div class="item" v-for="i in 10" :key="i">
+          <div class="item" v-for=" (item, index) in videoCountList" :key="item.videoId" @click="toVideoDetail(item.videoId)">
             <div class="item-left">
-              <i>1</i>
-              <div>如何预防老人感冒？</div>
+              <img :src= "require(`@/assets/index-video/${index +1}.svg`)" >
+              <div class="pl-9 pr-9  name" :title="item.videoName">{{item.videoName}}</div>
             </div>
-            <div class="item- f16 bold color-top">322,124</div>
+            <div class="f16 bold" :class="{'color-top': index === 0 || index === 1 || index === 2}">{{item.count}}</div>
           </div>
         </div>
       </div>
@@ -59,6 +59,7 @@ import {
   yearFirstDay,
   yearLastDay
 } from '@/utils/dateUtil'
+import filters from '@/utils/filter'
 const echarts = require('echarts/lib/echarts')
 // 引入柱状图组件
 require('echarts/lib/chart/bar')
@@ -77,7 +78,9 @@ export default {
         disabledDate: function (date) {
           return date.getTime() > new Date().getTime()
         }
-      }
+      },
+      // 总视频点击量排名
+      videoCountList: []
     }
   },
   created () {
@@ -85,6 +88,10 @@ export default {
   },
 
   methods: {
+    // 跳转到视频详情页面
+    toVideoDetail (id) {
+      this.$router.push({ path: '/main/video/' + id })
+    },
     createChart (data) {
       this.createTrendChart(data.clickTrend)
       this.createTopChart(data.oldManClass)
@@ -115,6 +122,7 @@ export default {
         endTime: this.endTime
       }).then((res) => {
         if (res.code === 200 && res.data) {
+          this.videoCountList = res.data.allVideoCount
           this.createChart(res.data)
         } else {
           this.msgError('查询失败')
@@ -123,27 +131,86 @@ export default {
     },
     // 点击量趋势图表
     createTrendChart (data) {
-      const xData = []
+      const formatDate = filters.formatDate
+      // 计算时间段
+      const dayNum = (new Date(this.endTime).getTime() - new Date(this.startTime).getTime()) / 1000 / 3600 / 24
+      // 不同时间段查询的数据 时间粒度不一样
+      let xData = []
       const seriesData = []
       // 获取x轴时间段
-      data.forEach((item) => {
-        const key = Object.keys(item)[0]
-        const value = item[key]
-        xData.push(key.slice(0, 10))
-        seriesData.push(value)
-      })
+      // x轴时间 分情况处理
+      // 查询一周 时间为星期一 星期二。。。
+      if (this.duration === 'week') {
+        xData = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日']
+        data.forEach((item) => {
+          const date = item.startTime.slice(0, 10)
+          const value = item.count
+          seriesData.push({
+            value: value,
+            date: date
+          })
+        })
+        // 查询14天到=60天 以周分隔单位
+      } else if (dayNum > 14 && dayNum <= 60) {
+        data.forEach((item, index) => {
+          const date = `${item.startTime.slice(0, 10)} 至 ${item.endTime.slice(0, 10)}`
+          const value = item.count
+          xData.push(`第${index + 1}周`)
+          seriesData.push({
+            value: value,
+            date: date
+          })
+        })
+        // 2020-10-01
+      } else if (dayNum > 60) {
+        data.forEach((item, index) => {
+          const date = `${item.startTime.slice(0, 10)} 至 ${item.endTime.slice(0, 10)}`
+          const key = item.startTime.slice(0, 10)
+          const value = item.count
+          const time = formatDate(key, 'YYYY年mm月')
+          xData.push(time)
+          seriesData.push({
+            value: value,
+            date: date
+          })
+        })
+      } else {
+        data.forEach((item) => {
+          const key = Object.keys(item)[0]
+          const value = item[key]
+          xData.push(key.slice(0, 10))
+          seriesData.push({
+            value: value,
+            date: key.slice(0, 10)
+          })
+        })
+      }
       const trendChart = echarts.init(document.getElementById('trend'))
       var option = {
         title: {
           text: '点击量趋势',
           left: '60'
         },
-        tooltip: {},
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+            label: {
+              show: true,
+              formatter: function (params) {
+                return params.seriesData[0].data.date
+              }
+            }
+          }
+        },
         // legend: {
         //   data: ['点击数']
         // },
         xAxis: {
-          data: xData
+          data: xData,
+          axisTick: {
+            alignWithLabel: true
+          }
         },
         yAxis: {},
         series: [
@@ -178,10 +245,10 @@ export default {
           left: '60'
         },
         tooltip: {
-          // trigger: 'item',
-          // axisPointer: { // 坐标轴指示器，坐标轴触发有效
-          //   type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          // },
+          trigger: 'item',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          },
           formatter: '{a}<br/>{c}'
         },
         legend: {
@@ -222,10 +289,10 @@ export default {
           left: '60'
         },
         tooltip: {
-          // trigger: 'item',
-          // axisPointer: { // 坐标轴指示器，坐标轴触发有效
-          //   type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          // },
+          trigger: 'item',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          },
           formatter: '{a}<br/>{c}'
         },
         legend: {

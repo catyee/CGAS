@@ -159,7 +159,8 @@ export default {
         pageSize: 20,
         // 查询参数
         nickName: '',
-        roleIds: 1
+        // 只显示管理员角色的用户
+        roleIds: 2
       },
       // 总条数
       total: 0,
@@ -170,7 +171,7 @@ export default {
       // 新增管理员表单数据
       ruleForm: {
         status: '0', // 0 正常 1停用 默认正常
-        roleIds: [1], // 新增默认必传 管理员
+        roleIds: [2], // 新增默认必传 管理员
         passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
       },
       // 新增用户表单验证规则
@@ -338,7 +339,7 @@ export default {
               this.msgSuccess('添加成功')
               this.ruleForm = {
                 status: '0',
-                roleIds: [1],
+                roleIds: [2],
                 passwdStatus: 0
               }
               this.showAddUser = false
@@ -352,8 +353,6 @@ export default {
           return false
         }
       })
-      // 隐藏新增用户弹框
-      // this.showAddUser = false
     }
   }
 }
