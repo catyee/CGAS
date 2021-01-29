@@ -3,7 +3,7 @@
     <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
-        <router-link to="/main/relation-list">
+        <router-link to="/relation/relation-list">
           <span class="pl-2 f14 color-danger">管理关系/</span>
         </router-link>
         <span class="pl-2 f14">关系图谱</span>
@@ -116,7 +116,7 @@ export default {
               return x.data.source + x.data.name + x.data.target
             } else {
               const url = window.location.href
-              const goVideoList = url.split('#')[0] + '#/main/video-list?tagId=' + x.data.tagId
+              const goVideoList = url.split('relation')[0] + 'video/video-list?tagId=' + x.data.tagId
               return `<a href="${goVideoList}" >查看标签<span class="color-danger">${x.data.name}</span>的相关视频</a>`
             }
           }

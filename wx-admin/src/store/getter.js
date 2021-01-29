@@ -1,10 +1,12 @@
 
 const getters = {
   token: state => state.user.token,
-  userName: state => state.user.userName,
+  name: state => state.user.name,
   userId: state => state.user.userId,
   roles: state => state.user.roles,
-  menus: state => state.user.menus,
-  indexPath: state => state.user.indexPath
+  permission_routes: state => state.permission.routes,
+  sidebarRouters: state => state.permission.sidebarRouters
+  // menus: state => state.user.menus
+  // indexPath: state => state.user.indexPath
 }
 export default getters

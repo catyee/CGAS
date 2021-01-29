@@ -74,6 +74,7 @@ export default {
       }
     }
     return {
+      redirect: undefined,
       resetUserName: '', // 需要重置的用户名
       loading: false, // 是否登录中
       // 显示log
@@ -88,6 +89,14 @@ export default {
         username: [{ validator: validateUsername, trigger: 'blur' }],
         password: [{ validator: validatePass, trigger: 'blur' }]
       }
+    }
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
     }
   },
   created () {},
@@ -158,7 +167,7 @@ export default {
           // 登录的同时 获取菜单信息
           // this.$store.dispatch('getMenuByUser').then(res => {
           this.loading = false
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: this.redirect || '/' }).catch(() => {})
         //  })
         })
         // eslint-disable-next-line handle-callback-err

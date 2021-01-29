@@ -8,7 +8,7 @@
 
        <el-menu mode="horizontal">
         <el-submenu index="1">
-          <template slot="title">{{userName}} <i class="iconfont iconyonghu icon-user"></i><span class=" username">用户名</span></template>
+          <template slot="title"><i class="iconfont iconyonghu icon-user"></i><span class=" username">{{userName}} </span></template>
           <!-- <el-menu-item index="1-1" @click="updatePwd">修改密码</el-menu-item> -->
           <el-menu-item index="1-2" @click="logout">退出登录</el-menu-item>
           <!-- <el-menu-item index="1-2">选项2</el-menu-item>
@@ -20,9 +20,9 @@
 </template>
 <script>
 export default {
-  data () {
-    return {
-      userName: ''
+  computed: {
+    userName () {
+      return this.$store.getters.name
     }
   },
   methods: {

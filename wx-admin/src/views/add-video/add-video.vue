@@ -291,7 +291,7 @@ export default {
         updateVideo(this.videoForm).then(res => {
           if (res.code === 200) {
             this.msgSuccess('修改成功')
-            this.$router.push({ path: '/main/video-list' })
+            this.$router.push({ path: '/video/video-list' })
           } else {
             this.msgError('修改失败' + res.code)
           }
@@ -301,7 +301,7 @@ export default {
         addVideo(this.videoForm).then((res) => {
           if (res.code === 200) {
             this.msgSuccess('添加成功')
-            this.$router.push({ path: '/main/video-list' })
+            this.$router.push({ path: '/video/video-list' })
           } else {
             this.msgError('添加失败' + res.code)
           }

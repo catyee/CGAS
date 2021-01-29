@@ -9,8 +9,9 @@
         <div class="color-grey pr-5 f14 no-wrap">关键字:</div>
         <div>
           <el-input
-            v-model="queryParams.nickName"
+            v-model="queryParams.tagName"
             placeholder="请输入标签或关系名称"
+             @change="handleQuery"
           ></el-input>
         </div>
       </div>
@@ -20,6 +21,8 @@
           <el-select
             v-model="relation"
             placeholder="请选择"
+            clearable
+            @clear="handleQuery"
             @change="handleQuery"
           >
             <el-option
@@ -91,7 +94,7 @@ export default {
   },
   data () {
     return {
-      relation: -1,
+      relation: '',
       relations: relations,
       tableData: [
       ],
@@ -101,9 +104,9 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 1,
+        pageSize: 20,
         // 查询参数
-        nickName: ''
+        tagName: ''
       },
       // 总条数
       total: 0
@@ -116,10 +119,20 @@ export default {
   methods: {
     // 生成关系图谱
     getRelationChart () {
-      this.$router.push('/main/relation-chart')
+      this.$router.push('/relation/relation-chart')
     },
     // 按关键字搜索
     handleQuery () {
+      if (this.relation === '相关') {
+        this.queryParams.parentTags = false
+        this.queryParams.relateTags = null
+      } else if (this.relation === '隶属于') {
+        this.queryParams.parentTags = null
+        this.queryParams.relateTags = false
+      } else {
+        this.queryParams.parentTags = null
+        this.queryParams.relateTags = null
+      }
       this.queryParams.pageNum = 1
       this.initList()
     },

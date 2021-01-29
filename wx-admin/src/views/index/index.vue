@@ -90,7 +90,7 @@ export default {
   methods: {
     // 跳转到视频详情页面
     toVideoDetail (id) {
-      this.$router.push({ path: '/main/video/' + id })
+      this.$router.push({ path: '/video/video/' + id })
     },
     createChart (data) {
       this.createTrendChart(data.clickTrend)

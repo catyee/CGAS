@@ -21,6 +21,10 @@ const user = {
     },
     SET_PERMISSIONS: (state, permissions) => {
       state.permissions = permissions
+    },
+    // 设置用户id
+    SET_USERID: (state, userId) => {
+      state.userId = userId
     }
   },
 
@@ -52,6 +56,7 @@ const user = {
             commit('SET_ROLES', ['ROLE_DEFAULT'])
           }
           commit('SET_NAME', user.userName)
+          commit('SET_USERID', user.userId)
           resolve(res)
         }).catch(error => {
           reject(error)

@@ -67,7 +67,7 @@
     <div class="list-container ml-16">
       <div class="oper-container pb-15">
         <el-button type="primary"  :disabled="!selectedIds.length" @click.prevent="deletedVideos" >删除选中视频</el-button>
-        <router-link to="/main/add-video">
+        <router-link to="/video/add-video">
           <el-button type="primary">上传新视频</el-button>
         </router-link>
       </div>
@@ -263,11 +263,11 @@ export default {
     },
     // 查看视频
     viewVideo (id) {
-      this.$router.push({ path: '/main/video/' + id })
+      this.$router.push({ path: '/video/video/' + id })
     },
     // 编辑视频
     editVideo (id) {
-      this.$router.push({ path: '/main/add-video/' + id })
+      this.$router.push({ path: '/video/add-video/' + id })
     },
     // 删除视频
     delteVideo (id) {

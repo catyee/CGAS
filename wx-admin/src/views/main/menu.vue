@@ -6,88 +6,23 @@
       class="menu-list"
       :unique-opened="true"
     >
-      <el-menu-item index="/index">
-        <i class="iconindex-normal iconfont"></i>
-        <span slot="title">首页</span>
-      </el-menu-item>
-      <el-submenu>
-        <template slot="title" index="">
-          <i class="iconvideo-normal iconfont"></i>
-          <span>视频管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/main/video-list"
-            ><template slot="title">
-              <span>视频列表</span>
-            </template></el-menu-item
-          >
-          <el-menu-item index="/main/add-video"
-            ><template slot="title">
-              <span>上传视频</span>
-            </template></el-menu-item
-          >
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu>
-        <template slot="title">
-          <i class="iconrelation-normal iconfont"></i>
-          <span>关系管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/main/tag-list">
-            <template slot="title">
-              <span>标签管理</span>
-            </template></el-menu-item
-          >
-          <!-- <el-menu-item index="/main/relation-list">新建关系</el-menu-item> -->
-          <el-menu-item index="/main/relation-list">
-            <template slot="title">
-              <span>管理关系</span>
-            </template></el-menu-item
-          >
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu>
-        <template slot="title">
-          <i class="iconmessage-normal iconfont"></i>
-          <span>信息管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/main/cooperation">
-            <template slot="title">
-              <span>合作洽谈</span>
-            </template></el-menu-item
-          >
-          <el-menu-item index="/main/suggest">
-            <template slot="title">
-              <span>意见反馈</span>
-            </template></el-menu-item
-          >
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu >
-        <template slot="title">
-          <i class="iconuser-normal iconfont"></i>
-          <span>管理员管理</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/main/reset-pwd">
-            <template slot="title">
-              <span>修改密码</span>
-            </template>
-          </el-menu-item>
-          <el-menu-item index="/main/administrator">
-            <template slot="title">
-              <span>管理员列表</span>
-            </template></el-menu-item
-          >
-        </el-menu-item-group>
-      </el-submenu>
+       <sidebar-item
+                    v-for="(route, index) in sidebarRouters"
+                    :key="route.path  + index"
+                    :item="route"
+                    :base-path="route.path"
+                />
     </el-menu>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import SidebarItem from './sidebarItem'
 export default {
+  components: { SidebarItem },
+  computed: {
+    ...mapGetters(['sidebarRouters'])
+  },
   data () {
     return {
       element: {
