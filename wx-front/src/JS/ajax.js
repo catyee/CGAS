@@ -1,11 +1,11 @@
 import axios from 'axios'
 // import vm from '../main'
-import { baseApi } from '../config'
 import { Toast } from 'vant';
+import errorCode from '@/JS/errorCode'
 
 /* 全局默认配置 */
 var http = axios.create({
-  baseURL: baseApi,
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 /* 请求拦截器 */
@@ -13,12 +13,28 @@ http.interceptors.request.use(
   config => {
     config.headers['Content-Type'] = 'application/json;charset=UTF-8'
     config.headers.timestamp = Math.floor(new Date().getTime() / 1000)
-    config.headers.token = sessionStorage.getItem('token') || ''
-    // 接口没返回时显示loadin
-    // if (config.loading === true) {
-    //   // vm.$loading.hide()
-    //   // vm.$loading.show()
-    // }
+       // get请求映射params参数
+       if (config.method === 'get' && config.params) {
+        let url = config.url + '?'
+        for (const propName of Object.keys(config.params)) {
+          const value = config.params[propName]
+          var part = encodeURIComponent(propName) + '='
+          if (value !== null && typeof (value) !== 'undefined' && value !== '') {
+            if (typeof value === 'object') {
+              for (const key of Object.keys(value)) {
+                const params = propName + '[' + key + ']'
+                var subPart = encodeURIComponent(params) + '='
+                url += subPart + encodeURIComponent(value[key]) + '&'
+              }
+            } else {
+              url += part + encodeURIComponent(value) + '&'
+            }
+          }
+        }
+        url = url.slice(0, -1)
+        config.params = {}
+        config.url = url
+      }
     return config
   },
   error => {
@@ -29,14 +45,25 @@ http.interceptors.request.use(
 /* 响应拦截器 */
 http.interceptors.response.use(
   res => {
-    const code = res.data.code
-    if (code !== 200) {
+    const code = res.data.code || 200
+     // 获取错误信息
+    const msg = errorCode[code] || res.data.msg || errorCode.default
+    if (code == 500) {
       Toast({
         type: 'fail',
-        message: res.data.msg,
+        message:msg,
         duration: 300
       });
-    } else {
+      return Promise.reject(new Error(msg))
+    } else if (code !== 200) {
+      Toast({
+        type: 'fail',
+        message: msg,
+        duration: 300
+      });
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject('error')
+    }else {
       return res.data
     }
     //  vm.$loading.hide()
@@ -44,45 +71,20 @@ http.interceptors.response.use(
   },
   error => {
     //  vm.$loading.hide()
+    let { message } = error
+    if (message === 'Network Error') {
+      message = '后端接口连接异常'
+    } else if (message.includes('timeout')) {
+      message = '系统接口请求超时'
+    } else if (message.includes('Request failed with status code')) {
+      message = '系统接口' + message.substr(message.length - 3) + '异常'
+    }
     Toast({
       type: 'fail',
-      message: error.msg,
+      message: message,
       duration: 300
     });
     return Promise.reject(error)
   }
 )
-
-// function get (url) {
-//   return new Promise((resolve, reject) => {
-//     http.get(url).then(
-//       response => {
-//         resolve(response.data)
-//       },
-//       err => {
-//         reject(err)
-//       }
-//     )
-//       .catch(error => {
-//         reject(error)
-//       })
-//   })
-// }
-
-// function post (url, data, loading) {
-//   return new Promise((resolve, reject) => {
-//     http.post(url, data, { loading: loading }).then(
-//       response => {
-//         resolve(response.data)
-//       },
-//       err => {
-//         reject(err)
-//       }
-//     )
-//       .catch(error => {
-//         reject(error)
-//       })
-//   })
-// }
-
-export { http }
+export default http
