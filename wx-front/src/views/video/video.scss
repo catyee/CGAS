@@ -13,7 +13,21 @@
         font-size: 14px;
         align-items: center;
         .time{
+            display: flex;
+            align-items: center;
             color: rgba(17, 17, 17, 0.65);
+        }
+    }
+    .video-content{
+        position: relative;
+        .control-video{
+            position: absolute;
+            bottom: 3.0em; /*底部控件是3.0em*/
+            left: 0;
+            width: 100%;
+            height: 100%;
+    
+            background-color: red;
         }
     }
     .video-desc{

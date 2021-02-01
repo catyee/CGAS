@@ -41,7 +41,8 @@ export const constantRoutes = [
         meta: { title: '首页', icon: 'iconindex-normal', noCache: true }
       }
     ]
-  }
+  },
+  { path: '*', component: (resolve) => require(['@/views/error/404'], resolve), hidden: true }
 ]
 
 const router = new VueRouter({

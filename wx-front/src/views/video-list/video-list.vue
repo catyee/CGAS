@@ -3,35 +3,57 @@
     <div class="list-title">
       <div>
         <span class="f14 c-111">老人状态 / </span
-        ><span class="f20 bold" @click="toTest">自理老人</span>
+        ><span class="f20 bold">自理老人</span>
       </div>
-      <van-search v-model="searchKey" placeholder="按内容搜索" />
+      <van-search
+        v-model="queryParams.videoName"
+        placeholder="按内容搜索"
+        @input="handlequery"
+      />
     </div>
     <div class="gap"></div>
-    <!-- 视频列表 -->
-    <div class="list">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
-        <div class="item" v-for="item in list" :key="item">
-          <div class="left">
-            <van-image width="100%" height="100%" fit="fill" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-            <div class="bg"></div>
-            <div class="arrow">
-              <img src="@/assets/arrow.png" >
-              <div class="pl-4">01:17</div>
+    <van-empty description="没有数据..." v-show="!list.length" />
+    <van-pull-refresh v-model="loading" @refresh="onRefresh">
+      <!-- 视频列表 -->
+      <div class="list" v-show="list.length">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :finished-text="finishText"
+          @load="onLoad"
+          :error.sync="error"
+          error-text="请求失败，点击重新加载"
+        >
+          <div
+            class="item"
+            v-for="item in list"
+            :key="item.videoId"
+            @click="toVideoDetail(item.videoId)"
+          >
+            <div class="left">
+              <van-image
+                fit="fill"
+                class="img-wrap"
+                :src="item.imagAddr"
+              >
+                <template v-slot:loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+              <div class="bg"></div>
+              <div class="arrow">
+                <img src="@/assets/arrow.png" />
+                <div class="pl-4">{{ item.videoDuration }}</div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="f16 video-title">{{ item.videoName }}</div>
+              <div class="video-tip">观看人数{{ item.count }}</div>
             </div>
           </div>
-          <div class="right">
-            <div class="f16 video-title">如何防止老人感冒？</div>
-            <div class="video-tip">观看10万+ {{item}}</div>
-          </div>
-        </div>
-      </van-list>
-    </div>
+        </van-list>
+      </div>
+    </van-pull-refresh>
   </div>
 </template>
 <script>
@@ -41,7 +63,11 @@ import { Button } from "vant";
 import { Search } from "vant";
 import { List } from "vant";
 import { Cell } from "vant";
-import { Image as VanImage } from 'vant';
+import { Image as VanImage } from "vant";
+import { getVideoList } from "@/api/video.js";
+import { Loading } from "vant";
+import { PullRefresh } from "vant";
+import { Empty } from "vant";
 
 export default {
   components: {
@@ -50,40 +76,82 @@ export default {
     [List.name]: List,
     [Cell.name]: Cell,
     [VanImage.name]: VanImage,
+    [Loading.name]: Loading,
+    [PullRefresh.name]: PullRefresh,
+    [Empty.name]: Empty,
+  },
+  computed: {
+    finishText: function () {
+      return this.list.length >= 10 ? "没有数据了..." : "";
+    },
   },
   data() {
     return {
-      searchKey: "", // 搜索关键字
       list: [],
       loading: false,
       finished: false,
+      refreshing: false,
+      error: false,
+      // 查询条件
+      queryParams: {
+        // 页数
+        pageNum: 1,
+        // 每页的大小
+        pageSize: 5,
+        oldManType: null,
+        takeCareType: null,
+        // 视频状态0正常 1已下架
+        status: null,
+        videoName: null,
+        beginTime: null,
+        endTime: null,
+        // 标签id
+        tags: null,
+      },
     };
   },
-  created() {
-    // Toast({
-    //   type: "fail",
-    //   message: "222222222",
-    //   duration: 300,
-    // });
-  },
   methods: {
-    toTest() {
-      window.location.href = 'http://localhost:8080/video/1'
-    },
     onLoad() {
-       this.finished = true;
-      setTimeout(() => {
-        for (let i = 0; i < 50; i++) {
-          this.list.push(this.list.length + 1);
-        }
-        // 加载状态结束
-        this.loading = false;
+      // 此时正在异步请求数据 让它别触发onload事件
 
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
+      getVideoList(this.queryParams).then((res) => {
+        if (res.code === 200 && res.rows.length) {
+          this.list = this.list.concat(res.rows);
+          this.total = parseInt(res.total);
+          this.queryParams.pageNum += 1;
+          this.loading = false;
+          if (this.list.length >= this.total) {
+            this.finished = true;
+          }
         }
-      }, 1000);
+      }).catch(() => {
+        this.loading = false
+        this.error = true
+      })
+    },
+    // 搜索
+    handlequery() {
+      this.queryParams.pageNum = 1;
+      this.list = [];
+      this.loading = true;
+      this.finished = false;
+      this.onLoad();
+    },
+    onRefresh() {
+      //  this.queryParams.videoName = null;
+      this.queryParams.pageNum = 1;
+      this.list = [];
+      // 清空列表数据
+      this.finished = false;
+
+      // 重新加载数据
+      // 将 loading 设置为 true，表示处于加载状态
+      this.loading = true;
+      this.onLoad();
+    },
+    // 跳转到视频详情
+    toVideoDetail(videoId) {
+      this.$router.push({ path: "/video/" + videoId });
     },
   },
 };

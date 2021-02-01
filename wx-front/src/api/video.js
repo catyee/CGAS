@@ -1,4 +1,4 @@
-import request from '@/JS/request'
+import request from '@/JS/ajax'
 // 新增视频
 export function addVideo (data) {
   return request({

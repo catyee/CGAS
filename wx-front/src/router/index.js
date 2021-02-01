@@ -30,7 +30,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "video" */ '../views/cooperation')
   },
   {
-    //path: '/video/:id',
     path: '/suggest',
     name: 'suggest',
     meta: { title: '意见反馈', keepAlive: false },
@@ -39,7 +38,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history', // 去掉url中的#
+  //mode: 'history', // 去掉url中的#
   routes
 })
 

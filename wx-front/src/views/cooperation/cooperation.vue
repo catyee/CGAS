@@ -1,17 +1,17 @@
 <template>
   <div class="cooperation">
     <div class="title pb-16">请描述想要洽谈的项目简介/计划</div>
-    <div class="pb-22">
-      <van-field
-        v-model="message"
-        class="textarea"
-        type="textarea"
-        placeholder="请在此输入您的项目计划"
-      />
-    </div>
     <van-form @submit="onSubmit">
       <van-field
-        v-model="department"
+        v-model="cooperate.cooperateContent"
+        class="textarea"
+        type="textarea"
+        :rules="[{ required: true, message: '' }]"
+        placeholder="请在此输入您的项目计划"
+      />
+      <div class="pb-22"></div>
+      <van-field
+        v-model="cooperate.contactOrganize"
         label-align="right"
         name="department"
         class="form-item"
@@ -24,31 +24,33 @@
       <van-field
         class="form-item"
         label-class="label"
-        v-model="lxr"
+        v-model="cooperate.contactName"
         label-align="right"
         name="联系人"
         label="联系人"
         :center="true"
         :colon="true"
+        required
         placeholder="请输入您的姓名"
-        :rules="[{ required: true, message: '请输入您的姓名' }]"
+        :rules="[{ required: true, message: '' }]"
       />
       <van-field
         label-class="label"
         class="form-item"
-        v-model="phone"
+        v-model="cooperate.phone"
         label-align="right"
         name="手机号"
         label="手机号"
         :colon="true"
         :center="true"
+        required
         placeholder="请输入您的手机号"
-        :rules="[{ required: true, message: '请输入您的手机号' }]"
+        :rules="phoneRules"
       />
       <van-field
         label-class="label"
         class="form-item"
-        v-model="email"
+        v-model="cooperate.email"
         label-align="right"
         :center="true"
         name="邮箱"
@@ -68,31 +70,62 @@
 import "./cooperation.scss";
 import { Field } from "vant";
 import { Form } from "vant";
+import { Toast } from "vant";
 import { Button } from "vant";
+import { addCooperation } from "@/api/submit";
 export default {
   components: {
     [Field.name]: Field,
     [Form.name]: Form,
     [Button.name]: Button,
-    // [GridItem.name]: GridItem,
-    // [Grid.name]: Grid,
-    // [VanImage.name]: VanImage,
-    // videoPlayer,
+    [Toast.name]: Toast,
   },
   data() {
     return {
-      message: "",
-      department: "",
-      lxr: "",
-      phone: "",
-      email: "",
+      cooperate: {
+        // 意见内容
+        cooperateContent: "",
+        contactOrganize: "",
+        // 联系人姓名
+        contactName: "",
+        // 手机号
+        phone: "",
+        // 邮箱
+        email: "",
+      },
+      // 手机号校验规则
+      phoneRules: [
+        { required: true, message: "" },
+        // 验证是否为手机号
+        {
+          validator: this.util.isPhone,
+          message: "手机号格式不正确",
+        },
+      ],
     };
   },
   created() {},
   mounted() {},
   methods: {
-    onSubmit(values) {
-      console.log("submit", values);
+    onSubmit() {
+      addCooperation(this.cooperate).then((res) => {
+        if (res.code === 200) {
+          Toast.success("提交成功");
+          this.cooperate = {
+            // 意见内容
+            cooperateContent: "",
+            contactOrganize: "",
+            // 联系人姓名
+            contactName: "",
+            // 手机号
+            phone: "",
+            // 邮箱
+            email: "",
+          };
+        } else {
+          Toast.fail("提交失败");
+        }
+      });
     },
   },
 };

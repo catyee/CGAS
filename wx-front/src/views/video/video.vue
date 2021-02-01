@@ -1,24 +1,37 @@
 <template>
   <div class="video">
-    <div class="video-title f20">如何预防老人感冒？</div>
+    <div class="video-title f20">{{videoDetail.videoName}}</div>
     <div class="video-tag pb-24">
-      <div class="color-blue pr-16">养老照料</div>
-      <div class="time">今天</div>
+      <div class="color-blue pr-5" >{{videoDetail.oldManType}}</div>
+      <div class="color-blue pr-16" >{{videoDetail.takeCareType}}</div>
+      <div class="time">{{videoDetail.createTime}}</div>
     </div>
     <div class="video-content">
-       <video-player class="vjs-custom-skin"
-                        ref="videoPlayer"
-                        :options="playerOptions"
-                        customEventName="changed"
-                        @ready="playerIsReady"
-                        @changed="playerStateChanged($event)">
-          </video-player>
+      <video-player
+        class="vjs-custom-skin"
+        ref="videoPlayer"
+        :options="playerOptions"
+          :playsinline="true"
+            @play="onPlayerPlay($event)"
+            @pause="onPlayerPause($event)"
+            @ended="onPlayerEnded($event)"
+            @loadeddata="onPlayerLoadeddata($event)"
+            @waiting="onPlayerWaiting($event)"
+            @playing="onPlayerPlaying($event)"
+            @timeupdate="onPlayerTimeupdate($event)"
+            @canplay="onPlayerCanplay($event)"
+            @canplaythrough="onPlayerCanplaythrough($event)"
+            @ready="playerReadied"
+            @statechanged="playerStateChanged($event)"
+      >
+      </video-player>
+      <!-- <div class="control-video"></div> -->
     </div>
     <div class="video-desc">
-      随着年龄的增长，人身体的各项生理机能都会发生退化，抵抗力变弱，因此，老年人很容易被一些疾病困扰，且不易恢复，例如感冒。感冒对于普通人群来说可能是小病，但对于老年人(特别是高龄老人)则属大病，因为感冒的并发症和继发感染严重者可危及老人生命。
+      {{videoDetail.videoDesc}}
     </div>
     <div class="video-tip">
-      <div class="reader">阅读10万+</div>
+      <div class="reader">阅读{{videoDetail.count}}</div>
       <div class="good-job active">
         <van-icon name="good-job-o" class="f16" />
         <span>赞56</span>
@@ -61,6 +74,7 @@
 <script>
 import "./video.scss";
 import { Icon } from "vant";
+import { Toast } from "vant";
 import { videoPlayer } from "vue-video-player";
 import "video.js/dist/video-js.css";
 import "vue-video-player/src/custom-theme.css";
@@ -68,6 +82,7 @@ import "vue-video-player/src/custom-theme.css";
 import "videojs-contrib-hls.js/src/videojs.hlsjs";
 import { Grid, GridItem } from "vant";
 import { Image as VanImage } from "vant";
+import { getVideo } from "@/api/video.js";
 
 export default {
   components: {
@@ -75,6 +90,7 @@ export default {
     [GridItem.name]: GridItem,
     [Grid.name]: Grid,
     [VanImage.name]: VanImage,
+    [Toast.name]: Toast,
     videoPlayer,
   },
   data() {
@@ -83,8 +99,21 @@ export default {
       list: [],
       loading: false,
       finished: false,
+      // 视频详情
+          // 视频信息
+      videoDetail: {
+        videoName: '',
+        videoDesc: '',
+        oldManType: '',
+        takeCareType: '',
+        tags: '',
+        imagAddr: '',
+        videoAddr: '',
+        // 标签列表
+        tagList: ''
+      },
       playerOptions: {
-         height: '360',
+        height: "360",
         // videojs options
         //width: document.documentElement.clientWidth,
         //height: '360',
@@ -97,23 +126,38 @@ export default {
         playbackRates: [0.7, 1.0, 1.5, 2.0],
         sources: [
           {
-            type: "video/mp4",
-            src: "http://vjs.zencdn.net/v/oceans.mp4",
+            type: "",
+            src: "",
           },
         ],
-          poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-6.jpg"
-        // poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg", //封面地址
+        poster: "",
       },
     };
   },
   created() {
-    // Toast({
-    //   type: "fail",
-    //   message: "222222222",
-    //   duration: 300,
-    // });
+    // 获取用户id
+    this.videoId = this.$route.params.id
+    // 获取视频详情
+    this.getVideo()
   },
   methods: {
+    getVideo() {
+      getVideo(this.videoId).then((res) => {
+        if (!res.data) {
+          Toast.fail("获取视频信息失败");
+        } else {
+          this.videoDetail = res.data;
+          // 获取视频格式
+          const videoAddrArr = res.data.videoAddr.split(".");
+          const type = videoAddrArr[videoAddrArr.length - 1];
+          this.playerOptions.sources[0].type = "video/" + type;
+          // 获取视频地址
+          this.playerOptions.sources[0].src = res.data.videoAddr;
+          // 获取图片地址
+          this.playerOptions.poster = res.data.imagAddr;
+        }
+      });
+    },
     showVideo() {
       this.$router.push({
         path: "/video/3",
@@ -131,6 +175,45 @@ export default {
         },
       });
     },
+      // listen event
+    onPlayerPlay (player) {
+      // console.log('player play!', player)
+    },
+    onPlayerPause (player) {
+      // console.log('player pause!', player)
+    },
+    onPlayerEnded (player) {
+      // console.log('player ended!', player)
+    },
+    onPlayerLoadeddata (player) {
+      // console.log('player Loadeddata!', player)
+    },
+    onPlayerWaiting (player) {
+      // console.log('player Waiting!', player)
+    },
+    onPlayerPlaying (player) {
+      // console.log('player Playing!', player)
+    },
+    onPlayerTimeupdate (player) {
+      // console.log('player Timeupdate!', player.currentTime())
+    },
+    onPlayerCanplay (player) {
+      // console.log('player Canplay!', player)
+    },
+    onPlayerCanplaythrough (player) {
+      // console.log('player Canplaythrough!', player)
+    },
+    // or listen state event
+    playerStateChanged (playerCurrentState) {
+      // console.log('player current update state', playerCurrentState)
+    },
+    // player is ready
+    playerReadied (player) {
+      // seek to 10s
+      console.log('example player 1 readied', player)
+      //  player.currentTime(10)
+      // console.log('example 01: the player is readied', player)
+    }
   },
 };
 </script>
