@@ -1,23 +1,51 @@
 // 过滤日期格式，传入时间戳，根据参数返回不同格式
-const formatTimer = function (val, hours) {
-    if (val) {
-      const dateTimer = new Date(val * 1000)
-      const y = dateTimer.getFullYear()
-      let M = dateTimer.getMonth() + 1
-      let d = dateTimer.getDate()
-      let h = dateTimer.getHours()
-      let m = dateTimer.getMinutes()
-      M = M >= 10 ? M : '0' + M
-      d = d >= 10 ? d : '0' + d
-      h = h >= 10 ? h : '0' + h
-      m = m >= 10 ? m : '0' + m
-      if (hours) {
-        return y + '-' + M + '-' + d + ' ' + h + ':' + m
-      } else {
-        return y + '-' + M + '-' + d
-      }
+function formatDate (date, fmt) {
+  date = new Date(date)
+  let ret
+  const opt = {
+    'Y+': date.getFullYear().toString(),
+    'm+': (date.getMonth() + 1).toString(),
+    'd+': date.getDate().toString(),
+    'H+': date.getHours().toString(),
+    'M+': date.getMinutes().toString(),
+    'S+': date.getSeconds().toString()
+    // 有其他格式化字符需求可以继续添加，必须转化成字符串
+  }
+  if(opt['Y+'] === new Date().getFullYear().toString() && opt['m+'] === (new Date().getMonth()+1).toString() && opt['d+'] === new Date().getDate().toString()) {
+    return '今天'
+  }
+  for (const k in opt) {
+    ret = new RegExp('(' + k + ')').exec(fmt)
+    if (ret) {
+      fmt = fmt.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, '0')))
     }
   }
+  return fmt
+}
+  // 传入时间秒s 得到时分秒
+function formatTime (value) {
+  var theTime = parseInt(value)// 秒
+  var middle = 0// 分
+  var hour = 0// 小时
+
+  if (theTime > 60) {
+    middle = parseInt(theTime / 60)
+    theTime = parseInt(theTime % 60)
+    if (middle > 60) {
+      hour = parseInt(middle / 60)
+      middle = parseInt(middle % 60)
+    }
+  }
+  var result = '' + parseInt(theTime) + '秒'
+  if (middle > 0) {
+    result = '' + parseInt(middle) + '分' + result
+  }
+  if (hour > 0) {
+    result = '' + parseInt(hour) + '小时' + result
+  }
+  return result
+}
   export default {
-    formatTimer
+    formatDate,
+    formatTime
   }

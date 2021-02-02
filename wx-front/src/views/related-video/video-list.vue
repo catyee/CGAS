@@ -43,7 +43,7 @@
               <div class="bg"></div>
               <div class="arrow">
                 <img src="@/assets/arrow.png" />
-                <div class="pl-4">{{ item.videoDuration | formatTime }}</div>
+                <div class="pl-4">{{ item.videoDuration }}</div>
               </div>
             </div>
             <div class="right">

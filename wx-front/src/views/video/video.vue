@@ -1,37 +1,39 @@
 <template>
   <div class="video">
-    <div class="video-title f20">{{videoDetail.videoName}}</div>
+    <div class="video-title f20">{{ videoDetail.videoName }}</div>
     <div class="video-tag pb-24">
-      <div class="color-blue pr-5" >{{videoDetail.oldManType}}</div>
-      <div class="color-blue pr-16" >{{videoDetail.takeCareType}}</div>
-      <div class="time">{{videoDetail.createTime}}</div>
+      <div class="color-blue pr-5">{{ videoDetail.oldManType }}</div>
+      <div class="color-blue pr-16">{{ videoDetail.takeCareType }}</div>
+      <div class="time">
+        {{ videoDetail.createTime | formatDate("YYYY年mm月dd日") }}
+      </div>
     </div>
     <div class="video-content">
       <video-player
         class="vjs-custom-skin"
         ref="videoPlayer"
         :options="playerOptions"
-          :playsinline="true"
-            @play="onPlayerPlay($event)"
-            @pause="onPlayerPause($event)"
-            @ended="onPlayerEnded($event)"
-            @loadeddata="onPlayerLoadeddata($event)"
-            @waiting="onPlayerWaiting($event)"
-            @playing="onPlayerPlaying($event)"
-            @timeupdate="onPlayerTimeupdate($event)"
-            @canplay="onPlayerCanplay($event)"
-            @canplaythrough="onPlayerCanplaythrough($event)"
-            @ready="playerReadied"
-            @statechanged="playerStateChanged($event)"
+        :playsinline="true"
+        @play="onPlayerPlay($event)"
+        @pause="onPlayerPause($event)"
+        @ended="onPlayerEnded($event)"
+        @loadeddata="onPlayerLoadeddata($event)"
+        @waiting="onPlayerWaiting($event)"
+        @playing="onPlayerPlaying($event)"
+        @timeupdate="onPlayerTimeupdate($event)"
+        @canplay="onPlayerCanplay($event)"
+        @canplaythrough="onPlayerCanplaythrough($event)"
+        @ready="playerReadied"
+        @statechanged="playerStateChanged($event)"
       >
       </video-player>
       <!-- <div class="control-video"></div> -->
     </div>
     <div class="video-desc">
-      {{videoDetail.videoDesc}}
+      {{ videoDetail.videoDesc }}
     </div>
     <div class="video-tip">
-      <div class="reader">阅读{{videoDetail.count}}</div>
+      <div class="reader">阅读{{ videoDetail.count }}</div>
       <div class="good-job active">
         <van-icon name="good-job-o" class="f16" />
         <span>赞56</span>
@@ -45,27 +47,37 @@
         /></span>
       </div>
       <div class="show-video pt-16">
-        <div
-          v-for="value in 3"
-          :key="value"
-          class="show-item"
-          @click="showVideo()"
-        >
-          <div class="img-container">
-            <van-image
-              class="video-img"
-              src="https://img.yzcdn.cn/vant/cat.jpeg"
-              fit="fill"
-            >
-              <!-- 图片遮罩层 -->
-              <div class="bg"></div>
-            </van-image>
+        <van-empty
+          image="search"
+          description="暂无相关视频"
+          v-if="!list.length"
+        />
+        <template v-if="list.length">
+          <div
+            v-for="video in list"
+            :key="video.videoId"
+            class="show-item"
+            @click="showVideo(video.videoId)"
+          >
+            <div class="img-container">
+              <!-- <van-image
+                class="video-img"
+                src="https://img.yzcdn.cn/vant/cat.jpeg"
+                fit="fill"
+              > -->
+                <!-- 图片遮罩层 -->
+                <!-- <div class="bg"></div>
+              </van-image> -->
+              <div class="video-img"  :style="{backgroundImage:`url(${video.imagAddr})`}">
+                  <div class="bg"></div>
+              </div>
+            </div>
+            <!-- <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt=""> -->
+            <div class="pr-8 pl-8 video-name">
+              {{video.videoName}}
+            </div>
           </div>
-          <!-- <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt=""> -->
-          <div class="van-ellipsis pr-8 pl-8">
-            这是一段最多显示一行的文字，多余的内容会被省略这是一段最多显示一行的文字，多余的内容会被省略
-          </div>
-        </div>
+        </template>
       </div>
     </div>
   </div>
@@ -82,7 +94,8 @@ import "vue-video-player/src/custom-theme.css";
 import "videojs-contrib-hls.js/src/videojs.hlsjs";
 import { Grid, GridItem } from "vant";
 import { Image as VanImage } from "vant";
-import { getVideo } from "@/api/video.js";
+import { getVideo, getRelatedVideo } from "@/api/video.js";
+import { Empty } from "vant";
 
 export default {
   components: {
@@ -91,27 +104,26 @@ export default {
     [Grid.name]: Grid,
     [VanImage.name]: VanImage,
     [Toast.name]: Toast,
+    [Empty.name]: Empty,
     videoPlayer,
   },
   data() {
     return {
-      searchKey: "", // 搜索关键字
+      // 相关视频
       list: [],
-      loading: false,
-      finished: false,
       // 视频详情
-          // 视频信息
       videoDetail: {
-        videoName: '',
-        videoDesc: '',
-        oldManType: '',
-        takeCareType: '',
-        tags: '',
-        imagAddr: '',
-        videoAddr: '',
+        videoName: "",
+        videoDesc: "",
+        oldManType: "",
+        takeCareType: "",
+        tags: "",
+        imagAddr: "",
+        videoAddr: "",
         // 标签列表
-        tagList: ''
+        tagList: "",
       },
+      // 视频播放器参数
       playerOptions: {
         height: "360",
         // videojs options
@@ -136,11 +148,12 @@ export default {
   },
   created() {
     // 获取用户id
-    this.videoId = this.$route.params.id
+    this.videoId = this.$route.params.id;
     // 获取视频详情
-    this.getVideo()
+    this.getVideo();
   },
   methods: {
+    // 获取视频详情
     getVideo() {
       getVideo(this.videoId).then((res) => {
         if (!res.data) {
@@ -155,65 +168,69 @@ export default {
           this.playerOptions.sources[0].src = res.data.videoAddr;
           // 获取图片地址
           this.playerOptions.poster = res.data.imagAddr;
+          // 获取该视频的相关推荐
+          this.getRelatedVideo();
         }
       });
     },
-    showVideo() {
-      this.$router.push({
-        path: "/video/3",
-        query: {
-          type: "all",
-        },
+    // 获取相关视频推荐
+    getRelatedVideo() {
+      getRelatedVideo({
+        tags: this.videoDetail.tags,
+      }).then((res) => {
+        this.list = res.rows.slice(0,3)
       });
-      //  this.$router.push({ path: '/user/deduce/' + id, query: { create: 1 } })
+    },
+    showVideo(videoId) {
+       this.$router.push({ path: "/video/" + videoId });
     },
     allVideo() {
       this.$router.push({
         path: "/",
         query: {
-          type: "all",
+          type: "0",
         },
       });
     },
-      // listen event
-    onPlayerPlay (player) {
+    // listen event
+    onPlayerPlay(player) {
       // console.log('player play!', player)
     },
-    onPlayerPause (player) {
+    onPlayerPause(player) {
       // console.log('player pause!', player)
     },
-    onPlayerEnded (player) {
+    onPlayerEnded(player) {
       // console.log('player ended!', player)
     },
-    onPlayerLoadeddata (player) {
+    onPlayerLoadeddata(player) {
       // console.log('player Loadeddata!', player)
     },
-    onPlayerWaiting (player) {
+    onPlayerWaiting(player) {
       // console.log('player Waiting!', player)
     },
-    onPlayerPlaying (player) {
+    onPlayerPlaying(player) {
       // console.log('player Playing!', player)
     },
-    onPlayerTimeupdate (player) {
+    onPlayerTimeupdate(player) {
       // console.log('player Timeupdate!', player.currentTime())
     },
-    onPlayerCanplay (player) {
+    onPlayerCanplay(player) {
       // console.log('player Canplay!', player)
     },
-    onPlayerCanplaythrough (player) {
+    onPlayerCanplaythrough(player) {
       // console.log('player Canplaythrough!', player)
     },
     // or listen state event
-    playerStateChanged (playerCurrentState) {
+    playerStateChanged(playerCurrentState) {
       // console.log('player current update state', playerCurrentState)
     },
     // player is ready
-    playerReadied (player) {
+    playerReadied(player) {
       // seek to 10s
-      console.log('example player 1 readied', player)
+      console.log("example player 1 readied", player);
       //  player.currentTime(10)
       // console.log('example 01: the player is readied', player)
-    }
+    },
   },
 };
 </script>
