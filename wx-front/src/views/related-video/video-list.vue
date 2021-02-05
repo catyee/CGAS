@@ -1,15 +1,17 @@
 <template>
   <div class="video-list">
     <div class="list-title">
-      <div>
+      <!-- <div>
         <span class="f14 c-111">老人状态 / </span
         ><span class="f20 bold">自理老人</span>
-      </div>
-      <van-search
-        v-model="queryParams.videoName"
-        placeholder="按内容搜索"
-        @input="handlequery"
-      />
+      </div> -->
+      <form action="1">
+        <van-search
+          v-model="queryParams.videoName"
+          placeholder="按内容搜索"
+          @search="handlequery"
+        />
+      </form>
     </div>
     <div class="gap"></div>
     <van-empty description="没有数据..." v-show="!list.length" />
@@ -31,20 +33,21 @@
             @click="toVideoDetail(item.videoId)"
           >
             <div class="left">
-              <van-image
-                fit="fill"
-                class="img-wrap"
-                :src="item.imagAddr"
+              <div
+                class="video-img"
+                :style="{ backgroundImage: `url(${item.imagAddr})` }"
               >
+                <div class="bg"></div>
+                <div class="arrow">
+                  <img src="@/assets/arrow1.png" />
+                  <div class="pl-4">{{ item.videoDuration }}</div>
+                </div>
+              </div>
+              <!-- <van-image fit="fill" class="img-wrap" :src="item.imagAddr">
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
-              </van-image>
-              <div class="bg"></div>
-              <div class="arrow">
-                <img src="@/assets/arrow.png" />
-                <div class="pl-4">{{ item.videoDuration }}</div>
-              </div>
+              </van-image> -->
             </div>
             <div class="right">
               <div class="f16 video-title">{{ item.videoName }}</div>
@@ -64,7 +67,7 @@ import { Search } from "vant";
 import { List } from "vant";
 import { Cell } from "vant";
 import { Image as VanImage } from "vant";
-import { getVideoList } from "@/api/video.js";
+import { getRelatedVideo } from "@/api/video.js";
 import { Loading } from "vant";
 import { PullRefresh } from "vant";
 import { Empty } from "vant";
@@ -82,7 +85,7 @@ export default {
   },
   computed: {
     finishText: function () {
-      return this.list.length >= 10 ? "没有数据了..." : "";
+      return this.list.length > 10 ? "没有数据了..." : "";
     },
   },
   data() {
@@ -97,37 +100,46 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 5,
+        pageSize: 10,
         oldManType: null,
         takeCareType: null,
         // 视频状态0正常 1已下架
-        status: null,
+        status: 0,
         videoName: null,
         beginTime: null,
         endTime: null,
         // 标签id
         tags: null,
+        videoId: null,
       },
     };
+  },
+  created() {
+    // 获取用户id
+    this.queryParams.videoId = this.$route.query.id;
+    this.onLoad();
   },
   methods: {
     onLoad() {
       // 此时正在异步请求数据 让它别触发onload事件
-
-      getVideoList(this.queryParams).then((res) => {
-        if (res.code === 200 && res.rows.length) {
-          this.list = this.list.concat(res.rows);
-          this.total = parseInt(res.total);
-          this.queryParams.pageNum += 1;
-          this.loading = false;
-          if (this.list.length >= this.total) {
+      getRelatedVideo(this.queryParams)
+        .then((res) => {
+          if (res.code === 200 && res.rows.length) {
+            this.list.push(...res.rows);
+            this.total = parseInt(res.total);
+            this.queryParams.pageNum += 1;
+            this.loading = false;
+            if (this.list.length >= this.total - 1) {
+              this.finished = true;
+            }
+          } else {
             this.finished = true;
           }
-        }
-      }).catch(() => {
-        this.loading = false
-        this.error = true
-      })
+        })
+        .catch(() => {
+          this.loading = false;
+          this.error = true;
+        });
     },
     // 搜索
     handlequery() {

@@ -13,6 +13,12 @@ const routes = [
     component: () =>  import(/* webpackChunkName: "video-list" */ '../views/video-list')
   },
   {
+    path: '/related',
+    name: 'related',
+    meta: { title: '全部视频', keepAlive: false },
+    component: () =>  import(/* webpackChunkName: "video-list" */ '../views/related-video')
+  },
+  {
     //path: '/video/:id',
     path: '/video/:id',
     name: 'video',
@@ -36,9 +42,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "video" */ '../views/suggest')
   }
 ]
+const originalPush = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
 const router = new VueRouter({
-  //mode: 'history', // 去掉url中的#
+  mode: 'history', // 去掉url中的#
   routes
 })
 

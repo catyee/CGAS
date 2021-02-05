@@ -36,6 +36,7 @@
         <div class="click-number-content">
           <div class="item" v-for=" (item, index) in videoCountList" :key="item.videoId" @click="toVideoDetail(item.videoId)">
             <div class="item-left">
+              <!-- <img :src= "require(`@/assets/index-video/${index +1}.svg`)" > -->
               <img :src= "require(`@/assets/index-video/${index +1}.svg`)" >
               <div class="pl-9 pr-9  name" :title="item.videoName">{{item.videoName}}</div>
             </div>
@@ -122,7 +123,7 @@ export default {
         endTime: this.endTime
       }).then((res) => {
         if (res.code === 200 && res.data) {
-          this.videoCountList = res.data.allVideoCount
+          this.videoCountList = res.data.allVideoCount.reverse().slice(0, 13)
           this.createChart(res.data)
         } else {
           this.msgError('查询失败')
@@ -176,12 +177,12 @@ export default {
         })
       } else {
         data.forEach((item) => {
-          const key = Object.keys(item)[0]
-          const value = item[key]
-          xData.push(key.slice(0, 10))
+          const date = item.startTime.slice(0, 10)
+          const value = item.count
+          xData.push(date)
           seriesData.push({
             value: value,
-            date: key.slice(0, 10)
+            date: date
           })
         })
       }

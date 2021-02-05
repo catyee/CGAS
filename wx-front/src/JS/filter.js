@@ -1,6 +1,7 @@
 // 过滤日期格式，传入时间戳，根据参数返回不同格式
 function formatDate (date, fmt) {
-  date = new Date(date)
+  if(!date) return
+  date = new Date(date.replace(/-/g,'/'))
   let ret
   const opt = {
     'Y+': date.getFullYear().toString(),

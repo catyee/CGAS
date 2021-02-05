@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="video">
     <div class="video-title f20">{{ videoDetail.videoName }}</div>
     <div class="video-tag pb-24">
@@ -72,7 +72,6 @@
                   <div class="bg"></div>
               </div>
             </div>
-            <!-- <img src="https://img.yzcdn.cn/vant/cat.jpeg" alt=""> -->
             <div class="pr-8 pl-8 video-name">
               {{video.videoName}}
             </div>
@@ -143,8 +142,16 @@ export default {
           },
         ],
         poster: "",
-      },
+      }
     };
+  },
+  watch: {
+    $route(to, from){
+       // 获取用户id
+    this.videoId = this.$route.params.id;
+    // 获取视频详情
+    this.getVideo();
+    }
   },
   created() {
     // 获取用户id
@@ -176,9 +183,11 @@ export default {
     // 获取相关视频推荐
     getRelatedVideo() {
       getRelatedVideo({
-        tags: this.videoDetail.tags,
+       videoId: this.videoId,
+       pageNum: 1,
+       pageSize: 3
       }).then((res) => {
-        this.list = res.rows.slice(0,3)
+        this.list = res.rows
       });
     },
     showVideo(videoId) {
@@ -186,9 +195,9 @@ export default {
     },
     allVideo() {
       this.$router.push({
-        path: "/",
+        path: "/related",
         query: {
-          type: "0",
+          id: this.videoId,
         },
       });
     },

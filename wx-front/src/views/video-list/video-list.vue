@@ -2,14 +2,16 @@
   <div class="video-list">
     <div class="list-title">
       <div>
-        <span class="f14 c-111">老人状态 / </span
-        ><span class="f20 bold">自理老人</span>
+        <span class="f14 c-111">{{name }}  {{name && type? '/&nbsp;':''}}</span
+        ><span class="f20 bold">{{type}}</span>
       </div>
-      <van-search
-        v-model="queryParams.videoName"
-        placeholder="按内容搜索"
-        @input="handlequery"
-      />
+      <form action="1">
+        <van-search
+          v-model="queryParams.videoName"
+          placeholder="按内容搜索"
+          @search="handlequery"
+        />
+      </form>
     </div>
     <div class="gap"></div>
     <van-empty description="没有数据..." v-show="!list.length" />
@@ -31,7 +33,17 @@
             @click="toVideoDetail(item.videoId)"
           >
             <div class="left">
-              <van-image
+              <div
+                class="video-img"
+                :style="{ backgroundImage: `url(${item.imagAddr})` }"
+              >
+                <div class="bg"></div>
+                <div class="arrow">
+                  <img src="@/assets/arrow1.png" />
+                  <div class="pl-4">{{ item.videoDuration | formatTime }}</div>
+                </div>
+              </div>
+              <!-- <van-image
                 fit="fill"
                 class="img-wrap"
                 :src="item.imagAddr"
@@ -39,12 +51,7 @@
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
-              </van-image>
-              <div class="bg"></div>
-              <div class="arrow">
-                <img src="@/assets/arrow.png" />
-                <div class="pl-4">{{ item.videoDuration | formatTime }}</div>
-              </div>
+              </van-image> -->
             </div>
             <div class="right">
               <div class="f16 video-title">{{ item.videoName }}</div>
@@ -68,6 +75,7 @@ import { getVideoList } from "@/api/video.js";
 import { Loading } from "vant";
 import { PullRefresh } from "vant";
 import { Empty } from "vant";
+import {olderTypes,careTypes } from '@/libs/constant'
 
 export default {
   components: {
@@ -78,15 +86,17 @@ export default {
     [VanImage.name]: VanImage,
     [Loading.name]: Loading,
     [PullRefresh.name]: PullRefresh,
-    [Empty.name]: Empty,
+    [Empty.name]: Empty
   },
   computed: {
     finishText: function () {
-      return this.list.length >= 10 ? "没有数据了..." : "";
+      return this.list.length > 8 ? "没有数据了..." : "";
     },
   },
   data() {
     return {
+      name: '',
+      type: '',
       list: [],
       loading: false,
       finished: false,
@@ -97,11 +107,11 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 5,
+        pageSize: 10,
         oldManType: null,
         takeCareType: null,
         // 视频状态0正常 1已下架
-        status: null,
+        status: 0,
         videoName: null,
         beginTime: null,
         endTime: null,
@@ -110,24 +120,45 @@ export default {
       },
     };
   },
+  created() {
+    let type = this.$route.query.type
+    // 老人状态
+    if(olderTypes.indexOf(type) !== -1) {
+      this.name = '老人状态'
+      this.type = type
+      this.queryParams.oldManType = type
+    }
+      // 老人状态
+    if(careTypes.indexOf(type) !== -1) {
+      this.name = '养老照护'
+      this.type = type
+      this.queryParams.takeCareType = type
+    }
+    // if(careTypes.indexOf(type) == -1 && olderTypes.indexOf(type) === -1) {
+    //   alert('当前页面地址不正确')
+    // }
+    this.onLoad();
+  },
   methods: {
     onLoad() {
       // 此时正在异步请求数据 让它别触发onload事件
 
-      getVideoList(this.queryParams).then((res) => {
-        if (res.code === 200 && res.rows.length) {
-          this.list = this.list.concat(res.rows);
-          this.total = parseInt(res.total);
-          this.queryParams.pageNum += 1;
-          this.loading = false;
-          if (this.list.length >= this.total) {
-            this.finished = true;
+      getVideoList(this.queryParams)
+        .then((res) => {
+          if (res.code === 200 && res.rows.length) {
+            this.list = this.list.concat(res.rows);
+            this.total = parseInt(res.total);
+            this.queryParams.pageNum += 1;
+            this.loading = false;
+            if (this.list.length >= this.total) {
+              this.finished = true;
+            }
           }
-        }
-      }).catch(() => {
-        this.loading = false
-        this.error = true
-      })
+        })
+        .catch(() => {
+          this.loading = false;
+          this.error = true;
+        });
     },
     // 搜索
     handlequery() {

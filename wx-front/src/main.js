@@ -8,6 +8,9 @@ import './JS/plugin'
 import './JS/FastClick'
 import filters from './JS/filter'
 import utils from './JS/utils'
+import { Lazyload } from 'vant';
+
+Vue.use(Lazyload);
 Vue.use(utils)
 // 注入全局过滤器
 Object.keys(filters).forEach(item => {
