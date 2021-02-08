@@ -182,7 +182,7 @@ export default {
     },
     // 跳转到视频详情
     toVideoDetail(videoId) {
-      this.$router.push({ path: "/video/" + videoId });
+      this.$router.push({ path: "/video/" + videoId, query: {tag: new Date().getTime()} });
     },
   },
 };

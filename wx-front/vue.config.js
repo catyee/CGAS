@@ -14,14 +14,14 @@ function addStyleResource(rule) {
     })
 }
 module.exports = {
-  publicPath: './',
+  publicPath: process.env.NODE_ENV === "production" ? "/" : "/",
   // 将构建好的文件输出到哪里
-  outputDir: 'dist/static',
+  outputDir: 'dist',
   // 放置生成的静态资源(js、css、img、fonts)的目录。
   assetsDir: 'static',
 
   // 指定生成的 index.html 的输出路径
-  indexPath: 'index.html',
+  //indexPath: 'index.html',
   // 是否使用包含运行时编译器的 Vue 构建版本。设置为 true 后你就可以在 Vue 组件中使用 template 选项了，但是这会让你的应用额外增加 10kb 左右。
   runtimeCompiler: false,
 

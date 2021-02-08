@@ -8,7 +8,7 @@
         {{ videoDetail.createTime | formatDate("YYYY年mm月dd日") }}
       </div>
     </div>
-    <div class="video-content">
+    <div class="video-content" v-if="videoDetail.videoAddr">
       <video-player
         class="vjs-custom-skin"
         ref="videoPlayer"
@@ -36,7 +36,7 @@
       <div class="reader">阅读{{ videoDetail.count }}</div>
       <div class="good-job active">
         <van-icon name="good-job-o" class="f16" />
-        <span>赞56</span>
+        <span @click="likeVideo">赞{{ videoDetail.stars }}</span>
       </div>
     </div>
     <div class="related-video">
@@ -65,15 +65,18 @@
                 src="https://img.yzcdn.cn/vant/cat.jpeg"
                 fit="fill"
               > -->
-                <!-- 图片遮罩层 -->
-                <!-- <div class="bg"></div>
+              <!-- 图片遮罩层 -->
+              <!-- <div class="bg"></div>
               </van-image> -->
-              <div class="video-img"  :style="{backgroundImage:`url(${video.imagAddr})`}">
-                  <div class="bg"></div>
+              <div
+                class="video-img"
+                :style="{ backgroundImage: `url(${video.imagAddr})` }"
+              >
+                <div class="bg"></div>
               </div>
             </div>
             <div class="pr-8 pl-8 video-name">
-              {{video.videoName}}
+              {{ video.videoName }}
             </div>
           </div>
         </template>
@@ -93,7 +96,7 @@ import "vue-video-player/src/custom-theme.css";
 import "videojs-contrib-hls.js/src/videojs.hlsjs";
 import { Grid, GridItem } from "vant";
 import { Image as VanImage } from "vant";
-import { getVideo, getRelatedVideo } from "@/api/video.js";
+import { getVideo, getRelatedVideo, likeVideo } from "@/api/video.js";
 import { Empty } from "vant";
 
 export default {
@@ -142,16 +145,16 @@ export default {
           },
         ],
         poster: "",
-      }
+      },
     };
   },
   watch: {
-    $route(to, from){
-       // 获取用户id
-    this.videoId = this.$route.params.id;
-    // 获取视频详情
-    this.getVideo();
-    }
+    $route(to, from) {
+      // 获取用户id
+      this.videoId = this.$route.params.id;
+      // 获取视频详情
+      this.getVideo();
+    },
   },
   created() {
     // 获取用户id
@@ -183,15 +186,15 @@ export default {
     // 获取相关视频推荐
     getRelatedVideo() {
       getRelatedVideo({
-       videoId: this.videoId,
-       pageNum: 1,
-       pageSize: 3
+        videoId: this.videoId,
+        pageNum: 1,
+        pageSize: 3,
       }).then((res) => {
-        this.list = res.rows
+        this.list = res.rows;
       });
     },
     showVideo(videoId) {
-       this.$router.push({ path: "/video/" + videoId });
+      this.$router.push({ path: "/video/" + videoId });
     },
     allVideo() {
       this.$router.push({
@@ -200,6 +203,17 @@ export default {
           id: this.videoId,
         },
       });
+    },
+    // 点赞视频
+    likeVideo() {
+      this.videoDetail.stars += 1
+      likeVideo(this.videoDetail).then(res => {
+        if(res.code === 200) {
+           Toast.success("操作成功");
+        }else{
+          Toast.fail("操作失败");
+        }
+      })
     },
     // listen event
     onPlayerPlay(player) {

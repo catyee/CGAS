@@ -24,3 +24,11 @@ export function getRelatedVideo(data) {
     params: data
   })
 }
+// 点赞视频 即修改视频详情
+export function likeVideo(data) {
+  return request({
+    url: '/wx/video',
+    method: 'put',
+    data: data
+  })
+}
