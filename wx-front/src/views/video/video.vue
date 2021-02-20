@@ -36,7 +36,9 @@
       <div class="reader">阅读{{ videoDetail.count }}</div>
       <div class="good-job active">
         <van-icon name="good-job-o" class="f16" />
-        <span @click="likeVideo">赞{{ videoDetail.stars }}</span>
+        <div @click="likeVideo">
+          {{ isLiked ? "已赞" : "赞" }}{{ videoDetail.stars }}
+        </div>
       </div>
     </div>
     <div class="related-video">
@@ -111,6 +113,7 @@ export default {
   },
   data() {
     return {
+      isLiked: false,
       // 相关视频
       list: [],
       // 视频详情
@@ -154,6 +157,7 @@ export default {
       this.videoId = this.$route.params.id;
       // 获取视频详情
       this.getVideo();
+      this.isLiked = localStorage.getItem("videoid" + this.videoId) || false;
     },
   },
   created() {
@@ -161,6 +165,9 @@ export default {
     this.videoId = this.$route.params.id;
     // 获取视频详情
     this.getVideo();
+  },
+  mounted() {
+    this.isLiked = localStorage.getItem("videoid" + this.videoId) || false;
   },
   methods: {
     // 获取视频详情
@@ -206,14 +213,17 @@ export default {
     },
     // 点赞视频
     likeVideo() {
-      this.videoDetail.stars += 1
-      likeVideo(this.videoDetail).then(res => {
-        if(res.code === 200) {
-           Toast.success("操作成功");
-        }else{
+      localStorage.setItem("videoid" + this.videoId, true);
+      if (this.isLiked) return;
+      this.isLiked = true;
+      this.videoDetail.stars += 1;
+      likeVideo(this.videoDetail).then((res) => {
+        if (res.code === 200) {
+          Toast.success("操作成功");
+        } else {
           Toast.fail("操作失败");
         }
-      })
+      });
     },
     // listen event
     onPlayerPlay(player) {

@@ -121,19 +121,27 @@ export default {
     };
   },
   created() {
-    let type = this.$route.query.type
+    let type = parseInt(this.$route.query.type)
+    let types = olderTypes.concat(careTypes)
+    let name = types[type - 1]
+    this.type = name
+    if(type < 6) {
+       this.queryParams.oldManType = name
+    }else {
+      this.queryParams.takeCareType = name
+    }
     // 老人状态
-    if(olderTypes.indexOf(type) !== -1) {
-      this.name = '老人状态'
-      this.type = type
-      this.queryParams.oldManType = type
-    }
-      // 老人状态
-    if(careTypes.indexOf(type) !== -1) {
-      this.name = '养老照护'
-      this.type = type
-      this.queryParams.takeCareType = type
-    }
+    // if(olderTypes.indexOf(type) !== -1) {
+    //   this.name = '老人状态'
+    //   this.type = type
+    //   this.queryParams.oldManType = type
+    // }
+    //   // 老人状态
+    // if(careTypes.indexOf(type) !== -1) {
+    //   this.name = '养老照护'
+    //   this.type = type
+    //   this.queryParams.takeCareType = type
+    // }
     // if(careTypes.indexOf(type) == -1 && olderTypes.indexOf(type) === -1) {
     //   alert('当前页面地址不正确')
     // }

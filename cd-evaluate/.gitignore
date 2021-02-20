@@ -1,10 +1,6 @@
 .DS_Store
-wx-admin/node_modules
-wx-admin/dist
-wx-front/node_modules
-wx-front/dist
-cd-evaluate/node_modules
-cd-evaluate/dist
+node_modules
+/dist
 
 
 # local env files
