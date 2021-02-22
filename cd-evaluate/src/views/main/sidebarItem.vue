@@ -1,7 +1,6 @@
 <template>
   <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children, item)
-    &&(!onlyOneChild.children||onlyOneChild.noShowingChildren)">
+    <template v-if="hasOneShowingChild(item.children, item)&&(!onlyOneChild.children||onlyOneChild.noShowingChildren)">
       <el-menu-item :index="resolvePath(onlyOneChild.path)">
         <i class="iconfont" :class="onlyOneChild.meta.icon"></i>
         <span slot="title">{{ onlyOneChild.meta.title }}</span>
@@ -24,61 +23,61 @@
   </div>
 </template>
 <script>
-import path from 'path';
-
+import path from 'path'
 export default {
   name: 'SidebarItem',
   props: {
     item: {
       type: Object,
-      required: true,
+      required: true
     },
     basePath: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
-      onlyOneChild: null,
-    };
+      onlyOneChild: null
+    }
   },
   methods: {
-    hasOneShowingChild(children = [], parent) {
+    hasOneShowingChild (children = [], parent) {
       if (!children) {
-        // children = [];
+        children = []
       }
       // 筛选出有几个可用的children
       const showingChildren = children.filter((item) => {
         if (item.hidden) {
-          return false;
+          return false
+        } else {
+          // Temp set(will be used if only has one showing child)
+          this.onlyOneChild = item
+          return true
         }
-        // Temp set(will be used if only has one showing child)
-        this.onlyOneChild = item;
-        return true;
-      });
+      })
 
       // When there is only one child router, the child router is displayed by default
       if (showingChildren.length === 1) {
-        return true;
+        return true
       }
 
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
-        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true };
-        return true;
+        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
+        return true
       }
 
-      return false;
+      return false
     },
-    resolvePath(routePath) {
-      let newPath = path.resolve(this.basePath, routePath);
+    resolvePath (routePath) {
+      let newPath = path.resolve(this.basePath, routePath)
       // 如果路由需要传id将id去掉 因为menu组件中不需要 否则会报错
-      newPath = newPath.replace(/:id/, '');
-      return newPath;
-    },
-  },
-};
+      newPath = newPath.replace(/:id/, '')
+      return newPath
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .iconfont {

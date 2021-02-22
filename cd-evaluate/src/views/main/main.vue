@@ -11,15 +11,14 @@
   </div>
 </template>
 <script>
-import Header from './header.vue';
-import Menu from './menu.vue';
-
+import Header from './header.vue'
+import Menu from './menu.vue'
 export default {
   components: {
     Header,
-    Menu,
-  },
-};
+    Menu
+  }
+}
 </script>
 <style lang="scss" scoped>
 .container {

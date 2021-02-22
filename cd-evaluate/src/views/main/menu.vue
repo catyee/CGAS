@@ -6,37 +6,36 @@
       class="menu-list"
       :unique-opened="true"
     >
-      <sidebar-item
-        v-for="(route, index) in sidebarRouters"
-        :key="route.path + index"
-        :item="route"
-        :base-path="route.path"
-      />
+       <sidebar-item
+                    v-for="(route, index) in sidebarRouters"
+                    :key="route.path  + index"
+                    :item="route"
+                    :base-path="route.path"
+                />
     </el-menu>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
-import SidebarItem from './sidebarItem.vue';
-
+import { mapGetters } from 'vuex'
+import SidebarItem from './sidebarItem'
 export default {
   components: { SidebarItem },
   computed: {
-    ...mapGetters(['sidebarRouters']),
+    ...mapGetters(['sidebarRouters'])
   },
-  data() {
+  data () {
     return {
       element: {
         router: true, // 是否使用vue-router的模式 启用该模式会在激活导航时以index作为path进行路由跳转
         // 当前激活菜单的index
-        active: '',
-      },
-    };
+        active: ''
+      }
+    }
   },
-  mounted() {
-    this.element.active = this.$route.path;
-  },
-};
+  mounted () {
+    this.element.active = this.$route.path
+  }
+}
 </script>
 <style lang="scss" scoped>
 .iconfont {

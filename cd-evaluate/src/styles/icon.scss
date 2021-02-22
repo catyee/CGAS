@@ -1,0 +1,33 @@
+
+.icon-universal-base {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.index-active{
+    @extend .icon-universal-base;
+    background-image: url("~@/assets/menu-icon/index-active.svg");
+}
+.index-normal{
+    @extend .icon-universal-base;
+    background-image: url("~@/assets/menu-icon/index-normal.svg");
+}
+
+
+/**
+ *  通用icon ----- END
+ * */
+
+
+
+
+
+
+
+/**
+ *  业务相关icon ------------------------- Start ------------------------------
+ * */
+

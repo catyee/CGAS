@@ -1,4 +1,4 @@
-# cd-evaluate
+# wx-admin
 
 ## Project setup
 ```

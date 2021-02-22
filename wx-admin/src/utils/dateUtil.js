@@ -3,13 +3,13 @@ const formatDate = filters.formatDate
 // 获取本周的第一天
 export function weekFirstDay () {
   var nowdate = new Date()
-  var day = new Date(nowdate - (nowdate.getDay() - 1) * 86400000)
+  var day = new Date(nowdate - (nowdate.getDay() === 0 ? 6 : nowdate.getDay() - 1) * 86400000)
   return formatDate(day, 'YYYY-mm-dd')
 }
 // 获取下周的第一天
 export function weekLastDay () {
   var nowdate = new Date()
-  var day = new Date(nowdate - (nowdate.getDay() - 8) * 86400000)
+  var day = new Date(nowdate - (nowdate.getDay() === 0 ? -1 : nowdate.getDay() - 8) * 86400000)
   return formatDate(day, 'YYYY-mm-dd')
 }
 // 获取本月的第一天

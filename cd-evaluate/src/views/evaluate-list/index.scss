@@ -1,0 +1,17 @@
+.evaluate-list{
+    .list-container{
+        background-color: #fff;
+        padding: 48px 16px;
+        box-sizing: border-box;
+    }
+    .color-green{
+        color: #1F9875;
+    }
+    .color-red{
+        color: #FF5F58;
+    }
+    .el-table--enable-row-hover .el-table__body tr:hover > td{
+        background-color: #E2F7F1;
+        cursor: pointer;
+    }
+}

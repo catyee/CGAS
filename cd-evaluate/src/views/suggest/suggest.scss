@@ -1,0 +1,27 @@
+.cooperation{
+    .selector{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 23px;
+
+    }
+    .title-line{
+        width: 3px;
+        height: 16px;
+        background: #C23731;
+    }
+    .list-container{
+        background-color: #fff;
+        padding: 8px 16px;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    .oper-container{
+        display: flex;
+        justify-content: flex-end;
+    }
+}

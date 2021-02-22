@@ -1,19 +1,17 @@
-const path = require('path');
-
-function resolve(dir) {
-  return path.join(__dirname, dir);
+const path = require('path')
+function resolve (dir) {
+  return path.join(__dirname, dir)
 }
-function addStyleResource(rule) {
+function addStyleResource (rule) {
   rule.use('style-resource')
     .loader('style-resources-loader')
     .options({
       patterns: [
-        path.resolve(__dirname, './src/styles/index.scss'),
-      ],
-    });
+        path.resolve(__dirname, './src/styles/index.scss')
+      ]
+    })
 }
-const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
   assetsDir: 'static',
@@ -55,36 +53,42 @@ module.exports = {
 
   //   }
   // },
-  chainWebpack: (config) => {
-    config.plugins.delete('preload'); // TODO: need test
-    config.plugins.delete('prefetch'); // TODO: need test
+  chainWebpack: config => {
+    config.plugin('html')
+      .tap(args => {
+        args[0].title = '承德养老评估系统'
+        return args
+      })
+    config.plugins.delete('preload') // TODO: need test
+    config.plugins.delete('prefetch') // TODO: need test
     config.resolve.alias
       .set('@', resolve('src'))
       .set('assets', resolve('src/assets'))
       .set('components', resolve('src/components'))
-      .set('views', resolve('src/views'));
-    const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
-    types.forEach((type) => addStyleResource(config.module.rule('scss').oneOf(type)));
+      .set('views', resolve('src/views'))
+    const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
+    types.forEach(type => addStyleResource(config.module.rule('scss').oneOf(type)))
     config.entry = {
-      'common-vendor': ['echarts'],
-    };
-    config.output.filename('[name].[hash].js').chunkFilename('[name].js');
+      'common-vendor': ['echarts']
+    }
+    config.output.filename('[name].[hash].js').chunkFilename('[name].js')
 
     config.optimization.splitChunks({
       name: 'common-chunk',
-      minChunks: 2,
-    });
+      minChunks: 2
+    })
     config.when(process.env.NODE_ENV !== 'development',
-      (config) => {
+      config => {
         config
           .plugin('ScriptExtHtmlWebpackPlugin')
           .after('html')
           .use('script-ext-html-webpack-plugin', [{
             // `runtime` must same as runtimeChunk name. default is `runtime`
-            inline: /runtime\..*\.js$/,
+            inline: /runtime\..*\.js$/
           }])
-          .end();
-      });
+          .end()
+      }
+    )
     // config.plugin('report').use(WebpackAnalyzer)
   },
   css: {
@@ -101,12 +105,12 @@ module.exports = {
             // ignoreIdentifier: false,  //（boolean/string）忽略单个属性的方法，启用ignoreidentifier后，replace将自动设置为true。
             // replace: true, // （布尔值）替换包含REM的规则，而不是添加回退。
             mediaQuery: false, // （布尔值）允许在媒体查询中转换px。
-            minPixelValue: 3, // 设置要替换的最小像素值(3px会被转rem)。 默认 0
-          }),
-        ],
-      },
-    },
-  },
+            minPixelValue: 3 // 设置要替换的最小像素值(3px会被转rem)。 默认 0
+          })
+        ]
+      }
+    }
+  }
 
   // css: {
   //   // css预设器配置项
@@ -120,4 +124,4 @@ module.exports = {
   //     }
   //   }
   // }
-};
+}

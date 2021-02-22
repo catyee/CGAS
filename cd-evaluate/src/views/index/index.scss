@@ -1,0 +1,73 @@
+.index{
+    .el-radio-button .el-radio-button__inner{
+        border: none;
+        width: 83px;
+        height: 32px;
+    }
+    .selector-group{
+        display: flex;
+        align-items: center;
+    }
+    .date-picker-title{
+        color:#7E888A;
+    }
+    .content {
+        display: flex;
+        align-items: top;
+    }
+    .content-l{
+        flex: 1;
+    }
+    .content-r{
+        width: 438px;
+        background-color: #fff;
+        padding: 20px;
+        height: 500px;
+    }
+    .trend-chart, .top-chart{
+        width: 100%;
+        height: 400px;
+        background-color: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+    .chart-gap{
+        width: 100%;
+        height: 16px;
+    }
+    .click-number-title{
+        font-size: 14px;
+        color: #000;
+        font-weight: 600;
+    }
+    .item{
+        display: flex;
+        justify-content:space-between ;
+        padding:20px 12px 0 12px;
+        cursor: pointer;
+      
+    }
+    .item-left{
+        display: flex;
+        align-items: center;
+        color: #111;
+        font-size: 14px;
+        &:hover{
+           // text-decoration: underline;
+          color: $system-color;
+        }
+        img{
+            width: 24px;
+            height: 24px;
+        }
+        .name{
+            line-height: 16PX;
+        }
+    }
+    .color-top{
+        color: #ED342C;
+    }
+    .color-normal{
+        color: #111111;
+    }
+}
