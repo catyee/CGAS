@@ -1,4 +1,63 @@
 .evaluate{
-  .left{
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  .wrap{
+    overflow-y: auto;
+    height: 800px;
+    flex: 1;
+    display: flex;
   }
+  .center-wrap{
+    flex: 1;
+  }
+  .left{
+    width: 350px;
+    // position: absolute;
+    // top: 14px;
+    // left: 27px;
+  }
+ .hash-list {
+   a {
+     display: block;
+     padding-left: 4px;
+     font-size: 14px;
+     line-height: 20px;
+     color: #111;
+     padding-bottom: 24px;
+     &:hover{
+      font-weight: 600;
+      color: #C23731;
+     }
+   }
+   a.active{
+     font-weight: 600;
+     color: #C23731;
+   }
+ }
+ .evaluate-tab{
+   height: 1000px;
+ }
+ .center{
+   //max-height: 100%;
+  //  width: 55%;
+   margin-right: 300px;
+   background-color: #fff;
+  // margin-left: 350px;
+   overflow-y: auto;
+   flex: 1;
+   box-sizing: border-box;
+   padding: 32px;
+ 
+ }
+ .tabs{
+    border: 1px solid #E7E7E7;
+    box-sizing: border-box;
+    padding: 24px;
+ }
+ .save{
+   position: fixed;
+   top: 76px;
+   right: 32px;
+ }
 }

@@ -57,6 +57,9 @@ export default {
  align-items: center;
 }
 .header {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
   display: flex;
   align-items: center;
   background: #fff;

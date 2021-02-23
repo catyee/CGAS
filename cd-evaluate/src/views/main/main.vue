@@ -1,11 +1,12 @@
 <template>
   <div class="container">
     <Header />
-
+    <div class="height-60"></div>
     <div class="content">
       <Menu />
-      <div class="main-content">
-        <router-view />
+
+      <div class="main-content" id="main-scroll">
+         <router-view />
       </div>
     </div>
   </div>
@@ -21,10 +22,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .container {
   box-sizing: border-box;
   height: 100%;
   padding-bottom: 60px;
+  //overflow: hidden;
 }
 .content {
   display: flex;
@@ -38,5 +41,7 @@ export default {
   height: 100%;
   box-sizing: border-box;
   background-color: $body-deep-color;
+  //overflow-y: hidden;
+  overflow: hidden;
 }
 </style>
