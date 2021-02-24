@@ -65,7 +65,7 @@ html, body, #app {
     }
 }
 // height
-@for $i from 1 through 100 {
+@for $i from 1 through 300 {
     .height-#{$i} {
         height: #{$i}px !important;
     }
