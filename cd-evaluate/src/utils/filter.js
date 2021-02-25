@@ -49,6 +49,7 @@ function formatTime (value) {
   }
   return result
 }
+
 export default {
   formatDate,
   formatTime,

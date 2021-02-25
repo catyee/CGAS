@@ -1,5 +1,5 @@
 <template>
-  <div id="input-wrap">
+  <div>
     <!-- 中文输入法状态 input会同时触发两次 所以此处设置type=number可以避免这个问题 -->
     <input
     :disabled="disabled"
@@ -27,6 +27,9 @@
   text-align: center;
   // 避免hover的时候出现位置移动
   &:hover{
+    margin-right: 1px;
+  }
+  &:focus{
     margin-right: 1px;
   }
 }

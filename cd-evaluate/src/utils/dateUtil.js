@@ -37,3 +37,27 @@ export function yearLastDay () {
   var day = new Date(Nowdate.getFullYear() + 1, 0, 1)
   return formatDate(day, 'YYYY-mm-dd')
 }
+// 传入日期 获取 年 月 日
+// type y,m,d 年月日
+export function getYearOrMonthOrDay (time, type) {
+  let t
+  switch (type) {
+    case 'y': t = (new Date(time)).getFullYear()
+      break
+    case 'm':
+      if ((new Date(time)).getMonth() + 1 < 10) {
+        t = '0' + ((new Date(time)).getMonth() + 1)
+      } else {
+        t = (new Date(time)).getMonth() + 1
+      }
+      break
+    case 'd':
+      if ((new Date(time)).getDate() < 10) {
+        t = '0' + ((new Date(time)).getDate())
+      } else {
+        t = (new Date(time)).getDate()
+      }
+      break
+  }
+  return t
+}
