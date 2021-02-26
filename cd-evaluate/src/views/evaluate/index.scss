@@ -100,7 +100,7 @@
    font-weight: 600;
    color: #000000;
    line-height: 20px;
-   font-size: 14px;
+   font-size: 16px;
  }
  .evaluate-table{
     border: 1px solid #E7E7E7;
@@ -234,7 +234,11 @@
       border-top: none;
     }
  }
- .el-radio__input{
-
+ .line22{
+   line-height: 32px;
+ }
+ .print-sign{
+  text-align: center;
+  margin-top: 64px;
  }
 }
