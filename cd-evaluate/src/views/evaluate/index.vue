@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-parsing-error */
 <template>
   <div class="evaluate pt-16 pl-27">
     <div class="left" id="left">
@@ -7,36 +6,61 @@
         <span class="pl-4 f14">评估</span>
       </div>
       <div class="hash-list">
-        <a href="#A1" class="pt-30"
-        :class="{'active': currentHash === 'A1'}"
-         @click="currentHash = 'A1'">A.1评估基本信息表</a>
-        <a href="#A2"
-        :class="{'active': currentHash === 'A2'}"
-          @click="currentHash = 'A2'">A.2被评估者的基本信息表</a>
-        <a href="#A3"
-        :class="{'active': currentHash === 'A3'}"
-         @click="currentHash = 'A3'">A.3信息提供者及联系人信息表</a>
-        <a href="#B1"
-        :class="{'active': currentHash === 'B1'}"
-         @click="currentHash = 'B1'">B.1日常生活活动评估表</a>
-        <a href="#B2"
-        :class="{'active': currentHash === 'B2'}"
-        @click="currentHash = 'B2'">B.2 精神状态评估表</a>
-        <a href="#B3"
-        :class="{'active': currentHash === 'B3'}"
-          @click="currentHash = 'B3'">B.3 感知觉与沟通评估表</a>
-        <a href="#B4"
-        :class="{'active': currentHash === 'B4'}"
-          @click="currentHash = 'B4'">B.4 社会参与评估表</a>
-        <a href="#C"
-        :class="{'active': currentHash === 'C'}"
-         @click="currentHash = 'C'">C 老年人能力评估报告</a>
+        <a
+          href="#A1"
+          class="pt-30"
+          :class="{ active: currentHash === 'A1' }"
+          @click="currentHash = 'A1'"
+          >A.1评估基本信息表</a
+        >
+        <a
+          href="#A2"
+          :class="{ active: currentHash === 'A2' }"
+          @click="currentHash = 'A2'"
+          >A.2被评估者的基本信息表</a
+        >
+        <a
+          href="#A3"
+          :class="{ active: currentHash === 'A3' }"
+          @click="currentHash = 'A3'"
+          >A.3信息提供者及联系人信息表</a
+        >
+        <a
+          href="#B1"
+          :class="{ active: currentHash === 'B1' }"
+          @click="currentHash = 'B1'"
+          >B.1日常生活活动评估表</a
+        >
+        <a
+          href="#B2"
+          :class="{ active: currentHash === 'B2' }"
+          @click="currentHash = 'B2'"
+          >B.2 精神状态评估表</a
+        >
+        <a
+          href="#B3"
+          :class="{ active: currentHash === 'B3' }"
+          @click="currentHash = 'B3'"
+          >B.3 感知觉与沟通评估表</a
+        >
+        <a
+          href="#B4"
+          :class="{ active: currentHash === 'B4' }"
+          @click="currentHash = 'B4'"
+          >B.4 社会参与评估表</a
+        >
+        <a
+          href="#C"
+          :class="{ active: currentHash === 'C' }"
+          @click="currentHash = 'C'"
+          >C 老年人能力评估报告</a
+        >
       </div>
     </div>
     <div class="wrap">
       <div class="center-wrap mt-16">
         <div class="center" id="print">
-          <div class="tabs">
+          <div class="tabs" id="pdfDom">
             <!-- A1 评估基本信息表 -->
             <div id="A1" class="evaluate-tab">
               <div class="page-top">MZ/T 039—2013</div>
@@ -1883,8 +1907,7 @@
                 <table class="evaluate-table no-bt">
                   <tr>
                     <td class="question">
-                      <span class="table-num bold">B.4 社会参与
-分级</span>
+                      <span class="table-num bold">B.4 社会参与 分级</span>
                     </td>
                     <td class="question center">
                       <input
@@ -1896,29 +1919,22 @@
                       级
                     </td>
                     <td>
-                      <div class="line22">
-                       0 能力完好：总分 0-2 分
-                      </div>
-                      <div class="line22">
-                        1 轻度受损：总分 3-7 分
-                      </div>
-                      <div class="line22">
-                        2 中度受损：总分 8-13 分
-                      </div>
-                      <div class="line22">
-                       3 重度受损：总分 14-20 分
-                      </div>
+                      <div class="line22">0 能力完好：总分 0-2 分</div>
+                      <div class="line22">1 轻度受损：总分 3-7 分</div>
+                      <div class="line22">2 中度受损：总分 8-13 分</div>
+                      <div class="line22">3 重度受损：总分 14-20 分</div>
                     </td>
                   </tr>
                 </table>
               </div>
             </div>
           </div>
-            <div class="print-sign">
-           <el-button class="btn" type="primary">确认以上选择无误打印签名页</el-button>
+          <div class="print-sign">
+            <el-button class="btn" type="primary" @click="getPdf('#pdfDom')"
+              >确认以上选择无误打印签名页</el-button
+            >
+          </div>
         </div>
-        </div>
-
       </div>
       <div class="save">
         <el-button type="primary" @click="print">暂存</el-button>
@@ -1944,7 +1960,7 @@ export default {
       evaluateData: {
         // A1 评估基本信息表
         A_1_1: '123456', // 评估编号
-        A_1_2: '2011-2-12', // 评估基准日期
+        A_1_2: '2011/2/12', // 评估基准日期
         A_1_3: 3, // 评估原因
         // A2被评估者的基本信息表
         A_2_1: '测试', // 姓名
@@ -2033,7 +2049,9 @@ export default {
         B_4_5: '2', // 社会交往能力
         B_4_6: '2', // 社会参与总分
         B_4: '2' // 社会参与分级
-      }
+      },
+
+      htmlTitle: '测试'
     }
   },
   computed: {
@@ -2066,16 +2084,233 @@ export default {
     // document.getElementById('center-wrap').style.height = document.body.clientHeight || document.documentElement.clientHeight
   },
   methods: {
+    exportPdf () {
+      const style = `
+       <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        tr,
+        td {
+            min-height: 32px;
+            border: 1px solid #E7E7E7;
+        }
+
+        .h1-title {
+            line-height: 28px;
+            font-weight: 600;
+            color: #000000;
+            font-size: 20px;
+            text-align: center;
+            padding-top: 32px;
+        }
+
+        .title-desc {
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #000000;
+            line-height: 17px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #000000;
+            line-height: 17px;
+            padding-bottom: 32px;
+        }
+
+        .table-wrap {
+            padding-bottom: 24px;
+        }
+
+        .table-title {
+            text-align: left;
+            padding-left: 8px;
+            padding-bottom: 8px;
+            font-weight: 600;
+            color: #000000;
+            line-height: 20px;
+            font-size: 16px;
+        }
+
+        .evaluate-table {
+            border: 1px solid #E7E7E7;
+            width: 100%;
+
+        }
+
+        .table-num {
+            padding-right: 8px;
+        }
+
+        td {
+            padding: 8px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .question {
+            width: 20%;
+            padding: 8px;
+            vertical-align: middle;
+            line-height: 22px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .question1 {
+            width: 10%;
+            padding: 8px;
+            line-height: 22px;
+        }
+
+        .evaluate-date {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .text {
+            padding: 0 8px;
+        }
+
+        .choices {
+            position: relative;
+            padding: 6px 8px;
+            vertical-align: middle;
+        }
+
+        .el-radio__input.is-checked+.el-radio__label {
+            color: #000;
+        }
+
+        .el-radio__input.is-checked+.el-radio__label {
+            color: #000;
+        }
+
+        .el-radio__label {
+            color: #000;
+        }
+
+        .el-radio {
+            white-space: pre-wrap;
+            line-height: 32px;
+            margin-right: 10px;
+
+        }
+
+        .el-radio__input.is-checked .el-radio__inner {
+            border-color: #000;
+            background: #fff;
+        }
+
+        .el-radio__inner {
+            border-color: #aaa;
+            background: #fff;
+        }
+
+        .el-radio__inner::after {
+            width: 6px;
+            height: 6px;
+            background-color: #000;
+            border-color: #000;
+        }
+
+        .radio-group {
+            padding-right: 50px;
+        }
+
+        .right {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+
+        }
+
+        .input {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            margin-right: 1px;
+            text-align: center;
+        }
+
+        .input {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            margin-right: 1px;
+            text-align: center;
+        }
+
+        .input-text {
+            font-size: 14px;
+            padding: 2px 5px;
+            border: none;
+            border-bottom: 1px solid #333;
+        }
+
+        .no-bt {
+            border-top: none;
+        }
+
+        .line22 {
+            line-height: 32px;
+        }
+
+        .print-sign {
+            text-align: center;
+            margin-top: 64px;
+        }
+    </style>
+      `
+      const body = document.getElementById('pdfDom').innerHTML
+      const html = `
+      <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打印</title>
+    ${style}
+</head>
+
+<body>
+  ${body}
+</body>
+
+</html>
+      `
+      console.log(html, 'ddddddddddd')
+    },
     print () {
-      console.log(JSON.stringify(this.evaluateData), 'A1111111111')
+      // console.log(JSON.stringify(this.evaluateData), 'A1111111111')
       // console.log(333)
       // // 根据div标签ID拿到div中的局部内容
       // const bdhtml = window.document.body.innerHTML
-      // var jubuData = document.getElementById('print').innerHTML
+      // var jubuData = document.getElementById('pdfDom').innerHTML
       // // // 把获取的 局部div内容赋给body标签, 相当于重置了 body里的内容
       // window.document.body.innerHTML = jubuData
       // // 调用打印功能
-      // window.print()
+      window.print()
       // window.document.body.innerHTML = bdhtml // 重新给页面内容赋值；
       // // 重新赋值之后 事件会失效！！！
       // console.log(bdhtml, 'dddddd')
