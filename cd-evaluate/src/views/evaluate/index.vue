@@ -394,33 +394,51 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <el-radio-group
+                        <el-checkbox-group
                           v-model="evaluateData.A_2_11.value"
                           class="radio-group"
                         >
-                          <el-radio :label="1">1城镇职工基本医疗保险</el-radio>
-                          <el-radio :label="2">2城镇居民基本医疗保险</el-radio>
-                          <el-radio :label="3">3新型农村合作医疗</el-radio>
-                          <el-radio :label="4">4贫困求助</el-radio>
-                          <el-radio :label="5">5商业医疗保险</el-radio>
-                          <el-radio :label="6">6全公费</el-radio>
-                          <el-radio :label="7">7全自费</el-radio>
-                          <el-radio :label="8">
+                          <el-checkbox :label="1"
+                            >1城镇职工基本医疗保险</el-checkbox
+                          >
+                          <el-checkbox :label="2"
+                            >2城镇居民基本医疗保险</el-checkbox
+                          >
+                          <el-checkbox :label="3"
+                            >3新型农村合作医疗</el-checkbox
+                          >
+                          <el-checkbox :label="4">4贫困求助</el-checkbox>
+                          <el-checkbox :label="5">5商业医疗保险</el-checkbox>
+                          <el-checkbox :label="6">6全公费</el-checkbox>
+                          <el-checkbox :label="7">7全自费</el-checkbox>
+                          <el-checkbox :label="8">
                             <span>8其他</span>
                             <radioInput
                               :radioValue="evaluateData.A_2_11.value"
                               :type="2"
                               v-model="evaluateData.A_2_11.text"
                             ></radioInput>
-                          </el-radio>
-                        </el-radio-group>
+                          </el-checkbox>
+                        </el-checkbox-group>
                         <div class="right">
-                          <input
-                            type="text"
-                            class="input"
-                            v-model="evaluateData.A_2_11.value"
-                            readonly
-                          />
+                          <div
+                            v-for="(i, index) in evaluateData.A_2_11.value"
+                            :key="index"
+                          >
+                            <input
+                              type="text"
+                              class="input"
+                              :value="i"
+                              readonly
+                            />
+                            <span
+                              v-if="
+                                evaluateData.A_2_11.value.length > 1 &&
+                                index !== evaluateData.A_2_11.value.length - 1
+                              "
+                              >/
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -431,29 +449,40 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <el-radio-group
+                        <el-checkbox-group
                           v-model="evaluateData.A_2_12.value"
                           class="radio-group"
                         >
-                          <el-radio :label="1">1退休金/养老金</el-radio>
-                          <el-radio :label="2">2子女补贴</el-radio>
-                          <el-radio :label="3">3亲友资助</el-radio>
-                          <el-radio :label="4">
+                          <el-checkbox :label="1">1退休金/养老金</el-checkbox>
+                          <el-checkbox :label="2">2子女补贴</el-checkbox>
+                          <el-checkbox :label="3">3亲友资助</el-checkbox>
+                          <el-checkbox :label="4">
                             <span>4其他补贴</span>
                             <radioInput
                               :radioValue="evaluateData.A_2_12.value"
                               :type="2"
                               v-model="evaluateData.A_2_12.text"
                             ></radioInput>
-                          </el-radio>
-                        </el-radio-group>
+                          </el-checkbox>
+                        </el-checkbox-group>
                         <div class="right">
-                          <input
-                            type="text"
-                            class="input"
-                            v-model="evaluateData.A_2_12.value"
-                            readonly
-                          />
+                          <div
+                            v-for="(i, index) in evaluateData.A_2_12.value"
+                            :key="index"
+                          >
+                            <input
+                              type="text"
+                              class="input"
+                              :value="i"
+                              readonly
+                            /><span
+                              v-if="
+                                evaluateData.A_2_12.value.length > 1 &&
+                                index !== evaluateData.A_2_12.value.length - 1
+                              "
+                              >/
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -1928,9 +1957,292 @@
                 </table>
               </div>
             </div>
+            <!-- C 老年人能力评估报告 -->
+            <div id="C">
+              <div class="h1-title">附 录 C</div>
+              <div class="title-desc">（规范性附录）</div>
+              <div class="subtitle">老年人能力评估报告</div>
+              <div class="table-wrap">
+                <table class="evaluate-table">
+                  <tr>
+                    <td class="question" rowspan="2">
+                      <span class="table-num bold">C.1 一级指标 分级</span>
+                    </td>
+                    <td>
+                      <div>
+                        <span class="table-num bold">C.1.1 日常生活活动：</span>
+                        <input
+                          type="text"
+                          class="input"
+                          v-model="evaluateData.C_1_1"
+                          readonly
+                        />级
+                      </div>
+                    </td>
+                    <td>
+                      <div class="c-td">
+                        <span class="table-num bold">C.1.2 精神状态：</span>
+                        <input
+                          type="text"
+                          class="input"
+                          v-model="evaluateData.C_1_2"
+                          readonly
+                        />级
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="c-td">
+                        <span class="table-num bold">C.1.3 感知觉与沟通：</span>
+                        <input
+                          type="text"
+                          class="input"
+                          v-model="evaluateData.C_1_3"
+                          readonly
+                        />级
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <span class="table-num bold">C.1.4 社会参与：</span>
+                        <input
+                          type="text"
+                          class="input"
+                          v-model="evaluateData.C_1_4"
+                          readonly
+                        />级
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <table class="evaluate-table no-bt">
+                  <tr>
+                    <td class="question">
+                      <span class="table-num bold"
+                        >C.2 老年人能 力初步等级</span
+                      >
+                    </td>
+                    <td>
+                      <div class="choices">
+                        <el-radio-group
+                          v-model="evaluateData.C_2"
+                          class="radio-group"
+                        >
+                          <el-radio :label="0">0能力完好</el-radio>
+                          <el-radio :label="1">1轻度失能</el-radio>
+                          <el-radio :label="2">2中度失能</el-radio>
+                          <el-radio :label="3">3重度失能</el-radio>
+                        </el-radio-group>
+                        <div class="right">
+                          <input
+                            type="text"
+                            class="input"
+                            v-model="evaluateData.C_2"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <table class="evaluate-table no-bt">
+                  <tr>
+                    <td class="question">
+                      <span class="table-num bold">C.3 等级变更 条款</span>
+                    </td>
+                    <td>
+                      <div>
+                        <el-radio v-model="evaluateData.C_3" label="1"
+                          >1
+                          有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；</el-radio
+                        >
+                      </div>
+                      <div>
+                        <el-radio v-model="evaluateData.C_3" label="2"
+                          >2 近 30 天内发生过 2
+                          次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一
+                          个等级；</el-radio
+                        >
+                      </div>
+                      <div>
+                        <el-radio v-model="evaluateData.C_3" label="3"
+                          >3 处于昏迷状态者，直接评定为重度失能；</el-radio
+                        >
+                      </div>
+                      <div>
+                        <el-radio v-model="evaluateData.C_3" label="3"
+                          >4 若初步等级确定为“3 重度失能”，则不考虑上述 1-3
+                          中各情况对最终等级的影响， 等级不再提高</el-radio
+                        >
+                      </div>
+                      <div style="text-align: right" class="pb-10">
+                        <input
+                          type="text"
+                          class="input"
+                          v-model="evaluateData.C_3"
+                          readonly
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                  <tr></tr>
+                </table>
+                <table class="evaluate-table no-bt">
+                  <tr>
+                    <td class="question">
+                      <span class="table-num bold"
+                        >C.4 老年人能 力最终等级</span
+                      >
+                    </td>
+                    <td>
+                      <div class="choices">
+                        <el-radio-group
+                          v-model="evaluateData.C_4"
+                          class="radio-group"
+                        >
+                          <el-radio :label="0">0能力完好</el-radio>
+                          <el-radio :label="1">1轻度失能</el-radio>
+                          <el-radio :label="2">2中度失能</el-radio>
+                          <el-radio :label="3">3重度失能</el-radio>
+                        </el-radio-group>
+                        <div class="right">
+                          <input
+                            type="text"
+                            class="input"
+                            v-model="evaluateData.C_4"
+                            readonly
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <table class="evaluate-table">
+                  <tr>
+                    <td>
+                      <div class="sign-box">
+                        <div class="sign-input">
+                          <div class="inline">评估员签名:</div>
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />、
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />
+                        </div>
+                        <div class="sign-input sign-date">
+                          <div class="inline">日期:</div>
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />年
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />月
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />日
+                        </div>
+                      </div>
+                      <div class="sign-box">
+                        <div class="sign-input">
+                          <div class="inline">信息提供者签名:</div>
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />
+                        </div>
+                        <div class="sign-input sign-date">
+                          <div class="inline">日期:</div>
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />年
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />月
+                          <input
+                            type="text"
+                            class="input-text inline"
+                            v-model="evaluateData.C_1_2"
+                          />日
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <td>
+                      <div class="pl-40 pt-20 pb-20">
+                        <span class="bold">注：</span
+                        >老年人能力初步等级划分标准:
+                      </div>
+                      <div class="bold pl-10 pb-20">0 能力完好：</div>
+                      <div class="pl-40 pb-20">
+                        日常生活活动、精神状态、感知觉与沟通分级均为
+                        0，社会参与分级为 0 或 1
+                      </div>
+                      <div class="bold pl-10 pb-20">1 轻度失能：</div>
+                      <div class="pl-40 pb-20">
+                        <div class="pb-20">
+                          日常生活活动、精神状态、感知觉与沟通分级均为
+                          0，社会参与分级为 0 或 1
+                        </div>
+                        <div>
+                          或日常生活活动分级为
+                          1，精神状态、感知觉与沟通、社会参与中至少有一项的分级为
+                          0 或 1
+                        </div>
+                      </div>
+                      <div class="bold pl-10 pb-20">2 中度失能：</div>
+                      <div class="pl-40 pb-20">
+                        <div class="pb-20">
+                          日常生活活动分级为
+                          1，但精神状态、感知觉与沟通、社会参与均为
+                          2，或有一项为 3；
+                        </div>
+                        <div>
+                          或日常生活活动分级为
+                          2，且精神状态、感知觉与沟通、社会参与中有 1-2
+                          项的分级为 1 或 2
+                        </div>
+                      </div>
+                      <div class="bold pl-10 pb-20">3 重度失能：</div>
+                      <div class="pl-40 pb-20">
+                        <div class="pb-20">日常生活活动的分级为 3；</div>
+                        <div class="pb-20">
+                          或日常生活活动、精神状态、感知觉与沟通、社会参与分级均为
+                          2
+                        </div>
+                        <div class="pb-20">
+                          或日常生活活动分级为
+                          2，且精神状态、感知觉与沟通、社会参与中至少有一项分级为
+                          3
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
           <div class="print-sign">
-            <el-button class="btn" type="primary" @click="getPdf('#pdfDom')"
+            <el-button class="btn" type="primary" @click="getOnePagePdf('#C')"
               >确认以上选择无误打印签名页</el-button
             >
           </div>
@@ -1947,10 +2259,12 @@ import './index.scss'
 import { getYearOrMonthOrDay } from '@/utils/dateUtil.js'
 import continueInput from '@/components/common/continue-input.vue'
 import radioInput from '@/components/common/radio-input.vue'
+// import exportEvaluate from '@/components/export-evaluate.vue'
 export default {
   components: {
     continueInput,
     radioInput
+    // exportEvaluate
   },
   data () {
     return {
@@ -1981,12 +2295,11 @@ export default {
         A_2_10: 2, // 居住情况
         A_2_11: {
           // todo！！！// 医疗费用支出
-          value: 8,
+          value: [1, 3, 8],
           text: '免费'
         },
         A_2_12: {
-          // todo！！！// 经济来源
-          value: 4,
+          value: [4, 1],
           text: '自己赚钱'
         },
         // 疾病诊断
@@ -2048,7 +2361,14 @@ export default {
         B_4_4: '2', // 人物定向
         B_4_5: '2', // 社会交往能力
         B_4_6: '2', // 社会参与总分
-        B_4: '2' // 社会参与分级
+        B_4: '2', // 社会参与分级
+        C_1_1: 2, // 日常生活活动等级
+        C_1_2: 2, // 精神状态
+        C_1_3: 2, // 感知觉与沟通
+        C_1_4: 2, // 社会参与
+        C_2: 2, // 老年人能力初步等级
+        C_3: 2, // 等级变更条款
+        C_4: 2 // 老年人能力最终等级
       },
 
       htmlTitle: '测试'
@@ -2299,7 +2619,8 @@ export default {
 
 </html>
       `
-      console.log(html, 'ddddddddddd')
+      console.log(html)
+      console.log(document.getElementById('id'), 'ddddddddddd')
     },
     print () {
       // console.log(JSON.stringify(this.evaluateData), 'A1111111111')
