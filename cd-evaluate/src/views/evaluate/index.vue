@@ -1948,7 +1948,7 @@
                       <input
                         type="text"
                         class="input"
-                        v-model="evaluateData.B_4_6"
+                        v-model="B_4_6"
                         readonly
                       />
                       分
@@ -1966,7 +1966,7 @@
                       <input
                         type="text"
                         class="input"
-                        v-model="evaluateData.B_4"
+                        v-model="B_4"
                         readonly
                       />
                       级
@@ -1998,7 +1998,7 @@
                         <input
                           type="text"
                           class="input"
-                          v-model="evaluateData.C_1_1"
+                          v-model="B_1"
                           readonly
                         />级
                       </div>
@@ -2009,7 +2009,7 @@
                         <input
                           type="text"
                           class="input"
-                          v-model="evaluateData.C_1_2"
+                          v-model="B_2"
                           readonly
                         />级
                       </div>
@@ -2022,7 +2022,7 @@
                         <input
                           type="text"
                           class="input"
-                          v-model="evaluateData.C_1_3"
+                          v-model="B_3"
                           readonly
                         />级
                       </div>
@@ -2033,7 +2033,7 @@
                         <input
                           type="text"
                           class="input"
-                          v-model="evaluateData.C_1_4"
+                          v-model="B_4"
                           readonly
                         />级
                       </div>
@@ -2049,7 +2049,11 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <el-radio-group
+                          <div class="choice" :class="{'active':C_2=== 0 }">0 能力完好</div>
+                          <div class="choice" :class="{'active':C_2=== 1 }">1 轻度失能</div>
+                          <div class="choice" :class="{'active':C_2=== 2 }">2 中度失能</div>
+                          <div class="choice" :class="{'active':C_2=== 3 }">3 重度失能</div>
+                        <!-- <el-radio-group
                           v-model="evaluateData.C_2"
                           class="radio-group"
                         >
@@ -2057,12 +2061,12 @@
                           <el-radio :label="1">1轻度失能</el-radio>
                           <el-radio :label="2">2中度失能</el-radio>
                           <el-radio :label="3">3重度失能</el-radio>
-                        </el-radio-group>
+                        </el-radio-group> -->
                         <div class="right">
                           <input
                             type="text"
                             class="input"
-                            v-model="evaluateData.C_2"
+                            v-model="C_2"
                             readonly
                           />
                         </div>
@@ -2077,25 +2081,25 @@
                     </td>
                     <td>
                       <div>
-                        <el-radio v-model="evaluateData.C_3" :label="1"
+                        <el-radio v-model="C_3" :label="1"
                           >1
                           有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；</el-radio
                         >
                       </div>
                       <div>
-                        <el-radio v-model="evaluateData.C_3" :label="2"
+                        <el-radio v-model="C_3" :label="2"
                           >2 近 30 天内发生过 2
                           次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一
                           个等级；</el-radio
                         >
                       </div>
                       <div>
-                        <el-radio v-model="evaluateData.C_3" :label="3"
+                        <el-radio v-model="C_3" :label="3"
                           >3 处于昏迷状态者，直接评定为重度失能；</el-radio
                         >
                       </div>
                       <div>
-                        <el-radio v-model="evaluateData.C_3" :label="3"
+                        <el-radio v-model="C_3" :label="4"
                           >4 若初步等级确定为“3 重度失能”，则不考虑上述 1-3
                           中各情况对最终等级的影响， 等级不再提高</el-radio
                         >
@@ -2104,7 +2108,7 @@
                         <input
                           type="text"
                           class="input"
-                          v-model="evaluateData.C_3"
+                          v-model="C_3"
                           readonly
                         />
                       </div>
@@ -2121,7 +2125,11 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <el-radio-group
+                        <div class="choice">0能力完好</div>
+                        <div class="choice">1轻度失能</div>
+                        <div class="choice">2中度失能</div>
+                        <div class="choice">3重度失能</div>
+                        <!-- <el-radio-group
                           v-model="evaluateData.C_4"
                           class="radio-group"
                         >
@@ -2129,12 +2137,12 @@
                           <el-radio :label="1">1轻度失能</el-radio>
                           <el-radio :label="2">2中度失能</el-radio>
                           <el-radio :label="3">3重度失能</el-radio>
-                        </el-radio-group>
+                        </el-radio-group> -->
                         <div class="right">
                           <input
                             type="text"
                             class="input"
-                            v-model="evaluateData.C_4"
+                            v-model="C_4"
                             readonly
                           />
                         </div>
@@ -2397,6 +2405,8 @@ export default {
         C_3: 2, // 等级变更条款
         C_4: 2 // 老年人能力最终等级
       },
+      // C.3 等级变更 条款
+      C_3: null,
 
       htmlTitle: '测试'
     }
@@ -2524,6 +2534,75 @@ export default {
         return 3
       }
       return ''
+    },
+    // B_4_6 社会参与总分
+    B_4_6: function () {
+      return this.evaluateData.B_4_1 + this.evaluateData.B_4_2 + this.evaluateData.B_4_3 + this.evaluateData.B_4_4 + this.evaluateData.B_4_5
+    },
+    // B_4 社会参与分级
+    B_4: function () {
+      if (this.B_4_6 >= 0 && this.B_4_6 <= 2) {
+        return 0
+      }
+      if (this.B_4_6 >= 3 && this.B_4_6 <= 7) {
+        return 1
+      }
+      if (this.B_4_6 >= 8 && this.B_4_6 <= 13) {
+        return 2
+      }
+      if (this.B_4_6 >= 14 && this.B_4_6 <= 20) {
+        return 3
+      }
+      return ''
+    },
+    // C_2 老年人能力初步等级
+    // 日常生活活动 B_1
+    // 精神状态 B_2
+    // 感知觉与沟通 B_3
+    // 社会参与 B_4
+    C_2: function () {
+      // 0 能力完好：日常生活活动、精神状态、感知觉与沟通分级均为 0，社会参与分级为 0 或 1
+      if (this.B_1 === 0 && this.B_2 === 0 && this.B_3 === 0 && (this.B_4 === 0 || this.B_4 === 1)) {
+        return 0
+      }
+      // 1 轻度失能：日常生活活动分级为 0，但精神状态、感知觉与沟通中至少一项分级为 1 及以上，或社会参与的分级为 2；
+      if (this.B_1 === 0 && (this.B_2 >= 1 || this.B_3 >= 1 || this.B_4 === 2)) {
+        return 1
+      }
+      // 1 轻度失能：或日常生活活动分级为 1，精神状态、感知觉与沟通、社会参与中至少有一项的分级为 0 或 1
+      if (this.B_1 === 1 && (this.B_2 <= 1 || this.B_3 <= 1 || this.B_4 <= 1)) {
+        return 1
+      }
+      // 2 中度失能：日常生活活动分级为 1，但精神状态、感知觉与沟通、社会参与均为 2，或有一项为 3；
+      if (this.B_1 === 1 && ((this.B_2 === 2 && this.B_3 === 2 && this.B_4 === 2) || (this.B_2 === 3 && this.B_3 !== 3 && this.B_4 !== 3) || (this.B_2 !== 3 && this.B_3 === 3 && this.B_4 !== 3) || (this.B_2 !== 3 && this.B_3 !== 3 && this.B_4 === 3))) {
+        return 2
+      }
+      // 2 中度失能：或日常生活活动分级为 2，且精神状态、感知觉与沟通、社会参与中有 1-2 项的分级为 1 或 2
+      if (this.B_1 === 2 && ((this.B_2 === 1 || this.B_2 === 2) || (this.B_3 === 1 || this.B_3 === 2) || (this.B_4 === 1 || this.B_4 === 2)) && !(((this.B_2 === 1 || this.B_2 === 2) && (this.B_3 === 1 || this.B_3 === 2) && (this.B_4 === 1 || this.B_4 === 2)))) {
+        return 2
+      }
+      // 3 重度失能：日常生活活动的分级为 3；
+      if (this.B_1 === 3) {
+        return 3
+      }
+      // 3 重度失能： 或日常生活活动、精神状态、感知觉与沟通、社会参与分级均为 2；
+      if (this.B_1 === 2 && this.B_2 === 2 && this.B_3 === 2 && this.B_4 === 2) {
+        return 3
+      }
+      // 3 重度失能： 或日常生活活动分级为 2，且精神状态、感知觉与沟通、社会参与中至少有一项分级为 3
+      if (this.B_1 === 2 && (this.B_2 === 3 || this.B_3 === 3 || this.B_4 === 3)) {
+        return 3
+      }
+      return ''
+    },
+    // C_4 最终等级
+    C_4: function () {
+      return ''
+    }
+  },
+  watch: {
+    B_4: function (val) {
+      this.evaluateData.B_4 = val
     }
   },
   mounted () {
