@@ -53,8 +53,8 @@
         </div>
       </div>
     </div>
-    <div class="list-container ml-16">
-      <el-table :data="list" tooltip-effect="dark" style="width: 100%">
+    <div class="list-container pl-16" >
+      <el-table class="table" :data="list" tooltip-effect="dark" style="width: 100%">
         <el-table-column label="序号" width="70px">
           <template slot-scope="scope">
             {{ scope.$index + 1 }}

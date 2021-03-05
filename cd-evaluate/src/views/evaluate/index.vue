@@ -57,8 +57,12 @@
         >
       </div>
     </div>
-     <div style="display:none">
-        <exportEvaluate :evaluateData="evaluateData" id="evaluate"></exportEvaluate></div>
+    <div style="display: none">
+      <exportEvaluate
+        :evaluateData="evaluateData"
+        id="evaluate"
+      ></exportEvaluate>
+    </div>
     <div class="wrap" @scroll="scrollEvent">
       <div class="center-wrap mt-16">
         <div class="center" id="print">
@@ -1202,12 +1206,7 @@
                       <span class="table-num bold">B.1 日常生活活动分级</span>
                     </td>
                     <td class="question center">
-                      <input
-                        type="text"
-                        class="input"
-                        v-model="B_1"
-                        readonly
-                      />
+                      <input type="text" class="input" v-model="B_1" readonly />
                       级
                     </td>
                     <td>
@@ -1243,12 +1242,49 @@
                         (1)画钟测验：“请您在这儿画一个圆形的时钟，在时钟上标出
                         10 点 45 分”
                       </div>
+                      <div class="pl-20 pb-20 pt-20">
+                        <upload
+                          :uploadHeaders="upload.headers"
+                          :uploadUrl="upload.imageUrl"
+                          :type="'img'"
+                          @getUrl="getTestImgUrl"
+                        >
+                          <el-image
+                            class="pt-20"
+                            v-show="evaluateData.B_2_1.img"
+                            :src="evaluateData.B_2_1.img"
+                            :preview-src-list="[evaluateData.B_2_1.img]"
+                          >
+                            <div slot="placeholder" class="image-slot">
+                              图片加载中<span class="dot">...</span>
+                            </div>
+                          </el-image>
+                        </upload>
+                      </div>
                     </td>
                   </tr>
                   <tr>
                     <td>
                       <div class="line22">
                         (2)回忆词语：“现在请您告诉我，刚才我要您记住的三样东西是什么？
+                      </div>
+                      <div>
+                        答：
+                        <input
+                          type="text"
+                          class="input-text inline"
+                          v-model="evaluateData.B_2_1.text1"
+                        />、
+                        <input
+                          type="text"
+                          class="input-text inline"
+                          v-model="evaluateData.B_2_1.text2"
+                        />、
+                        <input
+                          type="text"
+                          class="input-text inline"
+                          v-model="evaluateData.B_2_1.text3"
+                        />（不必按顺序）
                       </div>
                     </td>
                   </tr>
@@ -1348,22 +1384,21 @@
                         >0 分，无</el-radio
                       >
                     </td>
-                       </tr>
-                   <tr>
-                      <td>
+                  </tr>
+                  <tr>
+                    <td>
                       <el-radio v-model="evaluateData.B_2_3" :label="1"
                         >1 分，情绪低落、不爱说话、不爱梳洗、不爱活动</el-radio
                       >
                     </td>
-                   </tr>
-                    <tr>
-                      <td>
+                  </tr>
+                  <tr>
+                    <td>
                       <el-radio v-model="evaluateData.B_2_3" :label="2"
                         >2 分，有自杀念头或自杀行为</el-radio
                       >
                     </td>
-
-                    </tr>
+                  </tr>
                 </table>
                 <!-- B2.4 -->
                 <table class="evaluate-table no-bt">
@@ -1390,12 +1425,7 @@
                       <span class="table-num bold">B.2 精神状态 分级</span>
                     </td>
                     <td class="question center">
-                      <input
-                        type="text"
-                        class="input"
-                        v-model="B_2"
-                        readonly
-                      />
+                      <input type="text" class="input" v-model="B_2" readonly />
                       级
                     </td>
                     <td>
@@ -1622,12 +1652,7 @@
                       <span class="table-num bold">B.3 感知觉与 沟通分级</span>
                     </td>
                     <td class="question center">
-                      <input
-                        type="text"
-                        class="input"
-                        v-model="B_3"
-                        readonly
-                      />
+                      <input type="text" class="input" v-model="B_3" readonly />
                       级
                     </td>
                     <td>
@@ -1965,12 +1990,7 @@
                       <span class="table-num bold">B.4 社会参与 分级</span>
                     </td>
                     <td class="question center">
-                      <input
-                        type="text"
-                        class="input"
-                        v-model="B_4"
-                        readonly
-                      />
+                      <input type="text" class="input" v-model="B_4" readonly />
                       级
                     </td>
                     <td>
@@ -2051,10 +2071,18 @@
                     </td>
                     <td>
                       <div class="choices">
-                          <div class="choice" :class="{'active':C_2=== 0 }">0 能力完好</div>
-                          <div class="choice" :class="{'active':C_2=== 1 }">1 轻度失能</div>
-                          <div class="choice" :class="{'active':C_2=== 2 }">2 中度失能</div>
-                          <div class="choice" :class="{'active':C_2=== 3 }">3 重度失能</div>
+                        <div class="choice" :class="{ active: C_2 === 0 }">
+                          0 能力完好
+                        </div>
+                        <div class="choice" :class="{ active: C_2 === 1 }">
+                          1 轻度失能
+                        </div>
+                        <div class="choice" :class="{ active: C_2 === 2 }">
+                          2 中度失能
+                        </div>
+                        <div class="choice" :class="{ active: C_2 === 3 }">
+                          3 重度失能
+                        </div>
                         <!-- <el-radio-group
                           v-model="evaluateData.C_2"
                           class="radio-group"
@@ -2082,35 +2110,29 @@
                       <span class="table-num bold">C.3 等级变更 条款</span>
                     </td>
                     <td>
-                      <div>
-                        <el-radio v-model="C_3" :label="1"
-                          >1
-                          有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；</el-radio
-                        >
+                      <div class="line22" :class="{'text-active': C_3.indexOf(1) !== -1}">
+                        1
+                          有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
                       </div>
-                      <div>
-                        <el-radio v-model="C_3" :label="2"
-                          >2 近 30 天内发生过 2
+                      <div class="line22" :class="{'text-active': C_3.indexOf(2) !== -1}">
+                        2 近 30 天内发生过 2
                           次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一
-                          个等级；</el-radio
-                        >
+                          个等级；
                       </div>
-                      <div>
-                        <el-radio v-model="C_3" :label="3"
-                          >3 处于昏迷状态者，直接评定为重度失能；</el-radio
-                        >
+                      <div class="line22" :class="{'text-active': C_3.indexOf(3) !== -1}">
+                        3 处于昏迷状态者，直接评定为重度失能；
                       </div>
-                      <div>
-                        <el-radio v-model="C_3" :label="4"
-                          >4 若初步等级确定为“3 重度失能”，则不考虑上述 1-3
-                          中各情况对最终等级的影响， 等级不再提高</el-radio
-                        >
+                      <div class="line22" :class="{'text-active': C_3.indexOf(4) !== -1}">
+                        4 若初步等级确定为“3 重度失能”，则不考虑上述 1-3
+                          中各情况对最终等级的影响， 等级不再提高
                       </div>
                       <div style="text-align: right" class="pb-10">
                         <input
+                          v-for="(i,index) in C_3"
+                          :key="index"
                           type="text"
                           class="input"
-                          v-model="C_3"
+                         :value="i"
                           readonly
                         />
                       </div>
@@ -2127,10 +2149,10 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <div class="choice">0能力完好</div>
-                        <div class="choice">1轻度失能</div>
-                        <div class="choice">2中度失能</div>
-                        <div class="choice">3重度失能</div>
+                        <div class="choice" :class="C_4 === 0? 'active':''">0能力完好</div>
+                        <div class="choice" :class="C_4 === 1? 'active':''">1轻度失能</div>
+                        <div class="choice" :class="C_4 === 2? 'active':''">2中度失能</div>
+                        <div class="choice" :class="C_4 === 3? 'active':''">3重度失能</div>
                         <!-- <el-radio-group
                           v-model="evaluateData.C_4"
                           class="radio-group"
@@ -2286,9 +2308,7 @@
         <el-button type="primary" @click="print">暂存</el-button>
       </div>
     </div>
-    <div>
-
-    </div>
+    <div></div>
   </div>
 </template>
 <script>
@@ -2299,11 +2319,14 @@ import radioInput from '@/components/common/radio-input.vue'
 import { isEmpty, isSfz } from '@/utils/utils'
 import exportEvaluate from '@/components/export-evaluate.vue'
 import { exportTable } from '@/api/evaluate'
+import upload from '@/components/common/upload.vue'
+import { getToken } from '@/utils/auth'
 export default {
   components: {
     continueInput,
     radioInput,
-    exportEvaluate
+    exportEvaluate,
+    upload
   },
   data () {
     return {
@@ -2411,10 +2434,12 @@ export default {
         C_3: 2, // 等级变更条款
         C_4: 2 // 老年人能力最终等级
       },
-      // C.3 等级变更 条款
-      C_3: null,
 
-      htmlTitle: '测试'
+      htmlTitle: '测试',
+      upload: {
+        headers: { Authorization: 'Bearer ' + getToken() },
+        imageUrl: process.env.VUE_APP_BASE_API + '/common/upload'
+      }
     }
   },
   computed: {
@@ -2516,23 +2541,46 @@ export default {
     // B_3 感知觉与 沟通分级
     B_3: function () {
       // 0 能力完好：意识清醒，且视力和听力评为 0 或 1，沟通评为 0
-      if (this.evaluateData.B_3_1 === 0 && (this.evaluateData.B_3_2 === 0 || this.evaluateData.B_3_2 === 1) && (this.evaluateData.B_3_3 === 0 || this.evaluateData.B_3_3 === 1) && this.evaluateData.B_3_4 === 0) {
+      if (
+        this.evaluateData.B_3_1 === 0 &&
+        (this.evaluateData.B_3_2 === 0 || this.evaluateData.B_3_2 === 1) &&
+        (this.evaluateData.B_3_3 === 0 || this.evaluateData.B_3_3 === 1) &&
+        this.evaluateData.B_3_4 === 0
+      ) {
         return 0
       }
       // 1 轻度受损：意识清醒，但视力或听力中至少一项评为 2，或沟通评为 1
-      if (this.evaluateData.B_3_1 === 0 && (this.evaluateData.B_3_2 === 2 || this.evaluateData.B_3_3 === 2 || this.evaluateData.B_3_4 === 1)) {
+      if (
+        this.evaluateData.B_3_1 === 0 &&
+        (this.evaluateData.B_3_2 === 2 ||
+          this.evaluateData.B_3_3 === 2 ||
+          this.evaluateData.B_3_4 === 1)
+      ) {
         return 1
       }
       // 2 中度受损：意识清醒，但视力或听力中至少一项评为 3，或沟通评为 2；
-      if (this.evaluateData.B_3_1 === 0 && (this.evaluateData.B_3_2 === 3 || this.evaluateData.B_3_3 === 3 || this.evaluateData.B_3_4 === 2)) {
+      if (
+        this.evaluateData.B_3_1 === 0 &&
+        (this.evaluateData.B_3_2 === 3 ||
+          this.evaluateData.B_3_3 === 3 ||
+          this.evaluateData.B_3_4 === 2)
+      ) {
         return 2
       }
       // 2 中度受损：或嗜睡，视力或听力评定为 3 及以下，沟通评定为 2 及以下
-      if (this.evaluateData.B_3_1 === 1 && (this.evaluateData.B_3_2 <= 3 || this.evaluateData.B_3_3 <= 3) && this.evaluateData.B_3_4 <= 2) {
+      if (
+        this.evaluateData.B_3_1 === 1 &&
+        (this.evaluateData.B_3_2 <= 3 || this.evaluateData.B_3_3 <= 3) &&
+        this.evaluateData.B_3_4 <= 2
+      ) {
         return 2
       }
       // 3 重度受损：意识清醒或嗜睡，但视力或听力中至少一项评为 4，或沟通评为 3；
-      if ((this.evaluateData.B_3_1 === 0 || this.evaluateData.B_3_1 === 1) && (this.evaluateData.B_3_2 === 4 || this.evaluateData.B_3_3 === 4) && this.evaluateData.B_3_4 === 3) {
+      if (
+        (this.evaluateData.B_3_1 === 0 || this.evaluateData.B_3_1 === 1) &&
+        (this.evaluateData.B_3_2 === 4 || this.evaluateData.B_3_3 === 4) &&
+        this.evaluateData.B_3_4 === 3
+      ) {
         return 3
       }
       // 3 重度受损： 或昏睡/昏迷
@@ -2543,7 +2591,13 @@ export default {
     },
     // B_4_6 社会参与总分
     B_4_6: function () {
-      return this.evaluateData.B_4_1 + this.evaluateData.B_4_2 + this.evaluateData.B_4_3 + this.evaluateData.B_4_4 + this.evaluateData.B_4_5
+      return (
+        this.evaluateData.B_4_1 +
+        this.evaluateData.B_4_2 +
+        this.evaluateData.B_4_3 +
+        this.evaluateData.B_4_4 +
+        this.evaluateData.B_4_5
+      )
     },
     // B_4 社会参与分级
     B_4: function () {
@@ -2568,11 +2622,19 @@ export default {
     // 社会参与 B_4
     C_2: function () {
       // 0 能力完好：日常生活活动、精神状态、感知觉与沟通分级均为 0，社会参与分级为 0 或 1
-      if (this.B_1 === 0 && this.B_2 === 0 && this.B_3 === 0 && (this.B_4 === 0 || this.B_4 === 1)) {
+      if (
+        this.B_1 === 0 &&
+        this.B_2 === 0 &&
+        this.B_3 === 0 &&
+        (this.B_4 === 0 || this.B_4 === 1)
+      ) {
         return 0
       }
       // 1 轻度失能：日常生活活动分级为 0，但精神状态、感知觉与沟通中至少一项分级为 1 及以上，或社会参与的分级为 2；
-      if (this.B_1 === 0 && (this.B_2 >= 1 || this.B_3 >= 1 || this.B_4 === 2)) {
+      if (
+        this.B_1 === 0 &&
+        (this.B_2 >= 1 || this.B_3 >= 1 || this.B_4 === 2)
+      ) {
         return 1
       }
       // 1 轻度失能：或日常生活活动分级为 1，精神状态、感知觉与沟通、社会参与中至少有一项的分级为 0 或 1
@@ -2580,11 +2642,30 @@ export default {
         return 1
       }
       // 2 中度失能：日常生活活动分级为 1，但精神状态、感知觉与沟通、社会参与均为 2，或有一项为 3；
-      if (this.B_1 === 1 && ((this.B_2 === 2 && this.B_3 === 2 && this.B_4 === 2) || (this.B_2 === 3 && this.B_3 !== 3 && this.B_4 !== 3) || (this.B_2 !== 3 && this.B_3 === 3 && this.B_4 !== 3) || (this.B_2 !== 3 && this.B_3 !== 3 && this.B_4 === 3))) {
+      if (
+        this.B_1 === 1 &&
+        ((this.B_2 === 2 && this.B_3 === 2 && this.B_4 === 2) ||
+          (this.B_2 === 3 && this.B_3 !== 3 && this.B_4 !== 3) ||
+          (this.B_2 !== 3 && this.B_3 === 3 && this.B_4 !== 3) ||
+          (this.B_2 !== 3 && this.B_3 !== 3 && this.B_4 === 3))
+      ) {
         return 2
       }
       // 2 中度失能：或日常生活活动分级为 2，且精神状态、感知觉与沟通、社会参与中有 1-2 项的分级为 1 或 2
-      if (this.B_1 === 2 && ((this.B_2 === 1 || this.B_2 === 2) || (this.B_3 === 1 || this.B_3 === 2) || (this.B_4 === 1 || this.B_4 === 2)) && !(((this.B_2 === 1 || this.B_2 === 2) && (this.B_3 === 1 || this.B_3 === 2) && (this.B_4 === 1 || this.B_4 === 2)))) {
+      if (
+        this.B_1 === 2 &&
+        (this.B_2 === 1 ||
+          this.B_2 === 2 ||
+          this.B_3 === 1 ||
+          this.B_3 === 2 ||
+          this.B_4 === 1 ||
+          this.B_4 === 2) &&
+        !(
+          (this.B_2 === 1 || this.B_2 === 2) &&
+          (this.B_3 === 1 || this.B_3 === 2) &&
+          (this.B_4 === 1 || this.B_4 === 2)
+        )
+      ) {
         return 2
       }
       // 3 重度失能：日常生活活动的分级为 3；
@@ -2592,18 +2673,68 @@ export default {
         return 3
       }
       // 3 重度失能： 或日常生活活动、精神状态、感知觉与沟通、社会参与分级均为 2；
-      if (this.B_1 === 2 && this.B_2 === 2 && this.B_3 === 2 && this.B_4 === 2) {
+      if (
+        this.B_1 === 2 &&
+        this.B_2 === 2 &&
+        this.B_3 === 2 &&
+        this.B_4 === 2
+      ) {
         return 3
       }
       // 3 重度失能： 或日常生活活动分级为 2，且精神状态、感知觉与沟通、社会参与中至少有一项分级为 3
-      if (this.B_1 === 2 && (this.B_2 === 3 || this.B_3 === 3 || this.B_4 === 3)) {
+      if (
+        this.B_1 === 2 &&
+        (this.B_2 === 3 || this.B_3 === 3 || this.B_4 === 3)
+      ) {
         return 3
       }
       return ''
     },
+    // C.3 等级变更 条款
+    C_3: function () {
+      let v = []
+      // 若初步等级确定为“3 重度失能”，则不考虑上述 1-3 中各情况对最终等级的影响
+      if (this.C_2 === 3) {
+        v = [4]
+        return v
+      }
+      // 3 处于昏迷状态者，直接评定为重度失能；
+      if (this.evaluateData.B_3_1 === 3) {
+        v = [3]
+        return v
+      }
+
+      // 1 有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
+      // 2 近 30 天内发生过 2 次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一个等级；
+      if (this.evaluateData.B_2_1.score === 2 || this.evaluateData.A_2_13_1 || this.evaluateData.A_2_13_2) {
+        v.push(1)
+      }
+      if (this.evaluateData.A_2_14_1 >= 2 || this.evaluateData.A_2_14_3 >= 2 || this.evaluateData.A_2_14_4 >= 2 || this.evaluateData.A_2_14_2 >= 2) {
+        v.push(2)
+      }
+      return v
+    },
     // C_4 最终等级
     C_4: function () {
-      return ''
+      let v = this.C_2
+      // 若初步等级确定为“3 重度失能”，则不考虑上述 1-3 中各情况对最终等级的影响
+      if (this.C_2 === 3) {
+        return 3
+      }
+      // 3 处于昏迷状态者，直接评定为重度失能；
+      if (this.evaluateData.B_3_1 === 3) {
+        return 3
+      }
+      // 1 有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
+      // 2 近 30 天内发生过 2 次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一个等级；
+      if (this.evaluateData.B_2_1.score === 2 || this.evaluateData.A_2_13_1 || this.evaluateData.A_2_13_2) {
+        v += 1
+      }
+      if (this.evaluateData.A_2_14_1 >= 2 || this.evaluateData.A_2_14_3 >= 2 || this.evaluateData.A_2_14_4 >= 2 || this.evaluateData.A_2_14_2 >= 2) {
+        v += 1
+      }
+      if (v >= 3) return 3
+      return v
     }
   },
   watch: {
@@ -2617,9 +2748,12 @@ export default {
     this.toHash(location.hash)
   },
   methods: {
+    // 获取2.2.1测试 图片地址
+    getTestImgUrl (url) {
+      this.evaluateData.B_2_1.img = url
+    },
     // 点击选择出生日期
     chooseBornDate () {
-      console.log(222)
       this.$refs.datePicker.pickerVisible = true
     },
     // 跳转到指定hash
@@ -2861,8 +2995,10 @@ ${evaluate}
 
 </html>
       `
-      exportTable(html).then(res => {
-        window.open(`${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`)
+      exportTable(html).then((res) => {
+        window.open(
+          `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
+        )
       })
     },
     // 检测填写内容

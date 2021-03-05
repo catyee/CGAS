@@ -1,10 +1,16 @@
 .evaluate-list{
     height: 800px;
     overflow-y: auto;
+    padding-left: 16px;
+    width: 100%;
+    box-sizing: border-box;
     .list-container{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .table{
         background-color: #fff;
         padding: 48px 16px;
-        box-sizing: border-box;
     }
     .color-green{
         color: #1F9875;

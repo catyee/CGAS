@@ -6,7 +6,7 @@ export const evaluator = [
     // redirect: 'noredirect',
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     hidden: false,
-    meta: { title: '评估管理', icon: 'icondengjiliebiao' },
+    meta: { title: '', icon: '' },
     redirect: 'evaluate-list',
     children: [
       // 评估列表
@@ -14,13 +14,13 @@ export const evaluator = [
         path: 'evaluate-list',
         name: 'evaluate-list',
         hidden: false,
-        meta: { title: '评估管理', icon: '' },
+        meta: { title: '评估管理', icon: 'iconevaluate' },
         component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/evaluate-list')
       },
       {
         path: 'evaluate-history',
         name: 'evaluate-history',
-        hidden: false,
+        hidden: true,
         meta: { title: '评估历史', icon: '' },
         component: () => import(/* webpackChunkName: "evaluate-history" */ '../views/evaluate-list')
       },
@@ -34,18 +34,36 @@ export const evaluator = [
   },
   {
     path: '/user',
-    meta: { title: '管理员管理', icon: 'iconyidengji-huise' },
+    meta: { title: '管理员管理', icon: 'iconuser-admin' },
     hidden: false,
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     children: [
       {
         path: 'reset-pwd',
         name: 'reset-pwd',
-        meta: { title: '修改密码', icon: 'iconyidengji-huise' },
+        meta: { title: '修改密码', icon: 'iconuser-admin' },
         hidden: false,
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/reset-pwd')
       }
     ]
+  },
+  {
+    path: '',
+    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
+    hidden: false,
+    meta: { title: '', icon: '' },
+    redirect: 'register-list',
+    children: [
+      // 评估列表
+      {
+        path: 'register-list',
+        name: 'register-list',
+        hidden: false,
+        meta: { title: '登记列表', icon: 'iconregister' },
+        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register-list')
+      }
+    ]
+
   }
 
 ]
