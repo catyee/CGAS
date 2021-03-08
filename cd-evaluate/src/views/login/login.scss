@@ -1,4 +1,9 @@
 .login{
+    position: relative;
+    width: 1920px;
+    height: 880px;
+    background-image: url('../../assets/login-bg.png');
+    background-size: contain;
     .login-header{
         height: 80px;
         display: flex;
@@ -17,23 +22,19 @@
         color: #2B3940;
         line-height: 22px;
     }
-    .login-content{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-top: 63px;
-    }
-    .content-bg{
-        width: 786px;
-        height: 641px;
-        background-image: url('../../assets/login-bg.png');
-        background-size: contain;
+    // .content-bg{
+    //     width: 1920px;
+    //     height: 880px;
+    //     background-image: url('../../assets/login-bg.png');
+    //     background-size: contain;
         
-    }
+    // }
     .input-panel{
-        margin-left: 88px;
         width: 404px;
-        // height: 348px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
         background: #F4F4F4;
         padding: 32px;
         box-sizing: border-box;

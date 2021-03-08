@@ -61,6 +61,13 @@ export const evaluator = [
         hidden: false,
         meta: { title: '登记列表', icon: 'iconregister' },
         component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register-list')
+      },
+      {
+        path: 'register/:id?',
+        name: 'register',
+        hidden: true,
+        meta: { title: '登记', icon: '' },
+        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register')
       }
     ]
 

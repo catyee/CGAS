@@ -2,50 +2,47 @@
   <div class="login">
     <div class="login-header pl-26">
       <i class="login-logo pr-9"></i>
-      <span class="title">养老照料公众号后台管理</span>
+      <span class="title">承德养老评估系统</span>
     </div>
-    <div class="login-content">
-      <div class="content-bg">
-        <!-- <img src="../..//assets/login-bg.png" alt="" /> -->
-      </div>
-      <div class="input-panel">
-        <div class="input-title bold f24 pb-39">密码登录</div>
-        <el-form
-          :model="ruleForm"
-          status-icon
-          :rules="rules"
-          ref="loginForm"
-          label-width="80px"
-        >
-          <el-form-item prop="username" label-width="0">
-            <el-input
-              type="text"
-              v-model="ruleForm.username"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-          <el-form-item prop="password" label-width="0">
-            <el-input
-              type="password"
-              v-model="ruleForm.password"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
+    <div class="input-panel">
+      <div class="input-title bold f24 pb-39">密码登录</div>
+      <el-form
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        ref="loginForm"
+        label-width="80px"
+      >
+        <el-form-item prop="username" label-width="0">
+          <el-input
+            type="text"
+            v-model="ruleForm.username"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="password" label-width="0">
+          <el-input
+            type="password"
+            v-model="ruleForm.password"
+            autocomplete="off"
+          ></el-input>
+        </el-form-item>
 
-          <el-form-item label-width="0" class="pt-22">
-            <el-button
-              type="primary"
-              class="submit"
-              :loading="false"
-              @click.native.prevent="submitForm('loginForm')"
-            >
-              <span v-if="!loading">登 录</span>
-              <span v-else>登 录 中...</span>
-            </el-button>
-              <div class="forget-pwd color-danger pt-10" @click="resetPwd">忘记密码？</div>
-          </el-form-item>
-        </el-form>
-      </div>
+        <el-form-item label-width="0" class="pt-22">
+          <el-button
+            type="primary"
+            class="submit"
+            :loading="false"
+            @click.native.prevent="submitForm('loginForm')"
+          >
+            <span v-if="!loading">登 录</span>
+            <span v-else>登 录 中...</span>
+          </el-button>
+          <div class="forget-pwd color-danger pt-10" @click="resetPwd">
+            忘记密码？
+          </div>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -110,20 +107,22 @@ export default {
           value = value.trim()
           if (!value.length) return '请输入用户名'
         }
-      }).then(({ value }) => {
-        // console.log(this.submitRest)
-        this.resetUserName = value
-        this.submitReset()
-        // this.$message({
-        //   type: 'success',
-        //   message: '你的邮箱是: ' + value
-        // })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消输入'
-        })
       })
+        .then(({ value }) => {
+          // console.log(this.submitRest)
+          this.resetUserName = value
+          this.submitReset()
+          // this.$message({
+          //   type: 'success',
+          //   message: '你的邮箱是: ' + value
+          // })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          })
+        })
     },
     // 输入用户名 重置密码
     submitReset () {
@@ -137,7 +136,7 @@ export default {
             this.msgSuccess('操作成功')
           })
         })
-        .catch(action => {
+        .catch((action) => {
           this.$message({
             type: 'info',
             message: '取消操作'
@@ -153,7 +152,7 @@ export default {
           // 登录
           this.login()
         } else {
-        //  console.log('error submit!!')
+          //  console.log('error submit!!')
           return false
         }
       })
@@ -163,19 +162,18 @@ export default {
     login () {
       this.$store
         .dispatch('Login', this.ruleForm)
-        .then(res => {
+        .then((res) => {
           // 登录的同时 获取菜单信息
           // this.$store.dispatch('getMenuByUser').then(res => {
           this.loading = false
           this.$router.push({ path: this.redirect || '/' }).catch(() => {})
-        //  })
+          //  })
         })
         // eslint-disable-next-line handle-callback-err
-        .catch(error => {
+        .catch((error) => {
           this.loading = false
         })
     }
   }
-
 }
 </script>

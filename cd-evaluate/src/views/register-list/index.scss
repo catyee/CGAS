@@ -1,0 +1,25 @@
+.register-list{
+    height: 800px;
+    overflow-y: auto;
+    padding-left: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    .list-container{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .table{
+        background-color: #fff;
+        padding: 48px 16px;
+    }
+    .color-green{
+        color: #1F9875;
+    }
+    .color-red{
+        color: #FF5F58;
+    }
+    .el-table--enable-row-hover .el-table__body tr:hover > td{
+        background-color: #E2F7F1;
+        cursor: pointer;
+    }
+}
