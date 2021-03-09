@@ -41,7 +41,7 @@
             <span class="color-green pr-10 pointer" @click="addRelation(scope.row.tagId)"
               >添加关系</span
             >
-            <span class="color-red pointer" @click="deleteTag(scope.row.tagId)"
+            <span  v-show="!scope.row.count" class="color-red pointer" @click="deleteTag(scope.row.tagId)"
               >删除</span
             >
           </template>

@@ -13,7 +13,8 @@ function addStyleResource (rule) {
 }
 const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+  // 部署后请求路径
+  publicPath: process.env.NODE_ENV === 'production' ? '/cd/' : '/',
   assetsDir: 'static',
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   // lintOnSave: process.env.NODE_ENV === 'development',

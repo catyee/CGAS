@@ -1,0 +1,32 @@
+.register{
+    .list-container{
+        font-size: 0;
+        background-color: #fff;
+        padding: 48px;
+
+    }
+    .form-container{
+        display: flex;
+        align-items: flex-start;
+    }
+    .form-group{
+        font-size: 14px;
+        font-weight: 600;
+        color: #2B3940;
+        width: 500px;
+        cursor: pointer;
+    }
+    .title{
+        text-align: center;
+        padding-bottom: 19px;
+    }
+    .el-form-item__label{
+        font-weight: 600;
+        color: #2B3940;
+    }
+    .form-container-b{
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}

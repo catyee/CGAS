@@ -154,6 +154,11 @@ export default {
     upload,
     newTag
   },
+  watch: {
+    $route (to, from) {
+      location.reload()
+    }
+  },
   data () {
     return {
       // 当前下拉选中的标签
@@ -310,18 +315,14 @@ export default {
     },
     // 清空表单
     resetForm (formName) {
-      this.$confirm('您确定清空表单吗?', '提示', {
+      this.$confirm('修改的内容未保存，是否取消保存？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
         customClass: 'confirm-pannel'
       })
         .then(() => {
-          this.$refs[formName].resetFields()
-          this.$message({
-            type: 'success',
-            message: '已清空表单'
-          })
+          this.$router.push('/video/video-list')
         })
         .catch(() => {
           this.$message({
