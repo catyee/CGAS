@@ -1,13 +1,13 @@
 <template>
   <div class="cooperation">
-    <div class="title pb-16">请描述想要洽谈的项目简介/计划</div>
+    <div class="title pb-16">请简单描述您的合作意向，我们会尽快联系您</div>
     <van-form @submit="onSubmit">
       <van-field
         v-model="cooperate.cooperateContent"
         class="textarea"
         type="textarea"
         :rules="[{ required: true, message: '' }]"
-        placeholder="请在此输入您的项目计划"
+        placeholder="请简单描述您的合作意向"
       />
       <div class="pb-22"></div>
       <van-field

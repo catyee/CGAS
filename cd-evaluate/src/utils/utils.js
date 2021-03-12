@@ -105,3 +105,12 @@ export function isSfz (idcard) {
       return Err
   }
 }
+// 校验手机号码
+export function isPhone (val) {
+  var patrn = /^(((1[3456789][0-9]{1})|(15[0-9]{1}))+\d{8})$/
+  if (!patrn.test(val) || val === '') {
+    return false
+  } else {
+    return true
+  }
+}

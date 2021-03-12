@@ -58,7 +58,7 @@ module.exports = {
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(new BundleAnalyzerPlugin())
+   //   config.plugins.push(new BundleAnalyzerPlugin())
 
       config.plugins.push(new CompressionPlugin({ // gzip压缩配置
         test: /\.js$|\.html$|\.css/, // 匹配文件名

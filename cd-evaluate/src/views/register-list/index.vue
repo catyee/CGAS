@@ -19,6 +19,9 @@
       </div>
     </div>
     <div class="list-container pl-16">
+      <div class="oper-container pb-8">
+        <el-button type="primary"  @click="toRegister">新建登记</el-button>
+      </div>
       <el-table
         class="table"
         :data="list"
@@ -116,7 +119,11 @@ export default {
       //     this.total = parseInt(res.total)
       //   })
     },
-    // 去评估
+    // 新建登记
+    toRegister () {
+      this.$router.push({ path: '/register/' })
+    },
+    // 编辑登记
     edit (id) {
       this.$router.push({ path: '/register/' + id })
     }

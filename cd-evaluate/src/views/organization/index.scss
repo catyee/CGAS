@@ -1,0 +1,77 @@
+.organization{
+    .add-panel{
+        .desc{
+            text-align: right;
+            font-weight: 400;
+        }
+        .el-select,.el-input,.el-input__inner{
+            display: inline-block;
+            width: 100%;
+        }
+        .el-dialog__header{
+            border-bottom: 1px solid $border-color;
+        }
+        .el-dialog__footer{
+            border-top: 1px solid $border-color;
+        }
+        .el-dialog__body{
+            padding: 20px;
+        }
+    }
+    .selector{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 23px;
+
+    }
+    .title-line{
+        width: 3px;
+        height: 16px;
+        background: #C23731;
+    }
+    .color-green{
+        color: #1F9875;
+    }
+    .color-red{
+        color: #FF5F58;
+    }
+    .color-grey{
+        color:#7E888A;
+    }
+    .list-container{
+        background-color: #fff;
+        padding: 8px 16px;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    .oper-container{
+        display: flex;
+       justify-content: space-between;
+    }
+    .el-button--success{
+        background-color: #1677FF;
+        border-color: #1677FF;
+        &:hover{
+            background-color: rgba(22, 119, 255, 0.8);
+            border-color:rgba(22, 119, 255, 0.8);
+        }
+    }
+    // 批量启用的禁止点击样式
+    .el-button--success.is-disabled{
+        background-color: rgba(22, 119, 255, 0.5);
+        border-color:rgba(22, 119, 255, 0.5);
+        &:hover{
+            background-color: rgba(22, 119, 255, 0.5);
+            border-color:rgba(22, 119, 255, 0.5);
+        }
+    }
+    .el-switch__label.is-active{
+        color: #2B3940;
+    }
+
+  
+}

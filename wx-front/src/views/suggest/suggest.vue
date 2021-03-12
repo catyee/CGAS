@@ -1,7 +1,7 @@
 <template>
   <div class="suggest">
     <div class="title pb-16">
-      感谢您关注我们！请告诉我们您的意见和建议，我们会参考您的反馈不断优化我们的产品和服务。
+     感谢您关注我们。我们希望倾听您的意见和建议。
     </div>
     <van-form @submit="onSubmit">
       <van-field

@@ -7,6 +7,21 @@ export function addUser (data) {
     data: data
   })
 }
+// 更新管理员信息
+export function updateUser (data) {
+  return request({
+    url: '/system/user/',
+    method: 'put',
+    data: data
+  })
+}
+// 获取用户信息
+export function getUser (id) {
+  return request({
+    url: '/system/user/' + id,
+    method: 'get'
+  })
+}
 export function getUserList (query) {
   return request({
     url: '/system/user/list',

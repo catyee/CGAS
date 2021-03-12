@@ -10,7 +10,7 @@
     }
     .table{
         background-color: #fff;
-        padding: 48px 16px;
+        padding: 8px 16px 48px 8px;
     }
     .color-green{
         color: #1F9875;
@@ -21,5 +21,11 @@
     .el-table--enable-row-hover .el-table__body tr:hover > td{
         background-color: #E2F7F1;
         cursor: pointer;
+    }
+    .oper-container{
+        display: flex;
+        justify-content: flex-end;
+        background-color: #fff;
+        padding:8px 32px;
     }
 }
