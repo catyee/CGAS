@@ -10,6 +10,7 @@
         <div>
           <el-input
             placeholder="姓名/身份证号/手机号"
+            v-model="queryParams.searchValue"
             @change="handleQuery"
           ></el-input>
         </div>
@@ -33,31 +34,38 @@
             {{ scope.$index + 1 }}
           </template>
         </el-table-column>
-        <el-table-column label="评估日期" prop="date"> </el-table-column>
+        <el-table-column label="登记年份" prop="registerYear">
+            <template slot-scope="scope">
+              {{scope.row.registerYear.slice(0,4) }}
+          </template>
+        </el-table-column>
         <el-table-column prop="name" label="老人姓名"> </el-table-column>
-        <el-table-column prop="idCard" label="身份证号" show-overflow-tooltip>
+        <el-table-column prop="idNumber" label="身份证号" show-overflow-tooltip>
         </el-table-column>
         <el-table-column prop="age" label="年龄" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="child" label="子女数" show-overflow-tooltip>
+        <el-table-column prop="childNumber" label="子女数" show-overflow-tooltip>
         </el-table-column>
         <el-table-column
-          prop="dependents"
+          prop="dependent"
           label="由谁抚养"
           show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="isPoor" label="是否低保" show-overflow-tooltip>
+        <el-table-column prop="minimumLiving" label="是否低保" show-overflow-tooltip>
+          <template slot-scope="scope">
+              {{scope.row.minimumLiving === 0 ? '否':'是'}}
+          </template>
         </el-table-column>
-        <el-table-column prop="account" label="银行卡"> </el-table-column>
-        <el-table-column prop="account" label="联系人姓名"> </el-table-column>
-        <el-table-column prop="account" label="与老人关系"> </el-table-column>
+        <el-table-column prop="cardNumber" label="银行卡"> </el-table-column>
+        <el-table-column prop="contactName" label="联系人姓名"> </el-table-column>
+        <el-table-column prop="relate" label="与老人关系"> </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <div class="color-green" @click="edit(scope.row.id)">
+            <span class="color-green" @click="edit(scope.row.registerId)">
               编辑
-            </div>
-            <div class="color-green">删除</div>
+            </span>
+            <span class="color-green" @click="removeRegister(scope.row.registerId)">删除</span>
           </template>
         </el-table-column>
       </el-table>
@@ -72,6 +80,7 @@
 <script>
 import './index.scss'
 import pagination from '@/components/pagination.vue'
+import { getRegisterList, removeRegister } from '@/api/register'
 export default {
   components: {
     pagination
@@ -82,29 +91,18 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 20
+        pageSize: 20,
+        // 查询关键字
+        searchValue: null
       },
       // 总条数
       total: 0,
       list: [
-        {
-          id: 1,
-          year: '2020',
-          idCard: '11111111',
-          name: '张三',
-          age: 65,
-          phone: '123',
-          child: 2,
-          dependents: '22',
-          isPoor: 33,
-          account: '123',
-          lxr: '111',
-          lxrPhone: '123',
-          relation: '本人',
-          status: '未评估'
-        }
       ]
     }
+  },
+  mounted () {
+    this.initList()
   },
   methods: {
     // 按关键字搜索
@@ -114,10 +112,32 @@ export default {
     },
     // 获取列表
     initList () {
+      getRegisterList(this.queryParams).then(res => {
+        this.list = res.rows
+        this.total = parseInt(res.total)
+      })
       //   getVideoList(this.queryParams).then(res => {
       //     this.tableData = res.rows
       //     this.total = parseInt(res.total)
       //   })
+    },
+    // 删除登记
+    removeRegister (id) {
+      this.$confirm('此操作将永久删除该登记信息, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        removeRegister(id).then(res => {
+          this.msgSuccess('删除成功')
+          this.handleQuery()
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     // 新建登记
     toRegister () {

@@ -9,7 +9,7 @@
         <div class="color-grey pr-5 f12 no-wrap">关键字:</div>
         <div>
           <el-input
-            v-model="queryParams.tagName"
+            v-model="queryParams.searchValue"
             placeholder="姓名/身份证号/手机号"
             @change="handleQuery"
           ></el-input>
@@ -124,6 +124,8 @@ export default {
         pageNum: 1,
         // 每页的大小
         pageSize: 20,
+        // 查询关键字
+        searchValue: null,
         // 视频状态0正常 1已下架
         status: null,
         beginTime: null,

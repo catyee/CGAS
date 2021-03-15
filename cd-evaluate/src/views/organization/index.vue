@@ -283,7 +283,7 @@ export default {
         pageSize: 20,
         // 查询参数
         nickName: '',
-        // 只显示管理员角色的用户
+        // 只显示机构的用户
         roleIds: 3
       },
       // 总条数
