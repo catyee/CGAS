@@ -25,7 +25,7 @@ export const evaluator = [
         component: () => import(/* webpackChunkName: "evaluate-history" */ '../views/evaluate-list')
       },
       {
-        path: 'evaluate/:id',
+        path: 'evaluate/:id?',
         name: 'evaluate',
         hidden: true,
         component: () => import(/* webpackChunkName: "evaluate" */ '../views/evaluate')

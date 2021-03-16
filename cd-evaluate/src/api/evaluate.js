@@ -10,9 +10,20 @@ export function exportTable (query) {
     data: query
   })
 }
-// export function download (filename) {
-//   return request({
-//     url: '/common/download?fileName=' + filename + '&delete=true',
-//     method: 'get'
-//   })
-// }
+
+// 产生评估编号
+export function getCode (data) {
+  return request({
+    url: '/pg/assess/generate_code',
+    method: 'get',
+    params: data
+  })
+}
+// 保存评估信息
+export function addEvaluate (data) {
+  return request({
+    url: '/pg/assess',
+    method: 'post',
+    data: data
+  })
+}

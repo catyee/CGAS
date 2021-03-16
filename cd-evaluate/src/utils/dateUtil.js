@@ -39,7 +39,8 @@ export function yearLastDay () {
 }
 // 传入日期 获取 年 月 日
 // type y,m,d 年月日
-export function getYearOrMonthOrDay (time, type) {
+export function getYearOrMonthOrDay (value, type) {
+  const time = formatDate(value, 'YYYY/mm/dd')
   let t
   switch (type) {
     case 'y': t = (new Date(time)).getFullYear()

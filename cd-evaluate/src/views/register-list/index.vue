@@ -116,10 +116,6 @@ export default {
         this.list = res.rows
         this.total = parseInt(res.total)
       })
-      //   getVideoList(this.queryParams).then(res => {
-      //     this.tableData = res.rows
-      //     this.total = parseInt(res.total)
-      //   })
     },
     // 删除登记
     removeRegister (id) {

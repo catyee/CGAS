@@ -36,17 +36,17 @@
         <div class="color-grey pr-5 f14 no-wrap">评估状态:</div>
         <div>
           <el-select
-            v-model="queryParams.status"
+            v-model="queryParams.assessStatus"
             placeholder="请选择"
             clearable
             @clear="handleQuery"
             @change="handleQuery"
           >
             <el-option
-              v-for="item in evaluateStatus"
-              :key="item"
-              :label="item"
-              :value="item"
+              v-for="(item,index) in evaluateStatus"
+              :key="index"
+              :label="item.label"
+              :value="item.value"
             >
             </el-option>
           </el-select>
@@ -60,12 +60,15 @@
             {{ scope.$index + 1 }}
           </template>
         </el-table-column>
-        <el-table-column label="评估日期" prop="date">
+        <el-table-column label="评估日期" prop="createTime">
+          <template slot-scope="scope">
+              {{scope.row.createTime&&scope.row.createTime.slice(0,11)}}
+          </template>
         </el-table-column>
         <el-table-column prop="name" label="老人姓名">
         </el-table-column>
         <el-table-column
-          prop="idCard"
+          prop="idNumber"
           label="身份证号"
           show-overflow-tooltip
         >
@@ -77,26 +80,43 @@
         >
         </el-table-column>
         <el-table-column
-          prop="child"
+          prop="childNumber"
           label="子女数"
           show-overflow-tooltip
         >
         </el-table-column>
-        <el-table-column prop="dependents" label="由谁抚养" show-overflow-tooltip>
+        <el-table-column prop="dependent" label="由谁抚养" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="isPoor" label="是否低保" show-overflow-tooltip>
+        <el-table-column prop="minimumLiving" label="是否低保">
+           <template slot-scope="scope">
+              {{scope.row.minimumLiving === 0 ? '否':'是'}}
+          </template>
         </el-table-column>
-        <el-table-column prop="account" label="银行卡">
+        <el-table-column prop="cardNumber" label="银行卡"
+        show-overflow-tooltip>
         </el-table-column>
-        <el-table-column prop="account" label="联系人姓名">
+        <el-table-column prop="contactName" label="联系人姓名">
         </el-table-column>
-        <el-table-column prop="account" label="与老人关系">
+        <el-table-column prop="relate" label="与老人关系" style="show-overflow-tooltip">
         </el-table-column>
-        <el-table-column prop="account" label="评估状态">
+        <el-table-column prop="assessStatus" label="评估状态" >
+          <template slot-scope="scope">
+             <span class="color-green" v-show="scope.row.assessStatus ===2">
+               已评估
+             </span>
+             <span class="color-orange" v-show="scope.row.assessStatus ===1">
+               评估中
+             </span>
+              <span class="color-red" v-show="scope.row.assessStatus ===0">
+               未评估
+             </span>
+          </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <div class="color-green" @click="evaluate(scope.row.id)">去评估</div>
+            <div class="color-green" @click="evaluate(null,scope.row.createBy, scope.row.registerId)" v-show="scope.row.assessStatus ===0">去评估</div>
+            <div class="color-green" @click="evaluate(scope.row.id)" v-show="scope.row.assessStatus ===1">评估</div>
+            <div class="color-green" @click="evaluate(scope.row.id)" v-show="scope.row.assessStatus ===2">查看当前评估结果</div>
             <div class="color-green">历史评估</div>
           </template>
         </el-table-column>
@@ -112,13 +132,15 @@
 <script>
 import './index.scss'
 import pagination from '@/components/pagination.vue'
+import { evaluateStatus } from '@/libs/constant'
+import { getRegisterList } from '@/api/register'
 export default {
   components: {
     pagination
   },
   data () {
     return {
-      evaluateStatus: ['全部'],
+      evaluateStatus: evaluateStatus,
       queryParams: {
         // 页数
         pageNum: 1,
@@ -126,31 +148,20 @@ export default {
         pageSize: 20,
         // 查询关键字
         searchValue: null,
-        // 视频状态0正常 1已下架
-        status: null,
+        // 评估状态 全部 未评估 评估中 已评估
+        assessStatus: null,
         beginTime: null,
         endTime: null
       },
       // 总条数
       total: 0,
       list: [
-        {
-          id: 1,
-          date: '2020.1.20',
-          name: '张三',
-          idCard: '11111111',
-          age: 65,
-          child: 2,
-          dependents: '22',
-          isPoor: false,
-          account: '123',
-          lxr: '111',
-          lxrPhone: '123',
-          relation: '本人',
-          status: '未评估'
-        }
       ]
     }
+  },
+  mounted () {
+    // 获取列表
+    this.initList()
   },
   methods: {
     // 按关键字搜索
@@ -166,14 +177,15 @@ export default {
     },
     // 获取列表
     initList () {
-    //   getVideoList(this.queryParams).then(res => {
-    //     this.tableData = res.rows
-    //     this.total = parseInt(res.total)
-    //   })
+      getRegisterList(this.queryParams).then(res => {
+        this.list = res.rows
+        this.total = parseInt(res.total)
+      })
     },
     // 去评估
-    evaluate (id) {
-      this.$router.push({ path: '/evaluate/' + id })
+    evaluate (id, createBy, registerId) {
+      const assessId = id || ''
+      this.$router.push({ path: '/evaluate/' + assessId, query: { createBy: createBy, registerId: registerId } })
     }
   }
 }

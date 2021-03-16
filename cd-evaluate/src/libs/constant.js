@@ -19,3 +19,23 @@ export const relations = [
   '相关',
   '隶属于'
 ]
+
+// 评估状态
+export const evaluateStatus = [
+  {
+    value: null,
+    label: '全部'
+  },
+  {
+    value: 0,
+    label: '未评估'
+  },
+  {
+    value: 1,
+    label: '评估中'
+  },
+  {
+    value: 2,
+    label: '已评估'
+  }
+]
