@@ -19,11 +19,26 @@ export function getCode (data) {
     params: data
   })
 }
-// 保存评估信息
+// 新建评估信息
 export function addEvaluate (data) {
   return request({
     url: '/pg/assess',
     method: 'post',
     data: data
+  })
+}
+// 修改评估信息
+export function updateEvaluate (data) {
+  return request({
+    url: '/pg/assess',
+    method: 'put',
+    data: data
+  })
+}
+// h获取评估信息
+export function getEvaluate (id) {
+  return request({
+    url: '/pg/assess/' + id,
+    method: 'get'
   })
 }

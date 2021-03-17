@@ -115,7 +115,7 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <div class="color-green" @click="evaluate(null,scope.row.createBy, scope.row.registerId)" v-show="scope.row.assessStatus ===0">去评估</div>
-            <div class="color-green" @click="evaluate(scope.row.id)" v-show="scope.row.assessStatus ===1">评估</div>
+            <div class="color-green" @click="evaluate(scope.row.assessId)" v-show="scope.row.assessStatus ===1">评估</div>
             <div class="color-green" @click="evaluate(scope.row.id)" v-show="scope.row.assessStatus ===2">查看当前评估结果</div>
             <div class="color-green">历史评估</div>
           </template>

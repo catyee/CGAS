@@ -23,7 +23,7 @@ Object.keys(filters).forEach(item => {
 
 Vue.config.productionTip = false
 Vue.prototype.msgSuccess = function (msg) {
-  this.$message({ showClose: true, message: msg, type: 'success' })
+  this.$message({ showClose: true, message: msg, type: 'success', duration: 1000 })
 }
 
 Vue.prototype.msgError = function (msg) {

@@ -2020,6 +2020,7 @@
             </div>
             <!-- C 老年人能力评估报告 -->
             <div id="C" class="table-container">
+              <div class="page-top">MZ/T 039—2013</div>
               <div class="h1-title">附 录 C</div>
               <div class="title-desc">（规范性附录）</div>
               <div class="subtitle">老年人能力评估报告</div>
@@ -2198,12 +2199,12 @@
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.sign1"
+                            v-model="cInfoJson.data.sign1"
                           />、
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.sign2"
+                            v-model="cInfoJson.data.sign2"
                           />
                         </div>
                         <div class="sign-input sign-date">
@@ -2211,17 +2212,17 @@
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.year1"
+                            v-model="cInfoJson.data.year1"
                           />年
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.month1"
+                            v-model="cInfoJson.data.month1"
                           />月
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.day1"
+                            v-model="cInfoJson.data.day1"
                           />日
                         </div>
                       </div>
@@ -2231,7 +2232,7 @@
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.sign3"
+                            v-model="cInfoJson.data.sign3"
                           />
                         </div>
                         <div class="sign-input sign-date">
@@ -2239,17 +2240,17 @@
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.year2"
+                            v-model="cInfoJson.data.year2"
                           />年
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.month2"
+                            v-model="cInfoJson.data.month2"
                           />月
                           <input
                             type="text"
                             class="input-text inline"
-                            v-model="cInfoJson.day2"
+                            v-model="cInfoJson.data.day2"
                           />日
                         </div>
                       </div>
@@ -2331,9 +2332,9 @@ import './index.scss'
 import { getYearOrMonthOrDay } from '@/utils/dateUtil.js'
 import continueInput from '@/components/common/continue-input.vue'
 import radioInput from '@/components/common/radio-input.vue'
-import { isEmpty, isSfz } from '@/utils/utils'
+import { isEmpty, isSfz, _debounce } from '@/utils/utils'
 import exportEvaluate from '@/components/export-evaluate.vue'
-import { exportTable, getCode, addEvaluate } from '@/api/evaluate'
+import { exportTable, getCode, addEvaluate, updateEvaluate, getEvaluate } from '@/api/evaluate'
 import upload from '@/components/common/upload.vue'
 import { getToken } from '@/utils/auth'
 export default {
@@ -2462,15 +2463,17 @@ export default {
         C_2: null, // 老年人能力初步等级
         C_3: null, // 等级变更条款
         C_4: null, // 老年人能力最终等级
-        sign1: null, // 评估员签名1
-        sign2: null, // 评估员签名2
-        year1: null, // 签名年1
-        month1: null, // 签名月1
-        day1: null, // 签名日1
-        sign3: null, // 信息提供者签名
-        year2: null, // 签名年2
-        month2: null, // 签名月2
-        day2: null // 签名日2
+        data: {
+          sign1: null, // 评估员签名1
+          sign2: null, // 评估员签名2
+          year1: null, // 签名年1
+          month1: null, // 签名月1
+          day1: null, // 签名日1
+          sign3: null, // 信息提供者签名
+          year2: null, // 签名年2
+          month2: null, // 签名月2
+          day2: null // 签名日2
+        }
       },
       upload: {
         headers: { Authorization: 'Bearer ' + getToken() },
@@ -2805,29 +2808,40 @@ export default {
     }
   },
   watch: {
+    // 监听assessId当首次新建评估后获取到了assessId,刷新页面监听到了assessId变化 调用获取详情 不会丢失数据
+    assessId: function (id) {
+      console.log(8800000000)
+      if (!id) return
+      this.getEvaluate(this.assessId)
+    }
     // B_4: function (val) {
     //   this.evaluateData.B_4 = val
     // }
-    evaluateData: {
-      deep: true,
-      handler: function () {
-        this.save()
-        console.log(9999999999)
-      }
+    // evaluateData: {
+    //   deep: true,
+    //   handler: function () {
+    //     // this.save()
+    //     console.log(9999999999)
+    //   }
 
-    }
+    // }
   },
   created () {
     // 获取assessId
-    this.assessId = this.$route.id
+    this.assessId = this.$route.params.id
     // 新建
     if (!this.assessId) {
       this.registerId = this.$route.query.registerId
-      const createBy = this.$route.query.registerId
+      const createBy = this.$route.query.createBy
       // 生成评估编号
       getCode({ createBy: createBy }).then(res => {
         this.evaluateData.A_1_1 = res.msg
       })
+      // 获取assessId 并监听evaluateData变化 没当变化调用修改接口
+      this.addEvaluate()
+    } else {
+      // 存在assessId 首先获取评估信息 获取成功以后并监听evaluateData变化 没当变化调用修改接口
+      this.getEvaluate()
     }
   },
   mounted () {
@@ -2836,6 +2850,21 @@ export default {
     this.toHash(location.hash)
   },
   methods: {
+    // 监听页面数据变化
+    watchDataChange () {
+      const save = this.save()
+      this.$watch('evaluateData', function () {
+        console.log(9090)
+        save()
+      }, {
+        deep: true
+      })
+      this.$watch('cInfoJson.data', function (val) {
+        save()
+      }, {
+        deep: true
+      })
+    },
     // 获取2.2.1测试 图片地址
     getTestImgUrl (url) {
       this.evaluateData.B_2_1.img = url
@@ -2915,7 +2944,7 @@ export default {
 
         .h1-title {
             line-height: 28px;
-            font-weight: 600;
+            font-weight: bold;
             color: #000000;
             font-size: 20px;
             text-align: center;
@@ -2946,7 +2975,7 @@ export default {
             text-align: left;
             padding-left: 8px;
             padding-bottom: 8px;
-            font-weight: 600;
+            font-weight: bold;
             color: #000000;
             line-height: 20px;
             font-size: 16px;
@@ -3060,7 +3089,7 @@ export default {
             margin-bottom: 5px;
         }
         .bold{
-            font-weight: 600;
+            font-weight: bold;
         }
         .pt-20{
             padding-top: 10px;
@@ -3377,251 +3406,63 @@ ${evaluate}
         this.toHash('#B4')
       }
     },
-    exportPdf () {
-      const style = `
-       <style>
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-            vertical-align: middle;
-        }
-
-        tr,
-        td {
-            min-height: 32px;
-            border: 1px solid #E7E7E7;
-        }
-
-        .h1-title {
-            line-height: 28px;
-            font-weight: 600;
-            color: #000000;
-            font-size: 20px;
-            text-align: center;
-            padding-top: 32px;
-        }
-
-        .title-desc {
-            text-align: center;
-            padding: 6px 0;
-            font-size: 12px;
-            color: #000000;
-            line-height: 17px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 12px;
-            color: #000000;
-            line-height: 17px;
-            padding-bottom: 32px;
-        }
-
-        .table-wrap {
-            padding-bottom: 24px;
-        }
-
-        .table-title {
-            text-align: left;
-            padding-left: 8px;
-            padding-bottom: 8px;
-            font-weight: 600;
-            color: #000000;
-            line-height: 20px;
-            font-size: 16px;
-        }
-
-        .evaluate-table {
-            border: 1px solid #E7E7E7;
-            width: 100%;
-
-        }
-
-        .table-num {
-            padding-right: 8px;
-        }
-
-        td {
-            padding: 8px;
-            font-size: 14px;
-            vertical-align: middle;
-        }
-
-        .question {
-            width: 20%;
-            padding: 8px;
-            vertical-align: middle;
-            line-height: 22px;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .question1 {
-            width: 10%;
-            padding: 8px;
-            line-height: 22px;
-        }
-
-        .evaluate-date {
-            display: flex;
-            align-items: center;
-
-        }
-
-        .text {
-            padding: 0 8px;
-        }
-
-        .choices {
-            position: relative;
-            padding: 6px 8px;
-            vertical-align: middle;
-        }
-
-        .el-radio__input.is-checked+.el-radio__label {
-            color: #000;
-        }
-
-        .el-radio__input.is-checked+.el-radio__label {
-            color: #000;
-        }
-
-        .el-radio__label {
-            color: #000;
-        }
-
-        .el-radio {
-            white-space: pre-wrap;
-            line-height: 32px;
-            margin-right: 10px;
-
-        }
-
-        .el-radio__input.is-checked .el-radio__inner {
-            border-color: #000;
-            background: #fff;
-        }
-
-        .el-radio__inner {
-            border-color: #aaa;
-            background: #fff;
-        }
-
-        .el-radio__inner::after {
-            width: 6px;
-            height: 6px;
-            background-color: #000;
-            border-color: #000;
-        }
-
-        .radio-group {
-            padding-right: 50px;
-        }
-
-        .right {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-
-        }
-
-        .input {
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            margin-right: 1px;
-            text-align: center;
-        }
-
-        .input {
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            margin-right: 1px;
-            text-align: center;
-        }
-
-        .input-text {
-            font-size: 14px;
-            padding: 2px 5px;
-            border: none;
-            border-bottom: 1px solid #333;
-        }
-
-        .no-bt {
-            border-top: none;
-        }
-
-        .line22 {
-            line-height: 32px;
-        }
-
-        .print-sign {
-            text-align: center;
-            margin-top: 64px;
-        }
-    </style>
-      `
-      const body = document.getElementById('pdfDom').innerHTML
-      const html = `
-      <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>打印</title>
-    ${style}
-</head>
-
-<body>
-  ${body}
-</body>
-
-</html>
-      `
-      console.log(html)
-      console.log(document.getElementById('id'), 'ddddddddddd')
-    },
-    // 暂存
-    save () {
-      // 生成存储json  aInfoJson
-      this.aInfoJson = Object.assign({}, this.evaluateData)
-      this.aInfoJson.B_1_11 = this.B_1_11
-      this.aInfoJson.B_1 = this.B_1
-      this.aInfoJson.B_2_4 = this.B_2_4
-      this.aInfoJson.B_2 = this.B_2
-      this.aInfoJson.B_3 = this.B_3
-      this.aInfoJson.B_4_6 = this.B_4_6
-      this.aInfoJson.B_4 = this.B_4
-
-      // 生成存储json cInfoJson
-      this.cInfoJson.C_1_1 = this.B_1
-      this.cInfoJson.C_1_2 = this.B_2
-      this.cInfoJson.C_1_3 = this.B_3
-      this.cInfoJson.C_1_4 = this.B_4
-      this.cInfoJson.C_2 = this.C_2
-      this.cInfoJson.C_3 = this.C_3
-      this.cInfoJson.C_4 = this.C_4
-      const data = {
-        aInfoJson: this.aInfoJson,
-        cInfoJson: this.cInfoJson,
+    // 新建评估 仅调用一次 获取到评估id之后调修改接口
+    addEvaluate () {
+      addEvaluate({
         registerId: this.registerId
-      }
-      addEvaluate(data).then(res => {
-        console.log(res)
+      }).then(res => {
+        // 给评估id赋值
+        this.assessId = res.data
+      })
+    },
+    // 修改暂存
+    save () {
+      const _this = this
+      return _debounce(function () {
+        // 生成存储json  aInfoJson
+        _this.aInfoJson = Object.assign({}, _this.evaluateData)
+        console.log(_this.evaluateData, 'eaea')
+        console.log(_this.aInfoJson, '44aaaaaaaaaa')
+        _this.aInfoJson.B_1_11 = _this.B_1_11
+        _this.aInfoJson.B_1 = _this.B_1
+        _this.aInfoJson.B_2_4 = _this.B_2_4
+        _this.aInfoJson.B_2 = _this.B_2
+        _this.aInfoJson.B_3 = _this.B_3
+        _this.aInfoJson.B_4_6 = _this.B_4_6
+        _this.aInfoJson.B_4 = _this.B_4
+
+        // 生成存储json cInfoJson
+        _this.cInfoJson.C_1_1 = _this.B_1
+        _this.cInfoJson.C_1_2 = _this.B_2
+        _this.cInfoJson.C_1_3 = _this.B_3
+        _this.cInfoJson.C_1_4 = _this.B_4
+        _this.cInfoJson.C_2 = _this.C_2
+        _this.cInfoJson.C_3 = _this.C_3
+        _this.cInfoJson.C_4 = _this.C_4
+        const data = {
+          assessId: _this.assessId,
+          aInfoJson: JSON.stringify(_this.aInfoJson),
+          cInfoJson: JSON.stringify(_this.cInfoJson)
+        }
+
+        updateEvaluate(data).then(res => {
+          _this.msgSuccess('已为您保存')
+        })
+      }, 0)
+    },
+    // 获取评估信息 并且监听evaluateData变化
+    getEvaluate () {
+      console.log('009')
+      getEvaluate(this.assessId).then(res => {
+        if (res.data.aInfoJson) {
+          this.evaluateData = JSON.parse(res.data.aInfoJson)
+          console.log(res.data.aInfoJson, '明白22222')
+          console.log(this.evaluateData, '明白')
+        }
+        if (res.data.cInfoJson) {
+          this.cInfoJson = JSON.parse(res.data.cInfoJson)
+        }
+        this.watchDataChange()
       })
     }
   }
