@@ -114,7 +114,7 @@
                           :disabled="true"
                         />
                         <div class="text">日</div>
-                          <img
+                        <img
                           src="@/assets/date.svg"
                           class="pl-10"
                           alt="请选择日期"
@@ -285,16 +285,16 @@
                           <el-radio :label="1">1汉族</el-radio>
                           <el-radio :label="2">
                             <span>2少数民族</span>
-                            <radioInput
+                            <!-- <radioInput
                               :radioValue="evaluateData.A_2_6.value"
                               :type="2"
-                              v-model="evaluateData.A_2_6.text"
-                            ></radioInput>
-                            <!-- <input
+                              v-model="evaluateData.A_2_6.t"
+                            ></radioInput> -->
+                            <input
                               type="text"
                               class="input-text"
-                              v-model="A1.nation.text"
-                            /> -->
+                              v-model="evaluateData.A_2_6.text"
+                            />
                           </el-radio>
                         </el-radio-group>
                         <div class="right">
@@ -349,11 +349,16 @@
                           <el-radio :label="0">0无</el-radio>
                           <el-radio :label="1">
                             <span>1有</span>
-                            <radioInput
+                            <!-- <radioInput
                               :radioValue="evaluateData.A_2_8.value"
                               :type="1"
                               v-model="evaluateData.A_2_8.text"
-                            ></radioInput>
+                            ></radioInput> -->
+                            <input
+                              type="text"
+                              class="input-text"
+                              v-model="evaluateData.A_2_8.text"
+                            />
                           </el-radio>
                         </el-radio-group>
                         <div class="right">
@@ -449,11 +454,16 @@
                           <el-checkbox :label="7">7全自费</el-checkbox>
                           <el-checkbox :label="8">
                             <span>8其他</span>
-                            <radioInput
+                            <!-- <radioInput
                               :radioValue="evaluateData.A_2_11.value"
                               :type="2"
                               v-model="evaluateData.A_2_11.text"
-                            ></radioInput>
+                            ></radioInput> -->
+                            <input
+                              type="text"
+                              class="input-text"
+                              v-model="evaluateData.A_2_11.text"
+                            />
                           </el-checkbox>
                         </el-checkbox-group>
                         <div class="right">
@@ -494,11 +504,16 @@
                           <el-checkbox :label="3">3亲友资助</el-checkbox>
                           <el-checkbox :label="4">
                             <span>4其他补贴</span>
-                            <radioInput
+                            <!-- <radioInput
                               :radioValue="evaluateData.A_2_12.value"
                               :type="2"
                               v-model="evaluateData.A_2_12.text"
-                            ></radioInput>
+                            ></radioInput> -->
+                            <input
+                              type="text"
+                              class="input-text"
+                              v-model="evaluateData.A_2_12.text"
+                            />
                           </el-checkbox>
                         </el-checkbox-group>
                         <div class="right">
@@ -763,11 +778,16 @@
                           <el-radio :label="4">4雇佣照顾者</el-radio>
                           <el-radio :label="5">
                             <span>5其他</span>
-                            <radioInput
+                            <!-- <radioInput
                               :radioValue="evaluateData.A_3_2.value"
                               :type="2"
                               v-model="evaluateData.A_3_2.text"
-                            ></radioInput>
+                            ></radioInput> -->
+                            <input
+                              type="text"
+                              class="input-text"
+                              v-model="evaluateData.A_3_2.text"
+                            />
                           </el-radio>
                         </el-radio-group>
                         <div class="right">
@@ -2126,29 +2146,41 @@
                       <span class="table-num bold">C.3 等级变更 条款</span>
                     </td>
                     <td>
-                      <div class="line22" :class="{'text-active': C_3.indexOf(1) !== -1}">
+                      <div
+                        class="line22"
+                        :class="{ 'text-active': C_3.indexOf(1) !== -1 }"
+                      >
                         1
-                          有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
+                        有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
                       </div>
-                      <div class="line22" :class="{'text-active': C_3.indexOf(2) !== -1}">
+                      <div
+                        class="line22"
+                        :class="{ 'text-active': C_3.indexOf(2) !== -1 }"
+                      >
                         2 近 30 天内发生过 2
-                          次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一
-                          个等级；
+                        次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一
+                        个等级；
                       </div>
-                      <div class="line22" :class="{'text-active': C_3.indexOf(3) !== -1}">
+                      <div
+                        class="line22"
+                        :class="{ 'text-active': C_3.indexOf(3) !== -1 }"
+                      >
                         3 处于昏迷状态者，直接评定为重度失能；
                       </div>
-                      <div class="line22" :class="{'text-active': C_3.indexOf(4) !== -1}">
+                      <div
+                        class="line22"
+                        :class="{ 'text-active': C_3.indexOf(4) !== -1 }"
+                      >
                         4 若初步等级确定为“3 重度失能”，则不考虑上述 1-3
-                          中各情况对最终等级的影响， 等级不再提高
+                        中各情况对最终等级的影响， 等级不再提高
                       </div>
                       <div style="text-align: right" class="pb-10">
                         <input
-                          v-for="(i,index) in C_3"
+                          v-for="(i, index) in C_3"
                           :key="index"
                           type="text"
                           class="input"
-                         :value="i"
+                          :value="i"
                           readonly
                         />
                       </div>
@@ -2165,10 +2197,18 @@
                     </td>
                     <td>
                       <div class="choices">
-                        <div class="choice" :class="C_4 === 0? 'active':''">0能力完好</div>
-                        <div class="choice" :class="C_4 === 1? 'active':''">1轻度失能</div>
-                        <div class="choice" :class="C_4 === 2? 'active':''">2中度失能</div>
-                        <div class="choice" :class="C_4 === 3? 'active':''">3重度失能</div>
+                        <div class="choice" :class="C_4 === 0 ? 'active' : ''">
+                          0能力完好
+                        </div>
+                        <div class="choice" :class="C_4 === 1 ? 'active' : ''">
+                          1轻度失能
+                        </div>
+                        <div class="choice" :class="C_4 === 2 ? 'active' : ''">
+                          2中度失能
+                        </div>
+                        <div class="choice" :class="C_4 === 3 ? 'active' : ''">
+                          3重度失能
+                        </div>
                         <!-- <el-radio-group
                           v-model="evaluateData.C_4"
                           class="radio-group"
@@ -2321,31 +2361,46 @@
         </div>
       </div>
       <div class="save">
-        <el-button type="primary" @click="save">暂存</el-button>
+        <el-button type="primary" @click="confirmSave">暂存</el-button>
       </div>
     </div>
-    <div></div>
+    <uploadSign :showPanel="showSignPanel"
+     @closeModal="showSignPanel =false"
+     @getSignUrl="getSignUrl"></uploadSign>
   </div>
 </template>
 <script>
 import './index.scss'
 import { getYearOrMonthOrDay } from '@/utils/dateUtil.js'
 import continueInput from '@/components/common/continue-input.vue'
-import radioInput from '@/components/common/radio-input.vue'
+// import radioInput from '@/components/common/radio-input.vue'
 import { isEmpty, isSfz, _debounce } from '@/utils/utils'
 import exportEvaluate from '@/components/export-evaluate.vue'
-import { exportTable, getCode, addEvaluate, updateEvaluate, getEvaluate } from '@/api/evaluate'
+import uploadSign from '@/components/upload-sign.vue'
+import {
+  exportTable,
+  getCode,
+  addEvaluate,
+  updateEvaluate,
+  getEvaluate
+} from '@/api/evaluate'
 import upload from '@/components/common/upload.vue'
 import { getToken } from '@/utils/auth'
+import { getHtml } from './export-style'
 export default {
   components: {
     continueInput,
-    radioInput,
+    // radioInput,
     exportEvaluate,
-    upload
+    // 上传图片
+    upload,
+    // 上传签名页照片
+    uploadSign
   },
   data () {
     return {
+      // 显示打印签名页弹框
+      showSignPanel: false,
       // 评估id
       assessId: null,
       // 登记id 新建保存的时候需要传给后台
@@ -2463,6 +2518,7 @@ export default {
         C_2: null, // 老年人能力初步等级
         C_3: null, // 等级变更条款
         C_4: null, // 老年人能力最终等级
+        signUrl: '', // 签名页图片地址
         data: {
           sign1: null, // 评估员签名1
           sign2: null, // 评估员签名2
@@ -2499,7 +2555,6 @@ export default {
       set: function () {
         return getYearOrMonthOrDay(this.evaluateData.A_1_2, 'm').toString()
       }
-
     },
     // 根据评估日期解析出的日
     A1EvaluateDay: {
@@ -2539,7 +2594,18 @@ export default {
     },
     // 日常生活 活动总分 B_1_11
     B_1_11: function () {
-      if (this.evaluateData.B_1_1 === null && this.evaluateData.B_1_2 === null && this.evaluateData.B_1_3 === null && this.evaluateData.B_1_4 === null && this.evaluateData.B_1_5 === null && this.evaluateData.B_1_6 === null && this.evaluateData.B_1_7 === null && this.evaluateData.B_1_8 === null && this.evaluateData.B_1_9 === null && this.evaluateData.B_1_10 === null) {
+      if (
+        this.evaluateData.B_1_1 === null &&
+        this.evaluateData.B_1_2 === null &&
+        this.evaluateData.B_1_3 === null &&
+        this.evaluateData.B_1_4 === null &&
+        this.evaluateData.B_1_5 === null &&
+        this.evaluateData.B_1_6 === null &&
+        this.evaluateData.B_1_7 === null &&
+        this.evaluateData.B_1_8 === null &&
+        this.evaluateData.B_1_9 === null &&
+        this.evaluateData.B_1_10 === null
+      ) {
         return null
       }
       return (
@@ -2576,7 +2642,11 @@ export default {
     },
     // B_2_4 精神状态总分
     B_2_4: function () {
-      if (this.evaluateData.B_2_1.score === null && this.evaluateData.B_2_2 === null && this.evaluateData.B_2_3 === null) {
+      if (
+        this.evaluateData.B_2_1.score === null &&
+        this.evaluateData.B_2_2 === null &&
+        this.evaluateData.B_2_3 === null
+      ) {
         return null
       }
       return (
@@ -2655,7 +2725,13 @@ export default {
     },
     // B_4_6 社会参与总分
     B_4_6: function () {
-      if (this.evaluateData.B_4_1 === null && this.evaluateData.B_4_2 === null && this.evaluateData.B_4_3 === null && this.evaluateData.B_4_4 === null && this.evaluateData.B_4_5 === null) {
+      if (
+        this.evaluateData.B_4_1 === null &&
+        this.evaluateData.B_4_2 === null &&
+        this.evaluateData.B_4_3 === null &&
+        this.evaluateData.B_4_4 === null &&
+        this.evaluateData.B_4_5 === null
+      ) {
         return null
       }
       return (
@@ -2776,10 +2852,19 @@ export default {
 
       // 1 有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
       // 2 近 30 天内发生过 2 次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一个等级；
-      if (this.evaluateData.B_2_1.score === 2 || this.evaluateData.A_2_13_1 || this.evaluateData.A_2_13_2) {
+      if (
+        this.evaluateData.B_2_1.score === 2 ||
+        this.evaluateData.A_2_13_1 ||
+        this.evaluateData.A_2_13_2
+      ) {
         v.push(1)
       }
-      if (this.evaluateData.A_2_14_1 >= 2 || this.evaluateData.A_2_14_3 >= 2 || this.evaluateData.A_2_14_4 >= 2 || this.evaluateData.A_2_14_2 >= 2) {
+      if (
+        this.evaluateData.A_2_14_1 >= 2 ||
+        this.evaluateData.A_2_14_3 >= 2 ||
+        this.evaluateData.A_2_14_4 >= 2 ||
+        this.evaluateData.A_2_14_2 >= 2
+      ) {
         v.push(2)
       }
       return v
@@ -2797,35 +2882,44 @@ export default {
       }
       // 1 有认知障碍/痴呆、精神疾病者，在原有能力级别上提高一个等级；
       // 2 近 30 天内发生过 2 次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一个等级；
-      if (this.evaluateData.B_2_1.score === 2 || this.evaluateData.A_2_13_1 || this.evaluateData.A_2_13_2) {
+      if (
+        this.evaluateData.B_2_1.score === 2 ||
+        this.evaluateData.A_2_13_1 ||
+        this.evaluateData.A_2_13_2
+      ) {
         v += 1
       }
-      if (this.evaluateData.A_2_14_1 >= 2 || this.evaluateData.A_2_14_3 >= 2 || this.evaluateData.A_2_14_4 >= 2 || this.evaluateData.A_2_14_2 >= 2) {
+      if (
+        this.evaluateData.A_2_14_1 >= 2 ||
+        this.evaluateData.A_2_14_3 >= 2 ||
+        this.evaluateData.A_2_14_4 >= 2 ||
+        this.evaluateData.A_2_14_2 >= 2
+      ) {
         v += 1
       }
       if (v >= 3) return 3
       return v
     }
   },
-  watch: {
-    // 监听assessId当首次新建评估后获取到了assessId,刷新页面监听到了assessId变化 调用获取详情 不会丢失数据
-    assessId: function (id) {
-      console.log(8800000000)
-      if (!id) return
-      this.getEvaluate(this.assessId)
-    }
-    // B_4: function (val) {
-    //   this.evaluateData.B_4 = val
-    // }
-    // evaluateData: {
-    //   deep: true,
-    //   handler: function () {
-    //     // this.save()
-    //     console.log(9999999999)
-    //   }
+  // watch: {
+  // 监听assessId当首次新建评估后获取到了assessId,刷新页面监听到了assessId变化 调用获取详情 不会丢失数据
+  // assessId: function (id) {
+  //   console.log(8800000000)
+  //   if (!id) return
+  //   this.getEvaluate(this.assessId)
+  // }
+  // B_4: function (val) {
+  //   this.evaluateData.B_4 = val
+  // }
+  // evaluateData: {
+  //   deep: true,
+  //   handler: function () {
+  //     // this.save()
+  //     console.log(9999999999)
+  //   }
 
-    // }
-  },
+  // }
+  // },
   created () {
     // 获取assessId
     this.assessId = this.$route.params.id
@@ -2834,7 +2928,7 @@ export default {
       this.registerId = this.$route.query.registerId
       const createBy = this.$route.query.createBy
       // 生成评估编号
-      getCode({ createBy: createBy }).then(res => {
+      getCode({ createBy: createBy }).then((res) => {
         this.evaluateData.A_1_1 = res.msg
       })
       // 获取assessId 并监听evaluateData变化 没当变化调用修改接口
@@ -2846,24 +2940,53 @@ export default {
   },
   mounted () {
     // 刷新页面跳转到对应的hash
+
+    // const _this = this
+    // window.onbeforeunload = function (e) {
+    //   console.log(_this.$route.name, '_this.$route.name')
+    //   if (_this.$route.name === 'evaluate') {
+    //     e = e || window.event
+    //     // 兼容IE8和Firefox 4之前的版本
+    //     if (e) {
+    //       e.returnValue = '关闭提示1111'
+    //     }
+    //     // Chrome, Safari, Firefox 4+, Opera 12+ , IE 9+
+    //     return '关闭提示222'
+    //   } else {
+    //     window.onbeforeunload = null
+    //   }
+    // }
     if (!location.hash) return
     this.toHash(location.hash)
   },
   methods: {
+    // 获取签名页照片
+    getSignUrl (url) {
+      // 拿到签名页照片地址以后
+      this.cInfoJson.signUrl = url
+      // 保存到
+    },
     // 监听页面数据变化
     watchDataChange () {
       const save = this.save()
-      this.$watch('evaluateData', function () {
-        console.log(9090)
-        save()
-      }, {
-        deep: true
-      })
-      this.$watch('cInfoJson.data', function (val) {
-        save()
-      }, {
-        deep: true
-      })
+      this.$watch(
+        'evaluateData',
+        function () {
+          save()
+        },
+        {
+          deep: true
+        }
+      )
+      this.$watch(
+        'cInfoJson.data',
+        function (val) {
+          save()
+        },
+        {
+          deep: true
+        }
+      )
     },
     // 获取2.2.1测试 图片地址
     getTestImgUrl (url) {
@@ -2906,212 +3029,53 @@ export default {
       const jump = document.querySelectorAll('.table-container')
       jump[index].scrollIntoView({ block: 'start', behavior: 'smooth' })
     },
-    // 下载 打印签名页
+    // 确认提交并且打印签名页 确认后将不可更改
+    // confirmPrintSign () {
+    //   this.$confirm(
+    //     '确认以上无误打印签名页, 确认后将不可更改,是否继续?',
+    //     '提示',
+    //     {
+    //       confirmButtonText: '确定',
+    //       cancelButtonText: '取消',
+    //       type: 'warning'
+    //     }
+    //   )
+    //     .then(() => {
+    //       this.printSign()
+    //     })
+    //     .catch(() => {})
+    // },
+    // 下载打印签名页
     printSign () {
+      const loading = this.$loading({
+        lock: true,
+        text: '下载中，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      try {
+        const sign = document
+          .getElementById('evaluate')
+          .querySelector('#sign-export').innerHTML
+        const html = getHtml(sign)
+        exportTable(html).then((res) => {
+          loading.close()
+          // 下载完毕 显示上传图片弹框
+          this.showSignPanel = true
+          window.open(
+            `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
+          )
+        })
+      } catch (e) {
+        this.msgError(e)
+        loading.close()
+      }
+    },
+    // 下载 打印整个页面
+    printAllPage () {
       // this.checkData()
       const evaluate = document.getElementById('evaluate').innerHTML
-      const html = `
-        <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-        <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        html,
-        body {
-            font-size: 14px;
-        }
-
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-            vertical-align: middle;
-        }
-
-        tr,
-        td {
-            min-height: 32px;
-            border: 1px solid #E7E7E7;
-        }
-
-        .h1-title {
-            line-height: 28px;
-            font-weight: bold;
-            color: #000000;
-            font-size: 20px;
-            text-align: center;
-            padding-top: 32px;
-        }
-
-        .title-desc {
-            text-align: center;
-            padding: 10px 0;
-            font-size: 16px;
-            color: #000000;
-            line-height: 17px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 16px;
-            color: #000000;
-            line-height: 17px;
-            padding-bottom: 32px;
-        }
-
-        .table-wrap {
-            padding-bottom: 24px;
-        }
-
-        .table-title {
-            text-align: left;
-            padding-left: 8px;
-            padding-bottom: 8px;
-            font-weight: bold;
-            color: #000000;
-            line-height: 20px;
-            font-size: 16px;
-        }
-
-        .evaluate-table {
-            border: 1px solid #E7E7E7;
-            width: 100%;
-
-        }
-
-        .table-num {
-            padding-right: 8px;
-        }
-
-        td {
-            padding: 8px;
-            font-size: 14px;
-            vertical-align: middle;
-        }
-
-        .question {
-            width: 20%;
-            padding: 8px;
-            vertical-align: middle;
-            line-height: 22px;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .question1 {
-            width: 10%;
-            padding: 8px;
-            line-height: 22px;
-        }
-
-
-        .text {
-            padding: 0 8px;
-        }
-
-        .choices {
-            position: relative;
-            padding: 6px 8px;
-            vertical-align: middle;
-        }
-
-
-        .right {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-
-        }
-
-
-        .no-bt {
-            border-top: none;
-        }
-
-        .line22 {
-            line-height: 32px;
-        }
-
-        .print-sign {
-            text-align: center;
-            margin-top: 64px;
-        }
-
-        .text-box-group {
-            font-size: 0;
-        }
-
-        .text-box {
-            display: inline-block;
-            border: 1px solid #000;
-            width: 22px;
-            margin: 0 2px;
-            font-size: 14px;
-            line-height: 22px;
-            text-align: center;
-            height: 22px;
-        }
-
-        .text {
-            display: inline-block;
-            font-size: 14px;
-        }
-
-        .choice-text {
-            display: inline-block;
-            padding-right: 10px;
-            line-height: 22px;
-        }
-
-        .text-undeline {
-            display: inline-block;
-            padding: 3px 5px;
-            border-bottom: 1px solid #000;
-        }
-
-        .right-group {
-            display: inline-block;
-        }
-        .sign-input{
-            display: inline-block;
-            width: 40%;
-            text-align: left;
-            margin-bottom: 5px;
-        }
-        .bold{
-            font-weight: bold;
-        }
-        .pt-20{
-            padding-top: 10px;
-        }
-        .pb-20{
-            padding-bottom: 10px;
-        }
-        .pl-10{
-            padding-left: 10px;
-        }
-        .brakpage{
-          page-break-after: always;
-        }
-    </style>
-</head>
-
-<body>
-${evaluate}
-</body>
-
-</html>
-      `
+      const html = getHtml(evaluate)
       exportTable(html).then((res) => {
         window.open(
           `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
@@ -3410,26 +3374,31 @@ ${evaluate}
     addEvaluate () {
       addEvaluate({
         registerId: this.registerId
-      }).then(res => {
+      }).then((res) => {
         // 给评估id赋值
         this.assessId = res.data
+        this.getEvaluate(this.assessId)
       })
+    },
+    // 点击暂存按钮
+    confirmSave () {
+      this.save()()
     },
     // 修改暂存
     save () {
       const _this = this
       return _debounce(function () {
+        console.log(333)
+        // return _debounce(function () {
         // 生成存储json  aInfoJson
+        _this.evaluateData.B_1_11 = _this.B_1_11
+        _this.evaluateData.B_1 = _this.B_1
+        _this.evaluateData.B_2_4 = _this.B_2_4
+        _this.evaluateData.B_2 = _this.B_2
+        _this.evaluateData.B_3 = _this.B_3
+        _this.evaluateData.B_4_6 = _this.B_4_6
+        _this.evaluateData.B_4 = _this.B_4
         _this.aInfoJson = Object.assign({}, _this.evaluateData)
-        console.log(_this.evaluateData, 'eaea')
-        console.log(_this.aInfoJson, '44aaaaaaaaaa')
-        _this.aInfoJson.B_1_11 = _this.B_1_11
-        _this.aInfoJson.B_1 = _this.B_1
-        _this.aInfoJson.B_2_4 = _this.B_2_4
-        _this.aInfoJson.B_2 = _this.B_2
-        _this.aInfoJson.B_3 = _this.B_3
-        _this.aInfoJson.B_4_6 = _this.B_4_6
-        _this.aInfoJson.B_4 = _this.B_4
 
         // 生成存储json cInfoJson
         _this.cInfoJson.C_1_1 = _this.B_1
@@ -3445,22 +3414,21 @@ ${evaluate}
           cInfoJson: JSON.stringify(_this.cInfoJson)
         }
 
-        updateEvaluate(data).then(res => {
+        updateEvaluate(data).then((res) => {
           _this.msgSuccess('已为您保存')
         })
-      }, 0)
+      }, 1000)
     },
     // 获取评估信息 并且监听evaluateData变化
     getEvaluate () {
       console.log('009')
-      getEvaluate(this.assessId).then(res => {
-        if (res.data.aInfoJson) {
-          this.evaluateData = JSON.parse(res.data.aInfoJson)
-          console.log(res.data.aInfoJson, '明白22222')
-          console.log(this.evaluateData, '明白')
+      getEvaluate(this.assessId).then((res) => {
+        const data = res.data
+        if (data.aInfoJson) {
+          this.evaluateData = JSON.parse(data.aInfoJson)
         }
-        if (res.data.cInfoJson) {
-          this.cInfoJson = JSON.parse(res.data.cInfoJson)
+        if (data.cInfoJson) {
+          this.cInfoJson = JSON.parse(data.cInfoJson)
         }
         this.watchDataChange()
       })

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="tabs">
       <!-- A1 评估基本信息表 -->
-      <div class="evaluate-tab">
+      <div id="tab-A1" class="evaluate-tab hash-tab">
         <div class="h1-title">附 录 A</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估基本信息表</div>
@@ -10,7 +10,7 @@
           <div class="table-title">
             <span class="table-num">A.1 </span>评估基本信息表
           </div>
-          <table class="evaluate-table">
+          <table class="evaluate-table ">
             <tr>
               <td class="question">
                 <span class="table-num">A.1.1</span>评估编号
@@ -63,7 +63,7 @@
         </div>
       </div>
       <!-- A2 被评估者的基本信息表-->
-      <div class="evaluate-tab">
+      <div id="tab-A2" class="evaluate-tab hash-tab">
         <div class="table-wrap">
           <div class="table-title">
             <span class="table-num">A.2 </span>被评估者的基本信息表
@@ -422,7 +422,7 @@
         </div>
       </div>
       <!-- A3 信息提供者及联系人信息表 -->
-      <div class="evaluate-tab">
+      <div id="tab-A3" class="evaluate-tab hash-tab">
         <div class="table-wrap">
           <div class="table-title">
             <span class="table-num">A.3 </span>信息提供者及联系人信息表
@@ -465,7 +465,7 @@
           </table>
         </div>
       </div>
-      <div class="evaluate-tab">
+      <div id="tab-B1" class="evaluate-tab hash-tab">
         <div class="h1-title">附 录 B</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估表</div>
@@ -783,7 +783,7 @@
         </div>
       </div>
       <!-- B2精神状态评估表 -->
-      <div class="evaluate-tab">
+      <div id="tab-B2" class="evaluate-tab hash-tab">
         <div class="table-wrap">
           <div class="table-title">
             <span class="table-num">B.2 </span>精神状态评估表
@@ -931,7 +931,7 @@
         </div>
       </div>
       <!-- B.3 感知觉与沟通评估表 -->
-      <div class="evaluate-tab">
+      <div id="tab-B3" class="evaluate-tab hash-tab">
         <div class="table-wrap">
           <div class="table-title">
             <span class="table-num">B.3 </span>感知觉与沟通评估表
@@ -1121,7 +1121,7 @@
         </div>
       </div>
       <!-- B.4 社会参与评估表 -->
-      <div class="evaluate-tab brakpage">
+      <div id="tab-B4" class="evaluate-tab brakpage hash-tab">
         <div class="table-wrap">
           <div class="table-title">
             <span class="table-num">B.4 </span>社会参与评估表
@@ -1387,8 +1387,7 @@
         </div>
       </div>
       <!-- C 老年人能力评估报告 -->
-      <div>
-        <div></div>
+      <div id="sign-export" class="hash-tab">
         <div class="h1-title">附 录 C</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估报告</div>

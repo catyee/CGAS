@@ -29,6 +29,12 @@ export const evaluator = [
         name: 'evaluate',
         hidden: true,
         component: () => import(/* webpackChunkName: "evaluate" */ '../views/evaluate')
+      },
+      {
+        path: 'evaluate-show/:id',
+        name: 'evaluate-show',
+        hidden: true,
+        component: () => import(/* webpackChunkName: "evaluate-show" */ '../views/evaluate-show')
       }
     ]
   },

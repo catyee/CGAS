@@ -2,7 +2,7 @@
         <!-- 修改关系弹框 -->
     <div class="relation-panel">
       <el-dialog
-        :visible.sync="showRelationPanel"
+        :visible.sync="showPanel"
         width="50%"
         :close-on-click-modal="false"
       >
@@ -66,9 +66,8 @@ import { getTagList, addRelation } from '@/api/relation'
 export default {
   props: {
     // 控制弹框的出现
-    showRelationPanel: Boolean,
-    editTagId: Number,
-    panelTitle: String
+    showPanel: Boolean,
+    editTagId: Number
   },
   data () {
     return {
