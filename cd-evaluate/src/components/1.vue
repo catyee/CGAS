@@ -2,7 +2,7 @@
   <div class="container">
     <div class="tabs">
       <!-- A1 评估基本信息表 -->
-      <!-- <div id="tab-A1" class="evaluate-tab hash-tab">
+      <div id="tab-A1" class="evaluate-tab hash-tab">
         <div class="h1-title">附 录 A</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估基本信息表</div>
@@ -94,7 +94,7 @@
             </tr>
           </table>
         </div>
-      </div> -->
+      </div>
       <!-- A2 被评估者的基本信息表-->
       <div id="tab-A2" class="evaluate-tab hash-tab">
         <div class="table-wrap">

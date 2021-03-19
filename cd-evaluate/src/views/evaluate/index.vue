@@ -60,6 +60,7 @@
     <div style="display: none">
       <exportEvaluate
         :evaluateData="evaluateData"
+        :cInfoJson="cInfoJson"
         id="evaluate"
       ></exportEvaluate>
     </div>
@@ -2410,6 +2411,7 @@ export default {
       currentHash: 'A1',
       // 表格评估数据
       evaluateData: {
+        A1EvaluateYear: null,
         // A1 评估基本信息表
         A_1_1: '', // 评估编号
         A_1_2: new Date(), // 评估基准日期 默认今天
@@ -2965,6 +2967,24 @@ export default {
       // 拿到签名页照片地址以后
       this.cInfoJson.signUrl = url
       // 保存到
+      this.$confirm('提交后将无法修改, 是否确认提交?', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        closeOnClickModal: false
+      }).then(() => {
+        this.save()()
+        this.$alert('提交成功!请立即保存评估到本地，并打印', {
+          confirmButtonText: '下载到本地并打印',
+          center: true,
+          closeOnClickModal: false,
+          callback: action => {
+            this.printAllPage()
+            this.$route.push({ path: '/evaluate-show/' + this.assessId })
+          }
+        })
+      }).catch(() => {
+      })
     },
     // 监听页面数据变化
     watchDataChange () {
@@ -3065,6 +3085,9 @@ export default {
           window.open(
             `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
           )
+        }).catch((e) => {
+          this.msgError(e)
+          loading.close()
         })
       } catch (e) {
         this.msgError(e)
@@ -3073,14 +3096,25 @@ export default {
     },
     // 下载 打印整个页面
     printAllPage () {
-      // this.checkData()
-      const evaluate = document.getElementById('evaluate').innerHTML
-      const html = getHtml(evaluate)
-      exportTable(html).then((res) => {
-        window.open(
-          `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
-        )
+      const loading = this.$loading({
+        lock: true,
+        text: '下载中，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
       })
+      try {
+        const evaluate = document.getElementById('evaluate').innerHTML
+        const html = getHtml(evaluate)
+        exportTable(html).then((res) => {
+          window.open(
+          `${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`
+          )
+          loading.close()
+        })
+      } catch (e) {
+        this.msgError(e)
+        loading.close()
+      }
     },
     // 检测填写内容
     checkData () {
@@ -3377,7 +3411,7 @@ export default {
       }).then((res) => {
         // 给评估id赋值
         this.assessId = res.data
-        this.getEvaluate(this.assessId)
+        this.getEvaluate()
       })
     },
     // 点击暂存按钮
@@ -3388,9 +3422,14 @@ export default {
     save () {
       const _this = this
       return _debounce(function () {
-        console.log(333)
         // return _debounce(function () {
         // 生成存储json  aInfoJson
+        _this.evaluateData.A1EvaluateYear = _this.A1EvaluateYear
+        _this.evaluateData.A1EvaluateMonth = _this.A1EvaluateMonth
+        _this.evaluateData.A1EvaluateDay = _this.A1EvaluateDay
+        _this.evaluateData.A1bornDateYear = _this.A1bornDateYear
+        _this.evaluateData.A1bornDateMonth = _this.A1bornDateMonth
+        _this.evaluateData.A1bornDateDay = _this.A1bornDateDay
         _this.evaluateData.B_1_11 = _this.B_1_11
         _this.evaluateData.B_1 = _this.B_1
         _this.evaluateData.B_2_4 = _this.B_2_4
@@ -3421,7 +3460,6 @@ export default {
     },
     // 获取评估信息 并且监听evaluateData变化
     getEvaluate () {
-      console.log('009')
       getEvaluate(this.assessId).then((res) => {
         const data = res.data
         if (data.aInfoJson) {

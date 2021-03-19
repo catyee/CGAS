@@ -122,11 +122,6 @@ export function getHtml (element) {
 
   }
 
-
-  .no-bt {
-      border-top: none;
-  }
-
   .line22 {
       line-height: 32px;
   }
@@ -155,7 +150,13 @@ export function getHtml (element) {
       display: inline-block;
       font-size: 14px;
   }
-
+  .active{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .img-show{
+      display:none
+  }
   .choice-text {
       display: inline-block;
       padding-right: 10px;
