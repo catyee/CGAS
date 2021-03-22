@@ -2903,25 +2903,6 @@ export default {
       return v
     }
   },
-  // watch: {
-  // 监听assessId当首次新建评估后获取到了assessId,刷新页面监听到了assessId变化 调用获取详情 不会丢失数据
-  // assessId: function (id) {
-  //   console.log(8800000000)
-  //   if (!id) return
-  //   this.getEvaluate(this.assessId)
-  // }
-  // B_4: function (val) {
-  //   this.evaluateData.B_4 = val
-  // }
-  // evaluateData: {
-  //   deep: true,
-  //   handler: function () {
-  //     // this.save()
-  //     console.log(9999999999)
-  //   }
-
-  // }
-  // },
   created () {
     // 获取assessId
     this.assessId = this.$route.params.id
@@ -2973,22 +2954,22 @@ export default {
         type: 'warning',
         closeOnClickModal: false
       }).then(() => {
-        this.save()()
-        this.$alert('提交成功!请立即保存评估到本地，并打印', {
-          confirmButtonText: '下载到本地并打印',
-          center: true,
-          closeOnClickModal: false,
-          callback: action => {
-            this.printAllPage()
-            this.$route.push({ path: '/evaluate-show/' + this.assessId })
-          }
+        this.save(() => {
+          this.$alert('提交成功!请立即保存评估到本地，并打印', {
+            confirmButtonText: '下载到本地并打印',
+            center: true,
+            closeOnClickModal: false,
+            callback: action => {
+              this.printAllPage()
+              this.$router.push({ path: '/evaluate-show/' + this.assessId })
+            }
+          })
         })
-      }).catch(() => {
       })
     },
     // 监听页面数据变化
     watchDataChange () {
-      const save = this.save()
+      const save = this.autoSave()
       this.$watch(
         'evaluateData',
         function () {
@@ -3049,22 +3030,6 @@ export default {
       const jump = document.querySelectorAll('.table-container')
       jump[index].scrollIntoView({ block: 'start', behavior: 'smooth' })
     },
-    // 确认提交并且打印签名页 确认后将不可更改
-    // confirmPrintSign () {
-    //   this.$confirm(
-    //     '确认以上无误打印签名页, 确认后将不可更改,是否继续?',
-    //     '提示',
-    //     {
-    //       confirmButtonText: '确定',
-    //       cancelButtonText: '取消',
-    //       type: 'warning'
-    //     }
-    //   )
-    //     .then(() => {
-    //       this.printSign()
-    //     })
-    //     .catch(() => {})
-    // },
     // 下载打印签名页
     printSign () {
       const loading = this.$loading({
@@ -3416,48 +3381,56 @@ export default {
     },
     // 点击暂存按钮
     confirmSave () {
-      this.save()()
+      this.save()
     },
-    // 修改暂存
-    save () {
+    // 自动保存
+    autoSave () {
       const _this = this
       return _debounce(function () {
-        // return _debounce(function () {
-        // 生成存储json  aInfoJson
-        _this.evaluateData.A1EvaluateYear = _this.A1EvaluateYear
-        _this.evaluateData.A1EvaluateMonth = _this.A1EvaluateMonth
-        _this.evaluateData.A1EvaluateDay = _this.A1EvaluateDay
-        _this.evaluateData.A1bornDateYear = _this.A1bornDateYear
-        _this.evaluateData.A1bornDateMonth = _this.A1bornDateMonth
-        _this.evaluateData.A1bornDateDay = _this.A1bornDateDay
-        _this.evaluateData.B_1_11 = _this.B_1_11
-        _this.evaluateData.B_1 = _this.B_1
-        _this.evaluateData.B_2_4 = _this.B_2_4
-        _this.evaluateData.B_2 = _this.B_2
-        _this.evaluateData.B_3 = _this.B_3
-        _this.evaluateData.B_4_6 = _this.B_4_6
-        _this.evaluateData.B_4 = _this.B_4
-        _this.aInfoJson = Object.assign({}, _this.evaluateData)
-
-        // 生成存储json cInfoJson
-        _this.cInfoJson.C_1_1 = _this.B_1
-        _this.cInfoJson.C_1_2 = _this.B_2
-        _this.cInfoJson.C_1_3 = _this.B_3
-        _this.cInfoJson.C_1_4 = _this.B_4
-        _this.cInfoJson.C_2 = _this.C_2
-        _this.cInfoJson.C_3 = _this.C_3
-        _this.cInfoJson.C_4 = _this.C_4
-        const data = {
-          assessId: _this.assessId,
-          aInfoJson: JSON.stringify(_this.aInfoJson),
-          cInfoJson: JSON.stringify(_this.cInfoJson)
-        }
-
-        updateEvaluate(data).then((res) => {
-          _this.msgSuccess('已为您保存')
-        })
+        _this.save()
       }, 1000)
     },
+    // 点击保存按钮
+    save (callback) {
+      // 生成存储json  aInfoJson
+      this.evaluateData.A1EvaluateYear = this.A1EvaluateYear
+      this.evaluateData.A1EvaluateMonth = this.A1EvaluateMonth
+      this.evaluateData.A1EvaluateDay = this.A1EvaluateDay
+      this.evaluateData.A1bornDateYear = this.A1bornDateYear
+      this.evaluateData.A1bornDateMonth = this.A1bornDateMonth
+      this.evaluateData.A1bornDateDay = this.A1bornDateDay
+      this.evaluateData.B_1_11 = this.B_1_11
+      this.evaluateData.B_1 = this.B_1
+      this.evaluateData.B_2_4 = this.B_2_4
+      this.evaluateData.B_2 = this.B_2
+      this.evaluateData.B_3 = this.B_3
+      this.evaluateData.B_4_6 = this.B_4_6
+      this.evaluateData.B_4 = this.B_4
+      this.aInfoJson = Object.assign({}, this.evaluateData)
+
+      // 生成存储json cInfoJson
+      this.cInfoJson.C_1_1 = this.B_1
+      this.cInfoJson.C_1_2 = this.B_2
+      this.cInfoJson.C_1_3 = this.B_3
+      this.cInfoJson.C_1_4 = this.B_4
+      this.cInfoJson.C_2 = this.C_2
+      this.cInfoJson.C_3 = this.C_3
+      this.cInfoJson.C_4 = this.C_4
+      const data = {
+        assessId: this.assessId,
+        aInfoJson: JSON.stringify(this.aInfoJson),
+        cInfoJson: JSON.stringify(this.cInfoJson)
+      }
+      if (this.cInfoJson.signUrl) {
+        data.assessResult = this.C_4
+      }
+
+      updateEvaluate(data).then((res) => {
+        this.msgSuccess('已为您保存')
+        callback && callback()
+      })
+    },
+
     // 获取评估信息 并且监听evaluateData变化
     getEvaluate () {
       getEvaluate(this.assessId).then((res) => {

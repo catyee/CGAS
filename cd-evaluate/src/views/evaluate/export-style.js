@@ -81,14 +81,14 @@ export function getHtml (element) {
   }
 
   td {
-      padding: 8px;
+      padding: 2px 8px;
       font-size: 14px;
       vertical-align: middle;
   }
 
   .question {
       width: 20%;
-      padding: 8px;
+      padding:0px 8px;
       vertical-align: middle;
       line-height: 22px;
   }
@@ -123,7 +123,7 @@ export function getHtml (element) {
   }
 
   .line22 {
-      line-height: 32px;
+      line-height: 24px;
   }
 
   .print-sign {
@@ -152,7 +152,7 @@ export function getHtml (element) {
   }
   .active{
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
   }
   .img-show{
       display:none
@@ -192,6 +192,13 @@ export function getHtml (element) {
   }
   .brakpage{
     page-break-after: always;
+  }
+  .sign-img{
+      width:100%;
+  }
+  .img-export-sign{
+      width:100%;
+      display:inline-block;
   }
 </style>
 </head>

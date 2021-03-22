@@ -2,7 +2,7 @@
   <div class="container">
     <div class="tabs">
       <!-- A1 评估基本信息表 -->
-      <!-- <div id="tab-A1" class="evaluate-tab hash-tab">
+      <div id="tab-A1" class="evaluate-tab hash-tab">
         <div class="h1-title">附 录 A</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估基本信息表</div>
@@ -94,7 +94,7 @@
             </tr>
           </table>
         </div>
-      </div> -->
+      </div>
       <!-- A2 被评估者的基本信息表-->
       <div id="tab-A2" class="evaluate-tab hash-tab">
         <div class="table-wrap">
@@ -945,21 +945,21 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_1 === 10 }">
+                <div :class="{ active: evaluateData.B_1_1 === 10 }" class="line22">
                   10 分，可独立进食（在合理的时间内独立进食准备好的食物）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_1 === 5 }">
+                <div :class="{ active: evaluateData.B_1_1 === 5 }" class="line22">
                   5 分， 需部分帮助（进食过程中需要一定帮助，如协助把持餐具）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_1 === 0 }">
+                <div :class="{ active: evaluateData.B_1_1 === 0 }" class="line22">
                   0 分， 需极大帮助或完全依赖他人，或有留置营养管
                 </div>
               </td>
@@ -976,14 +976,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_2 === 5 }">
+                <div :class="{ active: evaluateData.B_1_2 === 5 }" class="line22">
                   5 分， 准备好洗澡水后，可自己独立完成洗澡过程
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_2 === 0 }">
+                <div :class="{ active: evaluateData.B_1_2 === 0 }" class="line22">
                   0 分， 在洗澡过程中需他人帮助
                 </div>
               </td>
@@ -997,18 +997,18 @@
                 梳头、刮脸等
               </td>
               <td class="question center" rowspan="2">
-                <div class="text-box">{{ evaluateData.B_1_3 }}</div>
+                <div class="text-box line2">{{ evaluateData.B_1_3 }}</div>
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_3 === 5 }">
+                <div :class="{ active: evaluateData.B_1_3 === 5 }" class="line22">
                   5 分， 可自己独立完成
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_3 === 0 }">
+                <div :class="{ active: evaluateData.B_1_3 === 0 }" class="line22">
                   0 分， 需他人帮助
                 </div>
               </td>
@@ -1022,26 +1022,26 @@
                 扣、拉拉链、穿 脱鞋袜、系鞋带
               </td>
               <td class="question center" rowspan="3">
-                <div class="text-box">{{ evaluateData.B_1_4 }}</div>
+                <div class="text-box line22">{{ evaluateData.B_1_4 }}</div>
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_4 === 10 }">
+                <div :class="{ active: evaluateData.B_1_4 === 10 }" class="line22">
                   10 分，可独立完成
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_4 === 5 }">
+                <div :class="{ active: evaluateData.B_1_4 === 5 }" class="line22">
                   5
                   分，需部分帮助（能自己穿脱，但需他人帮助整理衣物、系扣/鞋带、拉拉链）
                 </div>
               </td>
             </tr>
             <tr>
-              <td :class="{ active: evaluateData.B_1_4 === 0 }">
-                <div>0 分， 需极大帮助或完全依赖他人</div>
+              <td :class="{ active: evaluateData.B_1_4 === 0 }" >
+                <div class="line22">0 分， 需极大帮助或完全依赖他人</div>
               </td>
             </tr>
           </table>
@@ -1052,25 +1052,25 @@
                 <span class="table-num bold">B.1.5 大便控制</span>
               </td>
               <td class="question center" rowspan="3">
-                <div class="text-box">{{ evaluateData.B_1_5 }}</div>
+                <div class="text-box ">{{ evaluateData.B_1_5 }}</div>
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_5 === 10 }">
+                <div :class="{ active: evaluateData.B_1_5 === 10 }" class="line22">
                   10 分，可控制大便
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_5 === 5 }">
+                <div :class="{ active: evaluateData.B_1_5 === 5 }" class="line22">
                   5 分， 偶尔失控（每周＜1 次），或需要他人提示
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_5 === 0 }">
+                <div :class="{ active: evaluateData.B_1_5 === 0 }" class="line22">
                   0 分， 完全失控
                 </div>
               </td>
@@ -1087,21 +1087,21 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_6 === 10 }">
+                <div :class="{ active: evaluateData.B_1_6 === 10 }" class="line22">
                   10 分，可控制小便
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_6 === 5 }">
+                <div :class="{ active: evaluateData.B_1_6 === 5 }" class="line22">
                   5 分， 偶尔失控（每天＜1 次，但每周＞1 次），或需要他人提示
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_6 === 0 }">
+                <div :class="{ active: evaluateData.B_1_6 === 0 }" class="line22">
                   0 分， 完全失控，或留置导尿管
                 </div>
               </td>
@@ -1119,14 +1119,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_7 === 10 }">
+                <div :class="{ active: evaluateData.B_1_7 === 10 }" class="line22">
                   10 分，可独立完成
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_7 === 5 }">
+                <div :class="{ active: evaluateData.B_1_7 === 5 }" class="line22">
                   5 分，
                   需部分帮助（需他人搀扶去厕所、需他人帮忙冲水或整理衣裤等）
                 </div>
@@ -1134,7 +1134,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_7 === 0 }">
+                <div :class="{ active: evaluateData.B_1_7 === 0 }" class="line22">
                   0 分， 需极大帮助或完全依赖他人
                 </div>
               </td>
@@ -1151,28 +1151,28 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_8 === 15 }">
+                <div :class="{ active: evaluateData.B_1_8 === 15 }" class="line22">
                   15 分，可独立完成
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_8 === 10 }">
+                <div :class="{ active: evaluateData.B_1_8 === 10 }" class="line22">
                   10 分，需部分帮助（需他人搀扶或使用拐杖）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_8 === 5 }">
+                <div :class="{ active: evaluateData.B_1_8 === 5 }" class="line22">
                   5 分， 需极大帮助（较大程度上依赖他人搀扶和帮助）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_8 === 0 }">
+                <div :class="{ active: evaluateData.B_1_8 === 0 }" class="line22">
                   0 分， 完全依赖他人
                 </div>
               </td>
@@ -1189,14 +1189,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_9 === 15 }">
+                <div :class="{ active: evaluateData.B_1_9 === 15 }" class="line22">
                   15 分，可独立在平地上行走 45m
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_9 === 10 }">
+                <div :class="{ active: evaluateData.B_1_9 === 10 }" class="line22">
                   10
                   分，需部分帮助（因肢体残疾、平衡能力差、过度衰弱、视力等问题，在一定
                   程度上需他人地搀扶或使用拐杖、助行器等辅助用具）
@@ -1205,7 +1205,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_9 === 5 }">
+                <div :class="{ active: evaluateData.B_1_9 === 5 }" class="line22">
                   5 分，
                   需极大帮助（因肢体残疾、平衡能力差、过度衰弱、视力等问题，在较大
                   程度上依赖他人搀扶，或坐在轮椅上自行移动）
@@ -1214,7 +1214,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_9 === 0 }">
+                <div :class="{ active: evaluateData.B_1_9 === 0 }" class="line22">
                   0 分， 完全依赖他人
                 </div>
               </td>
@@ -1231,21 +1231,21 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_1_10 === 10 }">
+                <div :class="{ active: evaluateData.B_1_10 === 10 }" class="line22">
                   10 分，可独立上下楼梯（连续上下 10-15 个台阶）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_10 === 5 }">
+                <div :class="{ active: evaluateData.B_1_10 === 5 }" class="line22">
                   5 分， 需部分帮助（需他人搀扶，或扶着楼梯、使用拐杖等）
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_1_10 === 0 }">
+                <div :class="{ active: evaluateData.B_1_10 === 0 }" class="line22">
                   0 分， 需极大帮助或完全依赖他人
                 </div>
               </td>
@@ -1297,8 +1297,8 @@
                 <span class="table-num bold">B.2.1 认知功能</span>
               </td>
               <td class="question center" rowspan="3">测验</td>
-              <td class="line22">
-                “我说三样东西，请重复一遍，并记住，一会儿会问您”：苹果、手表、国旗
+              <td >
+               <div class="line22"> “我说三样东西，请重复一遍，并记住，一会儿会问您”：苹果、手表、国旗</div>
               </td>
             </tr>
             <tr>
@@ -1318,6 +1318,8 @@
                   </el-image>
                   <img
                   class="img-export test-img"
+                  v-if="evaluateData.B_2_1.img"
+                  style="width:100px;height:100px"
                     :src="evaluateData.B_2_1.img"
                   />
                 </div>
@@ -1330,21 +1332,15 @@
                 </div>
                 <div v-if="evaluateData.B_2_1">
                   答：
-                  <input
-                    type="text"
-                    class="input-text inline"
-                    v-model="evaluateData.B_2_1.text1"
-                  />、
-                  <input
-                    type="text"
-                    class="input-text inline"
-                    v-model="evaluateData.B_2_1.text2"
-                  />、
-                  <input
-                    type="text"
-                    class="input-text inline"
-                    v-model="evaluateData.B_2_1.text3"
-                  />（不必按顺序）
+                   <div class="text-undeline">
+                        {{ evaluateData.B_2_1 && evaluateData.B_2_1.text1 }}
+                      </div>、
+                       <div class="text-undeline">
+                        {{ evaluateData.B_2_1 && evaluateData.B_2_1.text2 }}
+                      </div>、
+                       <div class="text-undeline">
+                        {{ evaluateData.B_2_1 && evaluateData.B_2_1.text3 }}
+                      </div>（不必按顺序）
                 </div>
               </td>
             </tr>
@@ -1362,6 +1358,7 @@
                     active:
                       evaluateData.B_2_1 && evaluateData.B_2_1.score === 0,
                   }"
+                  class="line22"
                 >
                   0 分，画钟正确（画出一个闭锁圆，指针位置准确），且能回忆出 2-3
                   个词
@@ -1375,6 +1372,7 @@
                     active:
                       evaluateData.B_2_1 && evaluateData.B_2_1.score === 1,
                   }"
+                  class="line22"
                 >
                   1 分，画钟错误（画的圆不闭锁，或指针位置不准确），或只回忆出
                   0-1 个词
@@ -1388,6 +1386,7 @@
                     active:
                       evaluateData.B_2_1 && evaluateData.B_2_1.score === 2,
                   }"
+                  class="line22"
                 >
                   2 分，已确诊为认知障碍，如老年痴呆
                 </div>
@@ -1405,7 +1404,7 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_2_2 === 0 }">
+                <div :class="{ active: evaluateData.B_2_2 === 0 }" class="line22">
                   0
                   分，无身体攻击行为（如打/踢/推/咬/抓/摔东西）和语言攻击行为（如骂人、
                   语言威胁、尖叫）
@@ -1414,14 +1413,14 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_2_2 === 1 }">
+                <div :class="{ active: evaluateData.B_2_2 === 1 }" class="line22">
                   1 分，每月有几次身体攻击行为，或每周有几次语言攻击行为
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_2_2 === 2 }">
+                <div :class="{ active: evaluateData.B_2_2 === 2 }" class="line22">
                   2 分，每周有几次身体攻击行为，或每日有语言攻击行为
                 </div>
               </td>
@@ -1438,21 +1437,21 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_2_3 === 0 }">
+                <div :class="{ active: evaluateData.B_2_3 === 0 }" class="line22">
                   0 分，无
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_2_3 === 1 }">
+                <div :class="{ active: evaluateData.B_2_3 === 1 }" class="line22">
                   1 分，情绪低落、不爱说话、不爱梳洗、不爱活动
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_2_3 === 2 }">
+                <div :class="{ active: evaluateData.B_2_3 === 2 }" class="line22">
                   2 分，有自杀念头或自杀行为
                 </div>
               </td>
@@ -1516,14 +1515,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_3_1 === 0 }">
+                <div :class="{ active: evaluateData.B_3_1 === 0 }" class="line22">
                   0 分，神志清醒，对周围环境警觉
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_1 === 1 }">
+                <div :class="{ active: evaluateData.B_3_1 === 1 }" class="line22">
                   1
                   分，嗜睡，表现为睡眠状态过度延长。当呼唤或推动其肢体时可唤醒，并能进
                   行正确的交谈或执行指令，停止刺激后又继续入睡
@@ -1532,7 +1531,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_1 === 2 }">
+                <div :class="{ active: evaluateData.B_3_1 === 2 }" class="line22">
                   2
                   分，昏睡，一般的外界刺激不能使其觉醒，给予较强烈的刺激时可有短时的意
                   识清醒，醒后可简短回答提问，当刺激减弱后又很快进入睡眠状态
@@ -1541,7 +1540,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_1 === 3 }">
+                <div :class="{ active: evaluateData.B_3_1 === 3 }" class="line22">
                   3
                   分，昏迷，处于浅昏迷时对疼痛刺激有回避和痛苦表情；处于深昏迷时对刺激
                   无反应（若评定为昏迷，直接评定为重度失能，可不进行以下项目的评估）
@@ -1561,28 +1560,28 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_3_2 === 0 }">
+                <div :class="{ active: evaluateData.B_3_2 === 0 }" class="line22">
                   0 分，能看清书报上的标准字体
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_2 === 1 }">
+                <div :class="{ active: evaluateData.B_3_2 === 1 }" class="line22">
                   1 分，能看清楚大字体，但看不清书报上的标准字体
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_2 === 2 }">
+                <div :class="{ active: evaluateData.B_3_2 === 2 }" class="line22">
                   2 分，视力有限，看不清报纸大标题，但能辨认物体
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_2 === 3 }">
+                <div :class="{ active: evaluateData.B_3_2 === 3 }" class="line22">
                   3
                   分，辨认物体有困难，但眼睛能跟随物体移动，只能看到光、颜色和形状
                 </div>
@@ -1590,7 +1589,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_2 === 4 }">
+                <div :class="{ active: evaluateData.B_3_2 === 4 }" class="line22">
                   4 分，没有视力，眼睛不能跟随物体移动
                 </div>
               </td>
@@ -1608,35 +1607,35 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_3_3 === 0 }">
+                <div :class="{ active: evaluateData.B_3_3 === 0 }" class="line22">
                   0 分，可正常交谈，能听到电视、电话、门铃的声音
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_3 === 1 }">
+                <div :class="{ active: evaluateData.B_3_3 === 1 }" class="line22">
                   1 分，在轻声说话或说话距离超过 2 米时听不清
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_3 === 2 }">
+                <div :class="{ active: evaluateData.B_3_3 === 2 }" class="line22">
                   2 分，正常交流有些困难，需在安静的环静或大声说话才能听到
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_3 === 3 }">
+                <div :class="{ active: evaluateData.B_3_3 === 3 }" class="line22">
                   3 分，讲话者大声说话或说话很慢，才能部分听见
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_3 === 4 }">
+                <div :class="{ active: evaluateData.B_3_3 === 4 }" class="line22">
                   4 分，完全听不见
                 </div>
               </td>
@@ -1654,14 +1653,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_3_4 === 0 }">
+                <div :class="{ active: evaluateData.B_3_4 === 0 }" class="line22">
                   0 分，无困难，能与他人正常沟通和交流
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_4 === 1 }">
+                <div :class="{ active: evaluateData.B_3_4 === 1 }" class="line22">
                   1
                   分，能够表达自己的需要及理解别人的话，但需要增加时间或给予帮助
                 </div>
@@ -1669,14 +1668,14 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_4 === 2 }">
+                <div :class="{ active: evaluateData.B_3_4 === 2 }" class="line22">
                   2 分，表达需要或理解有困难，需频繁重复或简化口头表达
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_3_4 === 3 }">
+                <div :class="{ active: evaluateData.B_3_4 === 3 }" class="line22">
                   3 分，不能表达需要或理解他人的话
                 </div>
               </td>
@@ -1730,7 +1729,7 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_4_1 === 0 }">
+                <div :class="{ active: evaluateData.B_4_1 === 0 }" class="line22">
                   0
                   分，除个人生活自理外（如饮食、洗漱、穿戴、二便），能料理家务（如做饭、
                   洗衣）或当家管理事务
@@ -1739,28 +1738,28 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_1 === 1 }">
+                <div :class="{ active: evaluateData.B_4_1 === 1 }" class="line22">
                   1 分，除个人生活自理外，能做家务，但欠好，家庭事务安排欠条
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_1 === 2 }">
+                <div :class="{ active: evaluateData.B_4_1 === 2 }" class="line22">
                   2 分，个人生活能自理；只有在他人帮助下才能做些家务，但质量不好
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_1 === 3 }">
+                <div :class="{ active: evaluateData.B_4_1 === 3 }" class="line22">
                   3 分，个人基本生活事务能自理（如饮食、二便），在督促下可洗漱
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_1 === 4 }">
+                <div :class="{ active: evaluateData.B_4_1 === 4 }" class="line22">
                   4
                   分，个人基本生活事务（如饮食、二便）需要部分帮助或完全依赖他人帮助
                 </div>
@@ -1778,35 +1777,35 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_4_2 === 0 }">
+                <div :class="{ active: evaluateData.B_4_2 === 0 }" class="line22">
                   0 分，原来熟练的脑力工作或体力技巧性工作可照常进行
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_2 === 1 }">
+                <div :class="{ active: evaluateData.B_4_2 === 1 }" class="line22">
                   1 分，原来熟练的脑力工作或体力技巧性工作能力有所下降
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_2 === 2 }">
+                <div :class="{ active: evaluateData.B_4_2 === 2 }" class="line22">
                   2 分，原来熟练的脑力工作或体力技巧性工作明显不如以往，部分遗忘
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_2 === 3 }">
+                <div :class="{ active: evaluateData.B_4_2 === 3 }" class="line22">
                   3 分，对熟练工作只有一些片段保留，技能全部遗忘
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_2 === 4 }">
+                <div :class="{ active: evaluateData.B_4_2 === 4 }" class="line22">
                   4 分，对以往的知识或技能全部磨灭
                 </div>
               </td>
@@ -1823,7 +1822,7 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_4_3 === 0 }">
+                <div :class="{ active: evaluateData.B_4_3 === 0 }" class="line22">
                   0
                   分，时间观念（年、月、日、时）清楚；可单独出远门，能很快掌握新环境的
                   方位
@@ -1832,7 +1831,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_3 === 1 }">
+                <div :class="{ active: evaluateData.B_4_3 === 1 }" class="line22">
                   1
                   分，时间观念有些下降，年、月、日清楚，但有时相差几天；可单独来往于近
                   街，知道现住地的名称和方位，但不知回家路线
@@ -1841,7 +1840,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_3 === 2 }">
+                <div :class="{ active: evaluateData.B_4_3 === 2 }" class="line22">
                   2
                   分，时间观念较差，年、月、日不清楚，可知上半年或下半年；只能单独在家
                   附近行动，对现住地只知名称，不知道方位
@@ -1850,7 +1849,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_3 === 3 }">
+                <div :class="{ active: evaluateData.B_4_3 === 3 }" class="line22">
                   3
                   分，时间观念很差，年、月、日不清楚，可知上午或下午；只能在左邻右舍间
                   串门，对现住地不知名称和方位
@@ -1859,7 +1858,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_3 === 4 }">
+                <div :class="{ active: evaluateData.B_4_3 === 4 }" class="line22">
                   4 分，无时间观念；不能单独外出
                 </div>
               </td>
@@ -1876,7 +1875,7 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_4_4 === 0 }">
+                <div :class="{ active: evaluateData.B_4_4 === 0 }" class="line22">
                   0
                   分，知道周围人们的关系，知道祖孙、叔伯、姑姨、侄子侄女等称谓的意义；
                   可分辨陌生人的大致年龄和身份，可用适当称呼
@@ -1885,7 +1884,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_4 === 1 }">
+                <div :class="{ active: evaluateData.B_4_4 === 1 }" class="line22">
                   1
                   分，只知家中亲密近亲的关系，不会分辨陌生人的大致年龄，不能称呼陌生人
                 </div>
@@ -1893,21 +1892,21 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_4 === 2 }">
+                <div :class="{ active: evaluateData.B_4_4 === 2 }" class="line22">
                   2 分，只能称呼家中人，或只能照样称呼，不知其关系，不辨辈分
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_4 === 3 }">
+                <div :class="{ active: evaluateData.B_4_4 === 3 }" class="line22">
                   3 分，只认识常同住的亲人，可称呼子女或孙子女，可辨熟人和生人
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_4 === 4 }">
+                <div :class="{ active: evaluateData.B_4_4 === 4 }" class="line22">
                   4 分，只认识保护人，不辨熟人和生人
                 </div>
               </td>
@@ -1924,14 +1923,14 @@
                 分
               </td>
               <td>
-                <div :class="{ active: evaluateData.B_4_5 === 0 }">
+                <div :class="{ active: evaluateData.B_4_5 === 0 }" class="line22">
                   0 分，参与社会，在社会环境有一定的适应能力，待人接物恰当
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_5 === 1 }">
+                <div :class="{ active: evaluateData.B_4_5 === 1 }" class="line22">
                   1
                   分，能适应单纯环境，主动接触人，初见面时难让人发现智力问题，不能理解
                   隐喻语
@@ -1940,7 +1939,7 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_5 === 2 }">
+                <div :class="{ active: evaluateData.B_4_5 === 2 }" class="line22">
                   2
                   分，脱离社会，可被动接触，不会主动待人，谈话中很多不适词句，容易上当
                   受骗
@@ -1949,14 +1948,14 @@
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_5 === 3 }">
+                <div :class="{ active: evaluateData.B_4_5 === 3 }" class="line22">
                   3 分，勉强可与人交往，谈吐内容不清楚，表情不恰当
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div :class="{ active: evaluateData.B_4_5 === 4 }">
+                <div :class="{ active: evaluateData.B_4_5 === 4 }" class="line22">
                   4 分，难以与人接触
                 </div>
               </td>
@@ -2004,7 +2003,7 @@
         </div>
       </div>
       <!-- C 老年人能力评估报告 -->
-      <div id="sign-export" class="hash-tab">
+      <div id="sign-export" class="hash-tab brakpage">
         <div class="h1-title">附 录 C</div>
         <div class="title-desc">（规范性附录）</div>
         <div class="subtitle">老年人能力评估报告</div>
@@ -2286,14 +2285,14 @@
           </table>
         </div>
       </div>
-      <div class="sign-img">
+      <div class="sign-img ">
         <el-image
          class="img-show"
           :src="cInfoJson.signUrl"
           :preview-src-list="[cInfoJson.signUrl]"
         >
         </el-image>
-        <img  class="img-export sign-img" :src="cInfoJson.signUrl" >
+        <img  class="img-export img-import-sign" style="width:100%" :src="cInfoJson.signUrl"  v-if="cInfoJson.signUrl">
       </div>
     </div>
   </div>
