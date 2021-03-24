@@ -9,6 +9,7 @@ import { HappyScroll } from 'vue-happy-scroll'
 // 引入css
 import 'vue-happy-scroll/docs/happy-scroll.css'
 import filters from '@/utils/filter.js'
+import directives from '@/utils/directive.js'
 
 import htmlToPdf from '@/utils/htmlToPdf'
 // 使用Vue.use()方法就会调用工具方法中的install方法
@@ -19,6 +20,10 @@ Vue.component('happy-scroll', HappyScroll)
 // 注入全局过滤器
 Object.keys(filters).forEach(item => {
   Vue.filter(item, filters[item])
+})
+// 注入全局指令
+Object.keys(directives).forEach(item => {
+  Vue.directive(item, directives[item])
 })
 
 Vue.config.productionTip = false

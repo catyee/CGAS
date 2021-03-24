@@ -8,7 +8,7 @@
 
        <el-menu mode="horizontal">
         <el-submenu index="1">
-          <template slot="title"><i class="iconfont iconyonghu icon-user"></i><span class=" username">{{userName}} </span></template>
+          <template slot="title"><i class="iconfont iconyonghu icon-user"></i><span class=" username">{{userName}} ({{role}})</span></template>
           <!-- <el-menu-item index="1-1" @click="updatePwd">修改密码</el-menu-item> -->
           <el-menu-item index="1-2" @click="logout">退出登录</el-menu-item>
           <!-- <el-menu-item index="1-2">选项2</el-menu-item>
@@ -23,6 +23,19 @@ export default {
   computed: {
     userName () {
       return this.$store.getters.name
+    },
+    role () {
+      const role = this.$store.getters.roles[0]
+      if (role === 'common') {
+        return '评估机构'
+      }
+      if (role === 'admin') {
+        return '民政局'
+      }
+      if (role === 'pg') {
+        return '基层用户'
+      }
+      return ''
     }
   },
   methods: {

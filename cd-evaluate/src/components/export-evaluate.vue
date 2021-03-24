@@ -89,7 +89,7 @@
                 >
                   4因评估结果有疑问进行的复评
                 </div>
-                <div class="right text-box">{{ evaluateData.A_1_3 }}</div>
+                <div class="right-con text-box">{{ evaluateData.A_1_3 }}</div>
               </td>
             </tr>
           </table>
@@ -128,7 +128,7 @@
                   >
                     2女
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_1_3 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_1_3 }}</div>
                 </div>
               </td>
             </tr>
@@ -225,7 +225,7 @@
                   <div class="text-undeline">
                     {{ evaluateData.A_2_6 && evaluateData.A_2_6.text }}
                   </div>
-                  <div class="right text-box">
+                  <div class="right-con text-box">
                     {{ evaluateData.A_2_6 && evaluateData.A_2_6.value }}
                   </div>
                 </div>
@@ -273,7 +273,7 @@
                   >
                     6不详
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_7 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_7 }}</div>
                 </div>
               </td>
             </tr>
@@ -305,7 +305,7 @@
                   <div class="text-undeline">
                     {{ evaluateData.A_2_8 && evaluateData.A_2_8.text }}
                   </div>
-                  <div class="right text-box">
+                  <div class="right-con text-box">
                     {{ evaluateData.A_2_8 && evaluateData.A_2_8.value }}
                   </div>
                 </div>
@@ -347,7 +347,7 @@
                   >
                     5未说明的婚姻状况
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_9 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_9 }}</div>
                 </div>
               </td>
             </tr>
@@ -405,7 +405,7 @@
                   >
                     8养老机构
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_10 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_10 }}</div>
                 </div>
               </td>
             </tr>
@@ -619,7 +619,7 @@
                   >
                     3重度
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_13_1 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_13_1 }}</div>
                 </div>
               </td>
             </tr>
@@ -672,7 +672,7 @@
                   >
                     6精神发育迟滞伴发精神障碍
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_13_2 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_13_2 }}</div>
                 </div>
               </td>
             </tr>
@@ -719,7 +719,7 @@
                   >
                     3发生过3次及以上
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_14_1 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_14_1 }}</div>
                 </div>
               </td>
             </tr>
@@ -754,7 +754,7 @@
                   >
                     3发生过3次及以上
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_14_2 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_14_2 }}</div>
                 </div>
               </td>
             </tr>
@@ -789,7 +789,7 @@
                   >
                     3发生过3次及以上
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_14_3 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_14_3 }}</div>
                 </div>
               </td>
             </tr>
@@ -824,7 +824,7 @@
                   >
                     3发生过3次及以上
                   </div>
-                  <div class="right text-box">{{ evaluateData.A_2_14_4 }}</div>
+                  <div class="right-con text-box">{{ evaluateData.A_2_14_4 }}</div>
                 </div>
               </td>
             </tr>
@@ -904,7 +904,7 @@
                     5其他
                   </div>
                   <div class="text-undeline">{{evaluateData.A_3_2 && evaluateData.A_3_2.text}}</div>
-                  <div class="right text-box">
+                  <div class="right-con text-box">
                     {{ evaluateData.A_3_2 && evaluateData.A_3_2.value }}
                   </div>
                 </div>
@@ -2076,7 +2076,7 @@
                   >
                     3 重度失能
                   </div>
-                  <div class="right text-box">{{ cInfoJson.C_2 }}</div>
+                  <div class="right-con text-box">{{ cInfoJson.C_2 }}</div>
                 </div>
               </td>
             </tr>
@@ -2165,7 +2165,7 @@
                   >
                     3重度失能
                   </div>
-                  <div class="right text-box">{{ cInfoJson.C_4 }}</div>
+                  <div class="right-con text-box">{{ cInfoJson.C_4 }}</div>
                 </div>
               </td>
             </tr>
@@ -2173,8 +2173,8 @@
           <table class="evaluate-table">
             <tr>
               <td>
-                <div class="sign-box">
-                  <div class="sign-input">
+                <div class="sign-box pt-10 pb-10">
+                  <div class="sign-input ">
                     <div>
                       评估员签名:
                       <div class="text-undeline">
@@ -2402,7 +2402,7 @@ td {
   vertical-align: middle;
 }
 
-.right {
+.right-con {
   position: absolute;
   bottom: 5px;
   right: 5px;
@@ -2450,6 +2450,7 @@ td {
 .text-undeline {
   display: inline-block;
   padding: 3px 5px;
+  min-width: 60px;
   border-bottom: 1px solid #000;
 }
 

@@ -1,4 +1,4 @@
-
+// 评估机构
 export const evaluator = [
   {
     path: '',
@@ -17,19 +17,22 @@ export const evaluator = [
         meta: { title: '评估管理', icon: 'iconevaluate' },
         component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/evaluate-list')
       },
+      // 历史评估
       {
-        path: 'evaluate-history',
+        path: 'evaluate-history/:id',
         name: 'evaluate-history',
         hidden: true,
         meta: { title: '评估历史', icon: '' },
-        component: () => import(/* webpackChunkName: "evaluate-history" */ '../views/evaluate-list')
+        component: () => import(/* webpackChunkName: "evaluate-history" */ '../views/evaluate-history')
       },
+      // 评估
       {
         path: 'evaluate/:id?',
         name: 'evaluate',
         hidden: true,
         component: () => import(/* webpackChunkName: "evaluate" */ '../views/evaluate')
       },
+      // 评估详情
       {
         path: 'evaluate-show/:id',
         name: 'evaluate-show',
@@ -52,31 +55,50 @@ export const evaluator = [
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/reset-pwd')
       }
     ]
+  }
+
+]
+// 民政局
+export const adminRoutes = [
+  {
+    path: '',
+    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
+    hidden: false,
+    meta: { title: '', icon: '' },
+    redirect: 'evaluate-finished',
+    children: [
+      {
+        path: 'evaluate-finished',
+        name: 'evaluate-finished',
+        hidden: false,
+        meta: { title: '已评估老人列表', icon: 'iconevaluate' },
+        component: () => import(/* webpackChunkName: "evaluate-finished" */ '../views/evaluate-finished')
+      }
+    ]
   },
   {
     path: '',
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     hidden: false,
     meta: { title: '', icon: '' },
-    redirect: 'register-list',
+    redirect: 'no-evaluate',
     children: [
-      // 评估列表
       {
-        path: 'register-list',
-        name: 'register-list',
+        path: 'no-evaluate',
+        name: 'no-evaluate',
         hidden: false,
-        meta: { title: '登记列表', icon: 'iconregister' },
-        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register-list')
+        meta: { title: '已登记但未评估老人列表', icon: 'iconregisted' },
+        component: () => import(/* webpackChunkName: "no-evaluate" */ '../views/no-evaluate')
       },
+      // 历史评估
       {
-        path: 'register/:id?',
-        name: 'register',
+        path: 'evaluate-history/:id',
+        name: 'evaluate-history',
         hidden: true,
-        meta: { title: '登记', icon: '' },
-        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register')
+        meta: { title: '评估历史', icon: '' },
+        component: () => import(/* webpackChunkName: "evaluate-history" */ '../views/evaluate-history')
       }
     ]
-
   },
   {
     path: '',
@@ -103,112 +125,47 @@ export const evaluator = [
     ]
 
   }
-
 ]
-export const adminRoutes = [
+// 基层用户
+export const primaryRoutes = [
   {
-    path: '/video',
-    // 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
-    // redirect: 'noredirect',
+    path: '',
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     hidden: false,
-    meta: { title: '视频管理', icon: 'iconvideo-normal' },
+    meta: { title: '', icon: '' },
+    redirect: 'register-list',
     children: [
-      // 视频列表
+      // 登记列表
       {
-        path: 'video-list',
-        name: 'video-list',
+        path: 'register-list',
+        name: 'register-list',
         hidden: false,
-        meta: { title: '视频列表', icon: '' },
-        component: () => import(/* webpackChunkName: "video-list" */ '../views/video-list')
+        meta: { title: '登记列表', icon: 'iconregister' },
+        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register-list')
       },
-      // 查看视频
       {
-        path: 'video/:id',
-        name: 'video',
+        path: 'register/:id?',
+        name: 'register',
         hidden: true,
-        component: () => import(/* webpackChunkName: "video" */ '../views/video')
-      },
-      // 编辑新增视频
-      {
-        path: 'add-video/:id?',
-        name: 'video',
-        hidden: false,
-        meta: { title: '上传视频', icon: '' },
-        component: () => import(/* webpackChunkName: "add-video" */ '../views/add-video')
+        meta: { title: '登记', icon: '' },
+        component: () => import(/* webpackChunkName: "evaluate-list" */ '../views/register')
       }
     ]
-  },
-  {
-    path: '/relation',
-    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
-    hidden: false,
-    meta: { title: '关系管理', icon: 'iconrelation-normal' },
-    children: [
-      {
-        path: 'tag-list',
-        name: 'tag-list',
-        hidden: false,
-        meta: { title: '标签管理', icon: '' },
-        component: () => import(/* webpackChunkName: "tag-list" */ '../views/tag-list')
-      },
-      {
-        path: 'relation-list',
-        name: 'relation-list',
-        hidden: false,
-        meta: { title: '管理关系', icon: '' },
-        component: () => import(/* webpackChunkName: "relation-list" */ '../views/relation-list')
-      },
-      {
-        path: 'relation-chart',
-        name: 'relation-chart',
-        hidden: true,
-        component: () => import(/* webpackChunkName: "relation-chart" */ '../views/relation-chart')
-      }
-    ]
-  },
-  {
-    path: '/msg',
-    hidden: false,
-    meta: { title: '信息管理', icon: 'iconmessage-normal' },
-    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
-    children: [{
-      path: 'cooperation',
-      name: 'cooperation',
-      hidden: false,
-      meta: { title: '合作洽谈', icon: '' },
-      component: () => import(/* webpackChunkName: "cooperation" */ '../views/cooperation')
-    },
-    {
-      path: 'suggest',
-      name: 'suggest',
-      hidden: false,
-      meta: { title: '意见反馈', icon: '' },
-      component: () => import(/* webpackChunkName: "suggest" */ '../views/suggest')
-    }]
+
   },
   {
     path: '/user',
-    meta: { title: '管理员管理', icon: 'iconuser-normal' },
+    meta: { title: '管理员管理', icon: 'iconuser-admin' },
     hidden: false,
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     children: [
-      // 普通管理员没有权限
-      // {
-      //   path: 'administrator',
-      //   name: 'administrator',
-      //   hidden: false,
-      //   meta: { title: '管理员列表', icon: '' },
-      //   component: () => import(/* webpackChunkName: "administrator" */ '../views/administrator')
-      // },
       {
         path: 'reset-pwd',
         name: 'reset-pwd',
-        meta: { title: '修改密码', icon: 'iconuser-normal' },
+        meta: { title: '修改密码', icon: 'iconuser-admin' },
         hidden: false,
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/reset-pwd')
       }
     ]
   }
-
 ]

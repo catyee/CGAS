@@ -1,9 +1,9 @@
 <template>
-  <div class="evaluate-list">
+  <div class="evaluate-finished">
     <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
-        <span class="pl-2 f14">评估管理</span>
+        <span class="pl-2 f14">已评估老人列表</span>
       </div>
       <div class="flex pr-16">
         <div class="color-grey pr-5 f12 no-wrap">关键字:</div>
@@ -34,28 +34,36 @@
         </el-date-picker>
       </div>
       <div class="flex pr-16">
-        <div class="color-grey pr-5 f14 no-wrap">评估状态:</div>
+        <div class="color-grey pr-5 f14 no-wrap">评估结果:</div>
         <div>
           <el-select
-            v-model="queryParams.assessStatus"
+            v-model="queryParams.assessResult"
             placeholder="请选择"
             clearable
             @clear="handleQuery"
             @change="handleQuery"
           >
             <el-option
-              v-for="(item,index) in evaluateStatus"
+              v-for="(item, index) in evaluateResult"
               :key="index"
-              :label="item.label"
-              :value="item.value"
+              :label="item"
+              :value="index"
             >
             </el-option>
           </el-select>
         </div>
       </div>
+      <div class="flex pr-16">
+        <el-button type="primary" >导出excel表</el-button>
+      </div>
     </div>
-    <div class="list-container pl-16" >
-      <el-table class="table" :data="list" tooltip-effect="dark" style="width: 100%">
+    <div class="list-container pl-16">
+      <el-table
+        class="table"
+        :data="list"
+        tooltip-effect="dark"
+        style="width: 100%"
+      >
         <el-table-column label="序号" width="70px">
           <template slot-scope="scope">
             {{ scope.$index + 1 }}
@@ -63,62 +71,72 @@
         </el-table-column>
         <el-table-column label="评估日期" prop="createTime">
           <template slot-scope="scope">
-              {{scope.row.createTime&&scope.row.createTime.slice(0,11)}}
+            {{ scope.row.createTime && scope.row.createTime.slice(0, 11) }}
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="老人姓名">
-        </el-table-column>
-        <el-table-column
-          prop="idNumber"
-          label="身份证号"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column
-          prop="age"
-          label="年龄"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column
-          prop="childNumber"
-          label="子女数"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column prop="dependent" label="由谁抚养" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="minimumLiving" label="是否低保">
-           <template slot-scope="scope">
-              {{scope.row.minimumLiving === 0 ? '否':'是'}}
+        <el-table-column prop="name" label="老人姓名"> </el-table-column>
+        <el-table-column prop="name" label="性别">
+          <template slot-scope="scope">
+            {{ scope.row.sex === 1?'男': '女' }}
           </template>
         </el-table-column>
-        <el-table-column prop="cardNumber" label="银行卡"
-        show-overflow-tooltip>
+        <el-table-column prop="idNumber" label="身份证号" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column
+          prop="cardNumber"
+          label="银行卡号"
+          show-overflow-tooltip
+        >
         </el-table-column>
         <el-table-column prop="contactName" label="联系人姓名">
         </el-table-column>
-        <el-table-column prop="relate" label="与老人关系" style="show-overflow-tooltip">
+        <el-table-column prop="contactPhone" label="联系人手机号">
         </el-table-column>
-        <el-table-column prop="assessStatus" label="评估状态" >
+        <el-table-column
+          prop="relate"
+          label="与老人关系"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column prop="nickName" label="城乡或街道"  show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="assessStatus" label="评估结果" width="400">
           <template slot-scope="scope">
-             <span class="color-green" v-show="scope.row.assessStatus ===2">
-               已评估
-             </span>
-             <span class="color-orange" v-show="scope.row.assessStatus ===1">
-               评估中
-             </span>
-              <span class="color-red" v-show="scope.row.assessStatus ===0">
-               未评估
-             </span>
+            <div class="result-con">
+              <div class="pr-20">
+                {{ evaluateResult[scope.row.assessResult] }}
+              </div>
+              <div
+                v-if="!scope.row.assessResult && scope.row.assessResult !== 0"
+              >
+                无
+              </div>
+              <div
+                v-if="scope.row.assessResult || scope.row.assessResult === 0"
+              >
+                <div class="pb-10">
+                  <span class="pr-20">C1.1日常生活活动：2级</span>
+                  <span>C1.2精神状态：2级</span>
+                </div>
+                <div>
+                  <span class="pr-20">C1.1日常生活活动：2级</span>
+                  <span>C1.2精神状态：2级</span>
+                </div>
+              </div>
+            </div>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <div class="color-green" @click="evaluate(null,scope.row.createBy, scope.row.registerId)" v-show="scope.row.assessStatus ===0">去评估</div>
-            <div class="color-green" @click="evaluate(scope.row.assessId, scope.row.createBy,scope.row.registerId)" v-show="scope.row.assessStatus ===1">评估</div>
-            <div class="color-green pr-20" @click="toEvaluateResult(scope.row.assessId)" v-show="scope.row.assessStatus ===2">查看当前评估结果</div>
-            <div class="color-green" @click="toHistory(scope.row.idNumber)">历史评估</div>
+            <div
+              class="color-green pr-20"
+              @click="toEvaluateResult(scope.row.assessId)"
+            >
+              查看当前评估结果
+            </div>
+            <div class="color-green" @click="toHistory(scope.row.idNumber)">
+              历史评估
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -133,7 +151,7 @@
 <script>
 import './index.scss'
 import pagination from '@/components/pagination.vue'
-import { evaluateStatus } from '@/libs/constant'
+import { evaluateResult } from '@/libs/constant'
 import { getRegisterList } from '@/api/register'
 export default {
   components: {
@@ -142,7 +160,7 @@ export default {
   data () {
     return {
       date: '',
-      evaluateStatus: evaluateStatus,
+      evaluateResult: evaluateResult,
       queryParams: {
         // 页数
         pageNum: 1,
@@ -150,15 +168,16 @@ export default {
         pageSize: 20,
         // 查询关键字
         searchValue: null,
-        // 评估状态 全部 未评估 评估中 已评估
-        assessStatus: null,
+        // 评估状态 全部 未评估0 评估中1 已评估2
+        assessStatus: 2,
         beginTime: null,
-        endTime: null
+        endTime: null,
+        // 评估结果
+        assessResult: null
       },
       // 总条数
       total: 0,
-      list: [
-      ]
+      list: []
     }
   },
   mounted () {
@@ -179,7 +198,7 @@ export default {
     },
     // 获取列表
     initList () {
-      getRegisterList(this.queryParams).then(res => {
+      getRegisterList(this.queryParams).then((res) => {
         this.list = res.rows
         this.total = parseInt(res.total)
       })
@@ -187,11 +206,10 @@ export default {
     // 去评估
     evaluate (id, createBy, registerId) {
       const assessId = id || ''
-      if (!registerId) {
-        this.msgError('该数据存在异常，缺少registerId')
-      }
-      // createBy是为了新建评估的时候创建评估编号使用
-      this.$router.push({ path: '/evaluate/' + assessId, query: { createBy: createBy, registerId: registerId } })
+      this.$router.push({
+        path: '/evaluate/' + assessId,
+        query: { createBy: createBy, registerId: registerId }
+      })
     },
     // 查看评估结果
     toEvaluateResult (id) {

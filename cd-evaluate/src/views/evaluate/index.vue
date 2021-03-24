@@ -2906,9 +2906,13 @@ export default {
   created () {
     // 获取assessId
     this.assessId = this.$route.params.id
+    this.registerId = this.$route.query.registerId
+    // 如果没有registerId  跳转回去 从评估管理过来必须传registerId
+    if (!this.registerId) {
+      this.$router.go(-1)
+    }
     // 新建
     if (!this.assessId) {
-      this.registerId = this.$route.query.registerId
       const createBy = this.$route.query.createBy
       // 生成评估编号
       getCode({ createBy: createBy }).then((res) => {
@@ -3417,12 +3421,17 @@ export default {
       this.cInfoJson.C_3 = this.C_3
       this.cInfoJson.C_4 = this.C_4
       const data = {
+        registerId: this.registerId,
         assessId: this.assessId,
         aInfoJson: JSON.stringify(this.aInfoJson),
         cInfoJson: JSON.stringify(this.cInfoJson)
       }
+      // 存储最终结果
       if (this.cInfoJson.signUrl) {
         data.assessResult = this.C_4
+        // 配合后端需要 查询列表的时候要用
+        data.sex = this.evaluateData.A_2_2
+        data.assessResultDesc = `C1.1日常生活活动：${this.B_1}级别  C1.2精神状态：${this.B_2}级 C1.3感知觉与沟通：${this.B_3}级  C1.社会参与：${this.B_4}级`
       }
 
       updateEvaluate(data).then((res) => {

@@ -247,8 +247,14 @@ export default {
     getEvaluate () {
       getEvaluate(this.assessId).then((res) => {
         const data = res.data
-        if (data.aInfoJson) {
-          this.evaluateData = JSON.parse(data.aInfoJson)
+        if (data) {
+          // 如果没有评估完但是跳转到详情页面 跳转回去
+          if (!data.assessResult) {
+            this.$router.go(-1)
+          }
+          if (data.aInfoJson) {
+            this.evaluateData = JSON.parse(data.aInfoJson)
+          }
         }
         if (data.cInfoJson) {
           this.cInfoJson = JSON.parse(data.cInfoJson)
