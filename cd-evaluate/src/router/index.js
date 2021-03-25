@@ -5,11 +5,25 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export const constantRoutes = [
-  // {
-  //   path: '/',
-  //   name: 'login',
-  //   redirect: '/login'
-  // },
+
+  // auth页面 因为每次退出登录之后 切换角色重新登录 会跳转到path '',此时路由会受上一次的影响，会redirect上次的‘’对应的地址(路由多个角色都有一个‘’路由对应不同的路由跳转)
+  // 没有想到更好的办法 因此加了一个默认的‘’这样每次都跳转到auth，然后如果是要跳转到auth则在permission里面更改beforeEach中的to，让其直接跳转到根据角色获取到的路由链接
+  {
+    path: '',
+    name: 'auth',
+    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
+    redirect: 'auth',
+    hidden: true,
+    children: [
+      {
+        path: 'auth',
+        name: 'auth',
+        hidden: true,
+        component: () => import(/* webpackChunkName: "index" */ '../views/auth.vue'),
+        meta: { title: '', icon: '', noCache: true }
+      }
+    ]
+  },
   {
     path: '/login',
     name: 'login',
@@ -34,5 +48,14 @@ const router = new VueRouter({
   mode: 'history', // 去掉url中的#
   routes: constantRoutes
 })
+// router.$addRoutes = (params) => {
+//   console.log('newrouterrrr')
+//   router.matcher = new VueRouter({ // 重置路由规则
+//     routes: constantRoutes,
+//     base: '/cd',
+//     mode: 'history' // 去掉url中的#
+//   }).matcher
+//   router.addRoutes(params) // 添加路由
+// }
 
 export default router

@@ -152,7 +152,7 @@
                             >4因评估结果有疑问进行的复评</el-radio
                           >
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -198,7 +198,7 @@
                           <el-radio :label="1">1男</el-radio>
                           <el-radio :label="2">2女</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -298,7 +298,7 @@
                             />
                           </el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -326,7 +326,7 @@
                           <el-radio :label="5"> 5大学专科及以上 </el-radio>
                           <el-radio :label="6"> 6不详 </el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -362,7 +362,7 @@
                             />
                           </el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -389,7 +389,7 @@
                           <el-radio :label="4">4离婚</el-radio>
                           <el-radio :label="5">5未说明的婚姻状况</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -419,7 +419,7 @@
                           <el-radio :label="7">7与非亲属关系的人居住</el-radio>
                           <el-radio :label="8">8养老机构</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -467,9 +467,10 @@
                             />
                           </el-checkbox>
                         </el-checkbox-group>
-                        <div class="right">
+                        <div class="input-multi-con">
                           <div
                             v-for="(i, index) in evaluateData.A_2_11.value"
+                            class="input-multi"
                             :key="index"
                           >
                             <input
@@ -517,10 +518,11 @@
                             />
                           </el-checkbox>
                         </el-checkbox-group>
-                        <div class="right">
+                        <div class="input-multi-con">
                           <div
                             v-for="(i, index) in evaluateData.A_2_12.value"
                             :key="index"
+                            class="input-multi"
                           >
                             <input
                               type="text"
@@ -559,7 +561,7 @@
                           <el-radio :label="2">2中度</el-radio>
                           <el-radio :label="3">3重度</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -591,7 +593,7 @@
                             >精神发育迟滞伴发精神障碍</el-radio
                           >
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -636,7 +638,7 @@
                           <el-radio :label="2">2发生过2次</el-radio>
                           <el-radio :label="3">3发生过3次及以上</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -663,7 +665,7 @@
                           <el-radio :label="2">2发生过2次</el-radio>
                           <el-radio :label="3">3发生过3次及以上</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -690,7 +692,7 @@
                           <el-radio :label="2">2发生过2次</el-radio>
                           <el-radio :label="3">3发生过3次及以上</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -717,7 +719,7 @@
                           <el-radio :label="2">2发生过2次</el-radio>
                           <el-radio :label="3">3发生过3次及以上</el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -791,7 +793,7 @@
                             />
                           </el-radio>
                         </el-radio-group>
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -2129,7 +2131,7 @@
                           <el-radio :label="2">2中度失能</el-radio>
                           <el-radio :label="3">3重度失能</el-radio>
                         </el-radio-group> -->
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"
@@ -2219,7 +2221,7 @@
                           <el-radio :label="2">2中度失能</el-radio>
                           <el-radio :label="3">3重度失能</el-radio>
                         </el-radio-group> -->
-                        <div class="right">
+                        <div class="right-input">
                           <input
                             type="text"
                             class="input"

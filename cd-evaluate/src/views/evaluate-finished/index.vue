@@ -54,7 +54,7 @@
         </div>
       </div>
       <div class="flex pr-16">
-        <el-button type="primary" >导出excel表</el-button>
+        <el-button type="primary" @click="exportList">导出excel表</el-button>
       </div>
     </div>
     <div class="list-container pl-16">
@@ -153,6 +153,7 @@ import './index.scss'
 import pagination from '@/components/pagination.vue'
 import { evaluateResult } from '@/libs/constant'
 import { getRegisterList } from '@/api/register'
+import { exportList } from '@/api/evaluate'
 export default {
   components: {
     pagination
@@ -185,6 +186,12 @@ export default {
     this.initList()
   },
   methods: {
+    // 导出列表
+    exportList () {
+      exportList().then(res => {
+        window.open(`${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`)
+      })
+    },
     // 按关键字搜索
     handleQuery () {
       this.queryParams.pageNum = 1

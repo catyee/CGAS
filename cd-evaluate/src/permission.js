@@ -6,9 +6,10 @@ import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/auth'
 
 NProgress.configure({ showSpinner: false })
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
+const whiteList = ['/login', '/auth-redirect']
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  console.log(store.getters.roles, '999999999')
   if (getToken()) {
     /* has token */
     if (to.path === '/login') {
@@ -19,8 +20,10 @@ router.beforeEach((to, from, next) => {
       store.dispatch('GetInfo').then((res) => {
         const { roles } = res
         store.dispatch('GenerateRoutes', roles).then((accessRoutes) => {
-          // 根据roles权限生成可访问的路由表
           router.addRoutes(accessRoutes) // 动态添加可访问路由表
+          if (to.name === 'auth') {
+            to = accessRoutes && accessRoutes[0] && accessRoutes[0].children[0]
+          }
           next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
         })
         next()

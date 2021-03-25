@@ -35,10 +35,17 @@ export function updateEvaluate (data) {
     data: data
   })
 }
-// h获取评估信息
+// 获取评估信息
 export function getEvaluate (id) {
   return request({
     url: '/pg/assess/' + id,
+    method: 'get'
+  })
+}
+// 导出列表
+export function exportList () {
+  return request({
+    url: '/pg/register/export',
     method: 'get'
   })
 }

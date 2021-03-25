@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container export-evaluate">
     <div class="tabs">
       <!-- A1 评估基本信息表 -->
       <div id="tab-A1" class="evaluate-tab hash-tab">
@@ -2186,7 +2186,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="sign-input">
+                  <div class="sign-input-date">
                     <div>
                       日期:
                       <div class="text-undeline">
@@ -2213,7 +2213,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="sign-input">
+                  <div class="sign-input-date">
                     <div>
                       日期:
                       <div class="text-undeline">
@@ -2302,13 +2302,8 @@
   padding: 0;
   margin: 0;
 }
-
-html,
-body {
-  font-size: 14px;
-}
-
-table {
+.export-evaluate{
+  table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -2458,11 +2453,13 @@ td {
   display: inline-block;
 }
 .sign-input {
-  display: inline-block;
-  width: 40%;
-  text-align: left;
-  margin-bottom: 5px;
+  float:left;
+  padding:10px 0;
 }
+.sign-input-date{
+    float:right;
+    padding:10px 0;
+ }
 .test-img{
   display: inline-block;
   width: 100px;
@@ -2491,6 +2488,12 @@ td {
   font-weight: bold;
   font-size: 16px;
 }
+}
+html,
+body {
+  font-size: 14px;
+}
+
 </style>
 <script>
 export default {

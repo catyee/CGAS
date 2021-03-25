@@ -166,6 +166,7 @@ export default {
           // 登录的同时 获取菜单信息
           // this.$store.dispatch('getMenuByUser').then(res => {
           this.loading = false
+          // console.log(this.redirect, '000000000000')
           this.$router.push({ path: this.redirect || '/' }).catch(() => {})
           //  })
         })

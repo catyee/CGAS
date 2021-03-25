@@ -12,6 +12,14 @@ export function getHtml (element) {
       padding: 0;
       margin: 0;
   }
+  @page {
+    @bottom-right {
+        content: counter(page) ;
+    }
+    @top-right {
+        content: "MZ/T 039—2013 ";
+    }
+ }
 
   html,
   body {
@@ -115,7 +123,7 @@ export function getHtml (element) {
   }
 
 
-  .right {
+  .right-con {
       position: absolute;
       bottom: 5px;
       right: 5px;
@@ -166,18 +174,24 @@ export function getHtml (element) {
   .text-undeline {
       display: inline-block;
       padding: 3px 5px;
+      width: 60px;
       border-bottom: 1px solid #000;
   }
 
   .right-group {
       display: inline-block;
   }
-  .sign-input{
-      display: inline-block;
-      width: 40%;
-      text-align: left;
-      margin-bottom: 5px;
+  .sign-box{
+      overflow:hidden;
   }
+  .sign-input{
+     float:left;
+     padding:10px 0;
+  }
+  .sign-input-date{
+    float:right;
+    padding:10px 0;
+ }
   .bold{
       font-weight: bold;
   }

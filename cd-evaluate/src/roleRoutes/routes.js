@@ -73,6 +73,13 @@ export const adminRoutes = [
         hidden: false,
         meta: { title: '已评估老人列表', icon: 'iconevaluate' },
         component: () => import(/* webpackChunkName: "evaluate-finished" */ '../views/evaluate-finished')
+      },
+      // 评估详情
+      {
+        path: 'evaluate-show/:id',
+        name: 'evaluate-show',
+        hidden: true,
+        component: () => import(/* webpackChunkName: "evaluate-show" */ '../views/evaluate-show')
       }
     ]
   },
