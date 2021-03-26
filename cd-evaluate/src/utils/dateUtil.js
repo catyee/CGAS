@@ -16,7 +16,6 @@ export function weekLastDay () {
 export function monthFirstDay () {
   var Nowdate = new Date()
   var day = new Date(Nowdate.getFullYear(), Nowdate.getMonth(), 1)
-  console.log(day)
   return formatDate(day, 'YYYY-mm-dd')
 }
 // 获取下月的第一天

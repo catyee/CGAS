@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     beforeUpload (file) {
-      console.log(file, 'typetypeeeeee')
       // 上传到服务器之前 禁止再次上传
       this.enableUpload = false
       let types

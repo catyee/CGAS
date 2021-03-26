@@ -181,6 +181,8 @@
                       <input
                         type="text"
                         class="input-text"
+                        :disabled="true"
+                        :readonly="true"
                         v-model="evaluateData.A_2_1"
                       />
                     </td>
@@ -258,6 +260,7 @@
                     <td>
                       <continueInput
                         v-model="evaluateData.A_2_4"
+                         :disabled="true"
                         :inputNums="18"
                       />
                     </td>
@@ -2382,8 +2385,6 @@ import exportEvaluate from '@/components/export-evaluate.vue'
 import uploadSign from '@/components/upload-sign.vue'
 import {
   exportTable,
-  getCode,
-  addEvaluate,
   updateEvaluate,
   getEvaluate
 } from '@/api/evaluate'
@@ -2402,6 +2403,7 @@ export default {
   },
   data () {
     return {
+      parseData: {}, // 从评估管理带过来的数据
       // 显示打印签名页弹框
       showSignPanel: false,
       // 评估id
@@ -2907,25 +2909,29 @@ export default {
   },
   created () {
     // 获取assessId
-    this.assessId = this.$route.params.id
-    this.registerId = this.$route.query.registerId
-    // 如果没有registerId  跳转回去 从评估管理过来必须传registerId
-    if (!this.registerId) {
+    const data = JSON.parse(this.$route.query.data)
+    this.parseData = data
+    // 如果没有传递data  跳转回去 从评估管理过来必须传data
+    if (!data) {
       this.$router.go(-1)
     }
+    this.assessId = this.$route.params.id
+    this.registerId = data.registerId
+    this.getEvaluate()
+
     // 新建
-    if (!this.assessId) {
-      const createBy = this.$route.query.createBy
-      // 生成评估编号
-      getCode({ createBy: createBy }).then((res) => {
-        this.evaluateData.A_1_1 = res.msg
-      })
-      // 获取assessId 并监听evaluateData变化 没当变化调用修改接口
-      this.addEvaluate()
-    } else {
-      // 存在assessId 首先获取评估信息 获取成功以后并监听evaluateData变化 没当变化调用修改接口
-      this.getEvaluate()
-    }
+    // if (!this.assessId) {
+    //   const createBy = this.$route.query.createBy
+    //   // 生成评估编号
+    //   getCode({ createBy: createBy }).then((res) => {
+    //     this.evaluateData.A_1_1 = res.msg
+    //   })
+    //   // 获取assessId 并监听evaluateData变化 没当变化调用修改接口
+    //   this.addEvaluate()
+    // } else {
+    //   // 存在assessId 首先获取评估信息 获取成功以后并监听evaluateData变化 没当变化调用修改接口
+    //   this.getEvaluate()
+    // }
   },
   mounted () {
     // 刷新页面跳转到对应的hash
@@ -3038,6 +3044,10 @@ export default {
     },
     // 下载打印签名页
     printSign () {
+      const checked = this.checkData()
+      if (!checked) {
+        return
+      }
       const loading = this.$loading({
         lock: true,
         text: '下载中，请稍后...',
@@ -3373,18 +3383,20 @@ export default {
       if (isEmpty(this.evaluateData.B_4_5)) {
         this.msgError('请选择社会交往能力评分')
         this.toHash('#B4')
+        return
       }
+      return true
     },
     // 新建评估 仅调用一次 获取到评估id之后调修改接口
-    addEvaluate () {
-      addEvaluate({
-        registerId: this.registerId
-      }).then((res) => {
-        // 给评估id赋值
-        this.assessId = res.data
-        this.getEvaluate()
-      })
-    },
+    // addEvaluate () {
+    //   addEvaluate({
+    //     registerId: this.registerId
+    //   }).then((res) => {
+    //     // 给评估id赋值
+    //     this.assessId = res.data
+    //     this.getEvaluate()
+    //   })
+    // },
     // 点击暂存按钮
     confirmSave () {
       this.save()
@@ -3452,6 +3464,10 @@ export default {
         if (data.cInfoJson) {
           this.cInfoJson = JSON.parse(data.cInfoJson)
         }
+        // 将评估管理的值带过来
+        this.evaluateData.A_2_1 = this.parseData.name
+        this.evaluateData.A_2_4 = this.parseData.idNumber
+
         this.watchDataChange()
       })
     }

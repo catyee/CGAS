@@ -175,6 +175,8 @@ export default {
     registerData: Object
   },
   data () {
+    // http://101.201.211.8:8080/man/system/user/list?pageNum=1&pageSize=20&roleIds=3
+    // http://101.201.211.8:8080/man/system/user/list?pageNum=1&pageSize=20&roleIds=3
     return {
       // 提示5s之后跳转
       duration: 5,
@@ -187,8 +189,10 @@ export default {
       queryParams: {
         // 页数
         pageNum: 1,
+        // 查询参数
+        nickName: '',
         // 每页的大小
-        pageSize: 999999,
+        pageSize: 20,
         // 只显示机构
         roleIds: 3,
         status: '0' // 启动的

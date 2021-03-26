@@ -1,6 +1,5 @@
 function adjustColumnWidth (table) {
   const colgroup = table.querySelector('colgroup')
-  console.log(colgroup, 'colgroupcolgroupcolgroup')
   const colDefs = [...colgroup.querySelectorAll('col')]
   colDefs.forEach((col) => {
     const clsName = col.getAttribute('name')

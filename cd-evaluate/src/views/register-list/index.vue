@@ -35,9 +35,9 @@
           </template>
         </el-table-column>
         <el-table-column label="登记年份" prop="registerYear">
-            <template slot-scope="scope">
+            <!-- <template slot-scope="scope">
               {{scope.row.registerYear.slice(0,4) }}
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column prop="name" label="老人姓名"> </el-table-column>
         <el-table-column prop="idNumber" label="身份证号" show-overflow-tooltip>

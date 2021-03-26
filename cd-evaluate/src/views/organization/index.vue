@@ -472,7 +472,6 @@ export default {
             type: 'warning'
           })
             .then(() => {
-              console.log(222, this)
               this.submitUser()
             })
             .catch(() => {

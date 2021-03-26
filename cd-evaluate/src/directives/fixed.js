@@ -2,7 +2,6 @@ export default {
   bind (el, binding) {
     console.log(window)
     window.addEventListener('scroll', function (el) {
-      console.log(9999)
       this.handleScroll(el)
     })
   },

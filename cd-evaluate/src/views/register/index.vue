@@ -259,6 +259,7 @@ export default {
     // 点击保存
     save () {
       // 编辑
+      this.ruleForm.idNumber = this.ruleForm.idNumber.trim()
       if (this.registerId) {
         updateRegister(this.ruleForm).then(res => {
           this.msgSuccess('保存成功')
@@ -289,11 +290,12 @@ export default {
         this.msgError('身份证格式不正确')
         return
       }
-      getlastRegister({ idNumber: this.ruleForm.idNumber }).then(res => {
+      getlastRegister({ idNumber: this.ruleForm.idNumber.trim() }).then(res => {
         if (res.data) {
           this.ruleForm = res.data
           this.ruleForm.registerId = null
           this.registerId = null
+          this.ruleForm.assessStatus = 0 // 置为未评估
           this.ruleForm.registerYear = new Date().getFullYear()
         } else {
           this.msgError('此身份证号没有登记记录')

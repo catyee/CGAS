@@ -8,7 +8,6 @@ export default {
       var title = this.htmlTitle
       h22p(title, elements)
       // var pages = $('#pdfDom .evaluate-tab')
-      // console.log(pages)
       // const PDF = new JsPDF('', 'pt', 'a4')
       // var position = 0
       // html2Canvas(pages[0], {
