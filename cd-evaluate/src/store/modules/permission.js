@@ -24,12 +24,12 @@ const permission = {
         // 民政局
         if (role[0] === 'admin') {
           routes = adminRoutes
-          // 评估机构
         } else if (role[0] === 'common') {
-          routes = evaluator
           // 基层用户
-        } else if (role[0] === 'pg') {
           routes = primaryRoutes
+        } else if (role[0] === 'pg') {
+          // 评估机构
+          routes = evaluator
         }
         commit('SET_ROUTES', routes)
         commit('SET_SIDEBAR_ROUTERS', routes)

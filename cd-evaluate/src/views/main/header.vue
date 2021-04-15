@@ -27,13 +27,13 @@ export default {
     role () {
       const role = this.$store.getters.roles[0]
       if (role === 'common') {
-        return '评估机构'
+        return '基层用户'
       }
       if (role === 'admin') {
         return '民政局'
       }
       if (role === 'pg') {
-        return '基层用户'
+        return '评估机构'
       }
       return ''
     }

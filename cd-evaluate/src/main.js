@@ -4,7 +4,7 @@ import store from './store'
 import router from './router'
 import './plugins/element.js'
 import './permission' // permission control
-import 'lib-flexible/flexible.js'
+import './flexible.js'
 import { HappyScroll } from 'vue-happy-scroll'
 // 引入css
 import 'vue-happy-scroll/docs/happy-scroll.css'
@@ -12,8 +12,11 @@ import filters from '@/utils/filter.js'
 import directives from '@/utils/directive.js'
 
 import htmlToPdf from '@/utils/htmlToPdf'
+// 此部分引入的是我们所编写的mockjs文档
+// import './mock'
 // 使用Vue.use()方法就会调用工具方法中的install方法
-
+process.env.VUE_APP_MOCK && require('./mock')
+console.log(process.env.VUE_APP_MOCK, 66666666666)
 Vue.use(htmlToPdf)
 // 自定义组件名
 Vue.component('happy-scroll', HappyScroll)

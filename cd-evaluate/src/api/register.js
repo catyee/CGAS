@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+
 export function getRegisterList (data) {
   return request({
     url: '/pg/register/list',

@@ -2860,8 +2860,8 @@ export default {
       // 2 近 30 天内发生过 2 次及以上跌倒、噎食、自杀、走失者，在原有能力级别上提高一个等级；
       if (
         this.evaluateData.B_2_1.score === 2 ||
-        this.evaluateData.A_2_13_1 ||
-        this.evaluateData.A_2_13_2
+        this.evaluateData.A_2_13_1 !== 0 ||
+        this.evaluateData.A_2_13_2 !== 0
       ) {
         v.push(1)
       }
@@ -3118,11 +3118,11 @@ export default {
         this.toHash('#A2')
         return
       }
-      if (isEmpty(this.evaluateData.A_2_3)) {
-        this.msgError('请选择被评估者的出生日期')
-        this.toHash('#A2')
-        return
-      }
+      // if (isEmpty()) {
+      //   this.msgError('请选择被评估者的出生日期')
+      //   this.toHash('#A2')
+      //   return
+      // }
       if (isSfz(this.evaluateData.A_2_4) !== 1) {
         this.msgError('被评估者的' + isSfz(this.evaluateData.A_2_4))
         this.toHash('#A2')
@@ -3149,6 +3149,7 @@ export default {
       ) {
         this.msgError('请输入被评估者的少数民族类型')
         this.toHash('#A2')
+        return
       }
       if (isEmpty(this.evaluateData.A_2_7)) {
         this.msgError('请选择被评估者的文化程度')
@@ -3272,6 +3273,12 @@ export default {
         this.msgError('请输入联系人电话')
         this.toHash('#A3')
         return
+      }
+      // 如果评定为昏迷 直接评定为重度失能 只填A1，A2，A3即可
+      if (this.evaluateData.B_3_1 === 3) {
+        // this.msgError('请选择意识水平评分')
+        // this.toHash('#B3')
+        return true
       }
       // B1
       if (isEmpty(this.evaluateData.B_1_1)) {
