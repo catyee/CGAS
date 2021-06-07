@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>3</title>
+    <defs>
+        <linearGradient x1="50%" y1="23.449%" x2="50%" y2="75.252%" id="linearGradient-1">
+            <stop stop-color="#DB3A3A" offset="0%"></stop>
+            <stop stop-color="#FF5555" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="2.77 1.434 9.77 1.434 9.77 11.434 6.288 8.434 2.77 11.434"></polygon>
+        <polygon id="path-4" points="2.567 1.434 9.567 1.434 9.567 11.434 6.086 8.434 2.567 11.434"></polygon>
+        <linearGradient x1="100%" y1="102.542%" x2="8.03%" y2="27.528%" id="linearGradient-6">
+            <stop stop-color="#EB9D63" offset="0%"></stop>
+            <stop stop-color="#FFCFA3" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-7" points="10 0 17.071 2.929 20 10 17.071 17.071 10 20 2.929 17.071 0 10 2.929 2.929"></polygon>
+        <linearGradient x1="86.682%" y1="76.228%" x2="40.971%" y2="50%" id="linearGradient-9">
+            <stop stop-color="#FFCFA3" offset="0%"></stop>
+            <stop stop-color="#EB9D63" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-10" points="10 0 17.071 2.929 20 10 17.071 17.071 10 20 2.929 17.071 0 10 2.929 2.929"></polygon>
+        <polygon id="path-12" points="10 0 17.071 2.929 20 10 17.071 17.071 10 20 2.929 17.071 0 10 2.929 2.929"></polygon>
+        <linearGradient x1="83.934%" y1="82.164%" x2="39.969%" y2="50%" id="linearGradient-14">
+            <stop stop-color="#FFCFA3" offset="0%"></stop>
+            <stop stop-color="#EB9D63" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组">
+            <g transform="translate(0.000000, 10.000000)">
+                <g transform="translate(9.163000, 0.477000)">
+                    <g id="1cldemi5ga-link" transform="translate(7.069173, 7.626158) rotate(-30.000000) translate(-7.069173, -7.626158) translate(3.069173, 2.126158)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+                        <polygon id="1cldemi5ga" points="0.77 0.434 7.77 0.434 7.77 10.434 4.288 7.434 0.77 10.434"></polygon>
+                    </g>
+                    <g id="Clipped" transform="translate(1.000000, 1.000000)">
+                        <mask id="mask-3" fill="white">
+                            <use xlink:href="#path-2"></use>
+                        </mask>
+                        <g id="1cldemi5ga" transform="translate(6.270000, 6.434000) rotate(-30.000000) translate(-6.270000, -6.434000) "></g>
+                        <polygon id="路径" fill="#D23131" fill-rule="nonzero" mask="url(#mask-3)" transform="translate(5.668500, 6.196500) scale(-1, 1) translate(-5.668500, -6.196500) " points="1 6.023 8.402 9.343 10.337 7 1.512 3.05"></polygon>
+                    </g>
+                </g>
+                <g transform="translate(0.500000, 0.477000)">
+                    <g id="2cabttitld-link" transform="translate(7.091848, 7.524610) scale(-1, 1) rotate(-30.000000) translate(-7.091848, -7.524610) translate(3.091848, 2.024610)" fill="url(#linearGradient-1)" fill-rule="nonzero">
+                        <polygon id="2cabttitld" points="0.567 0.434 7.567 0.434 7.567 10.434 4.086 7.434 0.567 10.434"></polygon>
+                    </g>
+                    <g id="Clipped" transform="translate(1.000000, 1.000000)">
+                        <mask id="mask-5" fill="white">
+                            <use xlink:href="#path-4"></use>
+                        </mask>
+                        <g id="2cabttitld" transform="translate(6.067000, 6.434000) rotate(-330.000000) translate(-6.067000, -6.434000) "></g>
+                        <polygon id="路径" fill="#D23131" fill-rule="nonzero" mask="url(#mask-5)" points="2 6.023 9.402 9.343 11.337 7 2.512 3.05"></polygon>
+                    </g>
+                </g>
+            </g>
+            <g transform="translate(2.000000, 0.000000)">
+                <g id="nyviit6ulf-link" fill="url(#linearGradient-6)" fill-rule="nonzero">
+                    <polygon id="nyviit6ulf" points="10 0 17.071 2.929 20 10 17.071 17.071 10 20 2.929 17.071 0 10 2.929 2.929"></polygon>
+                </g>
+                <g id="Clipped">
+                    <mask id="mask-8" fill="white">
+                        <use xlink:href="#path-7"></use>
+                    </mask>
+                    <g id="nyviit6ulf"></g>
+                    <polygon id="路径" fill="url(#linearGradient-9)" fill-rule="nonzero" mask="url(#mask-8)" points="15 0 20 0 20 20 5 20"></polygon>
+                </g>
+                <g id="Clipped">
+                    <mask id="mask-11" fill="white">
+                        <use xlink:href="#path-10"></use>
+                    </mask>
+                    <g id="nyviit6ulf"></g>
+                    <g id="编组" mask="url(#mask-11)">
+                        <g transform="translate(6.000000, 5.000000)" id="0vq1fzdrbk-link">
+                            <g>
+                                <path d="M3,9.395 C3.922,9.395 4.704,9.163 5.348,8.7 C5.991,8.237 6.382,7.622 6.52,6.854 C6.606,6.38 6.56,5.968 6.384,5.62 C6.207,5.272 5.891,5.01 5.436,4.837 C5.86,4.659 6.222,4.403 6.524,4.071 C6.825,3.739 7.011,3.375 7.083,2.979 C7.221,2.212 7.071,1.609 6.631,1.172 C6.191,0.735 5.515,0.516 4.601,0.516 C4.075,0.516 3.575,0.617 3.101,0.819 C2.628,1.021 2.237,1.301 1.929,1.659 C1.621,2.017 1.427,2.421 1.345,2.872 L3.06,2.872 C3.113,2.583 3.266,2.349 3.52,2.169 C3.774,1.989 4.065,1.899 4.393,1.899 C4.757,1.899 5.026,1.996 5.198,2.189 C5.371,2.384 5.426,2.655 5.363,3.003 C5.298,3.363 5.141,3.652 4.893,3.869 C4.643,4.087 4.301,4.196 3.866,4.196 L2.952,4.196 L2.71,5.537 L3.618,5.537 C4.568,5.537 4.965,5.968 4.81,6.831 C4.745,7.187 4.578,7.473 4.308,7.688 C4.038,7.904 3.698,8.012 3.291,8.012 C2.935,8.012 2.654,7.909 2.447,7.703 C2.241,7.497 2.167,7.233 2.226,6.908 L0.51,6.908 C0.375,7.656 0.54,8.257 1.006,8.712 C1.472,9.167 2.136,9.395 2.999,9.395 L3,9.395 Z" id="0vq1fzdrbk" fill="#000000" fill-rule="nonzero"></path>
+                            </g>
+                            <g>
+                                <path d="M3,9.395 C3.922,9.395 4.704,9.163 5.348,8.7 C5.991,8.237 6.382,7.622 6.52,6.854 C6.606,6.38 6.56,5.968 6.384,5.62 C6.207,5.272 5.891,5.01 5.436,4.837 C5.86,4.659 6.222,4.403 6.524,4.071 C6.825,3.739 7.011,3.375 7.083,2.979 C7.221,2.212 7.071,1.609 6.631,1.172 C6.191,0.735 5.515,0.516 4.601,0.516 C4.075,0.516 3.575,0.617 3.101,0.819 C2.628,1.021 2.237,1.301 1.929,1.659 C1.621,2.017 1.427,2.421 1.345,2.872 L3.06,2.872 C3.113,2.583 3.266,2.349 3.52,2.169 C3.774,1.989 4.065,1.899 4.393,1.899 C4.757,1.899 5.026,1.996 5.198,2.189 C5.371,2.384 5.426,2.655 5.363,3.003 C5.298,3.363 5.141,3.652 4.893,3.869 C4.643,4.087 4.301,4.196 3.866,4.196 L2.952,4.196 L2.71,5.537 L3.618,5.537 C4.568,5.537 4.965,5.968 4.81,6.831 C4.745,7.187 4.578,7.473 4.308,7.688 C4.038,7.904 3.698,8.012 3.291,8.012 C2.935,8.012 2.654,7.909 2.447,7.703 C2.241,7.497 2.167,7.233 2.226,6.908 L0.51,6.908 C0.375,7.656 0.54,8.257 1.006,8.712 C1.472,9.167 2.136,9.395 2.999,9.395 L3,9.395 Z" id="0vq1fzdrbk" fill="#FFFFFF" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g id="Clipped">
+                    <mask id="mask-13" fill="white">
+                        <use xlink:href="#path-12"></use>
+                    </mask>
+                    <g id="nyviit6ulf"></g>
+                    <polygon id="路径" fill="url(#linearGradient-14)" fill-rule="nonzero" opacity="0.3" mask="url(#mask-13)" points="15 0 20 0 20 20 5 20"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

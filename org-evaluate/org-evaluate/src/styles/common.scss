@@ -1,0 +1,204 @@
+
+$menu-width: 300px;
+// 颜色定义
+$system-color: #C23731; // 系统色
+$body-background-color:#fff; // body背景色
+$border-color: #E6EBF1;
+$body-deep-color: #f8f8f8;
+
+// 系统字体
+// $system-font-family: 'PingFangSC-Regular,PingFang SC';
+$system-font-family: ' font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;';
+
+// common color
+$default-font-color: #27323e;
+$color-edit: #5274FD;
+
+// 页面高度
+html, body, #app {
+    box-sizing: border-box;
+    height: 100%;
+    background-color: $body-deep-color;
+  
+}
+.flex{
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+// icon
+// @font-face {
+//     font-family: 'iconfont';  /* project id 1617452 */
+//     src: url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.eot');
+//     src: url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.eot?#iefix') format('embedded-opentype'),
+//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.woff2') format('woff2'),
+//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.woff') format('woff'),
+//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.ttf') format('truetype'),
+//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.svg#iconfont') format('svg');
+//   }
+// .iconfont{
+//     font-family:"iconfont" !important;
+//     font-size:16px;font-style:normal;
+//     -webkit-font-smoothing: antialiased;
+//     -webkit-text-stroke-width: 0.2px;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+// margin
+@for $i from 1 through 30 {
+    .mt-#{$i} {
+        margin-top: #{$i}px !important;
+    }
+    .mr-#{$i} {
+        margin-right: #{$i}px !important;
+    }
+    .ml-#{$i} {
+        margin-left: #{$i}px !important;
+    }
+    .mb-#{$i} {
+        margin-bottom: #{$i}px !important;
+    }
+    .mg-#{$i} {
+      margin: #{$i}px !important;
+    }
+}
+// height
+@for $i from 1 through 300 {
+    .height-#{$i} {
+        height: #{$i}px !important;
+    }
+}
+// padding
+@for $i from 1 through 100 {
+    .pt-#{$i} {
+        padding-top: #{$i}px !important;
+    }
+    .pr-#{$i} {
+        padding-right: #{$i}px !important;
+    }
+    .pl-#{$i} {
+        padding-left: #{$i}px !important;
+    }
+    .pb-#{$i} {
+        padding-bottom: #{$i}px !important;
+    }
+    .pd-#{$i} {
+        padding: #{$i}px !important
+    }
+}
+// font-size
+@for $i from 1 through 60 {
+    .f#{$i} {
+        font-size: #{$i}px !important;
+    }
+}
+
+.dib{
+    display: inline-block;
+}
+.c-333 {
+    color: #333333;
+}
+.pointer {
+    cursor: pointer;
+}
+.bold{
+    font-weight: 600;
+}
+
+body {
+    //background-color: $body-background-color;
+    // font-family: 'PingFangSC-Regular,PingFang SC';
+    //font-family: 'Microsoft YaHei';
+}
+// 溢出隐藏
+.ellipsis{
+    overflow:hidden; //超出的文本隐藏
+    text-overflow:ellipsis; //溢出用省略号显示
+    white-space:nowrap; //溢出不换行
+}
+.color-danger{
+    color: $system-color;
+}
+.color-edit{
+    color: $color-edit;
+}
+
+.page-title{
+ 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 23px;
+
+   
+}
+.title-line{
+    width: 3px;
+    height: 16px;
+    background: #C23731;
+}
+  .table-content{
+    min-height: 400px;
+    background-color: #fff;
+}
+.el-table__header-wrapper thead th{
+    background-color: #F8F8F8;
+    padding: 20px 0;
+}
+.confirm-pannel .el-message-box__message p{
+    font-size: 20px;
+    font-weight: bold;
+}
+/* 清除滑条样式 */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: none;
+}
+
+/*chrome--------------------------------------------start*/
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(201, 201, 202, 1);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(162, 162, 163, 1);
+}
+/*chrome--------------------------------------------end*/
+/*IE--------------------------------------------start*/
+* {
+    /*三角箭头的颜色*/
+    scrollbar-arrow-color: #c0c4cc;
+    /*滚动条滑块按钮的颜色*/
+    scrollbar-face-color: #A2A2A3;
+    /*滚动条整体颜色*/
+    scrollbar-highlight-color: #A2A2A3;
+    /*滚动条阴影*/
+    scrollbar-shadow-color: #A2A2A3;
+    /*滚动条轨道颜色*/
+    scrollbar-track-color: #f4f4f5;
+    /*滚动条3d亮色阴影边框的外观颜色——左边和上边的阴影色*/
+    scrollbar-3dlight-color: #A2A2A3;
+    /*滚动条3d暗色阴影边框的外观颜色——右边和下边的阴影色*/
+    scrollbar-darkshadow-color: #A2A2A3;
+    /*滚动条基准颜色*/
+    scrollbar-base-color: #f4f4f5;
+}
+/*IE--------------------------------------------end*/
