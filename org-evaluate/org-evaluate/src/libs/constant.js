@@ -1,1 +1,1 @@
-export const constant = []
+export const checkedGrade = ['A', 'B', 'C']

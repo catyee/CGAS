@@ -72,8 +72,8 @@
     var width = docEl.getBoundingClientRect().width
     if (width / dpr > 1920) {
       width = 1920 * dpr
-    } else if (width / dpr < 540) {
-      width = 549 * dpr
+    } else if (width / dpr < 1200) {
+      width = 1200 * dpr
     }
     var rem = width / 10
     docEl.style.fontSize = rem + 'px'

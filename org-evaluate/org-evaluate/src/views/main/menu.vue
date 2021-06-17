@@ -59,6 +59,7 @@ export default {
   line-height: 64px;
   font-size: 16px;
   color: #111;
+  text-align: left;
   span {
     padding-left: 10px;
   }

@@ -3,7 +3,7 @@
     <div class="selector">
       <div class="flex pr-16">
         <div class="title-line"></div>
-        <span class="pl-2 f14">基层用户列表</span>
+        <span class="pl-2 f14">负责专员</span>
       </div>
       <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">用户名称:</div>
@@ -43,9 +43,7 @@
           >
         </div>
         <div class="oper-right pr-16">
-          <el-button type="primary" @click="showAddUser = true"
-            >添加新用户</el-button
-          >
+          <el-button type="primary" @click="addNew">添加新用户</el-button>
         </div>
       </div>
       <el-table
@@ -57,25 +55,15 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="nickName" label="乡、镇、街道名称">
+        <el-table-column prop="nickName" label="姓名"> </el-table-column>
+        <el-table-column prop="sex" label="性别" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <span>{{ scope.row.sex == 1 ? "男" : "女" }}</span>
+          </template>
         </el-table-column>
-        <el-table-column
-          prop="contactName"
-          label="相关联络人姓名"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="contactPhone"
-          label="相关联络人手机号"
-          show-overflow-tooltip
-        ></el-table-column>
-        <el-table-column
-          prop="userName"
-          label="登录手机号"
-          show-overflow-tooltip
-        >
+        <el-table-column prop="userName" label="手机号" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column label="用户状态" show-overflow-tooltip>
+        <el-table-column label="状态" show-overflow-tooltip>
           <template slot-scope="scope">
             <el-switch
               @change="changeUserStatus(scope.row)"
@@ -133,7 +121,7 @@
         width="50%"
         :close-on-click-modal="false"
       >
-        <div slot="title">添加基层用户</div>
+        <div slot="title">{{ pannelTitle }}</div>
         <div class="desc color-danger">必填项 *</div>
         <div class="mt-30 pb-30">
           <el-form
@@ -142,23 +130,22 @@
             :rules="rules"
             ref="ruleForm"
           >
-            <el-form-item label="乡、镇、街道名称：" prop="nickName">
+            <el-form-item label="姓名：" prop="nickName">
               <el-input
-                placeholder="请输入乡、镇、街道名称"
+                placeholder="姓名"
                 v-model="ruleForm.nickName"
               ></el-input>
             </el-form-item>
-            <el-form-item label="相关联络人姓名：" prop="contactName">
-              <el-input
-                placeholder="请输入相关联络人姓名"
-                v-model="ruleForm.contactName"
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="相关联络人手机号：" prop="contactPhone">
-              <el-input
-                placeholder="请输入相关联络人手机号"
-                v-model="ruleForm.contactPhone"
-              ></el-input>
+            <el-form-item label="性别:" prop="sex">
+              <el-select v-model="ruleForm.sex" placeholder="请选择">
+                <el-option
+                  v-for="item in sexOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item label="登录手机号:" prop="userName">
               <el-input
@@ -214,6 +201,11 @@ export default {
   },
   data () {
     return {
+      sexOptions: [
+        { label: '男', value: 1 },
+        { label: '女', value: 0 }
+      ],
+      pannelTitle: '新建负责专员',
       selectedIds: [], // 选中项的id
       selectedIdsStr: '', // 选中项id的拼接字符串
       // getList查询参数
@@ -239,7 +231,6 @@ export default {
         roleIds: [2], // 新增默认必传 基层用户
         passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
       }
-
     }
   },
   mounted () {
@@ -287,7 +278,9 @@ export default {
       if (this.ruleForm.userId) {
         rules.password = []
       } else {
-        rules.password = [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        rules.password = [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
       }
       return rules
     }
@@ -305,12 +298,18 @@ export default {
   //   }
   // },
   methods: {
+    // 新建用户
+    addNew () {
+      this.showAddUser = true
+      this.pannelTitle = '新建负责专员'
+    },
     // 修改用户信息
     edit (user) {
       this.ruleForm = user
       // 因为列表查询后端没有返回roleIds所以此处需要单独处理
       this.ruleForm.roleIds = [2]
       this.showAddUser = true
+      this.pannelTitle = '修改'
     },
     // 点击重置密码
     resetPwd (userId) {
@@ -487,7 +486,7 @@ export default {
     },
     submitUser () {
       if (this.ruleForm.userId) {
-      // 编辑用户
+        // 编辑用户
         updateUser(this.ruleForm).then((res) => {
           if (res.code === 200) {
             this.msgSuccess('修改成功')
@@ -503,7 +502,7 @@ export default {
           }
         })
       } else {
-      // 新建用户
+        // 新建用户
         addUser(this.ruleForm).then((res) => {
           if (res.code === 200) {
             this.msgSuccess('添加成功')
@@ -522,6 +521,5 @@ export default {
     }
   }
   // 提交用户信息
-
 }
 </script>
