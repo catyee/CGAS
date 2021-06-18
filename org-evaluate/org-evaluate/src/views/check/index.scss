@@ -7,7 +7,7 @@
     height: 100%;
     .wrap{
       overflow-y: auto;
-      height: 800px;
+      // height: 800px;
       flex: 1;
       display: flex;
     }
@@ -57,9 +57,9 @@
 
 
    .tabs{
-    border: 1px solid #E7E7E7;
+    // border: 1px solid #E7E7E7;
     box-sizing: border-box;
-    padding: 24px;
+    // padding: 24px;
   }
   .save{
    position: fixed;
@@ -125,6 +125,9 @@
       font-size: 14px;
       line-height: 1.5;
       vertical-align: middle;
+    }
+    .td-top{
+      vertical-align: top;
     }
     .center{
       text-align: center;
