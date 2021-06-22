@@ -16,6 +16,8 @@
     }
     .left{
        padding-right: 30px;
+       padding-bottom: 60px;
+       overflow-y: auto;
       // position: absolute;
       // top: 14px;
       // left: 27px;
@@ -135,6 +137,17 @@
 }
 .text-bold{
     font-weight: bold;
+}
+.tip{
+  padding: 32px 24px;
+  line-height: 26px;
+  color: #000;
+}
+.total-table{
+  td{
+    text-align: center;
+    color: #5B9244;
+  }
 }
   @media screen and (max-device-width: 1200px){
     .center{
