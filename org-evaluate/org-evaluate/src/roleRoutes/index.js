@@ -19,6 +19,13 @@ export const orgRoutes = [
         meta: { title: '评估', icon: 'iconevaluate' },
         hidden: true,
         component: () => import(/* webpackChunkName: "check" */ '../views/check')
+      },
+      {
+        path: 'check-show',
+        name: 'check-show',
+        meta: { title: '检查', icon: 'iconevaluate' },
+        hidden: true,
+        component: () => import(/* webpackChunkName: "check-show" */ '../views/check-show')
       }
     ]
   },

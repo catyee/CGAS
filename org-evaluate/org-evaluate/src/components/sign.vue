@@ -1,9 +1,17 @@
 <template>
-    <div>
-        <h2 class="title">Vue Sign Canvas 电子签名板</h2>
-        <sign-canvas class="sign-canvas" ref="SignCanvas" :options="options" v-model="value" />
-        <img v-if="value" class="view-image" :src="value" width="150" height="150" />
-        <div class="config">
+  <div>
+    <!-- <h2 class="title">Vue Sign Canvas 电子签名板</h2> -->
+    <div class="canvas-wrap">
+      <sign-canvas
+        class="sign-canvas"
+        ref="SignCanvas"
+        :options="options"
+        v-model="value"
+      />
+      <span class="canvas-tip">{{ tip }}</span>
+    </div>
+    <!-- <img v-if="value" class="view-image" :src="value" width="382" height="152" /> -->
+    <!-- <div class="config">
             <ul class="ul-config">
                 <li class="li-c">
                     <span class="item-label">书写速度:</span>
@@ -83,13 +91,13 @@
                     </span>
                 </li>
             </ul>
-        </div>
-        <div class="sign-btns">
+        </div> -->
+    <!-- <div class="sign-btns">
             <span id="clear" @click="canvasClear()">清空</span>
             <span id="save" @click="saveAsImg()">保存</span>
             <span id="save" @click="downloadSignImg()">下载</span>
-        </div>
-    </div>
+        </div> -->
+  </div>
 </template>
 <script>
 import SignCanvas from 'sign-canvas'
@@ -97,17 +105,27 @@ export default {
   components: {
     SignCanvas
   },
+  watch: {
+    value (value) {
+      if (value) {
+        this.tip = ''
+      } else {
+        this.tip = '请在空白处签字'
+      }
+    }
+  },
   data () {
     return {
+      tip: '请在空白处签字',
       value: null,
       options: {
-        isDpr: false, // 是否使用dpr兼容高倍屏 [Boolean] 可选
+        isDpr: true, // 是否使用dpr兼容高倍屏 [Boolean] 可选
         lastWriteSpeed: 1, // 书写速度 [Number] 可选
         lastWriteWidth: 2, // 下笔的宽度 [Number] 可选
         lineCap: 'round', // 线条的边缘类型 [butt]平直的边缘 [round]圆形线帽 [square]正方形线帽
         lineJoin: 'bevel', // 线条交汇时边角的类型  [bevel]创建斜角 [round]创建圆角 [miter]创建尖角。
-        canvasWidth: 350, // canvas宽高 [Number] 可选
-        canvasHeight: 370, // 高度  [Number] 可选
+        canvasWidth: 382, // canvas宽高 [Number] 可选
+        canvasHeight: 152, // 高度  [Number] 可选
         isShowBorder: true, // 是否显示边框 [可选]
         bgColor: '#fcc', // 背景色 [String] 可选
         borderWidth: 1, // 网格线宽度  [Number] 可选
@@ -123,80 +141,94 @@ export default {
   },
   methods: {
     /**
-             * 清除画板
-             */
+     * 清除画板
+     */
     canvasClear () {
       this.$refs.SignCanvas.canvasClear()
     },
 
     /**
-             * 保存图片
-             */
+     * 保存图片
+     */
     saveAsImg () {
+      if (!this.value) {
+        return false
+      }
       const img = this.$refs.SignCanvas.saveAsImg()
-      alert(`image 的base64：${img}`)
+      return img
     },
 
     /**
-             * 下载图片
-             */
+     * 下载图片
+     */
     downloadSignImg () {
       this.$refs.SignCanvas.downloadSignImg()
     }
   }
-
 }
 </script>
 <style lang="scss">
-    * {
-        margin: 0;
-        padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+}
+.canvas-wrap {
+  position: relative;
+  // width: 382PX;
+  // height: 152px;
+  .canvas-tip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.title {
+  padding: 20px;
+  text-align: center;
+}
+.sign-canvas {
+  display: block;
+  margin: 20px auto;
+}
+.view-image {
+  display: block;
+  margin: 20px auto;
+}
+.config {
+  width: 350px;
+  margin: 20px auto;
+  .ul-config {
+    .li-c {
+      display: flex;
+      align-items: center;
+      padding: 4px 10px;
+      .item-label {
+        font-size: 14px;
+      }
+      .item-content {
+        margin-left: 10px;
+      }
     }
-    .title {
-        padding: 20px;
-        text-align: center;
-    }
-    .sign-canvas {
-        display: block;
-        margin: 20px auto;
-    }
-    .view-image {
-        display: block;
-        margin: 20px auto;
-    }
-    .config {
-        width: 350px;
-        margin: 20px auto;
-        .ul-config {
-            .li-c {
-                display: flex;
-                align-items: center;
-                padding: 4px 10px;
-                .item-label {
-                    font-size: 14px;
-                }
-                .item-content {
-                    margin-left: 10px;
-                }
-            }
-        }
-    }
-    .sign-btns {
-        display: flex;
-        justify-content: space-between;
-        #clear,
-        #clear1,
-        #save {
-            display: inline-block;
-            padding: 5px 10px;
-            width: 76px;
-            height: 40px;
-            line-height: 40px;
-            border: 1px solid #eee;
-            background: #e1e1e1;
-            border-radius: 10px;
-            text-align: center;
-            margin: 20px auto;
-            cursor: pointer;
-        }
-    }
+  }
+}
+.sign-btns {
+  display: flex;
+  justify-content: space-between;
+  #clear,
+  #clear1,
+  #save {
+    display: inline-block;
+    padding: 5px 10px;
+    width: 76px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #eee;
+    background: #e1e1e1;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px auto;
+    cursor: pointer;
+  }
+}
+</style>

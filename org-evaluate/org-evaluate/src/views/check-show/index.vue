@@ -67,13 +67,8 @@
                   <td colspan="4">
                     <div class="input-line">
                       <span class="text-bold f16">机构名称：</span
-                      ><el-input
-                        type="textarea"
-                        autosize
-                        v-model="tableData.name"
-                        placeholder="请输入内容"
                       >
-                      </el-input>
+                      <span>{{tableData.orgName}}</span>
                     </div>
                   </td>
                   <td colspan="4">
@@ -105,14 +100,10 @@
                       <td>未取得许可证，为不符合。不符合的，请列明原因。</td>
                       <td>查看证照</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_1.value"
-                        ></CheckedGrade>
+                        {{tableData.data_1.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_1.text"
-                        ></CheckedText>
+                        {{tableData.data_1.text}}
                       </td>
                     </tr>
                     <tr>
@@ -128,14 +119,10 @@
                         查看证照；委托服务的，查看协议和提供方有效许可证。
                       </td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_2.value"
-                        ></CheckedGrade>
+                        {{tableData.data_2.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_2.text"
-                        ></CheckedText>
+                        {{tableData.data_2.text}}
                       </td>
                     </tr>
                     <tr>
@@ -149,14 +136,10 @@
 
                       <td>查看证照</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_3.value"
-                        ></CheckedGrade>
+                        {{tableData.data_3.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_3.text"
-                        ></CheckedText>
+                        {{tableData.data_3.text}}
                       </td>
                     </tr>
                     <tr>
@@ -168,14 +151,10 @@
 
                       <td>查看证照</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_4.value"
-                        ></CheckedGrade>
+                        {{tableData.data_4.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_4.text"
-                        ></CheckedText>
+                        {{tableData.data_4.text}}
                       </td>
                     </tr>
                   </template>
@@ -190,14 +169,10 @@
                       </td>
                       <td>查看制度、合同和手续</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_5.value"
-                        ></CheckedGrade>
+                        {{tableData.data_5.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_5.text"
-                        ></CheckedText>
+                        {{tableData.data_5.text}}
                       </td>
                     </tr>
                     <tr>
@@ -208,14 +183,10 @@
                       <td>发现此类问题投诉，为不符合。</td>
                       <td>查看制度，相关记录；询问老年人</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_6.value"
-                        ></CheckedGrade>
+                        {{tableData.data_6.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_6.text"
-                        ></CheckedText>
+                        {{tableData.data_6.text}}>
                       </td>
                     </tr>
                     <tr>
@@ -224,14 +195,10 @@
                       <td>如无为不符合。</td>
                       <td>查看制度</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_7.value"
-                        ></CheckedGrade>
+                        {{tableData.data_7.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_7.text"
-                        ></CheckedText>
+                        {{tableData.data_7.text}}
                       </td>
                     </tr>
                     <tr>
@@ -244,14 +211,10 @@
                       </td>
                       <td>查看制度、文件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_8.value"
-                        ></CheckedGrade>
+                        {{tableData.data_8.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_8.text"
-                        ></CheckedText>
+                        {{tableData.data_8.text}}
                       </td>
                     </tr>
                     <tr>
@@ -262,14 +225,10 @@
                       <td>如有此类情况，签订外包合同，有则符合。</td>
                       <td>查看合同</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_9.value"
-                        ></CheckedGrade>
+                        {{tableData.data_9.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_9.text"
-                        ></CheckedText>
+                        {{tableData.data_9.text}}
                       </td>
                     </tr>
                   </template>
@@ -286,14 +245,10 @@
                         <td>有1项情况存在，即不符合。</td>
                         <td>查看周边环境、相关文件</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_10.value"
-                          ></CheckedGrade>
+                            {{tableData.data_10.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_10.text"
-                          ></CheckedText>
+                            {{tableData.data_10.text}}
                         </td>
                       </tr>
                       <tr>
@@ -304,14 +259,10 @@
                         <td>如有1项情况不符合，即不符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_11.value"
-                          ></CheckedGrade>
+                          {{tableData.data_11.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_11.text"
-                          ></CheckedText>
+                        {{tableData.data_11.text}}
                         </td>
                       </tr>
                       <tr>
@@ -323,14 +274,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_12.value"
-                          ></CheckedGrade>
+                          {{tableData.data_12.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_12.text"
-                          ></CheckedText>
+                          {{tableData.data_12.text}}
                         </td>
                       </tr>
                       <tr>
@@ -344,14 +291,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_13.value"
-                          ></CheckedGrade>
+                          {{tableData.data_13.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_13.text"
-                          ></CheckedText>
+                          {{tableData.data_13.text}}
                         </td>
                       </tr>
                       <tr>
@@ -362,14 +305,10 @@
                         <td>满足3项为部分符合，4项及以上为符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_14.value"
-                          ></CheckedGrade>
+                          {{tableData.data_14.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_14.text"
-                          ></CheckedText>
+                          {{tableData.data_14.text}}
                         </td>
                       </tr>
                       <tr>
@@ -380,14 +319,10 @@
                         <td>满足2项为部分符合，3项及以上为符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_15.value"
-                          ></CheckedGrade>
+                          {{tableData.data_15.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_15.text"
-                          ></CheckedText>
+                          {{tableData.data_15.text}}
                         </td>
                       </tr>
                       <tr>
@@ -400,14 +335,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_16.value"
-                          ></CheckedGrade>
+                          {{tableData.data_16.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_16.text"
-                          ></CheckedText>
+                          {{tableData.data_16.text}}
                         </td>
                       </tr>
                       <tr>
@@ -416,14 +347,10 @@
                         <td>有1处不满足，为不符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_17.value"
-                          ></CheckedGrade>
+                          {{tableData.data_17.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_17.text"
-                          ></CheckedText>
+                          {{tableData.data_17.text}}
                         </td>
                       </tr>
                       <tr>
@@ -443,14 +370,10 @@
                         </td>
                         <td>现场查看、测量</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_18.value"
-                          ></CheckedGrade>
+                          {{tableData.data_18.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_18.text"
-                          ></CheckedText>
+                          {{tableData.data_18.text}}
                         </td>
                       </tr>
                       <tr>
@@ -461,14 +384,10 @@
                         <td>安装并可正常使用为符合；不能正常使用为不符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_19.value"
-                          ></CheckedGrade>
+                          {{tableData.data_19.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_19.text"
-                          ></CheckedText>
+                          {{tableData.data_19.text}}
                         </td>
                       </tr>
                       <tr>
@@ -483,14 +402,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_20.value"
-                          ></CheckedGrade>
+                          {{tableData.data_20.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_20.text"
-                          ></CheckedText>
+                          {{tableData.data_20.text}}
                         </td>
                       </tr>
                       <tr>
@@ -501,14 +416,10 @@
                         <td>1处不符合为不符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_21.value"
-                          ></CheckedGrade>
+                          {{tableData.data_21.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_21.text"
-                          ></CheckedText>
+                          {{tableData.data_21.text}}
                         </td>
                       </tr>
                       <tr>
@@ -521,14 +432,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_22.value"
-                          ></CheckedGrade>
+                          {{tableData.data_22.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_22.text"
-                          ></CheckedText>
+                          {{tableData.data_22.text}}
                         </td>
                       </tr>
                       <tr>
@@ -541,14 +448,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_23.value"
-                          ></CheckedGrade>
+                          {{tableData.data_23.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_23.text"
-                          ></CheckedText>
+                          {{tableData.data_23.text}}
                         </td>
                       </tr>
                       <tr>
@@ -562,14 +465,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_24.value"
-                          ></CheckedGrade>
+                          {{tableData.data_24.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_24.text"
-                          ></CheckedText>
+                          {{tableData.data_24.text}}
                         </td>
                       </tr>
                       <tr>
@@ -582,14 +481,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_25.value"
-                          ></CheckedGrade>
+                          {{tableData.data_25.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_25.text"
-                          ></CheckedText>
+                          {{tableData.data_25.text}}
                         </td>
                       </tr>
                       <tr>
@@ -602,14 +497,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_26.value"
-                          ></CheckedGrade>
+                          {{tableData.data_26.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_26.text"
-                          ></CheckedText>
+                          {{tableData.data_26.text}}
                         </td>
                       </tr>
                       <tr>
@@ -622,14 +513,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_27.value"
-                          ></CheckedGrade>
+                          {{tableData.data_27.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_27.text"
-                          ></CheckedText>
+                          {{tableData.data_27.text}}
                         </td>
                       </tr>
                       <tr>
@@ -645,14 +532,10 @@
                         </td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_28.value"
-                          ></CheckedGrade>
+                          {{tableData.data_28.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_28.text"
-                          ></CheckedText>
+                          {{tableData.data_28.text}}
                         </td>
                       </tr>
                       <tr>
@@ -663,14 +546,10 @@
                         <td>医疗垃圾处理可与专业机构签订合作协议。</td>
                         <td>现场查看，查看合同</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_29.value"
-                          ></CheckedGrade>
+                          {{tableData.data_29.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_29.text"
-                          ></CheckedText>
+                          {{tableData.data_29.text}}
                         </td>
                       </tr>
                       <tr>
@@ -683,14 +562,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_30.value"
-                          ></CheckedGrade>
+                          {{tableData.data_30.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_30.text"
-                          ></CheckedText>
+                          {{tableData.data_30.text}}
                         </td>
                       </tr>
                       <tr>
@@ -704,14 +579,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_31.value"
-                          ></CheckedGrade>
+                          {{tableData.data_31.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_31.text"
-                          ></CheckedText>
+                          {{tableData.data_31.text}}
                         </td>
                       </tr>
                       <tr>
@@ -722,14 +593,10 @@
                         <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                         <td>现场查看，试用设备</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_32.value"
-                          ></CheckedGrade>
+                          {{tableData.data_32.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_32.text"
-                          ></CheckedText>
+                          {{tableData.data_32.text}}
                         </td>
                       </tr>
                       <tr>
@@ -740,14 +607,10 @@
                         </td>
                         <td>查看制度、现场查看老人居室、维修记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_33.value"
-                          ></CheckedGrade>
+                          {{tableData.data_33.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_33.text"
-                          ></CheckedText>
+                          {{tableData.data_33.text}}
                         </td>
                       </tr>
                     </template>
@@ -765,14 +628,10 @@
                         </td>
                         <td>查看证书</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_34.value"
-                          ></CheckedGrade>
+                          {{tableData.data_34.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_34.text"
-                          ></CheckedText>
+                           {{tableData.data_34.text}}
                         </td>
                       </tr>
                       <tr>
@@ -787,14 +646,10 @@
                         </td>
                         <td>查看文件资料</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_35.value"
-                          ></CheckedGrade>
+                           {{tableData.data_35.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_35.text"
-                          ></CheckedText>
+                           {{tableData.data_35.text}}
                         </td>
                       </tr>
                       <tr>
@@ -807,14 +662,10 @@
                         </td>
                         <td>查看证书、相关记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_36.value"
-                          ></CheckedGrade>
+                           {{tableData.data_36.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_36.text"
-                          ></CheckedText>
+                          {{tableData.data_36.text}}
                         </td>
                       </tr>
                       <tr>
@@ -827,14 +678,10 @@
                         </td>
                         <td>如有，100%持证上岗为符合</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_37.value"
-                          ></CheckedGrade>
+                          {{tableData.data_37.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_37.text"
-                          ></CheckedText>
+                          {{tableData.data_37.text}}
                         </td>
                       </tr>
                       <tr>
@@ -849,14 +696,10 @@
                           查看证照，对照本人；如果由签约医疗机构提供服务，则查看签约协议。
                         </td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_38.value"
-                          ></CheckedGrade>
+                          {{tableData.data_38.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_38.text"
-                          ></CheckedText>
+                          {{tableData.data_38.text}}
                         </td>
                       </tr>
                       <tr>
@@ -871,14 +714,10 @@
                           查看证照或（聘书），对照本人；如果由签约服务机构提供服务，则查看签约协议。
                         </td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_39.value"
-                          ></CheckedGrade>
+                           {{tableData.data_39.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_39.text"
-                          ></CheckedText>
+                           {{tableData.data_39.text}}
                         </td>
                       </tr>
                       <tr>
@@ -891,14 +730,10 @@
                           查看证照或（聘书），对照本人；如果由签约服务机构提供服务，则查看签约协议。
                         </td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_40.value"
-                          ></CheckedGrade>
+                          {{tableData.data_40.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_40.text"
-                          ></CheckedText>
+                          {{tableData.data_40.text}}
                         </td>
                       </tr>
                       <tr>
@@ -911,14 +746,10 @@
                         </td>
                         <td>查看培训记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_41.value"
-                          ></CheckedGrade>
+                          {{tableData.data_41.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_41.text"
-                          ></CheckedText>
+                          {{tableData.data_41.text}}
                         </td>
                       </tr>
                     </template>
@@ -936,14 +767,10 @@
                         </td>
                         <td>查看制度，查看安全责任书</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_42.value"
-                          ></CheckedGrade>
+                          {{tableData.data_42.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_42.text"
-                          ></CheckedText>
+                         {{tableData.data_42.text}}
                         </td>
                       </tr>
                       <tr>
@@ -956,14 +783,10 @@
                         </td>
                         <td>查看制度、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_43.value"
-                          ></CheckedGrade>
+                          {{tableData.data_43.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_43.text"
-                          ></CheckedText>
+                           {{tableData.data_43.text}}
                         </td>
                       </tr>
                       <tr>
@@ -976,14 +799,10 @@
                         </td>
                         <td>查看制度、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_44.value"
-                          ></CheckedGrade>
+                           {{tableData.data_44.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_44.text"
-                          ></CheckedText>
+                          {{tableData.data_44.text}}
                         </td>
                       </tr>
                       <tr>
@@ -994,14 +813,10 @@
                         </td>
                         <td>查看评估记录、制度文件</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_45.value"
-                          ></CheckedGrade>
+                          {{tableData.data_45.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_45.text"
-                          ></CheckedText>
+                          {{tableData.data_45.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1014,14 +829,10 @@
                         </td>
                         <td>查看制度、记录；询问老年人</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_46.value"
-                          ></CheckedGrade>
+                          {{tableData.data_46.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_46.text"
-                          ></CheckedText>
+                          {{tableData.data_46.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1030,14 +841,10 @@
                         <td>有则符合，无则不符合。</td>
                         <td>查看制度、现场查看老人、照护记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_47.value"
-                          ></CheckedGrade>
+                          {{tableData.data_47.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_47.text"
-                          ></CheckedText>
+                          {{tableData.data_47.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1048,14 +855,10 @@
                         <td>满足1-2项的为部分符合，满足3项及以上为符合。</td>
                         <td>查看文件材料</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_48.value"
-                          ></CheckedGrade>
+                          {{tableData.data_48.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_48.text"
-                          ></CheckedText>
+                          {{tableData.data_48.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1066,14 +869,10 @@
                         <td>满足2项的为部分符合，满足3项及以上为符合。</td>
                         <td>现场查看</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_49.value"
-                          ></CheckedGrade>
+                          {{tableData.data_49.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_49.text"
-                          ></CheckedText>
+                          {{tableData.data_49.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1086,14 +885,10 @@
                         </td>
                         <td>查看记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_50.value"
-                          ></CheckedGrade>
+                          {{tableData.data_50.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_50.text"
-                          ></CheckedText>
+                          {{tableData.data_50.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1104,14 +899,10 @@
                         <td>有出入院制度为部分符合，并按制度执行为符合。</td>
                         <td>查看制度</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_51.value"
-                          ></CheckedGrade>
+                          {{tableData.data_51.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_51.text"
-                          ></CheckedText>
+                          {{tableData.data_51.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1124,14 +915,10 @@
                         </td>
                         <td>查看财务制度、收费价目表、收支情况</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_52.value"
-                          ></CheckedGrade>
+                          {{tableData.data_52.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_52.text"
-                          ></CheckedText>
+                          {{tableData.data_52.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1143,14 +930,10 @@
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
                         <td>查看制度、流程、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_53.value"
-                          ></CheckedGrade>
+                          {{tableData.data_53.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_53.text"
-                          ></CheckedText>
+                          {{tableData.data_53.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1162,14 +945,10 @@
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
                         <td>查看制度、流程、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_54.value"
-                          ></CheckedGrade>
+                          {{tableData.data_54.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_54.text"
-                          ></CheckedText>
+                          {{tableData.data_54.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1180,14 +959,10 @@
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
                         <td>查看制度、流程、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_55.value"
-                          ></CheckedGrade>
+                          {{tableData.data_55.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_55.text"
-                          ></CheckedText>
+                           {{tableData.data_55.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1199,14 +974,10 @@
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
                         <td>查看制度、流程、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_56.value"
-                          ></CheckedGrade>
+                           {{tableData.data_56.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_56.text"
-                          ></CheckedText>
+                           {{tableData.data_56.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1217,14 +988,10 @@
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
                         <td>查看制度、流程、文件、记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_57.value"
-                          ></CheckedGrade>
+                           {{tableData.data_57.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_57.text"
-                          ></CheckedText>
+                          {{tableData.data_57.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1233,14 +1000,10 @@
                         <td>有1项制度为部分符合，2项及以上为符合。</td>
                         <td>查看制度</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_58.value"
-                          ></CheckedGrade>
+                          {{tableData.data_58.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_58.text"
-                          ></CheckedText>
+                          {{tableData.data_58.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1253,14 +1016,10 @@
                         </td>
                         <td>查看制度、照护记录、交接班记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_59.value"
-                          ></CheckedGrade>
+                           {{tableData.data_59.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_59.text"
-                          ></CheckedText>
+                          {{tableData.data_59.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1273,14 +1032,10 @@
                         </td>
                         <td>查看制度、评估考核记录</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_60.value"
-                          ></CheckedGrade>
+                          {{tableData.data_60.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_60.text"
-                          ></CheckedText>
+                          {{tableData.data_60.text}}
                         </td>
                       </tr>
                       <tr>
@@ -1289,14 +1044,10 @@
                         <td>有机构内部服务管理标准、操作规范的，为符合。</td>
                         <td>查看标准文本</td>
                         <td>
-                          <CheckedGrade
-                            v-model="tableData.data_61.value"
-                          ></CheckedGrade>
+                          {{tableData.data_61.value}}
                         </td>
                         <td>
-                          <CheckedText
-                            v-model="tableData.data_61.text"
-                          ></CheckedText>
+                          {{tableData.data_61.text}}
                         </td>
                       </tr>
                     </template>
@@ -1318,14 +1069,10 @@
                       </td>
                       <td>查看制度、评估记录、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_62.value"
-                        ></CheckedGrade>
+                        {{tableData.data_62.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_62.text"
-                        ></CheckedText>
+                        {{tableData.data_62.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1338,14 +1085,10 @@
                       </td>
                       <td>抽查询问护理员</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_63.value"
-                        ></CheckedGrade>
+                        {{tableData.data_63.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_63.text"
-                        ></CheckedText>
+                       {{tableData.data_63.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1356,14 +1099,10 @@
                       <td>有1项未做到，即为不符合。</td>
                       <td>查看制度、现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_64.value"
-                        ></CheckedGrade>
+                        {{tableData.data_64.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_64.text"
-                        ></CheckedText>
+                        {{tableData.data_64.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1374,14 +1113,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_65.value"
-                        ></CheckedGrade>
+                        {{tableData.data_65.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_65.text"
-                        ></CheckedText>
+                        {{tableData.data_65.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1393,14 +1128,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_66.value"
-                        ></CheckedGrade>
+                        {{tableData.data_66.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_66.text"
-                        ></CheckedText>
+                        {{tableData.data_66.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1411,14 +1142,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_67.value"
-                        ></CheckedGrade>
+                        {{tableData.data_67.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_67.text"
-                        ></CheckedText>
+                         {{tableData.data_67.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1430,14 +1157,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_68.value"
-                        ></CheckedGrade>
+                         {{tableData.data_68.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_68.text"
-                        ></CheckedText>
+                         {{tableData.data_68.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1448,14 +1171,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_69.value"
-                        ></CheckedGrade>
+                         {{tableData.data_69.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_69.text"
-                        ></CheckedText>
+                        {{tableData.data_69.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1466,14 +1185,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_70.value"
-                        ></CheckedGrade>
+                        {{tableData.data_70.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_70.text"
-                        ></CheckedText>
+                         {{tableData.data_70.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1485,14 +1200,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_71.value"
-                        ></CheckedGrade>
+                         {{tableData.data_71.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_71.text"
-                        ></CheckedText>
+                         {{tableData.data_71.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1505,14 +1216,10 @@
                       </td>
                       <td>查看制度、流程，现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_72.value"
-                        ></CheckedGrade>
+                         {{tableData.data_72.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_72.text"
-                        ></CheckedText>
+                         {{tableData.data_72.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1525,14 +1232,10 @@
                       </td>
                       <td>查看记录、询问老人、现场抽查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_73.value"
-                        ></CheckedGrade>
+                         {{tableData.data_73.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_73.text"
-                        ></CheckedText>
+                        {{tableData.data_73.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1543,14 +1246,10 @@
                       <td>在院期间发生任何1例为不符合。</td>
                       <td>查看记录、询问老人</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_74.value"
-                        ></CheckedGrade>
+                        {{tableData.data_74.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_74.text"
-                        ></CheckedText>
+                        {{tableData.data_74.text}}
                       </td>
                     </tr>
                   </template>
@@ -1568,14 +1267,10 @@
                       </td>
                       <td>查看制度、评估记录、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_75.value"
-                        ></CheckedGrade>
+                        {{tableData.data_75.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_75.text"
-                        ></CheckedText>
+                         {{tableData.data_75.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1588,14 +1283,10 @@
                       </td>
                       <td>现场查看设备、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_76.value"
-                        ></CheckedGrade>
+                         {{tableData.data_76.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_76.text"
-                        ></CheckedText>
+                          {{tableData.data_76.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1608,14 +1299,10 @@
                       </td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_77.value"
-                        ></CheckedGrade>
+                          {{tableData.data_77.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_77.text"
-                        ></CheckedText>
+                         {{tableData.data_77.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1626,14 +1313,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_78.value"
-                        ></CheckedGrade>
+                         {{tableData.data_78.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_78.text"
-                        ></CheckedText>
+                         {{tableData.data_78.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1644,14 +1327,10 @@
                       <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_79.value"
-                        ></CheckedGrade>
+                         {{tableData.data_79.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_79.text"
-                        ></CheckedText>
+                         {{tableData.data_79.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1663,14 +1342,10 @@
                       <td>开展2项服务即为部分符合，3项及以上为符合。</td>
                       <td>查看制度、现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_80.value"
-                        ></CheckedGrade>
+                        {{tableData.data_80.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_80.text"
-                        ></CheckedText>
+                        {{tableData.data_80.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1681,14 +1356,10 @@
                       <td>如无，为不符合。如指导周期长于每周为部分符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_81.value"
-                        ></CheckedGrade>
+                        {{tableData.data_81.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_81.text"
-                        ></CheckedText>
+                         {{tableData.data_81.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1699,14 +1370,10 @@
                       <td>具备2项预防措施即为部分符合，3项及以上为符合。</td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_82.value"
-                        ></CheckedGrade>
+                         {{tableData.data_82.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_82.text"
-                        ></CheckedText>
+                         {{tableData.data_82.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1717,14 +1384,10 @@
                       <td>应有制度、工作流程，有1项做不到，即为不符合。</td>
                       <td>查看制度、现场查看、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_83.value"
-                        ></CheckedGrade>
+                         {{tableData.data_83.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_83.text"
-                        ></CheckedText>
+                         {{tableData.data_83.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1735,14 +1398,10 @@
                       <td>做到1项得部分符合；2项及以上为符合。</td>
                       <td>查看制度、现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_84.value"
-                        ></CheckedGrade>
+                        {{tableData.data_84.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_84.text"
-                        ></CheckedText>
+                          {{tableData.data_84.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1755,14 +1414,10 @@
                       </td>
                       <td>查看制度、现场查看、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_85.value"
-                        ></CheckedGrade>
+                          {{tableData.data_85.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_85.text"
-                        ></CheckedText>
+                        {{tableData.data_85.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1773,14 +1428,10 @@
                       </td>
                       <td>查看制度、现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_86.value"
-                        ></CheckedGrade>
+                        {{tableData.data_86.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_86.text"
-                        ></CheckedText>
+                        {{tableData.data_86.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1793,14 +1444,10 @@
                       </td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_87.value"
-                        ></CheckedGrade>
+                         {{tableData.data_87.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_87.text"
-                        ></CheckedText>
+                        {{tableData.data_87.text}}
                       </td>
                     </tr>
                   </template>
@@ -1818,14 +1465,10 @@
                       </td>
                       <td>现场查看，试用设备</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_88.value"
-                        ></CheckedGrade>
+                        {{tableData.data_88.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_88.text"
-                        ></CheckedText>
+                        {{tableData.data_88.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1838,14 +1481,10 @@
                       </td>
                       <td>查看制度</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_89.value"
-                        ></CheckedGrade>
+                        {{tableData.data_89.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_89.text"
-                        ></CheckedText>
+                        {{tableData.data_89.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1856,14 +1495,10 @@
                       <td>各项中有任何1点达不到，则该项不符合。</td>
                       <td>查看证书，询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_90.value"
-                        ></CheckedGrade>
+                        {{tableData.data_90.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_90.text"
-                        ></CheckedText>
+                        {{tableData.data_90.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1874,14 +1509,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>现场查看，询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_91.value"
-                        ></CheckedGrade>
+                        {{tableData.data_91.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_91.text"
-                        ></CheckedText>
+                        {{tableData.data_91.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1894,14 +1525,10 @@
                       </td>
                       <td>现场查看，人员操作、询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_92.value"
-                        ></CheckedGrade>
+                        {{tableData.data_92.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_92.text"
-                        ></CheckedText>
+                        {{tableData.data_92.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1912,14 +1539,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>查看制度、现场查看记录、人员操作、询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_93.value"
-                        ></CheckedGrade>
+                        {{tableData.data_93.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_93.text"
-                        ></CheckedText>
+                         {{tableData.data_93.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1930,14 +1553,10 @@
                       <td>各项中有任何1点达不到，则不符合。</td>
                       <td>现场查看，查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_94.value"
-                        ></CheckedGrade>
+                         {{tableData.data_94.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_94.text"
-                        ></CheckedText>
+                       {{tableData.data_94.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1948,14 +1567,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_95.value"
-                        ></CheckedGrade>
+                        {{tableData.data_95.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_95.text"
-                        ></CheckedText>
+                        {{tableData.data_95.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1966,14 +1581,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>查看记录、资料，人员操作、询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_96.value"
-                        ></CheckedGrade>
+                        {{tableData.data_96.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_96.text"
-                        ></CheckedText>
+                        {{tableData.data_96.text}}
                       </td>
                     </tr>
                     <tr>
@@ -1982,14 +1593,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_97.value"
-                        ></CheckedGrade>
+                         {{tableData.data_97.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_97.text"
-                        ></CheckedText>
+                         {{tableData.data_97.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2000,14 +1607,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>现场查看，查看维护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_98.value"
-                        ></CheckedGrade>
+                         {{tableData.data_98.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_98.text"
-                        ></CheckedText>
+                         {{tableData.data_98.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2018,14 +1621,10 @@
                       <td>如有，有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_99.value"
-                        ></CheckedGrade>
+                         {{tableData.data_99.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_99.text"
-                        ></CheckedText>
+                         {{tableData.data_99.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2036,14 +1635,10 @@
                       <td>如有，有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_100.value"
-                        ></CheckedGrade>
+                         {{tableData.data_100.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_100.text"
-                        ></CheckedText>
+                         {{tableData.data_100.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2054,14 +1649,10 @@
                       <td>如有，有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_101.value"
-                        ></CheckedGrade>
+                         {{tableData.data_101.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_101.text"
-                        ></CheckedText>
+                        {{tableData.data_101.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2072,14 +1663,10 @@
                       <td>如有，缺少1项即为部分符合。</td>
                       <td>查看维护、交接班记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_102.value"
-                        ></CheckedGrade>
+                        {{tableData.data_102.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_102.text"
-                        ></CheckedText>
+                           {{tableData.data_102.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2088,14 +1675,10 @@
                       <td>如有，缺少1项即为部分符合。</td>
                       <td>查看年检或检验报告</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_103.value"
-                        ></CheckedGrade>
+                          {{tableData.data_103.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_103.text"
-                        ></CheckedText>
+                          {{tableData.data_103.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2106,14 +1689,10 @@
                       <td>有1项未做到就不符合。</td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_104.value"
-                        ></CheckedGrade>
+                           {{tableData.data_104.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_104.text"
-                        ></CheckedText>
+                         {{tableData.data_104.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2124,14 +1703,10 @@
                       <td>建立视频监控系统或实行24小时巡查，均为符合。</td>
                       <td>现场查看、视频记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_105.value"
-                        ></CheckedGrade>
+                         {{tableData.data_105.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_105.text"
-                        ></CheckedText>
+                         {{tableData.data_105.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2144,14 +1719,10 @@
                       </td>
                       <td>查看制度、流程、文件、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_106.value"
-                        ></CheckedGrade>
+                        {{tableData.data_106.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_106.text"
-                        ></CheckedText>
+                         {{tableData.data_106.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2165,14 +1736,10 @@
                       <td>如未组织评估为不符合，如未履行告知为部分符合。</td>
                       <td>查看记录、询问老人</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_107.value"
-                        ></CheckedGrade>
+                         {{tableData.data_107.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_107.text"
-                        ></CheckedText>
+                         {{tableData.data_107.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2186,14 +1753,10 @@
                       </td>
                       <td>查看制度、培训记录、抽查员工</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_108.value"
-                        ></CheckedGrade>
+                         {{tableData.data_108.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_108.text"
-                        ></CheckedText>
+                        {{tableData.data_108.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2205,14 +1768,10 @@
                       <td>如有，有1项未做到就不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_109.value"
-                        ></CheckedGrade>
+                        {{tableData.data_109.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_109.text"
-                        ></CheckedText>
+                        {{tableData.data_109.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2224,14 +1783,10 @@
                       <td>如无安全保护服务设施设备或无法正常使用为不符合。</td>
                       <td>现场查看、试用</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_110.value"
-                        ></CheckedGrade>
+                          {{tableData.data_110.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_110.text"
-                        ></CheckedText>
+                         {{tableData.data_110.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2243,14 +1798,10 @@
                       <td>如有1项不符合为不符合</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_111.value"
-                        ></CheckedGrade>
+                         {{tableData.data_111.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_111.text"
-                        ></CheckedText>
+                         {{tableData.data_111.text}}
                       </td>
                     </tr>
                   </template>
@@ -2266,14 +1817,10 @@
                       <td>如有，且有相关协议或合同，即为符合。</td>
                       <td>查看合同文件、现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_112.value"
-                        ></CheckedGrade>
+                         {{tableData.data_112.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_112.text"
-                        ></CheckedText>
+                         {{tableData.data_112.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2285,14 +1832,10 @@
                       <td>有2项及以上不满足，为不符合。</td>
                       <td>查看制度、现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_113.value"
-                        ></CheckedGrade>
+                         {{tableData.data_113.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_113.text"
-                        ></CheckedText>
+                         {{tableData.data_113.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2303,14 +1846,10 @@
                       <td>如有1项不符合为不符合</td>
                       <td>查看资质证件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_114.value"
-                        ></CheckedGrade>
+                          {{tableData.data_114.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_114.text"
-                        ></CheckedText>
+                          {{tableData.data_114.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2319,14 +1858,10 @@
                       <td>有2项及以上不满足，为不符合。</td>
                       <td>查看制度、现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_115.value"
-                        ></CheckedGrade>
+                          {{tableData.data_115.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_115.text"
-                        ></CheckedText>
+                         {{tableData.data_115.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2339,14 +1874,10 @@
                       </td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_116.value"
-                        ></CheckedGrade>
+                          {{tableData.data_116.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_116.text"
-                        ></CheckedText>
+                         {{tableData.data_116.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2355,14 +1886,10 @@
                       <td>做到老年人每年体检1次，即为符合。</td>
                       <td>查看制度、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_117.value"
-                        ></CheckedGrade>
+                         {{tableData.data_117.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_117.text"
-                        ></CheckedText>
+                         {{tableData.data_117.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2374,14 +1901,10 @@
                       <td>100﹪老年人有健康档案，即为符合。</td>
                       <td>现场查看档案</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_118.value"
-                        ></CheckedGrade>
+                         {{tableData.data_118.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_118.text"
-                        ></CheckedText>
+                        {{tableData.data_118.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2394,14 +1917,10 @@
                       </td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_119.value"
-                        ></CheckedGrade>
+                         {{tableData.data_119.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_119.text"
-                        ></CheckedText>
+                         {{tableData.data_119.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2414,14 +1933,10 @@
                       </td>
                       <td>查看记录、证件、合同</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_120.value"
-                        ></CheckedGrade>
+                         {{tableData.data_120.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_120.text"
-                        ></CheckedText>
+                          {{tableData.data_120.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2432,14 +1947,10 @@
                       <td>如有，无记录为不符合，3项以上不符合为部分符合。</td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_121.value"
-                        ></CheckedGrade>
+                          {{tableData.data_121.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_121.text"
-                        ></CheckedText>
+                        {{tableData.data_121.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2448,14 +1959,10 @@
                       <td>1项不符为不符合。</td>
                       <td>查看档案、处方</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_122.value"
-                        ></CheckedGrade>
+                        {{tableData.data_122.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_122.text"
-                        ></CheckedText>
+                         {{tableData.data_122.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2467,14 +1974,10 @@
                       <td>1项不符为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_123.value"
-                        ></CheckedGrade>
+                         {{tableData.data_123.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_123.text"
-                        ></CheckedText>
+                         {{tableData.data_123.text}}
                       </td>
                     </tr>
                   </template>
@@ -2492,14 +1995,10 @@
                       </td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_124.value"
-                        ></CheckedGrade>
+                         {{tableData.data_124.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_124.text"
-                        ></CheckedText>
+                         {{tableData.data_124.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2510,14 +2009,10 @@
                       <td>如有居家服务，有1项不符合即为不符合。</td>
                       <td>查看记录、证件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_125.value"
-                        ></CheckedGrade>
+                         {{tableData.data_125.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_125.text"
-                        ></CheckedText>
+                         {{tableData.data_125.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2528,14 +2023,10 @@
                       <td>如有居家服务，有1项不符合即为不符合。</td>
                       <td>查看培训记录、证件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_126.value"
-                        ></CheckedGrade>
+                         {{tableData.data_126.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_126.text"
-                        ></CheckedText>
+                         {{tableData.data_126.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2548,14 +2039,10 @@
                       </td>
                       <td>查看记录、证件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_127.value"
-                        ></CheckedGrade>
+                         {{tableData.data_127.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_127.text"
-                        ></CheckedText>
+                         {{tableData.data_127.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2568,14 +2055,10 @@
                       </td>
                       <td>查看合同、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_128.value"
-                        ></CheckedGrade>
+                         {{tableData.data_128.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_128.text"
-                        ></CheckedText>
+                         {{tableData.data_128.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2586,14 +2069,10 @@
                       <td>如有居家服务，开展3项以上且有服务记录即为符合。</td>
                       <td>查看服务记录。</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_129.value"
-                        ></CheckedGrade>
+                         {{tableData.data_129.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_129.text"
-                        ></CheckedText>
+                        {{tableData.data_129.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2604,14 +2083,10 @@
                       <td>如有居家服务，居家服务老人100%建档为符合。</td>
                       <td>查看档案、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_130.value"
-                        ></CheckedGrade>
+                          {{tableData.data_130.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_130.text"
-                        ></CheckedText>
+                         {{tableData.data_130.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2622,14 +2097,10 @@
                       <td>如有居家服务，居家服务老人100%建档为符合。</td>
                       <td>查看档案、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_131.value"
-                        ></CheckedGrade>
+                         {{tableData.data_131.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_131.text"
-                        ></CheckedText>
+                         {{tableData.data_131.text}}
                       </td>
                     </tr>
                   </template>
@@ -2645,14 +2116,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>查看证书、体检记录和结果</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_132.value"
-                        ></CheckedGrade>
+                         {{tableData.data_132.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_132.text"
-                        ></CheckedText>
+                           {{tableData.data_132.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2665,14 +2132,10 @@
                       </td>
                       <td>查看制度、现场查看、询问、查看膳食记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_133.value"
-                        ></CheckedGrade>
+                          {{tableData.data_133.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_133.text"
-                        ></CheckedText>
+                           {{tableData.data_133.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2683,14 +2146,10 @@
                       </td>
                       <td>查看制度、膳食记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_134.value"
-                        ></CheckedGrade>
+                           {{tableData.data_134.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_134.text"
-                        ></CheckedText>
+                          {{tableData.data_134.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2703,14 +2162,10 @@
                       </td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_135.value"
-                        ></CheckedGrade>
+                          {{tableData.data_135.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_135.text"
-                        ></CheckedText>
+                        {{tableData.data_135.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2724,14 +2179,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_136.value"
-                        ></CheckedGrade>
+                         {{tableData.data_136.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_136.text"
-                        ></CheckedText>
+                         {{tableData.data_136.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2742,14 +2193,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_137.value"
-                        ></CheckedGrade>
+                         {{tableData.data_137.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_137.text"
-                        ></CheckedText>
+                         {{tableData.data_137.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2760,14 +2207,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_138.value"
-                        ></CheckedGrade>
+                         {{tableData.data_138.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_138.text"
-                        ></CheckedText>
+                         {{tableData.data_138.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2779,14 +2222,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_139.value"
-                        ></CheckedGrade>
+                        {{tableData.data_139.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_139.text"
-                        ></CheckedText>
+                        {{tableData.data_139.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2798,14 +2237,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_140.value"
-                        ></CheckedGrade>
+                          {{tableData.data_140.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_140.text"
-                        ></CheckedText>
+                         {{tableData.data_140.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2818,14 +2253,10 @@
                       </td>
                       <td>查看制度、现场查看、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_141.value"
-                        ></CheckedGrade>
+                          {{tableData.data_141.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_141.text"
-                        ></CheckedText>
+                          {{tableData.data_141.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2838,14 +2269,10 @@
                       </td>
                       <td>查看制度、相关记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_142.value"
-                        ></CheckedGrade>
+                          {{tableData.data_142.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_142.text"
-                        ></CheckedText>
+                        {{tableData.data_142.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2858,14 +2285,10 @@
                       <td>如有餐饮服务，1项不符为不符合。</td>
                       <td>现场查看、查看制度文件、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_143.value"
-                        ></CheckedGrade>
+                        {{tableData.data_143.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_143.text"
-                        ></CheckedText>
+                         {{tableData.data_143.text}}
                       </td>
                     </tr>
                   </template>
@@ -2882,14 +2305,10 @@
                       <td>如有，场地和设备符合需求即为符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_144.value"
-                        ></CheckedGrade>
+                        {{tableData.data_144.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_144.text"
-                        ></CheckedText>
+                        {{tableData.data_144.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2900,14 +2319,10 @@
                       <td>如有，有评估记录和防范方案，措施记录即为符合。</td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_145.value"
-                        ></CheckedGrade>
+                        {{tableData.data_145.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_145.text"
-                        ></CheckedText>
+                       {{tableData.data_144.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2920,14 +2335,10 @@
                       </td>
                       <td>查看证件、合同</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_146.value"
-                        ></CheckedGrade>
+                        {{tableData.data_146.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_146.text"
-                        ></CheckedText>
+                        {{tableData.data_146.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2938,14 +2349,10 @@
                       <td>如有，每月1次以上活动记录为符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_147.value"
-                        ></CheckedGrade>
+                          {{tableData.data_147.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_147.text"
-                        ></CheckedText>
+                         {{tableData.data_147.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2956,14 +2363,10 @@
                       <td>做到2项即为部分符合；3项及以上为符合。</td>
                       <td>查看制度、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_148.value"
-                        ></CheckedGrade>
+                         {{tableData.data_148.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_148.text"
-                        ></CheckedText>
+                         {{tableData.data_148.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2972,14 +2375,10 @@
                       <td>有保护隐私权相关制度和执行记录即为符合。</td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_149.value"
-                        ></CheckedGrade>
+                         {{tableData.data_149.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_149.text"
-                        ></CheckedText>
+                         {{tableData.data_149.text}}
                       </td>
                     </tr>
                     <tr>
@@ -2988,14 +2387,10 @@
                       <td>如有，1项不符为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_150.value"
-                        ></CheckedGrade>
+                         {{tableData.data_150.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_150.text"
-                        ></CheckedText>
+                          {{tableData.data_150.text}}
                       </td>
                     </tr>
                   </template>
@@ -3009,14 +2404,10 @@
                       <td>设备设施符合提供服务的需求即为符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_151.value"
-                        ></CheckedGrade>
+                          {{tableData.data_151.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_151.text"
-                        ></CheckedText>
+                         {{tableData.data_151.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3025,14 +2416,10 @@
                       <td>室内空气有异味为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_152.value"
-                        ></CheckedGrade>
+                         {{tableData.data_152.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_152.text"
-                        ></CheckedText>
+                         {{tableData.data_152.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3043,14 +2430,10 @@
                       <td>3项以上不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_153.value"
-                        ></CheckedGrade>
+                         {{tableData.data_153.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_153.text"
-                        ></CheckedText>
+                         {{tableData.data_153.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3061,14 +2444,10 @@
                       <td>3项以上不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_154.value"
-                        ></CheckedGrade>
+                         {{tableData.data_154.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_154.text"
-                        ></CheckedText>
+                         {{tableData.data_154.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3079,14 +2458,10 @@
                       <td>3项以上不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_155.value"
-                        ></CheckedGrade>
+                         {{tableData.data_155.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_155.text"
-                        ></CheckedText>
+                         {{tableData.data_155.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3097,14 +2472,10 @@
                       <td>3项以上不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_156.value"
-                        ></CheckedGrade>
+                         {{tableData.data_156.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_156.text"
-                        ></CheckedText>
+                         {{tableData.data_156.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3116,14 +2487,10 @@
                       <td>3项以上不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_157.value"
-                        ></CheckedGrade>
+                         {{tableData.data_157.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_157.text"
-                        ></CheckedText>
+                         {{tableData.data_157.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3135,14 +2502,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_158.value"
-                        ></CheckedGrade>
+                         {{tableData.data_158.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_158.text"
-                        ></CheckedText>
+                         {{tableData.data_158.text}}
                       </td>
                     </tr>
                   </template>
@@ -3158,14 +2521,10 @@
                       <td>设备设施符合提供服务的需求即为符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_159.value"
-                        ></CheckedGrade>
+                         {{tableData.data_159.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_159.text"
-                        ></CheckedText>
+                          {{tableData.data_159.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3176,14 +2535,10 @@
                       <td>开展3项活动为部分符合，4项及以上为符合。</td>
                       <td>查看制度、现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_160.value"
-                        ></CheckedGrade>
+                          {{tableData.data_160.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_160.text"
-                        ></CheckedText>
+                         {{tableData.data_160.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3192,14 +2547,10 @@
                       <td>开展3项活动为部分符合，4项及以上为符合。</td>
                       <td>查看制度、现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_161.value"
-                        ></CheckedGrade>
+                         {{tableData.data_161.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_161.text"
-                        ></CheckedText>
+                         {{tableData.data_161.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3212,14 +2563,10 @@
                       </td>
                       <td>现场查看老人、照护记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_162.value"
-                        ></CheckedGrade>
+                        {{tableData.data_162.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_162.text"
-                        ></CheckedText>
+                          {{tableData.data_162.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3230,14 +2577,10 @@
                       </td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_163.value"
-                        ></CheckedGrade>
+                          {{tableData.data_163.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_163.text"
-                        ></CheckedText>
+                         {{tableData.data_163.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3250,14 +2593,10 @@
                       </td>
                       <td>查看制度、现场询问老人、查看活动记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_164.value"
-                        ></CheckedGrade>
+                          {{tableData.data_164.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_164.text"
-                        ></CheckedText>
+                          {{tableData.data_164.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3268,14 +2607,10 @@
                       <td>无服务记录为不符合，低于每日1次为部分符合。</td>
                       <td>查看文件、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_165.value"
-                        ></CheckedGrade>
+                          {{tableData.data_165.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_165.text"
-                        ></CheckedText>
+                           {{tableData.data_165.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3309,9 +2644,7 @@
                       </td>
                       <td>现场查看，查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_167.value"
-                        ></CheckedGrade>
+                           {{tableData.data_167.value}}
                       </td>
                       <td>
                         <CheckedText
@@ -3327,14 +2660,10 @@
                       <td>如有，需具备人员资质或培训记录。</td>
                       <td>查看证件、培训记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_168.value"
-                        ></CheckedGrade>
+                        {{tableData.data_168.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_168.text"
-                        ></CheckedText>
+                         {{tableData.data_168.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3346,14 +2675,10 @@
                       <td>如有，需记录准确，缺项为不符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_169.value"
-                        ></CheckedGrade>
+                        {{tableData.data_169.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_169.text"
-                        ></CheckedText>
+                         {{tableData.data_169.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3365,14 +2690,10 @@
                       <td>如有，提供3项以上服务为符合。</td>
                       <td>查看记录，查看老人情况</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_170.value"
-                        ></CheckedGrade>
+                         {{tableData.data_170.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_170.text"
-                        ></CheckedText>
+                        {{tableData.data_170.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3381,14 +2702,10 @@
                       <td>如有，需记录准确，缺项为不符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_171.value"
-                        ></CheckedGrade>
+                         {{tableData.data_171.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_171.text"
-                        ></CheckedText>
+                          {{tableData.data_171.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3400,14 +2717,10 @@
                       <td>如有，无记录文件为不符合，文件不完善为部分符合。</td>
                       <td>查看制度、文件</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_172.value"
-                        ></CheckedGrade>
+                        {{tableData.data_172.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_172.text"
-                        ></CheckedText>
+                         {{tableData.data_172.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3418,14 +2731,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_173.value"
-                        ></CheckedGrade>
+                         {{tableData.data_173.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_173.text"
-                        ></CheckedText>
+                         {{tableData.data_173.text}}
                       </td>
                     </tr>
                   </template>
@@ -3443,14 +2752,10 @@
                       </td>
                       <td>现场查看、查看合同协议</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_174.value"
-                        ></CheckedGrade>
+                         {{tableData.data_174.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_174.text"
-                        ></CheckedText>
+                        {{tableData.data_174.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3459,14 +2764,10 @@
                       <td>需有人员培训记录</td>
                       <td>查看人员信息、培训记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_175.value"
-                        ></CheckedGrade>
+                        {{tableData.data_175.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_175.text"
-                        ></CheckedText>
+                         {{tableData.data_175.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3477,14 +2778,10 @@
                       <td>洗涤场地应符合要求，如3项以上不能做到为不符合。</td>
                       <td>现场查看、查看制度</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_176.value"
-                        ></CheckedGrade>
+                         {{tableData.data_176.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_176.text"
-                        ></CheckedText>
+                         {{tableData.data_176.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3495,14 +2792,10 @@
                       <td>有1项做不到即为部分符合，2项做不到为不符合。</td>
                       <td>查看制度、现场查看、工作记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_177.value"
-                        ></CheckedGrade>
+                          {{tableData.data_177.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_177.text"
-                        ></CheckedText>
+                        {{tableData.data_177.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3511,14 +2804,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_178.value"
-                        ></CheckedGrade>
+                          {{tableData.data_178.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_178.text"
-                        ></CheckedText>
+                          {{tableData.data_178.text}}
                       </td>
                     </tr>
                   </template>
@@ -3536,14 +2825,10 @@
                       </td>
                       <td>现场查看、查看合同协议</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_179.value"
-                        ></CheckedGrade>
+                          {{tableData.data_179.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_179.text"
-                        ></CheckedText>
+                          {{tableData.data_179.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3552,14 +2837,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场测量</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_180.value"
-                        ></CheckedGrade>
+                         {{tableData.data_180.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_180.text"
-                        ></CheckedText>
+                         {{tableData.data_180.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3568,14 +2849,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_181.value"
-                        ></CheckedGrade>
+                         {{tableData.data_181.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_181.text"
-                        ></CheckedText>
+                        {{tableData.data_181.text}}
                       </td>
                     </tr>
                   </template>
@@ -3591,14 +2868,10 @@
                       </td>
                       <td>查看制度、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_182.value"
-                        ></CheckedGrade>
+                          {{tableData.data_182.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_182.text"
-                        ></CheckedText>
+                         {{tableData.data_182.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3607,14 +2880,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_183.value"
-                        ></CheckedGrade>
+                         {{tableData.data_183.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_183.text"
-                        ></CheckedText>
+                        {{tableData.data_183.text}}
                       </td>
                     </tr>
                   </template>
@@ -3634,14 +2903,10 @@
                         查看制度和咨询、投诉建议处理记录；询问老年人是否知晓
                       </td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_184.value"
-                        ></CheckedGrade>
+                         {{tableData.data_184.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_184.text"
-                        ></CheckedText>
+                         {{tableData.data_184.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3650,14 +2915,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_185.value"
-                        ></CheckedGrade>
+                        {{tableData.data_185.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_185.text"
-                        ></CheckedText>
+                         {{tableData.data_185.text}}
                       </td>
                     </tr>
                   </template>
@@ -3673,14 +2934,10 @@
                       <td>无通讯设备为不符合。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_186.value"
-                        ></CheckedGrade>
+                         {{tableData.data_186.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_186.text"
-                        ></CheckedText>
+                          {{tableData.data_186.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3693,14 +2950,10 @@
                       </td>
                       <td>现场询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_187.value"
-                        ></CheckedGrade>
+                        {{tableData.data_187.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_187.text"
-                        ></CheckedText>
+                         {{tableData.data_187.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3711,14 +2964,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_188.value"
-                        ></CheckedGrade>
+                         {{tableData.data_188.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_188.text"
-                        ></CheckedText>
+                          {{tableData.data_188.text}}
                       </td>
                     </tr>
                   </template>
@@ -3734,14 +2983,10 @@
                       <td>如有，3项以上不符合为不符合</td>
                       <td>现场查看、查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_189.value"
-                        ></CheckedGrade>
+                          {{tableData.data_189.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_189.text"
-                        ></CheckedText>
+                         {{tableData.data_189.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3752,14 +2997,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、询问</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_190.value"
-                        ></CheckedGrade>
+                         {{tableData.data_190.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_190.text"
-                        ></CheckedText>
+                         {{tableData.data_190.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3770,14 +3011,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_191.value"
-                        ></CheckedGrade>
+                         {{tableData.data_191.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_191.text"
-                        ></CheckedText>
+                        {{tableData.data_191.text}}
                       </td>
                     </tr>
                   </template>
@@ -3793,14 +3030,10 @@
                       <td>如有，设施设备需符合服务需求。</td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_192.value"
-                        ></CheckedGrade>
+                        {{tableData.data_192.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_192.text"
-                        ></CheckedText>
+                          {{tableData.data_192.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3809,14 +3042,10 @@
                       <td>如有，需提供人员资质证明或培训记录。</td>
                       <td>查看证件、培训记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_193.value"
-                        ></CheckedGrade>
+                          {{tableData.data_193.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_193.text"
-                        ></CheckedText>
+                         {{tableData.data_193.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3827,14 +3056,10 @@
                       <td>如有，3项以上不符合为不符合。</td>
                       <td>查看文件、记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_195.value"
-                        ></CheckedGrade>
+                         {{tableData.data_195.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_195.text"
-                        ></CheckedText>
+                        {{tableData.data_195.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3845,14 +3070,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_197.value"
-                        ></CheckedGrade>
+                         {{tableData.data_197.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_197.text"
-                        ></CheckedText>
+                        {{tableData.data_197.text}}
                       </td>
                     </tr>
                   </template>
@@ -3868,14 +3089,10 @@
                       <td>有预约记录和执行记录，记录不全面为部分符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_198.value"
-                        ></CheckedGrade>
+                         {{tableData.data_198.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_198.text"
-                        ></CheckedText>
+                       {{tableData.data_198.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3884,14 +3101,10 @@
                       <td>有相应的规范要求为符合。</td>
                       <td>查看制度</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_199.value"
-                        ></CheckedGrade>
+                        {{tableData.data_199.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_199.text"
-                        ></CheckedText>
+                       {{tableData.data_199.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3900,14 +3113,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_200.value"
-                        ></CheckedGrade>
+                        {{tableData.data_200.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_200.text"
-                        ></CheckedText>
+                        {{tableData.data_200.text}}
                       </td>
                     </tr>
                   </template>
@@ -3923,14 +3132,10 @@
                       <td>如有，需100%签署相关协议为完全符合。</td>
                       <td>查看合同协议</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_201.value"
-                        ></CheckedGrade>
+                        {{tableData.data_201.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_201.text"
-                        ></CheckedText>
+                         {{tableData.data_201.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3942,14 +3147,10 @@
                       <td>如有，提供3项以上服务为符合。</td>
                       <td>查看记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_202.value"
-                        ></CheckedGrade>
+                         {{tableData.data_202.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_202.text"
-                        ></CheckedText>
+                         {{tableData.data_202.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3960,14 +3161,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_203.value"
-                        ></CheckedGrade>
+                        {{tableData.data_203.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_203.text"
-                        ></CheckedText>
+                        {{tableData.data_203.text}}
                       </td>
                     </tr>
                   </template>
@@ -3984,14 +3181,10 @@
                       <td>如有，3项以上不符合为不符合。</td>
                       <td>现场查看、查看记录、合同</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_204.value"
-                        ></CheckedGrade>
+                          {{tableData.data_204.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_204.text"
-                        ></CheckedText>
+                          {{tableData.data_204.text}}
                       </td>
                     </tr>
                     <tr>
@@ -4000,14 +3193,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_205.value"
-                        ></CheckedGrade>
+                          {{tableData.data_205.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_205.text"
-                        ></CheckedText>
+                         {{tableData.data_205.text}}
                       </td>
                     </tr>
                   </template>
@@ -4025,14 +3214,10 @@
                       </td>
                       <td>现场查看</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_206.value"
-                        ></CheckedGrade>
+                         {{tableData.data_206.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_206.text"
-                        ></CheckedText>
+                         {{tableData.data_206.text}}
                       </td>
                     </tr>
                     <tr>
@@ -4043,14 +3228,10 @@
                       <td>如有，需有相应的制度规范，工作要求。</td>
                       <td>查看制度、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_207.value"
-                        ></CheckedGrade>
+                         {{tableData.data_207.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_207.text"
-                        ></CheckedText>
+                        {{tableData.data_207.text}}
                       </td>
                     </tr>
                     <tr>
@@ -4061,14 +3242,10 @@
                       <td>如有，需有相应的制度规范，工作要求。</td>
                       <td>查看制度、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_208.value"
-                        ></CheckedGrade>
+                        {{tableData.data_208.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_208.text"
-                        ></CheckedText>
+                         {{tableData.data_208.text}}
                       </td>
                     </tr>
                     <tr>
@@ -4079,14 +3256,10 @@
                       <td>如有，需有相应的制度规范，工作要求。</td>
                       <td>查看制度、服务记录</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_209.value"
-                        ></CheckedGrade>
+                         {{tableData.data_209.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_209.text"
-                        ></CheckedText>
+                        {{tableData.data_209.text}}
                       </td>
                     </tr>
                     <tr>
@@ -4097,14 +3270,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_210.value"
-                        ></CheckedGrade>
+                        {{tableData.data_210.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_210.text"
-                        ></CheckedText>
+                         {{tableData.data_210.text}}
                       </td>
                     </tr>
                   </template>
@@ -4162,14 +3331,13 @@
                         <span class="text-border">{{
                           signData.checkMajor.name
                         }}</span>
-                        <el-button
+                        <!-- <el-button
                           v-if="!signData.checkMajor.sign"
                           type="primary"
                           @click="toSign('checkMajor')"
                           >去签字</el-button
-                        >
+                        > -->
                         <img
-                          v-if="signData.checkMajor.sign"
                           class="view-image"
                           @click="toSign('checkMajor')"
                           :src="signData.checkMajor.sign"
@@ -4192,14 +3360,13 @@
                             @click="addBeCheckedMajor"
                             >{{ signData.beCheckedMajor.name }}</span
                           >
-                          <el-button
+                          <!-- <el-button
                             type="primary"
                             v-if="!signData.beCheckedMajor.sign"
                             @click="toSign('beCheckedMajor')"
                             >去签字</el-button
-                          >
+                          > -->
                           <img
-                            v-if="signData.beCheckedMajor.sign"
                             class="view-image"
                             :src="signData.beCheckedMajor.sign"
                             width="95.5"
@@ -4207,13 +3374,13 @@
                             @click="toSign('beCheckedMajor')"
                           />
                         </div>
-                        <div
+                        <!-- <div
                           class="add-user"
                           @click="addBeCheckedMajor"
                           v-if="!signData.beCheckedMajor.name"
                         >
                           <span>+</span>添加
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -4232,12 +3399,12 @@
                           user.sex == 0 ? "男" : "女"
                         }}</span>
                         <span class="text-border">{{ user.phone }}</span>
-                        <el-button
+                        <!-- <el-button
                           v-if="!user.sign"
                           type="primary"
                           @click="toSign(index)"
                           >去签字</el-button
-                        >
+                        > -->
 
                         <img
                           v-if="user.sign"
@@ -4251,20 +3418,21 @@
                           >删除</span
                         >
                       </div>
-                      <div class="add-user" @click="addExpertVisible = true">
+                      <!-- <div class="add-user" @click="addExpertVisible = true">
                         <span>+</span>添加
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="sign-right">
                     <div class="flex">
                       <span class="mr-10">检查时间: </span>
                       <div>
-                         <el-date-picker
+                        {{signData.signDate}}
+                         <!-- <el-date-picker
                           v-model="signData.signDate"
                           type="date"
                           placeholder="选择日期">
-                        </el-date-picker>
+                        </el-date-picker> -->
                       </div>
                     </div>
                   </div>
@@ -4272,14 +3440,14 @@
               </div>
             </div>
           </div>
-          <div class="oper-btns">
+          <!-- <div class="oper-btns">
              <el-button type="primary"
                           @click="download"
                           >下载</el-button>
                           <el-button type="primary"
                           @click="submit"
                           >提交</el-button>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="save">
@@ -4287,7 +3455,7 @@
       </div>
     </div>
     <!-- 签字弹框 -->
-    <div class="sign-dialog">
+    <!-- <div class="sign-dialog">
       <el-dialog
         :visible.sync="signdialogVisible"
         :close-on-click-modal="false"
@@ -4299,31 +3467,22 @@
           <el-button type="primary" @click="saveSign">确 定</el-button>
         </span>
       </el-dialog>
-    </div>
+    </div> -->
     <!-- 添加专家组成员 -->
-    <AddExpert
+    <!-- <AddExpert
       :userData="currentExpert"
       :show="addExpertVisible"
       @closeModal="addExpertVisible = false"
       @addExpert="addCheckExpert"
-    ></AddExpert>
+    ></AddExpert> -->
   </div>
 </template>
 <script>
-import './index.scss'
-import CheckedGrade from './checked-grade.vue'
-import CheckedText from './checked-text.vue'
+import '@/views/check/index.scss'
 import Defer from './checkMixin'
-import Sign from '@/components/sign.vue'
-import AddExpert from './add-expert.vue'
 export default {
   components: {
-    // 检查结果选择组件
-    CheckedGrade,
-    // 整改建议输入组件
-    CheckedText,
-    Sign,
-    AddExpert
+
   },
   mixins: [Defer()],
   data () {
@@ -4371,14 +3530,14 @@ export default {
       // 当前激活的路由
       activeHash: '1',
       tableData: {
-        orgName: '',
+        orgName: '333',
         // 根据需求 标黑指标属于基本指标 此处置为0 其余指标属于提升指标 此处置为1
 
         // 1-1
         data_1: {
           type: 0,
-          value: '',
-          text: ''
+          value: 'A',
+          text: '333333333333333333333333'
         },
         data_2: {
           type: 0,
@@ -5445,71 +4604,7 @@ export default {
       }
     }
   },
-  mounted () {
-  },
   methods: {
-    // 提交
-    submit () {
-
-    },
-    // 下载
-    download () {
-
-    },
-    // 删除某个专家组成员
-    removeExpert (index) {
-      this.signData.checkExpert.splice(index, 1)
-    },
-    // 添加专家组成员
-    addCheckExpert (v) {
-      this.signData.checkExpert.push(v)
-    },
-    // 添加被检查养老院负责人
-    addBeCheckedMajor () {
-      this.$prompt('姓名', '', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        inputValidator: function (value) {
-          value = value && value.trim()
-          if (!value || !value.length) return '姓名不能为空'
-        }
-      })
-        .then(({ value }) => {
-          this.signData.beCheckedMajor.name = value
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          })
-        })
-    },
-    // 去签字
-    toSign (prop) {
-      this.currentSign = prop
-      this.signdialogVisible = true
-    },
-    // 清空画布
-    canvasClear () {
-      this.$refs.sign.canvasClear()
-    },
-    // 保存签名 确定签名
-    saveSign () {
-      const img = this.$refs.sign.saveAsImg()
-      if (!img) {
-      }
-      const sign = this.currentSign
-      // 如果只传递了索引过来，说明是专家组成员 直接根据索引赋值
-      if (typeof sign === 'number') {
-        this.signData.checkExpert[sign].sign = img
-      } else {
-        this.signData[sign].sign = img
-      }
-
-      // 保存签名之后 清空画布 防止下次打开未清空
-      this.canvasClear()
-      this.signdialogVisible = false
-    },
     save () {
       console.log(this.tableData, 'tttttttttttttttttt')
     },
@@ -5536,14 +4631,6 @@ export default {
           break
         }
       }
-      // // 滚动条触底了
-      // if (
-      //   e.srcElement.scrollTop + e.srcElement.offsetHeight ===
-      //   e.srcElement.scrollHeight
-      // ) {
-      //   this.activeHash = scrollItems.length - 1
-      //   this.activeHash = this.activeHash.toString()
-      // }
     }
   }
 }
