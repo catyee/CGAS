@@ -2619,14 +2619,10 @@
                       <td>1项不符合为不符合。</td>
                       <td>查看记录、现场调查</td>
                       <td>
-                        <CheckedGrade
-                          v-model="tableData.data_166.value"
-                        ></CheckedGrade>
+                         {{tableData.data_166.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_166.text"
-                        ></CheckedText>
+                         {{tableData.data_166.text}}
                       </td>
                     </tr>
                   </template>
@@ -2647,9 +2643,7 @@
                            {{tableData.data_167.value}}
                       </td>
                       <td>
-                        <CheckedText
-                          v-model="tableData.data_167.text"
-                        ></CheckedText>
+                         {{tableData.data_167.text}}
                       </td>
                     </tr>
                     <tr>
@@ -3331,15 +3325,8 @@
                         <span class="text-border">{{
                           signData.checkMajor.name
                         }}</span>
-                        <!-- <el-button
-                          v-if="!signData.checkMajor.sign"
-                          type="primary"
-                          @click="toSign('checkMajor')"
-                          >去签字</el-button
-                        > -->
                         <img
                           class="view-image"
-                          @click="toSign('checkMajor')"
                           :src="signData.checkMajor.sign"
                           width="95.5"
                           height="38"
@@ -3357,30 +3344,15 @@
                         >
                           <span
                             class="text-border"
-                            @click="addBeCheckedMajor"
                             >{{ signData.beCheckedMajor.name }}</span
                           >
-                          <!-- <el-button
-                            type="primary"
-                            v-if="!signData.beCheckedMajor.sign"
-                            @click="toSign('beCheckedMajor')"
-                            >去签字</el-button
-                          > -->
                           <img
                             class="view-image"
                             :src="signData.beCheckedMajor.sign"
                             width="95.5"
                             height="38"
-                            @click="toSign('beCheckedMajor')"
                           />
                         </div>
-                        <!-- <div
-                          class="add-user"
-                          @click="addBeCheckedMajor"
-                          v-if="!signData.beCheckedMajor.name"
-                        >
-                          <span>+</span>添加
-                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -3399,40 +3371,20 @@
                           user.sex == 0 ? "男" : "女"
                         }}</span>
                         <span class="text-border">{{ user.phone }}</span>
-                        <!-- <el-button
-                          v-if="!user.sign"
-                          type="primary"
-                          @click="toSign(index)"
-                          >去签字</el-button
-                        > -->
-
                         <img
-                          v-if="user.sign"
                           class="view-image"
-                          @click="toSign(index)"
                           :src="user.sign"
                           width="95.5"
                           height="38"
                         />
-                           <span class="pl-10 remove-expert" @click="removeExpert(index)"
-                          >删除</span
-                        >
                       </div>
-                      <!-- <div class="add-user" @click="addExpertVisible = true">
-                        <span>+</span>添加
-                      </div> -->
                     </div>
                   </div>
                   <div class="sign-right">
                     <div class="flex">
                       <span class="mr-10">检查时间: </span>
                       <div>
-                        {{signData.signDate}}
-                         <!-- <el-date-picker
-                          v-model="signData.signDate"
-                          type="date"
-                          placeholder="选择日期">
-                        </el-date-picker> -->
+                        {{signData.signDate | formatDate('YYYY-mm-dd')}}
                       </div>
                     </div>
                   </div>
@@ -3440,41 +3392,12 @@
               </div>
             </div>
           </div>
-          <!-- <div class="oper-btns">
-             <el-button type="primary"
-                          @click="download"
-                          >下载</el-button>
-                          <el-button type="primary"
-                          @click="submit"
-                          >提交</el-button>
-          </div> -->
         </div>
       </div>
       <div class="save">
-        <el-button type="primary" @click="save">暂存</el-button>
+        <el-button type="primary" @click="save">下载</el-button>
       </div>
     </div>
-    <!-- 签字弹框 -->
-    <!-- <div class="sign-dialog">
-      <el-dialog
-        :visible.sync="signdialogVisible"
-        :close-on-click-modal="false"
-      >
-        <Sign ref="sign"></Sign>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="signdialogVisible = false">取 消</el-button>
-          <el-button @click="canvasClear">重写</el-button>
-          <el-button type="primary" @click="saveSign">确 定</el-button>
-        </span>
-      </el-dialog>
-    </div> -->
-    <!-- 添加专家组成员 -->
-    <!-- <AddExpert
-      :userData="currentExpert"
-      :show="addExpertVisible"
-      @closeModal="addExpertVisible = false"
-      @addExpert="addCheckExpert"
-    ></AddExpert> -->
   </div>
 </template>
 <script>

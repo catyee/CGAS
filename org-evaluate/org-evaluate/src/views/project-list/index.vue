@@ -76,10 +76,7 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-15">
-        <el-button
-          type="primary"
-          >新建检查</el-button
-        >
+        <el-button type="primary" @click="addNewCheck">新建检查</el-button>
         <router-link to="/video/add-video">
           <el-button type="primary">生成汇总表</el-button>
         </router-link>
@@ -89,56 +86,22 @@
         :data="tableData"
         tooltip-effect="dark"
         style="width: 100%"
-        @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column label="视频" prop="pic">
-          <template slot-scope="scope">
-            <el-image
-              style="width: 100px; height: 100px"
-              :src="scope.row.imagAddr"
-              fit="fill"
-              :preview-src-list="[scope.row.imagAddr]"
-            >
-              <div slot="placeholder" class="image-slot">
-                图片加载中<span class="dot">...</span>
-              </div>
-            </el-image> </template
-          >>
-        </el-table-column>
-        <el-table-column prop="videoDuration" label="视频长度">
+        <el-table-column label="序号" type="index"> </el-table-column>
+        <el-table-column label="项目编号" prop="pic"> </el-table-column>
+        <el-table-column label="被检查机构名称" prop="pic"> </el-table-column>
+        <el-table-column label="负责专员" prop="pic"> </el-table-column>
+        <el-table-column label="专家组成员" prop="pic">
           <template slot-scope="scope">
             {{ scope.row.videoDuration | formatTime }}
           </template>
         </el-table-column>
-        <el-table-column
-          prop="videoName"
-          label="视频标题"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column
-          prop="oldManType"
-          label="老人类型"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column
-          prop="takeCareType"
-          label="照料类型"
-          show-overflow-tooltip
-        >
-        </el-table-column>
-        <el-table-column prop="tags" label="标签" show-overflow-tooltip>
+        <el-table-column label="检查时间" prop="pic">
           <template slot-scope="scope">
-            <span v-for="(tag, index) in scope.row.tagList" :key="tag.tagId">{{
-              index !== scope.row.tagList.length - 1
-                ? tag.tagName + ","
-                : tag.tagName
-            }}</span>
+            {{ scope.row.videoDuration | formatTime }}
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="日期" show-overflow-tooltip>
+        <el-table-column prop="createTime" label="检查时间" show-overflow-tooltip>
           <template slot-scope="scope">
             <div>{{ scope.row.createTime | formatDate("YYYY-mm-dd") }}</div>
           </template>
@@ -159,7 +122,7 @@
               <span
                 class="color-red pointer"
                 @click="delteVideo(scope.row.videoId)"
-                >删除</span
+                >下载</span
               >
               <span
                 class="color-green pointer"
@@ -181,13 +144,20 @@
         </el-table-column>
       </el-table>
     </div>
+    <AddNewCheck :newCheckVisible="newCheckVisible"/>
   </div>
 </template>
 <script>
 import './index.scss'
+import AddNewCheck from './newCheck.vue'
 export default {
+  components: {
+    AddNewCheck
+  },
   data () {
     return {
+      // 是否显示新建检查弹框
+      newCheckVisible: true,
       date: '',
       evaluateStatus: [],
       queryParams: {
@@ -205,6 +175,10 @@ export default {
     }
   },
   methods: {
+    // 新建检查
+    addNewCheck () {
+
+    },
     // 按关键字搜索
     handleQuery () {
       this.queryParams.pageNum = 1
