@@ -67,13 +67,15 @@
                   <td colspan="4">
                     <div class="input-line">
                       <span class="text-bold f16">机构名称：</span
-                      ><el-input
+                      >
+                      <span>{{tableData.orgName}}</span>
+                      <!-- <el-input
                         type="textarea"
                         autosize
                         v-model="tableData.name"
                         placeholder="请输入内容"
                       >
-                      </el-input>
+                      </el-input> -->
                     </div>
                   </td>
                   <td colspan="4">
@@ -4261,7 +4263,7 @@
                       <span class="mr-10">检查时间: </span>
                       <div>
                          <el-date-picker
-                          v-model="signData.signDate"
+                          v-model="inspectTime"
                           type="date"
                           placeholder="选择日期">
                         </el-date-picker>
@@ -4316,6 +4318,8 @@ import CheckedText from './checked-text.vue'
 import Defer from './checkMixin'
 import Sign from '@/components/sign.vue'
 import AddExpert from './add-expert.vue'
+import { _debounce } from '@/utils/utils'
+import { evaluateStatus } from '@/libs/constant'
 export default {
   components: {
     // 检查结果选择组件
@@ -4328,6 +4332,9 @@ export default {
   mixins: [Defer()],
   data () {
     return {
+      assessStatus: null, // 0： 未开始 调新建接口 1：检查中 调修改接口和获取详情接口 2：已完成 调获取详情接口 3：不合格 调获取详情接口和新建接口
+      projectId: null, // 项目id
+      assessId: null, // 检查id
       // 当前正在编辑的专家组成员，如果没有属性都为空
       currentExpert: {
         name: '',
@@ -4363,9 +4370,9 @@ export default {
             phone: '',
             sign: ''
           }
-        ],
-        signDate: new Date()
+        ]
       },
+      inspectTime: null,
       // 是否显示签字弹框
       signdialogVisible: false,
       // 当前激活的路由
@@ -5445,9 +5452,46 @@ export default {
       }
     }
   },
+  created () {
+    const data = JSON.parse(this.$route.query.data)
+    // 如果没有传递data  跳转回去 从项目列表过来必须传data
+    if (!data) {
+      this.$router.go(-1)
+    }
+    // 获取评估状态
+    this.assessStatus = data.assessStatus
+    // 默认取值检查时间
+    this.inspectTime = data.inspectTime
+    // 获取项目id
+    this.projectId = data.registerId
+    // 默认取值机构名称
+    this.tableData.orgName = data.name
+    switch (this.assessStatus) {
+      // 未开始
+      case evaluateStatus[0].status:
+        // 调新建接口 拿到assessId 然后之后调用修改接口
+        this.createCheck()
+        break
+    }
+  },
   mounted () {
   },
   methods: {
+    // 新建评估检查
+    createCheck () {
+
+    },
+    // 自动保存
+    autoSave () {
+      const _this = this
+      return _debounce(function () {
+        _this.save()
+      }, 1000)
+    },
+    // 点击保存按钮
+    save (callback) {
+      // 生成存储json  aInfoJson
+    },
     // 提交
     submit () {
 

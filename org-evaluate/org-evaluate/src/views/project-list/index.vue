@@ -185,12 +185,15 @@ export default {
     createCheck (data) {
       const passData = JSON.stringify(
         {
-          projectId: data.projectId
+          projectId: data.projectId,
+          name: data.name,
+          assessStatus: data.assessStatus,
+          inspectTime: data.inspectTime
         }
       )
       this.$router.push({
         path: '/check/',
-        query: {data: passData}
+        query: { data: passData }
       })
     },
     // 获取列表
