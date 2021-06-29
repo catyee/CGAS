@@ -14,7 +14,7 @@ export const orgRoutes = [
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/project-list')
       },
       {
-        path: 'check',
+        path: 'check/:checkid?',
         name: 'check',
         meta: { title: '评估', icon: 'iconevaluate' },
         hidden: true,

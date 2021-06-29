@@ -152,3 +152,32 @@ export function _throttle (fn, interval) {
     }
   }
 }
+// 密码校验规则 – 至少1个大写英文字母
+// – 至少1个小写英文字母
+// – 至少1位数字
+// – 至少1个特殊字符
+// – 最少8个长度
+export const pwdRule = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/
+
+export const checkPwdSimple = function (value) {
+  if (!/(?=.*?[A-Z])/.test(value)) {
+    return '必须包含大写字母'
+  }
+  if (!/(?=(.*[a-z]){1,})/.test(value)) {
+    return '必须包含小写字母'
+  }
+  if (!/(?=(.*[\d]){1,})/.test(value)) {
+    return '必须包含数字'
+  }
+  if (!/(?=(.*[\W]){1,})/.test(value)) {
+    return '必须包含特殊字符'
+  }
+  if (!/(?!.*\s).{8,}/.test(value)) {
+    return '至少为8位'
+  }
+
+  return true
+  // if (!/(?=.*?[A-Z])/.test(value)) {
+  //   return '至少包含1个大写英文字母'
+  // }
+}

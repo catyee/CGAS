@@ -5,7 +5,7 @@
         <div class="title-line"></div>
         <span class="pl-2 f14">负责专员</span>
       </div>
-      <div class="flex pr-16">
+      <!-- <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">用户名称:</div>
         <div>
           <el-input
@@ -17,7 +17,7 @@
       </div>
       <div class="flex">
         <el-button type="primary" @click="handleQuery">查询</el-button>
-      </div>
+      </div> -->
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-8">
@@ -43,7 +43,7 @@
           >
         </div>
         <div class="oper-right pr-16">
-          <el-button type="primary" @click="addNew">添加新用户</el-button>
+          <el-button type="primary" @click="addNew">新建负责专员</el-button>
         </div>
       </div>
       <el-table
@@ -159,7 +159,7 @@
               v-show="!ruleForm.userId"
             >
               <el-input
-                placeholder="请输入密码"
+                placeholder="密码至少8位数且必须含有大小写字母，数字和特殊字符"
                 v-model="ruleForm.password"
               ></el-input>
             </el-form-item>
@@ -184,7 +184,7 @@
 </template>
 <script>
 import './index.scss'
-import { isPhone } from '@/utils/utils'
+import { isPhone, checkPwdSimple } from '@/utils/utils'
 import {
   addUser,
   getUserList,
@@ -202,8 +202,8 @@ export default {
   data () {
     return {
       sexOptions: [
-        { label: '男', value: 1 },
-        { label: '女', value: 0 }
+        { label: '男', value: '1' },
+        { label: '女', value: '0' }
       ],
       pannelTitle: '新建负责专员',
       selectedIds: [], // 选中项的id
@@ -216,7 +216,7 @@ export default {
         pageSize: 20,
         // 查询参数
         nickName: '',
-        // 只显示管理员角色的用户
+        // 只显示负责专员的用户
         roleIds: 2
       },
       // 总条数
@@ -227,8 +227,11 @@ export default {
       showAddUser: false,
       // 新增管理员表单数据
       ruleForm: {
+        nickName: '',
+        userName: '',
+        sex: '',
         status: '0', // 0 正常 1停用 默认正常
-        roleIds: [2], // 新增默认必传 基层用户
+        roleIds: [2], // 新增默认必传 负责专员
         passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
       }
     }
@@ -246,12 +249,22 @@ export default {
           callback(new Error('请输入正确的手机号'))
         }
       }
+      var validatePass = (rule, value, callback) => {
+        const res = checkPwdSimple(value)
+        if (value === '') {
+          callback(new Error('请输入密码'))
+        } else if (res !== true) {
+          callback(new Error(res))
+        } else {
+          callback()
+        }
+      }
       // 新增用户表单验证规则
       const rules = {
         nickName: [
           {
             required: true,
-            message: '请输入乡、镇、街道名称',
+            message: '请输入姓名',
             trigger: 'blur'
           }
         ],
@@ -270,7 +283,6 @@ export default {
           { required: true, message: '请输入登录手机号', trigger: 'blur' },
           { validator: checkPhone, trigger: 'blur' }
         ],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         status: [
           { required: true, message: '请选择用户状态', trigger: 'blur' }
         ]
@@ -279,27 +291,24 @@ export default {
         rules.password = []
       } else {
         rules.password = [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { validator: validatePass, trigger: 'change' }
         ]
       }
       return rules
     }
   },
-  // watch: {
-  //   ruleForm: {
-  //     deep: true,
-  //     handler: function (value) {
-  //       if (value.userId) {
-  //         this.rules.password = []
-  //       } else {
-  //         this.rules.password = [{ required: true, message: '请输入密码', trigger: 'blur' }]
-  //       }
-  //     }
-  //   }
-  // },
   methods: {
     // 新建用户
     addNew () {
+      this.ruleForm = {
+        nickName: '',
+        userName: '',
+        sex: '',
+        status: '0', // 0 正常 1停用 默认正常
+        roleIds: [2], // 新增默认必传 负责专员
+        passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
+      }
       this.showAddUser = true
       this.pannelTitle = '新建负责专员'
     },
@@ -317,34 +326,38 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputValidator: function (value) {
+          if (!value) {
+            return '请输入新密码'
+          }
           value = value.trim()
+
           if (!value.length) return '请输入新密码'
+          const res = checkPwdSimple(value)
+          if (res !== true) {
+            return res
+          }
         }
-      })
-        .then(({ value }) => {
-          resetPwd({ userId: userId, password: value })
-            .then((res) => {
-              this.$alert('', '新密码为' + value, {
-                confirmButtonText: '确定',
-                callback: (action) => {
-                  this.$message({
-                    type: 'success',
-                    message: '重置成功'
-                  })
-                }
+      }).then(({ value }) => {
+        resetPwd({ userId: userId, password: value }).then((res) => {
+          this.$alert('', '新密码为' + value, {
+            confirmButtonText: '确定',
+            callback: action => {
+              this.$message({
+                type: 'success',
+                message: '重置成功'
               })
-              this.handleQuery()
-            })
-            .catch(() => {
-              this.msgInfo('已取消操作')
-            })
-        })
-        .catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
+            }
           })
+          this.handleQuery()
+        }).catch(() => {
+          this.msgInfo('已取消操作')
         })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        })
+      })
     },
     // 选中表格中的每一项
     handleSelectionChange (value) {
@@ -397,7 +410,7 @@ export default {
     },
     // 批量启用用户
     enableUser () {
-      this.$confirm('此操作将启用选中的管理员, 是否继续?', '提示', {
+      this.$confirm('此操作将启用选中的负责专员, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -416,7 +429,7 @@ export default {
     },
     // 批量禁用用户
     disableUser () {
-      this.$confirm('此操作将禁用选中的管理员, 是否继续?', '提示', {
+      this.$confirm('此操作将禁用选中的负责专员, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -435,7 +448,7 @@ export default {
     },
     // 删除用户
     handleDelete (id) {
-      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该负责专员, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -464,7 +477,7 @@ export default {
         const text = this.ruleForm.userId ? '修改' : '创建'
         // 验证通过
         if (valid) {
-          this.$confirm(`您确定要${text}该基层用户信息吗?`, '提示', {
+          this.$confirm(`您确定要${text}该负责专员信息吗?`, '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'

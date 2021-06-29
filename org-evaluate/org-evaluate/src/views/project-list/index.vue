@@ -9,7 +9,7 @@
         <div class="color-grey pr-5 f14 no-wrap">项目编号:</div>
         <div>
           <el-input
-            v-model="queryParams.searchValue"
+            v-model="queryParams.projectNumber"
             placeholder=""
             @change="handleQuery"
           ></el-input>
@@ -19,7 +19,7 @@
         <div class="color-grey pr-5 f14 no-wrap">被检查机构名称:</div>
         <div>
           <el-input
-            v-model="queryParams.searchValue"
+            v-model="queryParams.name"
             placeholder=""
             @change="handleQuery"
           ></el-input>
@@ -29,7 +29,7 @@
         <div class="color-grey pr-5 f14 no-wrap">检查组成员:</div>
         <div>
           <el-input
-            v-model="queryParams.searchValue"
+            v-model="queryParams.expertNames"
             placeholder=""
             @change="handleQuery"
           ></el-input>
@@ -38,14 +38,11 @@
       <div class="flex pr-16">
         <div class="color-grey pl-12 pr-5 f14">检查日期:</div>
         <el-date-picker
-          type="daterange"
+          type="date"
           align="right"
-          unlink-panels
-          v-model="date"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
           value-format="yyyy-MM-dd"
+          unlink-panels
+          v-model="queryParams.inspectTime"
           @change="queryDate"
         >
         </el-date-picker>
@@ -64,7 +61,7 @@
               v-for="(item, index) in evaluateStatus"
               :key="index"
               :label="item.label"
-              :value="item.value"
+              :value="item.status"
             >
             </el-option>
           </el-select>
@@ -88,96 +85,128 @@
         style="width: 100%"
       >
         <el-table-column label="序号" type="index"> </el-table-column>
-        <el-table-column label="项目编号" prop="pic"> </el-table-column>
-        <el-table-column label="被检查机构名称" prop="pic"> </el-table-column>
-        <el-table-column label="负责专员" prop="pic"> </el-table-column>
-        <el-table-column label="专家组成员" prop="pic">
+        <el-table-column label="项目编号" prop="projectNumber"> </el-table-column>
+        <el-table-column label="被检查机构名称" prop="name"> </el-table-column>
+        <el-table-column label="负责专员" prop="userId"> </el-table-column>
+        <el-table-column label="专家组成员" prop="expertNames">
           <template slot-scope="scope">
-            {{ scope.row.videoDuration | formatTime }}
+            {{ scope.row.expertNames && scope.row.expertNames.length ? scope.row.expertNames: '暂无'}}
           </template>
         </el-table-column>
-        <el-table-column label="检查时间" prop="pic">
+        <el-table-column label="检查时间" prop="inspectTime">
           <template slot-scope="scope">
-            {{ scope.row.videoDuration | formatTime }}
+            {{ scope.row.inspectTime?scope.row.inspectTime: scope.row.createTime }}
           </template>
         </el-table-column>
-        <el-table-column prop="createTime" label="检查时间" show-overflow-tooltip>
+        <el-table-column prop="assessStatus" label="状态">
           <template slot-scope="scope">
-            <div>{{ scope.row.createTime | formatDate("YYYY-mm-dd") }}</div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="status" label="状态">
-          <template slot-scope="scope">
-            <span>{{ scope.row.status === 0 ? "正常" : "已下架" }}</span>
+            <span>{{ !scope.row.assessStatus ? evaluateStatus[0]['label'] : evaluateStatus[scope.row.assessStatus]['label']}}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <div class="oper-btns">
               <span
+                v-show="scope.row.assessStatus ===  evaluateStatus[2].status"
                 class="color-green pointer"
-                @click="viewVideo(scope.row.videoId)"
                 >查看</span
               >
               <span
+               v-show="scope.row.assessStatus === evaluateStatus[2].status"
                 class="color-red pointer"
-                @click="delteVideo(scope.row.videoId)"
                 >下载</span
               >
               <span
                 class="color-green pointer"
-                @click="editVideo(scope.row.videoId)"
-                >修改</span
+                @click="createCheck(scope.row)"
+                 v-show="!scope.row.assessStatus || scope.row.assessStatus === evaluateStatus[1].status"
+                >去检查</span
               >
               <span
                 class="color-green pointer"
-                :class="[
-                  { 'color-green': scope.row.status === 1 },
-                  { 'color-red': scope.row.status === 0 },
-                ]"
-                @click="updateVideoStatus(scope.row)"
+                 v-show="scope.row.assessStatus === evaluateStatus[3].status"
+                >复查</span
               >
-                {{ scope.row.status === 0 ? "下架" : "上架" }}
-              </span>
             </div>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <AddNewCheck :newCheckVisible="newCheckVisible"/>
+       <pagination
+      :total="total"
+      :queryParams="queryParams"
+      @initList="initList"
+    ></pagination>
+    <AddNewCheck :newCheckVisible="dialogShow" @close="dialogShow= false" @submit="submit"/>
   </div>
 </template>
 <script>
 import './index.scss'
+import { evaluateStatus } from '@/libs/constant'
+import pagination from '@/components/pagination.vue'
 import AddNewCheck from './newCheck.vue'
+import { getProjectList } from '@/api/project-list'
 export default {
   components: {
-    AddNewCheck
+    AddNewCheck,
+    pagination
   },
   data () {
     return {
       // 是否显示新建检查弹框
-      newCheckVisible: true,
+      dialogShow: false,
+      // 总条数
+      total: 0,
       date: '',
-      evaluateStatus: [],
+      // 评估状态
+      evaluateStatus: evaluateStatus,
+      // 列表
+      tableData: [],
       queryParams: {
         // 页数
         pageNum: 1,
         // 每页的大小
         pageSize: 20,
         // 查询关键字
-        searchValue: null,
-        // 评估状态 全部 未评估 评估中 已评估
+        name: null,
+        // 专家组
+        expertNames: '',
         assessStatus: null,
-        beginTime: null,
-        endTime: null
+        // 检查日期
+        inspectTime: null
       }
     }
   },
+  created () {
+    this.initList()
+  },
   methods: {
+    // 新建检查评估
+    createCheck (data) {
+      const passData = JSON.stringify(
+        {
+          projectId: data.projectId
+        }
+      )
+      this.$router.push({
+        path: '/check/',
+        query: {data: passData}
+      })
+    },
+    // 获取列表
+    initList () {
+      getProjectList(this.queryParams).then((res) => {
+        this.tableData = res.rows
+        this.total = parseInt(res.total)
+      })
+    },
+    // 新增检查
+    submit () {
+      this.initList()
+    },
     // 新建检查
     addNewCheck () {
-
+      this.dialogShow = true
     },
     // 按关键字搜索
     handleQuery () {
@@ -186,12 +215,8 @@ export default {
     },
     // 按照日期筛选
     queryDate () {
-      this.queryParams.beginTime = this.date && this.date[0]
-      this.queryParams.endTime = this.date && this.date[1]
       this.handleQuery()
-    },
-    // 获取列表
-    initList () {}
+    }
   }
 }
 </script>

@@ -19,6 +19,7 @@
     </div>
     <el-dialog :visible.sync="dialogVisible" width="30%">
       <div slot="title" class="dialog-header">修改密码</div>
+      <div class="pb-20 color-danger">密码长度不能小于8位，且必须包含大写字母，小写字母，数字及特殊符号</div>
       <div class="dialog-content">
         <el-form
           label-position="right"
@@ -51,6 +52,7 @@
 import './reset-pwd.scss'
 import { removeToken } from '@/utils/auth'
 import { updatePassword } from '@/api/user.js'
+import { checkPwdSimple } from '@/utils/utils'
 export default {
   data () {
     var checkOldPass = (rule, value, callback) => {
@@ -60,8 +62,11 @@ export default {
       callback()
     }
     var validatePass = (rule, value, callback) => {
+      const res = checkPwdSimple(value)
       if (value === '') {
         callback(new Error('请输入密码'))
+      } else if (res !== true) {
+        callback(new Error(res))
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass')

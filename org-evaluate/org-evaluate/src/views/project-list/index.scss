@@ -26,8 +26,11 @@
     }
     .oper-btns{
         display: flex;
-        justify-content: space-around;
+        // justify-content: space-around;
         flex-wrap: wrap;
+        span{
+            padding-right: 10px;
+        }
     }
     .oper-container{
         display: flex;
