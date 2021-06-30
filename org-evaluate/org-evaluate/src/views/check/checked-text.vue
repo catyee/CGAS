@@ -16,6 +16,16 @@ export default {
     prop: 'bindData',
     event: 'changeData'
   },
+  watch: {
+    bindData: {
+      handler (v) {
+        this.inputValue = v
+      },
+      immediate: true,
+      deep: true
+    }
+
+  },
   props: {
     bindData: {
       type: String,

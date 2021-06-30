@@ -68,7 +68,7 @@
                     <div class="input-line">
                       <span class="text-bold f16">机构名称：</span
                       >
-                      <span>{{tableData.orgName}}</span>
+                      <span>{{orgName}}</span>
                     </div>
                   </td>
                   <td colspan="4">
@@ -3293,26 +3293,26 @@
                   <td>其中提升指标(项)</td>
                   <td>合计(项)</td>
                 </tr>
-                <tr>
+                 <tr>
                   <td>A</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{sum.A.listStr}}</td>
+                  <td>{{sum.A.baseList.length}}</td>
+                  <td>{{sum.A.liftList.length}}</td>
+                  <td>{{sum.A.list.length}}</td>
                 </tr>
                 <tr>
                   <td>B</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{sum.B.listStr}}</td>
+                  <td>{{sum.B.baseList.length}}</td>
+                  <td>{{sum.B.liftList.length}}</td>
+                  <td>{{sum.B.list.length}}</td>
                 </tr>
                 <tr>
                   <td>C</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{sum.C.listStr}}</td>
+                  <td>{{sum.C.baseList.length}}</td>
+                  <td>{{sum.C.liftList.length}}</td>
+                  <td>{{sum.C.list.length}}</td>
                 </tr>
               </table>
               <!-- 签字 -->
@@ -3384,7 +3384,7 @@
                     <div class="flex">
                       <span class="mr-10">检查时间: </span>
                       <div>
-                        {{signData.signDate | formatDate('YYYY-mm-dd')}}
+                        {{inspectTime | formatDate('YYYY-mm-dd')}}
                       </div>
                     </div>
                   </div>
@@ -3403,6 +3403,7 @@
 <script>
 import '@/views/check/index.scss'
 import Defer from './checkMixin'
+import { getEvaluate } from '@/api/check'
 export default {
   components: {
 
@@ -3410,6 +3411,10 @@ export default {
   mixins: [Defer()],
   data () {
     return {
+      orgName: '', // 机构名称
+      // 检查时间
+      inspectTime: null,
+      assessId: null,
       // 当前正在编辑的专家组成员，如果没有属性都为空
       currentExpert: {
         name: '',
@@ -3423,7 +3428,7 @@ export default {
       signData: {
         // 负责专家
         checkMajor: {
-          name: '王小明',
+          name: '',
           sign: ''
         },
         // 被检查养老院负责人
@@ -3453,14 +3458,14 @@ export default {
       // 当前激活的路由
       activeHash: '1',
       tableData: {
-        orgName: '333',
+        orgName: '',
         // 根据需求 标黑指标属于基本指标 此处置为0 其余指标属于提升指标 此处置为1
 
         // 1-1
         data_1: {
           type: 0,
-          value: 'A',
-          text: '333333333333333333333333'
+          value: '',
+          text: ''
         },
         data_2: {
           type: 0,
@@ -4524,10 +4529,66 @@ export default {
           value: '',
           text: ''
         }
+      },
+      // 最终的统计信息
+      sum: {
+        A: {
+          list: [], // 所有的A项目
+          listStr: '',
+          baseList: [], // 基础指标序号
+          liftList: [],
+          liftStr: '',
+          baseStr: ''
+        },
+        B: {
+          list: [], // 所有的B项目
+          listStr: '',
+          liftList: [],
+          liftStr: '',
+          baseStr: '',
+          baseList: [] // 基础指标序号
+        },
+        C: {
+          list: [], // 所有的C项目
+          listStr: '',
+          liftList: [],
+          liftStr: '',
+          baseStr: '',
+          baseList: [] // 基础指标序号
+        },
+        // 最终结果 0整改/ 1提升
+        // 检查结果中有任何1项基础指标属于C（不符合），则检查结果为整改；养老院基础指标全部符合，则检查结果为提升
+        result: ''
+
       }
     }
   },
+  created () {
+    this.assessId = this.$route.params.checkid
+    this.getCheck()
+  },
   methods: {
+    // 获取检查详情
+    getCheck () {
+      getEvaluate(this.assessId).then(res => {
+        const data = res.data
+        this.inspectTime = data.inspectTime
+        this.assessStatus = data.assessStatus
+        if (data.result) {
+          const result = JSON.parse(data.result)
+          if (result.tableData) {
+            this.tableData = result.tableData
+          }
+          if (result.signData) {
+            this.signData = result.signData
+          }
+          this.orgName = result.orgName
+        }
+        if (data.sum) {
+          this.sum = JSON.parse(data.sum)
+        }
+      })
+    },
     save () {
       console.log(this.tableData, 'tttttttttttttttttt')
     },

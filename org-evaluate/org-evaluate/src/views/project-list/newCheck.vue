@@ -96,7 +96,8 @@ export default {
         projectNumber: '', // 项目编号
         name: '', // 评估机构名称
         type: null, // 机构性质
-        userId: null // 负责专员
+        userId: null, // 负责专员
+        userName: ''
       }
     }
   },
@@ -122,6 +123,10 @@ export default {
     },
     // 新增项目
     addProject () {
+      const user = this.userList.filter(item => {
+        return item.userId === this.ruleForm.userId
+      })[0]
+      this.ruleForm.userName = user.nickName
       addProject(this.ruleForm).then(res => {
         this.$emit('submit')
         this.closeModal()

@@ -87,7 +87,7 @@
         <el-table-column label="序号" type="index"> </el-table-column>
         <el-table-column label="项目编号" prop="projectNumber"> </el-table-column>
         <el-table-column label="被检查机构名称" prop="name"> </el-table-column>
-        <el-table-column label="负责专员" prop="userId"> </el-table-column>
+        <el-table-column label="负责专员" prop="userName"> </el-table-column>
         <el-table-column label="专家组成员" prop="expertNames">
           <template slot-scope="scope">
             {{ scope.row.expertNames && scope.row.expertNames.length ? scope.row.expertNames: '暂无'}}
@@ -111,11 +111,11 @@
                 class="color-green pointer"
                 >查看</span
               >
-              <span
+              <!-- <span
                v-show="scope.row.assessStatus === evaluateStatus[2].status"
                 class="color-red pointer"
                 >下载</span
-              >
+              > -->
               <span
                 class="color-green pointer"
                 @click="createCheck(scope.row)"
@@ -187,14 +187,25 @@ export default {
         {
           projectId: data.projectId,
           name: data.name,
+          inspector: data.userName,
           assessStatus: data.assessStatus,
-          inspectTime: data.inspectTime
+          inspectTime: data.inspectTime ? data.inspectTime : data.createTime
         }
       )
-      this.$router.push({
-        path: '/check/',
-        query: { data: passData }
-      })
+      // 移除掉存储的assessId
+      // 避免相互影响
+      localStorage.removeItem('assessId')
+      if (data.lastAssessId) {
+        this.$router.push({
+          path: '/check/' + data.lastAssessId,
+          query: { data: passData }
+        })
+      } else {
+        this.$router.push({
+          path: '/check/',
+          query: { data: passData }
+        })
+      }
     },
     // 获取列表
     initList () {

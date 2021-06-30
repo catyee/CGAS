@@ -21,7 +21,7 @@ export const orgRoutes = [
         component: () => import(/* webpackChunkName: "check" */ '../views/check')
       },
       {
-        path: 'check-show',
+        path: 'check-show/:checkid',
         name: 'check-show',
         meta: { title: '检查', icon: 'iconevaluate' },
         hidden: true,

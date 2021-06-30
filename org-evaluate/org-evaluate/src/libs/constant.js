@@ -1,11 +1,11 @@
 export const checkedGrade = ['A', 'B', 'C']
 export const orgType = [
   {
-    type: 0,
+    type: 1,
     name: '服务社会老年人的养老院'
   },
   {
-    type: 1,
+    type: 2,
     name: '敬老院'
   }
 ]

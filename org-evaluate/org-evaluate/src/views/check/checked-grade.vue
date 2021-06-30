@@ -14,6 +14,16 @@ export default {
     prop: 'bindValue',
     event: 'changeData'
   },
+  watch: {
+    // 必须监听prop的变化 否则当prop数据变化时 数据不同同步到这里
+    bindValue: {
+      handler (v) {
+        this.radioValue = v
+      },
+      immediate: true,
+      deep: true
+    }
+  },
   props: {
     bindValue: {
       type: String,
