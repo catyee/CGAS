@@ -202,3 +202,10 @@ body {
     scrollbar-base-color: #f4f4f5;
 }
 /*IE--------------------------------------------end*/
+.clearfix::after {
+    content: "";
+    display: block;
+    height: 0;
+    clear:both;
+    visibility: hidden;
+}

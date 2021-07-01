@@ -1,0 +1,23 @@
+.final-list {
+    .list-container{
+        width: 100%;
+    }
+    table{
+        border: 1px solid #E7E7E7;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 48px 16px;
+    }
+    tr,td{
+        border: 1px solid #E7E7E7;
+        background-color: #fff;
+        box-sizing: border-box;
+      }
+      td{
+        padding:12px 8px;
+        font-size: 14px;
+        line-height: 1.5;
+        vertical-align: middle;
+      }
+    
+}

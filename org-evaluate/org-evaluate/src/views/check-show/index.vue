@@ -60,8 +60,7 @@
     <div class="wrap" @scroll="scrollEvent">
       <div class="center-wrap mt-16">
         <div class="center" id="print">
-          <div class="" id="pdfDom">
-            <div class="table-wrap">
+           <div class="table-wrap" id="dowmloadDom">
               <table class="evaluate-table">
                 <tr>
                   <td colspan="4">
@@ -3317,16 +3316,16 @@
               </table>
               <!-- 签字 -->
               <div class="sign-panel">
-                <div class="flex-between">
-                  <div class="flex">
+                <div class="clearfix sign-part">
+                  <div class="sign-left">
                     <span>负责专员签字：</span>
-                    <div>
-                      <div class="flex-sign">
-                        <span class="text-border">{{
+                    <div class="inline">
+                      <div class="inline">
+                        <span class="text-border inline">{{
                           signData.checkMajor.name
                         }}</span>
                         <img
-                          class="view-image"
+                          class="view-image inline"
                           :src="signData.checkMajor.sign"
                           width="95.5"
                           height="38"
@@ -3334,20 +3333,20 @@
                       </div>
                     </div>
                   </div>
-                  <div  class="sign-right">
-                    <div class="flex">
+                  <div  class="sign-right ">
+                    <div class="inline">
                       <span>被检查养老院负责人签字：</span>
-                      <div>
+                      <div class="inline">
                         <div
-                          class="flex-sign"
+                          class="inline"
                           v-if="signData.beCheckedMajor.name"
                         >
                           <span
-                            class="text-border"
+                            class="text-border inline"
                             >{{ signData.beCheckedMajor.name }}</span
                           >
                           <img
-                            class="view-image"
+                            class="view-image inline"
                             :src="signData.beCheckedMajor.sign"
                             width="95.5"
                             height="38"
@@ -3357,22 +3356,22 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex-between">
-                  <div class="flex">
-                    <span>专家组成员签字：</span>
-                    <div>
+                <div class="clearfix sign-part">
+                  <div class="sign-left">
+                    <span class="vertical-top">专家组成员签字：</span>
+                    <div class="vertical-top">
                       <div
-                        class="flex-sign mb-20"
+                        class="mb-20"
                         v-for="(user, index) in signData.checkExpert"
                         :key="index"
                       >
-                        <span class="text-border">{{ user.name }}</span>
-                        <span class="text-border">{{
+                        <span class="text-border inline">{{ user.name }}</span>
+                        <span class="text-border inline">{{
                           user.sex == 0 ? "男" : "女"
                         }}</span>
-                        <span class="text-border">{{ user.phone }}</span>
+                        <span class="text-border inline">{{ user.phone }}</span>
                         <img
-                          class="view-image"
+                          class="view-image inline"
                           :src="user.sign"
                           width="95.5"
                           height="38"
@@ -3381,9 +3380,9 @@
                     </div>
                   </div>
                   <div class="sign-right">
-                    <div class="flex">
+                    <div class="inline">
                       <span class="mr-10">检查时间: </span>
-                      <div>
+                      <div class="inline">
                         {{inspectTime | formatDate('YYYY-mm-dd')}}
                       </div>
                     </div>
@@ -3391,11 +3390,10 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
       <div class="save">
-        <el-button type="primary" @click="save">下载</el-button>
+        <el-button type="primary" @click="download">下载</el-button>
       </div>
     </div>
   </div>
@@ -3403,7 +3401,9 @@
 <script>
 import '@/views/check/index.scss'
 import Defer from './checkMixin'
-import { getEvaluate } from '@/api/check'
+import { getEvaluate, exportTable } from '@/api/check'
+import { getHtml } from './export-style'
+import { baseUrl } from '@/baseUrl'
 export default {
   components: {
 
@@ -4589,8 +4589,29 @@ export default {
         }
       })
     },
-    save () {
-      console.log(this.tableData, 'tttttttttttttttttt')
+    download () {
+      const loading = this.$loading({
+        lock: true,
+        text: '下载中，请稍后...',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+      try {
+        const evaluate = document.getElementById('dowmloadDom').innerHTML
+        const html = getHtml(evaluate)
+        exportTable(html).then((res) => {
+          window.open(
+          `${baseUrl}/common/download?fileName=${res.msg}&delete=true`
+          )
+          loading.close()
+        }, (e) => {
+          loading.close()
+        })
+      } catch (e) {
+        console.log(777777777777777)
+        this.msgError(e)
+        loading.close()
+      }
     },
     // 点击hash
     selectHash (hash) {

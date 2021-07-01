@@ -74,7 +74,7 @@
     <div class="list-container ml-16">
       <div class="oper-container pb-15">
         <el-button type="primary" @click="addNewCheck">新建检查</el-button>
-        <router-link to="/video/add-video">
+        <router-link to="/final-list">
           <el-button type="primary">生成汇总表</el-button>
         </router-link>
       </div>
@@ -107,9 +107,9 @@
           <template slot-scope="scope">
             <div class="oper-btns">
               <span
-                v-show="scope.row.assessStatus ===  evaluateStatus[2].status"
+                @click="getHistory(scope.row)"
                 class="color-green pointer"
-                >查看</span
+                >查看历史</span
               >
               <!-- <span
                v-show="scope.row.assessStatus === evaluateStatus[2].status"
@@ -138,6 +138,7 @@
       @initList="initList"
     ></pagination>
     <AddNewCheck :newCheckVisible="dialogShow" @close="dialogShow= false" @submit="submit"/>
+    <CheckHistory :dialogTableVisible="showHistory" :title="historyTitle"  :gridData="historyData" @close="showHistory = false"/>
   </div>
 </template>
 <script>
@@ -145,14 +146,22 @@ import './index.scss'
 import { evaluateStatus } from '@/libs/constant'
 import pagination from '@/components/pagination.vue'
 import AddNewCheck from './newCheck.vue'
-import { getProjectList } from '@/api/project-list'
+import CheckHistory from './check-history.vue'
+import { getProjectList, getCheckListByProjectId } from '@/api/project-list'
 export default {
   components: {
     AddNewCheck,
-    pagination
+    pagination,
+    CheckHistory
   },
   data () {
     return {
+      // 检查历史列表
+      historyData: [],
+      // 历史检查弹框标题
+      historyTitle: '',
+      // 检查历史弹框
+      showHistory: false,
       // 是否显示新建检查弹框
       dialogShow: false,
       // 总条数
@@ -230,6 +239,21 @@ export default {
     // 按照日期筛选
     queryDate () {
       this.handleQuery()
+    },
+    // 根据项目id 获取项目下所有的检查历史
+    getHistory (data) {
+      getCheckListByProjectId({
+        projectId: data.projectId,
+        assessStatus: 3
+      }).then(res => {
+        if (!res.data.length) {
+          this.msgInfo('没有检查历史')
+          return
+        }
+        this.showHistory = true
+        this.historyTitle = data.name + '机构检查记录'
+        this.historyData = res.data
+      })
     }
   }
 }

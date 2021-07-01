@@ -15,3 +15,11 @@ export function getProjectList (data) {
     params: data
   })
 }
+// 获取项目对应的检查列表
+export function getCheckListByProjectId (data) {
+  return request({
+    url: '/pg/assess/list/simple',
+    method: 'get',
+    params: data
+  })
+}
