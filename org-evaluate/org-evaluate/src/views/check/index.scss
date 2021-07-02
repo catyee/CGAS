@@ -99,6 +99,7 @@
   // }
   .table-wrap{
    padding-bottom: 24px;
+   box-sizing: border-box;
   }
   .table-title{
    text-align: left;
@@ -112,6 +113,7 @@
   .evaluate-table{
     border: 1px solid #E7E7E7;
     width: 100%;
+    box-sizing: border-box;
     .input-line{
         display: flex;
         align-items: center;
@@ -120,6 +122,7 @@
         }
     }
     tr,td{
+      box-sizing: border-box;
       border: 1px solid #E7E7E7;
     }
     td{
@@ -237,7 +240,7 @@
    }
    textarea{
      border: none;
-    //  resize: none
+    resize: none
    }
 
   

@@ -5,9 +5,7 @@ $system-color: #C23731; // 系统色
 $body-background-color:#fff; // body背景色
 $border-color: #E6EBF1;
 $body-deep-color: #f8f8f8;
-
 // 系统字体
-// $system-font-family: 'PingFangSC-Regular,PingFang SC';
 $system-font-family: ' font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;';
 
 // common color
@@ -18,6 +16,7 @@ $color-edit: #5274FD;
 html, body, #app {
     box-sizing: border-box;
     height: 100%;
+    font-family: $system-font-family;
     background-color: $body-deep-color;
   
 }
@@ -28,23 +27,6 @@ html, body, #app {
     box-sizing: border-box;
 }
 
-// icon
-// @font-face {
-//     font-family: 'iconfont';  /* project id 1617452 */
-//     src: url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.eot');
-//     src: url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.eot?#iefix') format('embedded-opentype'),
-//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.woff2') format('woff2'),
-//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.woff') format('woff'),
-//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.ttf') format('truetype'),
-//     url('//at.alicdn.com/t/font_1617452_6sfzso4fdr8.svg#iconfont') format('svg');
-//   }
-// .iconfont{
-//     font-family:"iconfont" !important;
-//     font-size:16px;font-style:normal;
-//     -webkit-font-smoothing: antialiased;
-//     -webkit-text-stroke-width: 0.2px;
-//     -moz-osx-font-smoothing: grayscale;
-// }
 
 // margin
 @for $i from 1 through 30 {
@@ -108,11 +90,6 @@ html, body, #app {
     font-weight: 600;
 }
 
-body {
-    //background-color: $body-background-color;
-    // font-family: 'PingFangSC-Regular,PingFang SC';
-    //font-family: 'Microsoft YaHei';
-}
 // 溢出隐藏
 .ellipsis{
     overflow:hidden; //超出的文本隐藏

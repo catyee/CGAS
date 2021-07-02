@@ -2,7 +2,7 @@
   <div class="header height-60">
     <div class="header-title">
       <img src="@/assets/logo-header.svg" class="icon" />
-      <div class="f16 pl-9">承德养老评估系统</div>
+      <div class="f16 pl-9">机构评估平台</div>
     </div>
     <div class="header-right pr-16">
 

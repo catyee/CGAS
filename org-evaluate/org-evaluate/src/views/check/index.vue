@@ -59,9 +59,8 @@
     </div>
     <div class="wrap" @scroll="scrollEvent">
       <div class="center-wrap mt-16">
-        <div class="center" id="print">
-          <div class="" id="pdfDom">
-            <div class="table-wrap">
+        <div class="center">
+           <div class="table-wrap">
               <table class="evaluate-table">
                 <tr>
                   <td colspan="4">
@@ -4273,11 +4272,10 @@
                 </div>
               </div>
             </div>
-          </div>
           <div class="oper-btns">
-             <el-button type="primary"
+             <!-- <el-button type="primary"
                           @click="download"
-                          >下载</el-button>
+                          >下载</el-button> -->
                           <el-button type="primary"
                           @click="submit"
                           >提交</el-button>
@@ -5503,6 +5501,8 @@ export default {
     if (this.assessId) {
       // 获取详情
       this.getCheck()
+    } else {
+      this.createCheck()
     }
 
     data = JSON.parse(data)
@@ -5649,7 +5649,6 @@ export default {
           // 进入该页面的时候是未开始状态 需要先创建一个check 拿到assessId 之后的操作开始修改操作
           // 因为未开始的状态 每次进入页面都拿不到 assessId 所以在这个页面刷新的时候 同样拿不到assessId 这样如果再次调用新建接口会多次创建 所以需要存储一下assessId 进入未开始的页面的时候 获取一下localstorage 如果获取到那么就直接采用 如果获取不到 那么就调新建接口获取
           localStorage.setItem('assessId', res.data)
-          // 创建完检查之后 需要监听页面的变化
           this.watchDataChange()
         } else {
           this.msgError('新建检查出错!')
@@ -5666,10 +5665,10 @@ export default {
     // 点击保存按钮 调修改检查接口
     save () {
       // 保存的时候 如果状态是未创建 一定会先调取创建接口
-      if (!this.assessStatus === evaluateStatus[0].status) {
-        this.createCheck()
-        return
-      }
+      // if (!this.assessStatus === evaluateStatus[0].status) {
+      //   this.createCheck()
+      //   return
+      // }
       // 保存的时候 检查状态置为 检查中
       this.assessStatus = evaluateStatus[1].status
       // 生成存储json
@@ -5745,9 +5744,9 @@ export default {
       return true
     },
     // 下载
-    download () {
+    // download () {
 
-    },
+    // },
     // 删除某个专家组成员
     removeExpert (index) {
       this.signData.checkExpert.splice(index, 1)

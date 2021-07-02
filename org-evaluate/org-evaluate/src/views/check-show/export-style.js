@@ -29,6 +29,11 @@ export function getHtml (element) {
        .evaluate-table{
         border: 1px solid #E7E7E7;
         width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    .f16{
+      font-size: 16px;
     }
     .input-line{
         display: flex;
@@ -55,6 +60,9 @@ export function getHtml (element) {
       }
       .text-bold{
         font-weight: bold;
+    }
+    .bold{
+      font-weight: bold;
     }
     .tip{
         padding: 32px 24px;
