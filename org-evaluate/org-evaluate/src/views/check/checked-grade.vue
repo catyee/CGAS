@@ -1,9 +1,11 @@
 <template>
-  <el-radio-group v-model="radioValue" @change="change" class="group-container">
+  <div class="check-grade">
+    <el-radio-group v-model="radioValue" @change="change" class="group-container">
       <el-radio v-for="item in grades" :label="item" :key="item">{{
         item
       }}</el-radio>
     </el-radio-group>
+  </div>
 </template>
 <script>
 import { checkedGrade } from '@/libs/constant.js'
@@ -42,10 +44,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.group-container{
-  box-sizing: border-box;
+
+/deep/.el-radio ::after {
+  transition: none!important;
 }
-/deep/  .el-radio__inner{
-  box-sizing: border-box;
-}
+
+// .group-container{
+//   box-sizing: border-box;
+// }
+// /deep/  .el-radio__inner{
+//   box-sizing: border-box;
+// }
 </style>

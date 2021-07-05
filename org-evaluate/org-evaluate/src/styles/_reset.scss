@@ -54,28 +54,28 @@ body {
   // font-family: PingFang SC, helvetica neue, hiragino sans gb, arial, microsoft yahei ui, microsoft yahei, simsun, sans-serif;
   background: transparent;
 }
-input,
-label,
-select,
-button,
-textarea
-{   
-    &, 
-    &:visited, 
-    &:focus,
-    &:hover, 
-    &:active{
-        margin:0;
-        vertical-align:middle;
-        white-space:normal;
-    }
-}
+// input,
+// label,
+// select,
+// button,
+// textarea
+// {   
+//     &, 
+//     &:visited, 
+//     &:focus,
+//     &:hover, 
+//     &:active{
+//         margin:0;
+//         vertical-align:middle;
+//         white-space:normal;
+//     }
+// }
 
 /* Remove the stupid outer glow in Webkit */
-input:focus
-{
-	outline:0;
-}
+// input:focus
+// {
+// 	outline:0;
+// }
 input:-webkit-autofill{
   box-shadow:0 0 0 1000px #fff inset;
   background-color: transparent;

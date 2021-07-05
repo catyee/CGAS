@@ -59,7 +59,7 @@
     </div>
     <div class="wrap" @scroll="scrollEvent">
       <div class="center-wrap mt-16">
-        <div class="center">
+        <div class="center1">
            <div class="table-wrap">
               <table class="evaluate-table">
                 <tr>

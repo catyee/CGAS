@@ -100,6 +100,7 @@
   .table-wrap{
    padding-bottom: 24px;
    box-sizing: border-box;
+   width: 100%;
   }
   .table-title{
    text-align: left;
@@ -113,6 +114,7 @@
   .evaluate-table{
     border: 1px solid #E7E7E7;
     width: 100%;
+    table-layout: fixed;
     box-sizing: border-box;
     .input-line{
         display: flex;
