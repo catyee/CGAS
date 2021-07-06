@@ -59,7 +59,7 @@
     </div>
     <div class="wrap" @scroll="scrollEvent">
       <div class="center-wrap mt-16">
-        <div class="center1">
+        <div class="center">
            <div class="table-wrap">
               <table class="evaluate-table">
                 <tr>
@@ -4123,7 +4123,7 @@
               <table class="evaluate-table total-table">
                 <tr>
                   <td>检查结果</td>
-                  <td>
+                  <td class="text-left">
                     检查结果
                     <div>(项目指标清单)</div>
                   </td>
@@ -4133,21 +4133,21 @@
                 </tr>
                 <tr>
                   <td>A</td>
-                  <td>{{sum.A.listStr}}</td>
+                  <td  class="text-left">{{sum.A.listStr}}</td>
                   <td>{{sum.A.baseList.length}}</td>
                   <td>{{sum.A.liftList.length}}</td>
                   <td>{{sum.A.list.length}}</td>
                 </tr>
                 <tr>
                   <td>B</td>
-                  <td>{{sum.B.listStr}}</td>
+                  <td  class="text-left">{{sum.B.listStr}}</td>
                   <td>{{sum.B.baseList.length}}</td>
                   <td>{{sum.B.liftList.length}}</td>
                   <td>{{sum.B.list.length}}</td>
                 </tr>
                 <tr>
                   <td>C</td>
-                  <td>{{sum.C.listStr}}</td>
+                  <td  class="text-left">{{sum.C.listStr}}</td>
                   <td>{{sum.C.baseList.length}}</td>
                   <td>{{sum.C.liftList.length}}</td>
                   <td>{{sum.C.list.length}}</td>
@@ -4318,7 +4318,7 @@ import Sign from '@/components/sign.vue'
 import AddExpert from './add-expert.vue'
 import { _debounce } from '@/utils/utils'
 import { evaluateStatus } from '@/libs/constant'
-import { addEvaluate, updateEvaluate, getEvaluate } from '@/api/check'
+import { addEvaluate, updateEvaluate, getEvaluate, reviewEvaluate } from '@/api/check'
 export default {
   components: {
     // 检查结果选择组件
@@ -5491,20 +5491,6 @@ export default {
       this.$router.go(-1)
     }
     this.assessId = this.$route.params.checkid
-    // 如果有id即为检查中过来的 如果没有id 先查看是否存储了id 如果存储了 给id赋值
-    // 这样创建完检查之后 刷新页面 不会丢失id  可以获取详情了
-    if (!this.assessId) {
-      this.assessId = localStorage.getItem('assessId')
-    }
-    // id赋值完之后 再次校验是否存在id 只有存在id的情况下才会获取详情
-    // 如果id还是不存在 说明确实还未创建 此时在保存的时候 状态一定是未开始 所以会调取 创建接口
-    if (this.assessId) {
-      // 获取详情
-      this.getCheck()
-    } else {
-      this.createCheck()
-    }
-
     data = JSON.parse(data)
 
     // 获取评估状态
@@ -5517,29 +5503,76 @@ export default {
     this.signData.checkMajor.name = data.inspector
     // 默认取值机构名称
     this.orgName = data.name
+
+    // 如果有id即为检查中过来的 如果没有id 先查看是否存储了id 如果存储了 给id赋值
+    // 这样创建完检查之后 刷新页面 不会丢失id  可以获取详情了
+    if (!this.assessId) {
+      this.assessId = localStorage.getItem('assessId')
+    }
+    // id赋值完之后 再次校验是否存在id 只有存在id的情况下才会获取详情
+    // 如果id还是不存在 说明确实还未创建 此时在保存的时候 状态一定是未开始 所以会调取 创建接口
+    if (this.assessId) {
+      // 获取详情
+      this.getCheck()
+    } else {
+      // 检查状态为不合格 因此此处是复查 调取复查接口
+      if (this.assessStatus === evaluateStatus[3].status) {
+        this.reviewCheck()
+      } else {
+        this.createCheck()
+      }
+    }
   },
   mounted () {
   },
   methods: {
+    // 复查
+    reviewCheck () {
+      reviewEvaluate({
+        projectId: this.projectId
+      }).then(res => {
+        const data = res.data
+        this.getDataFromHttp(data)
+        // 状态置为开始中
+        this.assessStatus = evaluateStatus[1].status
+        this.assessId = data.assessId
+        // 存储assessId 避免刷新浏览器重复 复检
+        localStorage.setItem('assessId', data.assessId)
+        // 清空所有的签名
+        this.signData.checkMajor.sign = ''
+        this.signData.beCheckedMajor.sign = ''
+        this.signData.checkExpert = this.signData.checkExpert.map(item => {
+          item.sign = ''
+          return item
+        })
+        // 复查接口调用之后 修改数据  默认保存一次
+        this.save()
+        // 获取详情后监听页面变化
+        this.watchDataChange()
+      })
+    },
+    getDataFromHttp (data) {
+      this.inspectTime = data.inspectTime
+      this.assessStatus = data.assessStatus
+      if (data.result) {
+        const result = JSON.parse(data.result)
+        if (result.tableData) {
+          this.tableData = result.tableData
+        }
+        if (result.signData) {
+          this.signData = result.signData
+        }
+        this.orgName = result.orgName
+      }
+      if (data.sum) {
+        this.sum = JSON.parse(data.sum)
+      }
+    },
     // 获取检查详情
     getCheck () {
       getEvaluate(this.assessId).then(res => {
         const data = res.data
-        this.inspectTime = data.inspectTime
-        this.assessStatus = data.assessStatus
-        if (data.result) {
-          const result = JSON.parse(data.result)
-          if (result.tableData) {
-            this.tableData = result.tableData
-          }
-          if (result.signData) {
-            this.signData = result.signData
-          }
-          this.orgName = result.orgName
-        }
-        if (data.sum) {
-          this.sum = JSON.parse(data.sum)
-        }
+        this.getDataFromHttp(data)
         // 获取详情后监听页面变化
         this.watchDataChange()
       })
@@ -5603,8 +5636,10 @@ export default {
       // 最终结果 0整改/ 1提升
       // 检查结果中有任何1项基础指标属于C（不符合），则检查结果为整改；养老院基础指标全部符合，则检查结果为提升
       if (this.sum.C.baseList.length) {
+        // 整改
         this.sum.result = 0
       } else {
+        // 提升
         this.sum.result = 1
       }
     },
@@ -5682,6 +5717,8 @@ export default {
       const checked = this.checkData()
       // 校过 提交
       if (!checked) return
+      // // 最终计算一次结果 避免不修改数据 直接提交
+      // this.getSum()
       this.$confirm('您确定要提交吗？提交后将不可更改', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -5692,15 +5729,15 @@ export default {
         // 已完成
         if (this.sum.result) {
           // 已完成
-          this.assessStatus = evaluateStatus[2].value
+          this.assessStatus = evaluateStatus[2].status
         } else {
           // 不合格
-          this.assessStatus = evaluateStatus[3].value
+          this.assessStatus = evaluateStatus[3].status
         }
         const data = this.getSubmitData()
         updateEvaluate(data).then(res => {
           this.msgSuccess('提交成功')
-          this.$route.push('/check-show/' + this.assessId)
+          this.$router.push('/check-show/' + this.assessId)
         })
       }).catch(() => {
 

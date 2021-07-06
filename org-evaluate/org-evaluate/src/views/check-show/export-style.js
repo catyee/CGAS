@@ -17,6 +17,9 @@ export function getHtml (element) {
     body {
         font-size: 14px;
     }
+    .brakpage{
+      page-break-after: always;
+    }
     .table-title{
         text-align: left;
         padding-left: 8px;
@@ -72,39 +75,22 @@ export function getHtml (element) {
       .total-table  td{
         text-align: center;
         color: #5B9244;
+        word-break: break-all;
+      }
+      .total-table .text-left{
+        text-align: left;
       }
       .sign-panel{
         padding: 80px 0;
         font-size: 14px;
         font-weight: bold;
       }
-      .sign-right{
-        width: 40%;
-      }
-      .sign-right{
-        width: 40%;
-        float: right;
-      }
       .vertical-top{
         display: inline-block;
         vertical-align: top;
       
       }
-      .oper-btns{
-        display: flex;
-        justify-content: center;
-      }
-      .inline{
-        display: inline-block;
-        vertical-align: middle;
-      }
-      .sign-left{
-        float: left;
       
-      }
-      .sign-part{
-        padding-top: 20px;
-      }
       .clearfix::after {
         content: "";
         display: block;
@@ -112,6 +98,38 @@ export function getHtml (element) {
         clear:both;
         visibility: hidden;
     }
+    .view-image{
+      display: inline-block;
+      vertical-align: middle;
+      margin-top:30px;
+    }
+    .f-l{
+      float: left;
+    }
+    .f-r{
+      float: right;
+      width: 40%;
+    }
+    .pt-30{
+      padding-top: 30px;
+    }
+    .inline-t {
+      display: table-cell;
+      vertical-align: sub;
+    }
+    .inline{
+      display: inline-block;
+      vertical-align: text-top;
+      }
+      .f16{
+        font-size:16px;
+      }
+      .text-center{
+        text-align:center;
+      }
+      .text-left{
+        text-align:left;
+      }
   </style>
   </head>
   

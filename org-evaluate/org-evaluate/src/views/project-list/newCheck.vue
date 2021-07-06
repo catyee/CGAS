@@ -160,6 +160,15 @@ export default {
     // 关闭弹框
     closeModal () {
       this.$emit('close')
+      // 关闭弹框之后 清空组件内数据
+      this.ruleForm = {
+        assessStatus: 0, // 默认未开始
+        projectNumber: '', // 项目编号
+        name: '', // 评估机构名称
+        type: null, // 机构性质
+        userId: null, // 负责专员
+        userName: ''
+      }
     }
   }
 }

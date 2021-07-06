@@ -1,0 +1,277 @@
+.check-show{
+  .el-menu-item-group__title{
+      padding: 0;
+  }
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  .wrap{
+    overflow-y: auto;
+    // height: 800px;
+    flex: 1;
+    display: flex;
+  }
+  .center-wrap{
+    flex: 1;
+  }
+  .left{
+     padding-right: 30px;
+     padding-bottom: 60px;
+     overflow-y: auto;
+    // position: absolute;
+    // top: 14px;
+    // left: 27px;
+  }
+ .hash-list {
+   a {
+     display: block;
+     padding-left: 4px;
+     font-size: 14px;
+  //    line-height: 20px;
+     color: #111;
+  //    padding-bottom: 24px;
+     &:hover{
+      font-weight: 600;
+      color: #C23731;
+     }
+   }
+   a.active{
+     font-weight: 600;
+     color: #C23731;
+   }
+ }
+ .evaluate-tab{
+  // height: 1000px;
+ }
+ .center{
+   //max-height: 100%;
+  //  width: 55%;
+   margin-right: 100px;
+   background-color: #fff;
+  // margin-left: 350px;
+   overflow-y: auto;
+   flex: 1;
+   box-sizing: border-box;
+   padding: 32px;
+   cursor: pointer;
+ 
+ }
+
+
+ .tabs{
+  // border: 1px solid #E7E7E7;
+  box-sizing: border-box;
+  // padding: 24px;
+}
+.save{
+ position: fixed;
+ top: 76px;
+ right: 32px;
+}
+.page-top{
+ text-align: right;
+ padding: 18px 24px 0 0 ;
+ color: #000000;
+ line-height: 20px;
+ font-size: 14px;
+}
+// .h1-title{
+//  line-height: 28px;  
+//  font-weight: 600;
+//  color: #000000;
+//  font-size: 20px;
+//  text-align: center;
+//  padding-top: 32px;
+// }
+// .title-desc{
+//  text-align: center;
+//  padding: 6px 0;
+//  font-size: 12px;
+//  color: #000000;
+//  line-height: 17px;
+// }
+// .subtitle{
+//  text-align: center;
+//   font-size: 12px;
+//   color: #000000;
+//   line-height: 17px;
+//   padding-bottom: 32px;
+// }
+.table-wrap{
+ padding-bottom: 24px;
+ box-sizing: border-box;
+ width: 100%;
+}
+.table-title{
+ text-align: left;
+ padding-left: 8px;
+ padding-bottom: 8px;
+ font-weight: 600;
+ color: #000000;
+ line-height: 20px;
+ font-size: 16px;
+}
+.evaluate-table{
+  border: 1px solid #E7E7E7;
+  width: 100%;
+  table-layout: fixed;
+  box-sizing: border-box;
+  .input-line{
+      display: flex;
+      align-items: center;
+      span{
+          white-space: nowrap;
+      }
+  }
+  tr,td{
+    box-sizing: border-box;
+    border: 1px solid #E7E7E7;
+  }
+  td{
+    padding:12px 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+  .td-top{
+    vertical-align: top;
+  }
+  .center{
+    text-align: center;
+  }
+}
+.text-bold{
+  font-weight: bold;
+}
+.tip{
+padding: 32px 24px;
+line-height: 26px;
+color: #000;
+}
+.total-table{
+td{
+  text-align: center;
+  color: #5B9244;
+  word-break: break-all;
+}
+.text-left{
+  text-align: left;
+}
+}
+.sign-dialog{
+.el-dialog{
+  height: 280PX;
+  box-sizing: border-box;
+  padding: 0 10PX;
+  width: 402PX;
+}
+.el-dialog__body{
+  display: flex;
+  justify-content: center;
+  width: 382PX;
+  padding: 0;
+
+}
+}
+
+.sign-panel{
+padding: 80px 0;
+font-size: 14px;
+font-weight: bold;
+}
+.flex{
+display: flex;
+flex-wrap: nowrap;
+align-items: baseline;
+}
+
+.text-border{
+display: inline-block;
+padding: 6px 16px;
+border-bottom: 1px solid #C3C3C3;
+margin: 0 8px;
+}
+.flex-between{
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+}
+.flex-sign{
+display: flex;
+align-items: center;
+}
+.add-user{
+color: #C23731;
+padding: 24px 30px;
+font-size: 14px;
+}
+.remove-expert{
+color: #aaa;
+font-size: 12px;
+&:hover{
+  color: #C23731;
+}
+}
+.sign-right{
+width: 40%;
+float: right;
+}
+.vertical-top{
+display: inline-block;
+vertical-align: top;
+
+}
+.oper-btns{
+display: flex;
+justify-content: center;
+}
+.inline{
+display: inline-block;
+vertical-align: text-top;
+}
+.sign-left{
+float: left;
+
+}
+.sign-part{
+padding-top: 20px;
+}
+.view-image{
+  display: inline-block;
+  vertical-align: middle;
+}
+.f-l{
+  float: left;
+}
+.f-r{
+  float: right;
+  min-width: 40%;
+}
+.pt-30{
+  padding-top: 30px;
+}
+.inline-t {
+  display: table-cell;
+  vertical-align: sub;
+}
+.text-center{
+  text-align:center;
+}
+.text-left{
+  text-align:left;
+}
+@media screen and (max-device-width: 1200px){
+  .center{
+      margin-right: 0;
+  }
+  .el-icon-arrow-down{
+      display: none;
+  }
+ }
+ textarea{
+   border: none;
+  resize: none
+ }
+
+
+}

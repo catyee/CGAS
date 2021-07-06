@@ -100,7 +100,7 @@
         </el-table-column>
         <el-table-column prop="assessStatus" label="状态">
           <template slot-scope="scope">
-            <span>{{ !scope.row.assessStatus ? evaluateStatus[0]['label'] : evaluateStatus[scope.row.assessStatus]['label']}}</span>
+            <span :class="{'color-danger': scope.row.assessStatus === 3,'color-green': scope.row.assessStatus === 1 }">{{ !scope.row.assessStatus ? evaluateStatus[0]['label'] : evaluateStatus[scope.row.assessStatus]['label']}}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -123,7 +123,8 @@
                 >去检查</span
               >
               <span
-                class="color-green pointer"
+                class="color-danger pointer"
+                @click="review(scope.row)"
                  v-show="scope.row.assessStatus === evaluateStatus[3].status"
                 >复查</span
               >
@@ -190,6 +191,25 @@ export default {
     this.initList()
   },
   methods: {
+    // 复查
+    review (data) {
+      const passData = JSON.stringify(
+        {
+          projectId: data.projectId,
+          name: data.name,
+          inspector: data.userName,
+          assessStatus: data.assessStatus,
+          inspectTime: data.inspectTime ? data.inspectTime : data.createTime
+        }
+      )
+      // 移除掉存储的assessId
+      // 避免相互影响
+      localStorage.removeItem('assessId')
+      this.$router.push({
+        path: '/check/',
+        query: { data: passData }
+      })
+    },
     // 新建检查评估
     createCheck (data) {
       const passData = JSON.stringify(
@@ -243,8 +263,8 @@ export default {
     // 根据项目id 获取项目下所有的检查历史
     getHistory (data) {
       getCheckListByProjectId({
-        projectId: data.projectId,
-        assessStatus: 3
+        projectId: data.projectId
+        // assessStatus: 3
       }).then(res => {
         if (!res.data.length) {
           this.msgInfo('没有检查历史')

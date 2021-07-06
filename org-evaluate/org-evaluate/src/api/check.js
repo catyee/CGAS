@@ -34,3 +34,11 @@ export function exportTable (query) {
     data: query
   })
 }
+// 复查
+export function reviewEvaluate (data) {
+  return request({
+    url: '/pg/assess/review',
+    method: 'get',
+    params: data
+  })
+}
