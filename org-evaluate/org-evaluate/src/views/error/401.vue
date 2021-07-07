@@ -72,7 +72,7 @@ export default {
       color: #484848;
     }
     .list-unstyled {
-      font-size: 14px;
+      font-size: 14PX;
       li {
         padding-bottom: 5px;
       }

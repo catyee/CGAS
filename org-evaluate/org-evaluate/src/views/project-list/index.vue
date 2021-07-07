@@ -73,9 +73,9 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-15">
-        <el-button type="primary" @click="addNewCheck">新建检查</el-button>
+        <el-button type="primary" @click="addNewCheck" v-if="role!== 'common'">新建检查</el-button>
         <router-link to="/final-list">
-          <el-button type="primary">生成汇总表</el-button>
+          <el-button type="primary" v-if="role!== 'common'">生成汇总表</el-button>
         </router-link>
       </div>
       <el-table
@@ -111,6 +111,12 @@
                 class="color-green pointer"
                 >查看历史</span
               >
+               <span
+               v-show="scope.row.assessStatus=== evaluateStatus[2].status || scope.row.assessStatus=== evaluateStatus[3].status "
+                @click="toCheckShow(scope.row)"
+                class="color-green pointer"
+                >查看</span
+              >
               <!-- <span
                v-show="scope.row.assessStatus === evaluateStatus[2].status"
                 class="color-red pointer"
@@ -119,13 +125,13 @@
               <span
                 class="color-green pointer"
                 @click="createCheck(scope.row)"
-                 v-show="!scope.row.assessStatus || scope.row.assessStatus === evaluateStatus[1].status"
+                 v-show="(!scope.row.assessStatus || scope.row.assessStatus === evaluateStatus[1].status) && role === 'common'"
                 >去检查</span
               >
               <span
                 class="color-danger pointer"
                 @click="review(scope.row)"
-                 v-show="scope.row.assessStatus === evaluateStatus[3].status"
+                 v-show="(scope.row.assessStatus === evaluateStatus[3].status) && role === 'common'"
                 >复查</span
               >
             </div>
@@ -157,6 +163,7 @@ export default {
   },
   data () {
     return {
+      role: this.$store.getters.roles[0],
       // 检查历史列表
       historyData: [],
       // 历史检查弹框标题
@@ -179,6 +186,8 @@ export default {
         pageSize: 20,
         // 查询关键字
         name: null,
+        // 负责专员id
+        userId: null,
         // 专家组
         expertNames: '',
         assessStatus: null,
@@ -191,6 +200,10 @@ export default {
     this.initList()
   },
   methods: {
+    // 查看已经完成的且合格的
+    toCheckShow (data) {
+      this.$router.push('/check-show/' + data.lastAssessId)
+    },
     // 复查
     review (data) {
       const passData = JSON.stringify(
@@ -205,9 +218,17 @@ export default {
       // 移除掉存储的assessId
       // 避免相互影响
       localStorage.removeItem('assessId')
-      this.$router.push({
-        path: '/check/',
-        query: { data: passData }
+      this.$confirm('您确定要开始复查吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$router.push({
+          path: '/check/',
+          query: { data: passData }
+        })
+      }).catch(() => {
+
       })
     },
     // 新建检查评估
@@ -230,14 +251,26 @@ export default {
           query: { data: passData }
         })
       } else {
-        this.$router.push({
-          path: '/check/',
-          query: { data: passData }
+        this.$confirm('您确定要开始检查吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$router.push({
+            path: '/check/',
+            query: { data: passData }
+          })
+        }).catch(() => {
+
         })
       }
     },
     // 获取列表
     initList () {
+      // 检查人员登录 只能查询到检查人员对应的列表
+      if (this.role === 'common') {
+        this.queryParams.userId = this.$store.getters.userId
+      }
       getProjectList(this.queryParams).then((res) => {
         this.tableData = res.rows
         this.total = parseInt(res.total)
@@ -263,8 +296,8 @@ export default {
     // 根据项目id 获取项目下所有的检查历史
     getHistory (data) {
       getCheckListByProjectId({
-        projectId: data.projectId
-        // assessStatus: 3
+        projectId: data.projectId,
+        assessStatus: 3
       }).then(res => {
         if (!res.data.length) {
           this.msgInfo('没有检查历史')

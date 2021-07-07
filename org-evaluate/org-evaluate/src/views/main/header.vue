@@ -27,7 +27,7 @@ export default {
     role () {
       const role = this.$store.getters.roles[0]
       if (role === 'common') {
-        return '基层用户'
+        return '检查人员'
       }
       if (role === 'admin') {
         return '民政局'
@@ -78,7 +78,7 @@ export default {
   background: #fff;
 }
 .username{
-  font-size: 20px;
+  font-size: 20PX;
   padding-left:10px ;
 }
 .icon-user {
@@ -90,7 +90,7 @@ export default {
   border:1px  solid #595959;
   border-radius: 50%;;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 20PX;
 }
 .header-title {
   color: #fff;

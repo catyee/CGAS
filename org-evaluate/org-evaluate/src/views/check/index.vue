@@ -5485,6 +5485,7 @@ export default {
     }
   },
   created () {
+    this.handleData()
     // 如果没有传递data  跳转回去 从项目列表过来必须传data
     let data = this.$route.query.data
     if (!data) {
@@ -5526,6 +5527,12 @@ export default {
   mounted () {
   },
   methods: {
+    handleData () {
+      const keys = Object.keys(this.tableData)
+      keys.forEach(item => {
+        this.tableData[item].value = 'C'
+      })
+    },
     // 复查
     reviewCheck () {
       reviewEvaluate({

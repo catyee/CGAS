@@ -43,6 +43,7 @@ export const constantRoutes = [
 ]
 
 const router = new VueRouter({
+  base: '/org',
   routes: constantRoutes,
   mode: 'history' // 去掉url中的#
 })

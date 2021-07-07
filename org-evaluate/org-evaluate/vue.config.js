@@ -14,7 +14,7 @@ function addStyleResource (rule) {
 const WebpackAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 module.exports = {
   // 部署后请求路径
-  publicPath: process.env.NODE_ENV === 'production' ? '/cd/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/org/' : '/',
   assetsDir: 'static',
   // 是否开启eslint保存检测，有效值：ture | false | 'error'
   // lintOnSave: process.env.NODE_ENV === 'development',
@@ -60,7 +60,7 @@ module.exports = {
     }
     config.plugin('html')
       .tap(args => {
-        args[0].title = '承德养老评估系统'
+        args[0].title = '机构评估平台'
         return args
       })
     config.plugins.delete('preload') // TODO: need test

@@ -204,7 +204,7 @@ export default {
       align-items: center;
       padding: 4px 10px;
       .item-label {
-        font-size: 14px;
+        font-size: 14PX;
       }
       .item-content {
         margin-left: 10px;

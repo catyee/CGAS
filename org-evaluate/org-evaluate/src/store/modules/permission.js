@@ -1,5 +1,5 @@
 import { constantRoutes } from '@/router'
-import { orgRoutes } from '@/roleRoutes'
+import { orgRoutes, primaryRoutes } from '@/roleRoutes'
 const permission = {
   state: {
     routes: [],
@@ -19,9 +19,17 @@ const permission = {
     GenerateRoutes ({ commit }, role) {
       return new Promise(resolve => {
         let routes = []
-        routes = orgRoutes
+        // 民政局
+        if (role[0] === 'admin') {
+          routes = orgRoutes
+        } else if (role[0] === 'common') {
+          // 基层用户
+          routes = primaryRoutes
+        }
+        // routes = orgRoutes
         commit('SET_ROUTES', routes)
         commit('SET_SIDEBAR_ROUTERS', routes)
+        console.log(routes, 'ssssssssssssssss')
         resolve(routes)
       })
     }

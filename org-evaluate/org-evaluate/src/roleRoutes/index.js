@@ -72,3 +72,42 @@ export const orgRoutes = [
   }
 
 ]
+// 检查人员
+export const primaryRoutes = [
+  {
+    path: '',
+    meta: { title: '项目列表', icon: '' },
+    hidden: false,
+    component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
+    children: [
+      {
+        path: 'project-list',
+        name: 'project-list',
+        meta: { title: '项目列表', icon: 'iconevaluate' },
+        hidden: false,
+        component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/project-list')
+      },
+      {
+        path: 'check/:checkid?',
+        name: 'check',
+        meta: { title: '评估', icon: 'iconevaluate' },
+        hidden: true,
+        component: () => import(/* webpackChunkName: "check" */ '../views/check')
+      },
+      {
+        path: 'check-show/:checkid',
+        name: 'check-show',
+        meta: { title: '检查', icon: 'iconevaluate' },
+        hidden: true,
+        component: () => import(/* webpackChunkName: "check-show" */ '../views/check-show')
+      },
+      {
+        path: 'final-list',
+        name: 'final-list',
+        meta: { title: '汇总表', icon: 'iconevaluate' },
+        hidden: true,
+        component: () => import(/* webpackChunkName: "final-list" */ '../views/final-list')
+      }
+    ]
+  }
+]

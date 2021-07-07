@@ -73,7 +73,7 @@ html, body, #app {
 // font-size
 @for $i from 1 through 60 {
     .f#{$i} {
-        font-size: #{$i}px !important;
+        font-size: #{$i}PX !important;
     }
 }
 

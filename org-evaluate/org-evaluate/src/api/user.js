@@ -63,7 +63,7 @@ export function resetPwd (data) {
 export function requestReset (data) {
   return request({
     url: '/system/user/apply/resetPwd',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }

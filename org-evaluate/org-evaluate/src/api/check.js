@@ -42,3 +42,11 @@ export function reviewEvaluate (data) {
     params: data
   })
 }
+
+// 获取统计信息
+export function getSumList () {
+  return request({
+    url: '/pg/project/list/sum',
+    method: 'get'
+  })
+}
