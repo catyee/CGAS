@@ -39,7 +39,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .iconfont {
-  font-size: 16PX;
+  font-size: 14PX;
   // padding-right: 20px;
   color: #b7c2cf;
 }
@@ -57,7 +57,7 @@ export default {
 .menu-container /deep/ .el-menu-item {
   height: 64px;
   line-height: 64px;
-  font-size: 16PX;
+  font-size: 14PX;
   color: #111;
   text-align: left;
   span {

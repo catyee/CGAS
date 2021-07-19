@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-header pl-26">
       <i class="login-logo pr-9"></i>
-      <span class="title">承德养老评估系统</span>
+      <span class="title">机构评估系统</span>
     </div>
     <div class="input-panel">
       <div class="input-title bold f24 pb-39">密码登录</div>
@@ -35,10 +35,10 @@
             :loading="false"
             @click.native.prevent="submitForm('loginForm')"
           >
-            <span v-if="!loading">登 录</span>
+            <span v-if="!loading" class="f14">登 录</span>
             <span v-else>登 录 中...</span>
           </el-button>
-          <div class="forget-pwd color-danger pt-10" @click="resetPwd">
+          <div class="forget-pwd color-danger pt-10 f14" @click="resetPwd">
             忘记密码？
           </div>
         </el-form-item>

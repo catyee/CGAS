@@ -23,3 +23,16 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 .el-radio__input.is-checked .el-radio__inner::after{
     transition: none!important;
 }
+.el-message-box__message{
+    font-size: 12PX;
+}
+.el-button--small{
+    span{
+        font-size: 12PX;
+    }
+}
+.el-scrollbar__view li.el-select-dropdown__item {
+    padding: 10PX;
+    min-height: 36PX;
+    font-size: 12PX;
+}

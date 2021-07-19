@@ -73,7 +73,7 @@
     </div>
     <div class="list-container ml-16">
       <div class="oper-container pb-15">
-        <el-button type="primary" @click="addNewCheck" v-if="role!== 'common'">新建检查</el-button>
+        <el-button type="primary" @click="addNewCheck" >新建检查</el-button>
         <router-link to="/final-list">
           <el-button type="primary" v-if="role!== 'common'">生成汇总表</el-button>
         </router-link>
@@ -106,6 +106,18 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <div class="oper-btns">
+                <span
+                  v-show="scope.row.assessStatus=== evaluateStatus[0].status"
+                @click="editCheck(scope.row)"
+                class="color-danger pointer"
+                >修改</span
+              >
+                <span
+                 v-show="scope.row.assessStatus=== evaluateStatus[0].status"
+                @click="removeProject(scope.row)"
+                class="color-danger pointer"
+                >删除</span
+              >
               <span
                 @click="getHistory(scope.row)"
                 class="color-green pointer"
@@ -144,7 +156,7 @@
       :queryParams="queryParams"
       @initList="initList"
     ></pagination>
-    <AddNewCheck :newCheckVisible="dialogShow" @close="dialogShow= false" @submit="submit"/>
+    <AddNewCheck :newCheckVisible="dialogShow" @close="dialogShow= false" @submit="submit" :title="checkModalTitle" :checkData="checkModalData"/>
     <CheckHistory :dialogTableVisible="showHistory" :title="historyTitle"  :gridData="historyData" @close="showHistory = false"/>
   </div>
 </template>
@@ -154,7 +166,7 @@ import { evaluateStatus } from '@/libs/constant'
 import pagination from '@/components/pagination.vue'
 import AddNewCheck from './newCheck.vue'
 import CheckHistory from './check-history.vue'
-import { getProjectList, getCheckListByProjectId } from '@/api/project-list'
+import { getProjectList, getCheckListByProjectId, deleteProject } from '@/api/project-list'
 export default {
   components: {
     AddNewCheck,
@@ -163,6 +175,8 @@ export default {
   },
   data () {
     return {
+      checkModalData: {},
+      checkModalTitle: '新建检查',
       role: this.$store.getters.roles[0],
       // 检查历史列表
       historyData: [],
@@ -183,7 +197,7 @@ export default {
         // 页数
         pageNum: 1,
         // 每页的大小
-        pageSize: 20,
+        pageSize: 10,
         // 查询关键字
         name: null,
         // 负责专员id
@@ -200,6 +214,29 @@ export default {
     this.initList()
   },
   methods: {
+    // 删除项目
+    removeProject (data) {
+      this.$confirm('您确定要删除吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          deleteProject(data.projectId).then(res => {
+            this.msgSuccess('删除成功')
+            this.initList()
+          })
+        })
+        .catch(() => {
+          this.msgInfo('已取消删除')
+        })
+    },
+    // 编辑项目
+    editCheck (data) {
+      this.checkModalTitle = '修改检查'
+      this.dialogShow = true
+      this.checkModalData = data
+    },
     // 查看已经完成的且合格的
     toCheckShow (data) {
       this.$router.push('/check-show/' + data.lastAssessId)
@@ -269,7 +306,8 @@ export default {
     initList () {
       // 检查人员登录 只能查询到检查人员对应的列表
       if (this.role === 'common') {
-        this.queryParams.userId = this.$store.getters.userId
+        this.queryParams.userId = this.$store.state.user.userId
+        console.log(this.$store.state.user.userId, 'useridididid')
       }
       getProjectList(this.queryParams).then((res) => {
         this.tableData = res.rows
@@ -280,8 +318,9 @@ export default {
     submit () {
       this.initList()
     },
-    // 新建检查
+    // 新建项目
     addNewCheck () {
+      this.checkModalTitle = '新建检查'
       this.dialogShow = true
     },
     // 按关键字搜索

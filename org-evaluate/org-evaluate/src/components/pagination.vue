@@ -5,7 +5,7 @@
       background
       @size-change="initList"
       @current-change="initList"
-      :page-sizes="[20, 30, 50, 100]"
+      :page-sizes="[10,20]"
       :current-page.sync="queryParams.pageNum"
       :page-size.sync="queryParams.pageSize"
       layout="total,sizes, prev, pager, next"

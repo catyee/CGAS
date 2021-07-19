@@ -2,7 +2,7 @@
   <div class="header height-60">
     <div class="header-title">
       <img src="@/assets/logo-header.svg" class="icon" />
-      <div class="f16 pl-9">机构评估平台</div>
+      <div class="f16 pl-9">机构评估平台 <i class="el-icon-full-screen" title="全屏" @click="screenChange"></i></div>
     </div>
     <div class="header-right pr-16">
 
@@ -19,6 +19,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   computed: {
     userName () {
@@ -39,6 +40,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'changeFullStatus'
+    ]),
+    // 切换是否全屏
+    screenChange () {
+      this.changeFullStatus()
+    },
     // 退出登录
     logout () {
       this.$confirm('您确定要退出登录吗?', '提示', {
@@ -91,6 +99,10 @@ export default {
   border-radius: 50%;;
   cursor: pointer;
   font-size: 20PX;
+}
+.el-icon-full-screen{
+  cursor: pointer;
+  padding: 0 10px;
 }
 .header-title {
   color: #fff;

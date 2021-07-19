@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="save">
-        <el-button type="primary" @click="download">下载</el-button>
+        <el-button type="primary" class="f12" @click="download">下载</el-button>
       </div>
     </div>
   </div>
@@ -78,6 +78,7 @@ import { getEvaluate, exportTable } from '@/api/check'
 import { getHtml } from './export-style'
 import { baseUrl } from '@/baseUrl'
 import ExportCheck from './export-check.vue'
+import { mapActions } from 'vuex'
 export default {
   components: {
     ExportCheck
@@ -1225,10 +1226,14 @@ export default {
     }
   },
   created () {
+    this.changeFullStatus()
     this.assessId = this.$route.params.checkid
     this.getCheck()
   },
   methods: {
+    ...mapActions([
+      'changeFullStatus'
+    ]),
     // 获取检查详情
     getCheck () {
       getEvaluate(this.assessId).then((res) => {
@@ -1272,7 +1277,6 @@ export default {
           }
         )
       } catch (e) {
-        console.log(777777777777777)
         this.msgError(e)
         loading.close()
       }

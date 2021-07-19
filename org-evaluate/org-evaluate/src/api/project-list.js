@@ -7,6 +7,21 @@ export function addProject (data) {
     data: data
   })
 }
+// 修改机构 项目
+export function updateProject (data) {
+  return request({
+    url: '/pg/project/',
+    method: 'put',
+    data: data
+  })
+}
+// 删除机构 项目
+export function deleteProject (id) {
+  return request({
+    url: '/pg/project/' + id,
+    method: 'delete'
+  })
+}
 // 获取机构 项目 列表
 export function getProjectList (data) {
   return request({

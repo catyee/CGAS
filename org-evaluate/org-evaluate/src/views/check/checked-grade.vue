@@ -48,7 +48,15 @@ export default {
 /deep/.el-radio ::after {
   transition: none!important;
 }
-
+.check-grade{
+  font-size: 12PX;
+}
+/deep/.el-radio{
+  padding: 5PX;
+}
+/deep/.el-radio__label{
+  font-size: 12PX;
+}
 // .group-container{
 //   box-sizing: border-box;
 // }

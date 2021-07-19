@@ -18,7 +18,10 @@ router.beforeEach((to, from, next) => {
       store.dispatch('GetInfo').then(res => {
         const { roles } = res
         store.dispatch('GenerateRoutes', roles).then((accessRoutes) => {
-          router.addRoutes(accessRoutes) // 动态添加可访问路由表
+          accessRoutes.forEach(item => {
+            router.addRoute(item) // 动态添加可访问路由表
+          })
+
           if (to.name === 'auth') {
             to = accessRoutes && accessRoutes[0] && accessRoutes[0].children[0]
           }

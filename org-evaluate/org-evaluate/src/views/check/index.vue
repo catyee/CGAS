@@ -4155,8 +4155,8 @@
               </table>
               <!-- 签字 -->
               <div class="sign-panel">
-                <div class="flex-between">
-                  <div class="flex">
+                <div class="flex-between block">
+                  <div class="flex block">
                     <span>负责专员签字：</span>
                     <div>
                       <div class="flex-sign">
@@ -4180,7 +4180,7 @@
                       </div>
                     </div>
                   </div>
-                  <div  class="sign-right">
+                  <div  class="sign-right block">
                     <div class="flex">
                       <span>被检查养老院负责人签字：</span>
                       <div>
@@ -4219,8 +4219,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex-between">
-                  <div class="flex">
+                <div class="flex-between block">
+                  <div class="flex block">
                     <span>专家组成员签字：</span>
                     <div>
                       <div
@@ -4257,13 +4257,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="sign-right">
+                  <div class="sign-right block">
                     <div class="flex">
                       <span class="mr-10">检查时间: </span>
                       <div>
                          <el-date-picker
                           v-model="inspectTime"
                           type="date"
+                          :editable="false"
                           placeholder="选择日期">
                         </el-date-picker>
                       </div>
@@ -4277,13 +4278,14 @@
                           @click="download"
                           >下载</el-button> -->
                           <el-button type="primary"
+                          class="f12"
                           @click="submit"
                           >提交</el-button>
           </div>
         </div>
       </div>
       <div class="save">
-        <el-button type="primary" @click="save">暂存</el-button>
+        <el-button type="primary" class="f12" @click="save">暂存</el-button>
       </div>
     </div>
     <!-- 签字弹框 -->
@@ -4319,6 +4321,7 @@ import AddExpert from './add-expert.vue'
 import { _debounce } from '@/utils/utils'
 import { evaluateStatus } from '@/libs/constant'
 import { addEvaluate, updateEvaluate, getEvaluate, reviewEvaluate } from '@/api/check'
+import { mapActions } from 'vuex'
 export default {
   components: {
     // 检查结果选择组件
@@ -5485,7 +5488,9 @@ export default {
     }
   },
   created () {
-    this.handleData()
+    // 首先全屏
+    this.changeFullStatus()
+    // this.handleData()
     // 如果没有传递data  跳转回去 从项目列表过来必须传data
     let data = this.$route.query.data
     if (!data) {
@@ -5527,12 +5532,15 @@ export default {
   mounted () {
   },
   methods: {
-    handleData () {
-      const keys = Object.keys(this.tableData)
-      keys.forEach(item => {
-        this.tableData[item].value = 'C'
-      })
-    },
+    ...mapActions([
+      'changeFullStatus'
+    ]),
+    // handleData () {
+    //   const keys = Object.keys(this.tableData)
+    //   keys.forEach(item => {
+    //     this.tableData[item].value = 'C'
+    //   })
+    // },
     // 复查
     reviewCheck () {
       reviewEvaluate({
@@ -5744,7 +5752,7 @@ export default {
         const data = this.getSubmitData()
         updateEvaluate(data).then(res => {
           this.msgSuccess('提交成功')
-          this.$router.push('/check-show/' + this.assessId)
+          this.$router.push('/project-list/')
         })
       }).catch(() => {
 

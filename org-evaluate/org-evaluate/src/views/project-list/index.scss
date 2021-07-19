@@ -1,5 +1,5 @@
 .project-list{
-    height: 800px;
+    height:800px;
     overflow-y: auto;
     padding-left: 16px;
     width: 100%;
@@ -29,7 +29,7 @@
         // justify-content: space-around;
         flex-wrap: wrap;
         span{
-            padding-right: 10px;
+            padding: 10PX;
         }
     }
     .oper-container{
@@ -41,6 +41,12 @@
         background-color: #fff;
         padding: 8px 16px;
         box-sizing: border-box;
+        font-size: 12PX;
+    }
+    .el-table .cell{
+        font-size: 12PX;
+    }
+    .el-input__inner{
         font-size: 12PX;
     }
 }

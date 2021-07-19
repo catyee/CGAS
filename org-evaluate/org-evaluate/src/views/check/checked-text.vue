@@ -45,4 +45,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+/deep/.el-textarea__inner{
+  font-size: 12PX;
+}
 </style>

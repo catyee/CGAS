@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <Header />
+
     <div class="height-60"></div>
     <div class="content">
-      <Menu />
+      <Menu v-show="!fullScreen"/>
 
       <div class="main-content" id="main-scroll">
          <router-view />
@@ -12,13 +13,19 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import Header from './header.vue'
 import Menu from './menu.vue'
 export default {
   components: {
     Header,
     Menu
-  }
+  },
+  computed: mapState({
+    fullScreen: state => {
+      return state.menuhandle.isFullScreen
+    }
+  })
 }
 </script>
 <style lang="scss" scoped>

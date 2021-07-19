@@ -182,8 +182,11 @@
 }
 .flex{
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: baseline;
+  span{
+    padding-bottom: 10px;
+  }
 }
 
 .text-border{
@@ -249,6 +252,13 @@
      border: none;
     resize: none
    }
+   .el-menu-item{
+     font-size: 12PX;
+   }
+   .menu-container{
+     display: none;
+   }
+
 
   
   }

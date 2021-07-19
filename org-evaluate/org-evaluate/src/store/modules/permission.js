@@ -29,7 +29,6 @@ const permission = {
         // routes = orgRoutes
         commit('SET_ROUTES', routes)
         commit('SET_SIDEBAR_ROUTERS', routes)
-        console.log(routes, 'ssssssssssssssss')
         resolve(routes)
       })
     }

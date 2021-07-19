@@ -27,12 +27,17 @@ const user = {
     // 设置用户id
     SET_USERID: (state, userId) => {
       state.userId = userId
+      console.log(userId, '2222222222222222222222222222')
     }
   },
   actions: {
     Login ({ commit }, userInfo) {
       const username = userInfo.username.trim()
       const password = userInfo.password
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      commit('SET_PERMISSIONS', [])
+      removeToken()
       return new Promise((resolve, reject) => {
         login(username, password).then(res => {
           setToken(res.token)
@@ -57,6 +62,7 @@ const user = {
           commit('SET_NAME', user.userName)
           commit('SET_NICKNAME', user.nickName)
           commit('SET_USERID', user.userId)
+          console.log('000000000000000000000000000')
           resolve(res)
         }).catch(error => {
           reject(error)
