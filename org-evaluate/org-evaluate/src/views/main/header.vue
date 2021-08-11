@@ -2,10 +2,10 @@
   <div class="header height-60">
     <div class="header-title">
       <img src="@/assets/logo-header.svg" class="icon" />
-      <div class="f16 pl-9">机构评估平台 <i class="el-icon-full-screen" title="全屏" @click="screenChange"></i></div>
+      <div class="f16 pl-9">养老机构指控检查 </div>
     </div>
     <div class="header-right pr-16">
-
+      <i class="el-icon-full-screen f28" title="全屏" @click="screenChange"></i>
        <el-menu mode="horizontal">
         <el-submenu index="1">
           <template slot="title"><i class="iconfont iconyonghu icon-user"></i><span class=" username">{{userName}} ({{role}})</span></template>
@@ -28,7 +28,7 @@ export default {
     role () {
       const role = this.$store.getters.roles[0]
       if (role === 'common') {
-        return '检查人员'
+        return '负责专员'
       }
       if (role === 'admin') {
         return '民政局'

@@ -53,6 +53,7 @@
 import './cooperation.scss'
 import { getCooperationList, exportCooperationList } from '@/api/cooperation'
 import pagination from '@/components/pagination.vue'
+import { baseUrl } from '../../baseUrl'
 export default {
   components: {
     pagination
@@ -95,7 +96,7 @@ export default {
     // 导出合作列表
     download () {
       exportCooperationList(this.selectedIds).then((res) => {
-        window.open(`${process.env.VUE_APP_BASE_API}/common/download?fileName=${res.msg}&delete=true`)
+        window.open(`${baseUrl}/common/download?fileName=${res.msg}&delete=true`)
       })
     }
   }

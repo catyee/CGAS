@@ -4,7 +4,7 @@ import store from './store'
 import router from './router'
 import './plugins/element.js'
 import './permission' // permission control
-import 'lib-flexible/flexible.js'
+import './flexible.js'
 import { HappyScroll } from 'vue-happy-scroll'
 // 引入css
 import 'vue-happy-scroll/docs/happy-scroll.css'

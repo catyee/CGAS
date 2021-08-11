@@ -149,6 +149,7 @@ import upload from '@/components/upload'
 import newTag from '@/components/add-tag.vue'
 import { getTagList } from '@/api/relation'
 import { addVideo, getVideo, updateVideo } from '@/api/video'
+import { baseUrl } from '../../baseUrl'
 export default {
   components: {
     upload,
@@ -208,8 +209,8 @@ export default {
       upload: {
         headers: { Authorization: 'Bearer ' + getToken() },
         // 上传的地址
-        videoUrl: process.env.VUE_APP_BASE_API + '/common/video/upload',
-        imageUrl: process.env.VUE_APP_BASE_API + '/common/upload'
+        videoUrl: baseUrl + '/common/video/upload',
+        imageUrl: baseUrl + '/common/upload'
       },
       // 标签列表
       tagList: [],

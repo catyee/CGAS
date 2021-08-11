@@ -2,14 +2,14 @@
 export const orgRoutes = [
   {
     path: '',
-    meta: { title: '项目列表', icon: '' },
+    meta: { title: '检查列表', icon: '' },
     hidden: false,
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     children: [
       {
         path: 'project-list',
         name: 'project-list',
-        meta: { title: '项目列表', icon: 'iconevaluate' },
+        meta: { title: '检查列表', icon: 'iconevaluate' },
         hidden: false,
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/project-list')
       },
@@ -56,7 +56,7 @@ export const orgRoutes = [
     path: '',
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     hidden: false,
-    meta: { title: '检查人员列表', icon: '' },
+    meta: { title: '负责专员列表', icon: '' },
     redirect: 'primary-user',
     children: [
       // 评估列表
@@ -64,7 +64,7 @@ export const orgRoutes = [
         path: 'primary-user',
         name: 'primary-user',
         hidden: false,
-        meta: { title: '检查人员列表', icon: 'iconuser-admin' },
+        meta: { title: '负责专员列表', icon: 'iconuser-admin' },
         component: () => import(/* webpackChunkName: "primary-user" */ '../views/primary-user')
       }
     ]
@@ -76,14 +76,14 @@ export const orgRoutes = [
 export const primaryRoutes = [
   {
     path: '',
-    meta: { title: '项目列表', icon: '' },
+    meta: { title: '检查列表', icon: '' },
     hidden: false,
     component: () => import(/* webpackChunkName: "main" */ '../views/main/main.vue'),
     children: [
       {
         path: 'project-list',
         name: 'project-list',
-        meta: { title: '项目列表', icon: 'iconevaluate' },
+        meta: { title: '检查列表', icon: 'iconevaluate' },
         hidden: false,
         component: () => import(/* webpackChunkName: "reset-pwd" */ '../views/project-list')
       },

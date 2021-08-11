@@ -46,6 +46,7 @@ export const constantRoutes = [
 ]
 
 const router = new VueRouter({
+  base: '/admin',
   mode: 'history', // 去掉url中的#
   routes: constantRoutes
 })

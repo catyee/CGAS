@@ -19,7 +19,7 @@
       </div>
       <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">关键字:</div>
-        <el-input v-model="keyword" placeholder="请输入内容" @change="handleQuery"></el-input>
+        <el-input v-model="queryParams.videoName" placeholder="请输入内容" @change="handleQuery"></el-input>
       </div>
       <div class="flex pr-16">
         <div class="color-grey pl-12 pr-5 f14">选择日期:</div>
@@ -176,7 +176,8 @@ export default {
         beginTime: null,
         endTime: null,
         // 标签id
-        tags: null
+        tags: null,
+        keyword: ''
       },
       keyword: '',
       // 视频类型

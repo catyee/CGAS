@@ -57,12 +57,11 @@
         </el-menu>
       </div>
     </div>
-    <div class="wrap" @scroll="scrollEvent">
+    <div class="wrap">
       <div class="center-wrap mt-16">
         <div class="center">
-           <div class="table-wrap">
-              <table class="evaluate-table">
-                <tr>
+            <table  class="evaluate-table table-header">
+              <tr class="fixed">
                   <td colspan="4">
                     <div class="input-line">
                       <span class="text-bold f16">机构名称：</span
@@ -84,7 +83,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr class="text-bold">
+                <tr class="text-bold  fixed">
                   <td class="f16" width="8%">检查维度</td>
                   <td class="f16" width="8%">检查项目</td>
                   <td class="f16">序号</td>
@@ -94,7 +93,11 @@
                   <td class="f16" width="12%">检查结果</td>
                   <td class="f16" width="20%">整改建议</td>
                 </tr>
-                <!-- 1基本要求 -->
+            </table>
+           <div class="table-wrap"  @scroll="scrollEvent">
+              <table class="evaluate-table  table-body"  >
+                <tbody>
+                       <!-- 1基本要求 -->
                 <!-- 1-1资质/1-2 初次默认渲染 提高渲染速度 -->
                 <template>
                   <template>
@@ -821,12 +824,12 @@
                       <tr>
                         <td>37</td>
                         <td>
-                          持有国家职业资格的养老护理员占养老护理员总数的比例不低于30%或所有养老护理员经过专业技能培训合格
+                         餐饮服务人员必须经体检取得健康合格证后上岗并每年体检
                         </td>
                         <td>
-                          餐饮服务人员必须经体检取得健康合格证后上岗并每年体检
+                         如有，100%持证上岗为符合
                         </td>
-                        <td>如有，100%持证上岗为符合</td>
+                        <td>查看证照，对照本人；如果由签约餐饮服务企业提供服务，则查看签约协议。</td>
                         <td>
                           <CheckedGrade
                             v-model="tableData.data_37.value"
@@ -1194,7 +1197,7 @@
                       <tr>
                         <td>56</td>
                         <td>
-                          应制定检杳程序和要求。检查程序应包括但不限于：组织者、检查时间、依据、内容、方式、
+                          应制定检查程序和要求。检查程序应包括但不限于：组织者、检查时间、依据、内容、方式、
                           结果的表述与处理
                         </td>
                         <td>如无相应内容为不符合。如有缺项漏项为部分符合。</td>
@@ -1622,10 +1625,10 @@
                     <tr>
                       <td>78</td>
                       <td class="bold">
-                        按相关要求做好自备药管理；根据协议及老年人生活能力提供自带药管理，收取药品进行核对交接，记录应签字确认，提供发药监督服药；药品分类放置，标签清楚，账、物相符，定时清点，有登记。
+                        正确执行医嘱，对各种治疗严格执行查对制度和无菌技术要求
                       </td>
-                      <td>2项以上不符合为不符合，1项不符合为部分符合。</td>
-                      <td>现场查看，查看记录</td>
+                      <td>核对医嘱、记录和设备是否对应，设备是否齐备。如有1项不符合，为不符合。</td>
+                      <td>查看医嘱、记录、现场设备</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_78.value"
@@ -2200,8 +2203,7 @@
                     <tr>
                       <td>109</td>
                       <td>
-                        应防止老人自伤、伤害他人、跌倒、坠床、白行除去尿袋或鼻饲管、尿布、衣服等以及其
-                        他危险因素时使用约束物品。使用约束物品前应得到医师、护士和相关第三方的书面认可
+                        应防止老人自伤、伤害他人、跌倒、坠床、白行除去尿袋或鼻饲管、尿布、衣服等以及其他危险因素时使用约束物品。使用约束物品前应得到医师、护士和相关第三方的书面认可
                       </td>
                       <td>如有，有1项未做到就不符合。</td>
                       <td>现场查看</td>
@@ -4110,6 +4112,8 @@
                     </tr>
                   </template>
                 </template>
+                </tbody>
+
               </table>
               <!-- 提示事项 -->
               <div class="tip">
@@ -4272,8 +4276,7 @@
                   </div>
                 </div>
               </div>
-            </div>
-          <div class="oper-btns">
+               <div class="oper-btns">
              <!-- <el-button type="primary"
                           @click="download"
                           >下载</el-button> -->
@@ -4282,6 +4285,8 @@
                           @click="submit"
                           >提交</el-button>
           </div>
+            </div>
+
         </div>
       </div>
       <div class="save">
@@ -5535,12 +5540,7 @@ export default {
     ...mapActions([
       'changeFullStatus'
     ]),
-    // handleData () {
-    //   const keys = Object.keys(this.tableData)
-    //   keys.forEach(item => {
-    //     this.tableData[item].value = 'C'
-    //   })
-    // },
+
     // 复查
     reviewCheck () {
       reviewEvaluate({
@@ -5868,6 +5868,7 @@ export default {
     // 监听滚动条
     scrollEvent (e) {
       const scrollItems = document.querySelectorAll('.part-hash')
+      // const scrollTop = e.target.scrollTop - 4
       for (let i = scrollItems.length - 1; i >= 0; i--) {
         // 判断滚动条滚动距离是否大于当前滚动项可滚动距离
         const judge =
@@ -5879,14 +5880,10 @@ export default {
           break
         }
       }
-      // // 滚动条触底了
-      // if (
-      //   e.srcElement.scrollTop + e.srcElement.offsetHeight ===
-      //   e.srcElement.scrollHeight
-      // ) {
-      //   this.activeHash = scrollItems.length - 1
-      //   this.activeHash = this.activeHash.toString()
-      // }
+    //   document.getElementById('thead').style.transform =
+    //  'translateY(' + scrollTop + 'px)'
+      // document.getElementsByClassName('fixed')[1].style.transform =
+      //   'translateY(' + e.target.scrollTop + 'px)'
     }
   }
 }

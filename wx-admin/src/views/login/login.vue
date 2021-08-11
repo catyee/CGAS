@@ -81,8 +81,8 @@ export default {
       dialogVisible: false,
       // login表单数据
       ruleForm: {
-        username: 'admin',
-        password: '12345'
+        username: '',
+        password: ''
       },
       // login表单验证规则
       rules: {

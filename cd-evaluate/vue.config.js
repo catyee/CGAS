@@ -55,6 +55,9 @@ module.exports = {
   //   }
   // },
   chainWebpack: config => {
+    config.entry = {
+      'common-vendor': ['echarts']
+    }
     config.plugin('html')
       .tap(args => {
         args[0].title = '承德养老评估系统'

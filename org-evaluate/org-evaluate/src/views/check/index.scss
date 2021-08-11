@@ -1,5 +1,10 @@
 .evaluate{
   font-size: 12PX;
+  overflow-y: hidden;
+  // 隐藏掉滚动条 避免错位
+ ::-webkit-scrollbar{ 
+    width:0;
+}
     .el-menu-item-group__title{
         padding: 0;
     }
@@ -7,13 +12,14 @@
     justify-content: flex-start;
     height: 100%;
     .wrap{
-      overflow-y: auto;
+      overflow-y: hidden;
       // height: 800px;
       flex: 1;
       display: flex;
     }
     .center-wrap{
       flex: 1;
+      overflow-y: hidden;
     }
     .left{
        padding-right: 30px;
@@ -41,16 +47,15 @@
        color: #C23731;
      }
    }
-   .evaluate-tab{
-    // height: 1000px;
-   }
+
    .center{
      //max-height: 100%;
     //  width: 55%;
+     height: 100%;
      margin-right: 100px;
      background-color: #fff;
     // margin-left: 350px;
-     overflow-y: auto;
+     overflow-y: hidden;
      flex: 1;
      box-sizing: border-box;
      padding: 32px;
@@ -102,6 +107,8 @@
    padding-bottom: 24px;
    box-sizing: border-box;
    width: 100%;
+   height:100%;
+   overflow-y: scroll;
   }
   .table-title{
    text-align: left;
@@ -117,6 +124,19 @@
     width: 100%;
     table-layout: fixed;
     box-sizing: border-box;
+    // tbody{
+    //   display: block;
+    //   overflow-y: scroll;
+    //   height: 100vh;
+    //   table-layout: fixed;
+    // }
+
+    // thead, thead tr
+    // tbody tr {
+    //  display: table;
+    //   width: 100%;
+    //  table-layout: fixed;
+    //  }
     .input-line{
         display: flex;
         align-items: center;
@@ -125,6 +145,7 @@
         }
     }
     tr,td{
+      table-layout: fixed;
       box-sizing: border-box;
       border: 1px solid #E7E7E7;
     }
@@ -140,7 +161,10 @@
     .center{
       text-align: center;
     }
+   
+
 }
+
 .text-bold{
     font-weight: bold;
 }

@@ -79,7 +79,8 @@ export const adminRoutes = [
         path: 'evaluate-show/:id',
         name: 'evaluate-show',
         hidden: true,
-        component: () => import(/* webpackChunkName: "evaluate-show" */ '../views/evaluate-show')
+        component: () => import(/* webpackChunkName: "evaluate-show" */ '../views/evaluate-show'),
+        props: true
       }
     ]
   },

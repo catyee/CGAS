@@ -3,7 +3,7 @@
     <div class="page-title">
       <div class="flex pr-16">
         <div class="title-line"></div>
-        <span class="pl-2 f14">项目列表</span>
+        <span class="pl-2 f14">检查列表</span>
       </div>
       <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">项目编号:</div>
@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="flex pr-16">
-        <div class="color-grey pr-5 f14 no-wrap">检查组成员:</div>
+        <div class="color-grey pr-5 f14 no-wrap">专家组成员:</div>
         <div>
           <el-input
             v-model="queryParams.expertNames"
@@ -304,10 +304,9 @@ export default {
     },
     // 获取列表
     initList () {
-      // 检查人员登录 只能查询到检查人员对应的列表
+      // 检查人员登录 只能查询到对应的列表
       if (this.role === 'common') {
         this.queryParams.userId = this.$store.state.user.userId
-        console.log(this.$store.state.user.userId, 'useridididid')
       }
       getProjectList(this.queryParams).then((res) => {
         this.tableData = res.rows

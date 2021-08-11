@@ -9,7 +9,7 @@ export function downSaveAs (blob, filename, extension) {
   } else {
     const link = document.createElement('a')
     const body = document.querySelector('body')
-    let binaryData = new Array(blob)
+    const binaryData = new Array(blob)
     console.log(binaryData, 'binaryData')
     // binaryData.push(blob)
     console.log(extension)
@@ -29,14 +29,43 @@ export function downSaveAs (blob, filename, extension) {
 
 // 深拷贝
 export function deepClone (obj) {
-  let newObj = {}
+  const newObj = {}
   if (obj === null) return obj
   if (typeof obj !== 'object' && typeof obj !== 'function') return obj
   if (obj instanceof RegExp) return new RegExp(obj)
-  for (let key in obj) {
-    if (obj.hasOwnProperty(key)) {
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
       newObj[key] = deepClone(obj[key])
     }
   }
   return newObj
+}
+// 密码校验规则 – 至少1个大写英文字母
+// – 至少1个小写英文字母
+// – 至少1位数字
+// – 至少1个特殊字符
+// – 最少8个长度
+export const pwdRule = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/
+
+export const checkPwdSimple = function (value) {
+  if (!/(?=.*?[A-Z])/.test(value)) {
+    return '必须包含大写字母'
+  }
+  if (!/(?=(.*[a-z]){1,})/.test(value)) {
+    return '必须包含小写字母'
+  }
+  if (!/(?=(.*[\d]){1,})/.test(value)) {
+    return '必须包含数字'
+  }
+  if (!/(?=(.*[\W]){1,})/.test(value)) {
+    return '必须包含特殊字符'
+  }
+  if (!/(?!.*\s).{8,}/.test(value)) {
+    return '至少为8位'
+  }
+
+  return true
+  // if (!/(?=.*?[A-Z])/.test(value)) {
+  //   return '至少包含1个大写英文字母'
+  // }
 }

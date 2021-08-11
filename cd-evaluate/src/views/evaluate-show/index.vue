@@ -84,6 +84,7 @@ import {
 import { getHtml } from '@/views/evaluate/export-style'
 import exportEvaluate from '@/components/export-evaluate.vue'
 export default {
+  // props: ['id'],
   components: {
     exportEvaluate
   },

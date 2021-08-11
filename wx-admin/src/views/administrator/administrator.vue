@@ -143,11 +143,22 @@
 import './administrator.scss'
 import { addUser, getUserList, deleteUser, enableUser, disableUser, resetPwd } from '@/api/user'
 import pagination from '@/components/pagination.vue'
+import { checkPwdSimple } from '@/utils/utils'
 export default {
   components: {
     pagination
   },
   data () {
+    var validatePass = (rule, value, callback) => {
+      const res = checkPwdSimple(value)
+      if (value === '') {
+        callback(new Error('请输入密码'))
+      } else if (res !== true) {
+        callback(new Error(res))
+      } else {
+        callback()
+      }
+    }
     return {
       selectedIds: [], // 选中项的id
       selectedIdsStr: '', // 选中项id的拼接字符串
@@ -179,7 +190,7 @@ export default {
         userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        password: [{ validator: validatePass, trigger: 'change' }],
         nickName: [{ required: true, message: '请输入姓名', trigger: 'blur' }],
         status: [
           { required: true, message: '请选择用户状态', trigger: 'blur' }
@@ -198,8 +209,16 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputValidator: function (value) {
+          if (!value) {
+            return '请输入新密码'
+          }
           value = value.trim()
+
           if (!value.length) return '请输入新密码'
+          const res = checkPwdSimple(value)
+          if (res !== true) {
+            return res
+          }
         }
       }).then(({ value }) => {
         resetPwd({ userId: userId, password: value }).then((res) => {

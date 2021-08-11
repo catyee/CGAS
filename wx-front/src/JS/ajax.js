@@ -2,10 +2,13 @@ import axios from 'axios'
 // import vm from '../main'
 import { Toast } from 'vant';
 import errorCode from '@/JS/errorCode'
+import {baseUrl} from '../baseUrl'
 
+// const baseURL = window.location.origin+ ':8080'
 /* 全局默认配置 */
 var http = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+ // baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: baseUrl,
   timeout: 5000
 })
 /* 请求拦截器 */

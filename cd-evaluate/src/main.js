@@ -11,13 +11,13 @@ import 'vue-happy-scroll/docs/happy-scroll.css'
 import filters from '@/utils/filter.js'
 import directives from '@/utils/directive.js'
 
-import htmlToPdf from '@/utils/htmlToPdf'
+// import htmlToPdf from '@/utils/htmlToPdf'
 // 此部分引入的是我们所编写的mockjs文档
 // import './mock'
 // 使用Vue.use()方法就会调用工具方法中的install方法
-process.env.VUE_APP_MOCK && require('./mock')
-console.log(process.env.VUE_APP_MOCK, 66666666666)
-Vue.use(htmlToPdf)
+// process.env.VUE_APP_MOCK && require('./mock')
+// console.log(process.env.VUE_APP_MOCK, 66666666666)
+// Vue.use(htmlToPdf)
 // 自定义组件名
 Vue.component('happy-scroll', HappyScroll)
 // 注入全局过滤器

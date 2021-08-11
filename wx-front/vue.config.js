@@ -56,19 +56,19 @@ module.exports = {
     })
 
   },
-  configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-   //   config.plugins.push(new BundleAnalyzerPlugin())
+  // configureWebpack: config => {
+  //   if (process.env.NODE_ENV === 'production') {
+  //  //   config.plugins.push(new BundleAnalyzerPlugin())
 
-      config.plugins.push(new CompressionPlugin({ // gzip压缩配置
-        test: /\.js$|\.html$|\.css/, // 匹配文件名
-        threshold: 10240, // 对超过10kb的数据进行压缩
-        deleteOriginalAssets: false // 是否删除原文件
-      }))
-    } else {
-      // 为开发环境修改配置...
-    }
-  },
+  //     config.plugins.push(new CompressionPlugin({ // gzip压缩配置
+  //       test: /\.js$|\.html$|\.css/, // 匹配文件名
+  //       threshold: 10240, // 对超过10kb的数据进行压缩
+  //       deleteOriginalAssets: true // 是否删除原文件
+  //     }))
+  //   } else {
+  //     // 为开发环境修改配置...
+  //   }
+  // },
   // 配置移动端适配 
   css: {
     loaderOptions: {

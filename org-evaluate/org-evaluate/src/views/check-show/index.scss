@@ -1,4 +1,12 @@
 .check-show{
+    // 隐藏掉滚动条 避免错位
+ ::-webkit-scrollbar{ 
+  width:0;
+}
+.table-header{
+  display: none;
+}
+
   .el-menu-item-group__title{
       padding: 0;
   }
@@ -6,13 +14,14 @@
   justify-content: flex-start;
   height: 100%;
   .wrap{
-    overflow-y: auto;
+    overflow-y: hidden;
     // height: 800px;
     flex: 1;
     display: flex;
   }
   .center-wrap{
     flex: 1;
+    overflow-y: hidden;
   }
   .left{
      padding-right: 30px;
@@ -40,21 +49,19 @@
      color: #C23731;
    }
  }
- .evaluate-tab{
-  // height: 1000px;
- }
+
  .center{
    //max-height: 100%;
   //  width: 55%;
+  height: 100%;
    margin-right: 100px;
    background-color: #fff;
   // margin-left: 350px;
-   overflow-y: auto;
+   overflow-y: hidden;
    flex: 1;
    box-sizing: border-box;
    padding: 32px;
-   cursor: pointer;
- 
+  cursor: auto;
  }
 
 
@@ -98,9 +105,11 @@
 //   padding-bottom: 32px;
 // }
 .table-wrap{
- padding-bottom: 24px;
- box-sizing: border-box;
- width: 100%;
+  padding-bottom: 24px;
+  box-sizing: border-box;
+  width: 100%;
+  height:100%;
+  overflow-y: scroll;
 }
 .table-title{
  text-align: left;

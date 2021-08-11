@@ -60,7 +60,7 @@ module.exports = {
     }
     config.plugin('html')
       .tap(args => {
-        args[0].title = '机构评估平台'
+        args[0].title = '养老机构指控检查'
         return args
       })
     config.plugins.delete('preload') // TODO: need test

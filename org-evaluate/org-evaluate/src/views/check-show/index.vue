@@ -57,10 +57,44 @@
         </el-menu>
       </div>
     </div>
-    <div class="wrap" @scroll="scrollEvent">
+    <div class="wrap">
       <div class="center-wrap mt-16">
         <div class="center" id="print">
-          <div class="table-wrap">
+              <table  class="evaluate-table">
+              <tr class="fixed">
+                  <td colspan="4">
+                    <div class="input-line">
+                      <span class="text-bold f16">机构名称：</span
+                      >
+                      <span>{{orgName}}</span>
+                      <!-- <el-input
+                        type="textarea"
+                        autosize
+                        v-model="tableData.name"
+                        placeholder="请输入内容"
+                      >
+                      </el-input> -->
+                    </div>
+                  </td>
+                  <td colspan="4">
+                    <div class="input-line text-bold f16">
+                      <span>适用范围：</span>
+                      <span>养老机构</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="text-bold  fixed">
+                  <td class="f16" width="8%">检查维度</td>
+                  <td class="f16" width="8%">检查项目</td>
+                  <td class="f16">序号</td>
+                  <td class="f16">检查内容</td>
+                  <td class="f16">检查细则</td>
+                  <td class="f16">检查方式</td>
+                  <td class="f16" width="12%">检查结果</td>
+                  <td class="f16" width="20%">整改建议</td>
+                </tr>
+            </table>
+          <div class="table-wrap" @scroll="scrollEvent">
             <ExportCheck id="downloadDom" :tableData="tableData" :sum="sum" :orgName="orgName" :inspectTime="inspectTime" :signData="signData"/>
           </div>
         </div>
