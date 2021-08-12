@@ -3,6 +3,7 @@
     <el-dialog
       :title="title"
       :visible.sync="dialogTableVisible"
+      width="80%"
       :before-close="close"
     >
       <el-table :data="gridData">
@@ -1204,9 +1205,7 @@ export default {
         const html = getHtml(evaluate)
         exportTable(html).then(
           (res) => {
-            window.open(
-              `${baseUrl}/common/download?fileName=${res.msg}&delete=true`
-            )
+            window.location.href = `${baseUrl}/common/download?fileName=${res.msg}&delete=true`
             loading.close()
           },
           (e) => {

@@ -1,6 +1,6 @@
 <template>
   <div class="" >
-    <table class="evaluate-table">
+    <table class="evaluate-table pb-30">
       <tr class="table-header">
         <td colspan="4">
           <div class="input-line">
@@ -3114,7 +3114,7 @@
       </template>
     </table>
     <!-- 提示事项 -->
-    <div class="tip brakpage">
+    <div class="tip brakpage tip-export">
       <span>注:</span>
       <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
       <div>

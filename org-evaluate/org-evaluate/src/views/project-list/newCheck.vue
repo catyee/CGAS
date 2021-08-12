@@ -1,8 +1,8 @@
 <template>
-  <el-dialog :title="title" :visible.sync="newCheckVisible" width="50%"  :before-close="closeModal" >
+  <el-dialog :title="title" :visible.sync="newCheckVisible"  :before-close="closeModal" width="450px">
     <div class="mt-30 pb-30">
       <el-form
-        label-width="180px"
+        label-width="130px"
         :model="ruleForm"
         :rules="rules"
         ref="ruleForm"
@@ -209,6 +209,6 @@ export default {
   padding: 10PX;
 }
 /deep/.el-input__inner{
-  min-width: 250PX;
+  min-width: 250px;
 }
 </style>

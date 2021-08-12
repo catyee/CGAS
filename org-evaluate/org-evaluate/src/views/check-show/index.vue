@@ -60,42 +60,49 @@
     <div class="wrap">
       <div class="center-wrap mt-16">
         <div class="center" id="print">
-              <table  class="evaluate-table">
-              <tr class="fixed">
-                  <td colspan="4">
-                    <div class="input-line">
-                      <span class="text-bold f16">机构名称：</span
-                      >
-                      <span>{{orgName}}</span>
-                      <!-- <el-input
-                        type="textarea"
-                        autosize
-                        v-model="tableData.name"
-                        placeholder="请输入内容"
-                      >
-                      </el-input> -->
-                    </div>
-                  </td>
-                  <td colspan="4">
-                    <div class="input-line text-bold f16">
-                      <span>适用范围：</span>
-                      <span>养老机构</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="text-bold  fixed">
-                  <td class="f16" width="8%">检查维度</td>
-                  <td class="f16" width="8%">检查项目</td>
-                  <td class="f16">序号</td>
-                  <td class="f16">检查内容</td>
-                  <td class="f16">检查细则</td>
-                  <td class="f16">检查方式</td>
-                  <td class="f16" width="12%">检查结果</td>
-                  <td class="f16" width="20%">整改建议</td>
-                </tr>
-            </table>
+          <!-- 提示事项 -->
+          <div class="tip brakpage">
+            <span>注:</span>
+            <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
+            <div>
+              2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
+            </div>
+          </div>
+          <div class="org-title-content">
+            <div class="org-title">
+              <div class="org-title-l">
+                <div class="input-line">
+                  <span class="text-bold f16">机构名称：</span>
+                  <span>{{ orgName }}</span>
+                </div>
+              </div>
+              <div class="input-line text-bold f16 org-title-r">
+                <span>适用范围：</span>
+                <span>养老机构</span>
+              </div>
+            </div>
+          </div>
+          <table class="evaluate-table org-title-content">
+            <tr class="text-bold evaluate-header2">
+              <td>检查维度</td>
+              <td>检查项目</td>
+              <td>序号</td>
+              <td>检查内容</td>
+              <td>检查细则</td>
+              <td>检查方式</td>
+              <td>检查结果</td>
+              <td>整改建议</td>
+            </tr>
+          </table>
           <div class="table-wrap" @scroll="scrollEvent">
-            <ExportCheck id="downloadDom" :tableData="tableData" :sum="sum" :orgName="orgName" :inspectTime="inspectTime" :signData="signData"/>
+            <ExportCheck
+              id="downloadDom"
+              :tableData="tableData"
+              :sum="sum"
+              :orgName="orgName"
+              :inspectTime="inspectTime"
+              :signData="signData"
+            />
           </div>
         </div>
       </div>
@@ -1147,40 +1154,51 @@ export default {
           value: '',
           text: ''
         },
-        data_195: {
+        data_194: {
           type: 1,
           value: '',
           text: ''
         },
-        data_197: {
+        data_195: {
           type: 0,
           value: '',
           text: ''
         },
         // 3-12
+        data_196: {
+          type: 0,
+          value: '',
+          text: ''
+        },
+        data_197: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_198: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-13
         data_199: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_200: {
           type: 0,
           value: '',
           text: ''
         },
-        // 3-13
+        data_200: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_201: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-14
         data_202: {
-          type: 1,
+          type: 0,
           value: '',
           text: ''
         },
@@ -1189,20 +1207,19 @@ export default {
           value: '',
           text: ''
         },
-        // 3-14
+        // 3-15
         data_204: {
           type: 0,
           value: '',
           text: ''
         },
         data_205: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
-        // 3-15
         data_206: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
@@ -1212,16 +1229,6 @@ export default {
           text: ''
         },
         data_208: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_209: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_210: {
           type: 0,
           value: '',
           text: ''
@@ -1265,9 +1272,7 @@ export default {
     this.getCheck()
   },
   methods: {
-    ...mapActions([
-      'changeFullStatus'
-    ]),
+    ...mapActions(['changeFullStatus']),
     // 获取检查详情
     getCheck () {
       getEvaluate(this.assessId).then((res) => {
@@ -1301,12 +1306,11 @@ export default {
         const html = getHtml(evaluate)
         exportTable(html).then(
           (res) => {
-            window.open(
-              `${baseUrl}/common/download?fileName=${res.msg}&delete=true`
-            )
+            window.location.href = `${baseUrl}/common/download?fileName=${res.msg}&delete=true`
             loading.close()
           },
           (e) => {
+            this.msgError(e)
             loading.close()
           }
         )
@@ -1318,11 +1322,11 @@ export default {
     // 点击hash
     selectHash (hash) {
       this.activeHash = hash
-      // const showPart = 'part' + hash
-      // this.show[showPart] = true
       const jump = document.querySelector('.part' + hash)
+
       if (!jump) return
-      jump.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      document.getElementsByClassName('table-wrap')[0].scrollTop = jump.offsetTop
+      // jump.scrollIntoView({ block: 'start', behavior: 'smooth' })
     },
     // 监听滚动条
     scrollEvent (e) {

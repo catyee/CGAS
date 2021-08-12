@@ -60,44 +60,44 @@
     <div class="wrap">
       <div class="center-wrap mt-16">
         <div class="center">
-            <table  class="evaluate-table table-header">
-              <tr class="fixed">
-                  <td colspan="4">
-                    <div class="input-line">
-                      <span class="text-bold f16">机构名称：</span
-                      >
-                      <span>{{orgName}}</span>
-                      <!-- <el-input
-                        type="textarea"
-                        autosize
-                        v-model="tableData.name"
-                        placeholder="请输入内容"
-                      >
-                      </el-input> -->
-                    </div>
-                  </td>
-                  <td colspan="4">
-                    <div class="input-line text-bold f16">
-                      <span>适用范围：</span>
-                      <span>养老机构</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr class="text-bold  fixed">
-                  <td class="f16" width="8%">检查维度</td>
-                  <td class="f16" width="8%">检查项目</td>
-                  <td class="f16">序号</td>
-                  <td class="f16">检查内容</td>
-                  <td class="f16">检查细则</td>
-                  <td class="f16">检查方式</td>
-                  <td class="f16" width="12%">检查结果</td>
-                  <td class="f16" width="20%">整改建议</td>
-                </tr>
-            </table>
-           <div class="table-wrap"  @scroll="scrollEvent">
-              <table class="evaluate-table  table-body"  >
-                <tbody>
-                       <!-- 1基本要求 -->
+            <!-- 提示事项 -->
+            <div class="tip">
+              <span>注:</span>
+              <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
+              <div>
+                2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
+              </div>
+            </div>
+          <div class="org-title-content">
+            <div class="org-title">
+              <div class="org-title-l">
+                <div class="input-line">
+                  <span class="text-bold f16">机构名称：</span>
+                  <span>{{ orgName }}</span>
+                </div>
+              </div>
+              <div class="input-line text-bold f16 org-title-r">
+                <span>适用范围：</span>
+                <span>养老机构</span>
+              </div>
+            </div>
+          </div>
+          <table class="evaluate-table org-title-content">
+            <tr class="text-bold evaluate-header2">
+              <td>检查维度</td>
+              <td>检查项目</td>
+              <td>序号</td>
+              <td>检查内容</td>
+              <td>检查细则</td>
+              <td>检查方式</td>
+              <td>检查结果</td>
+              <td>整改建议</td>
+            </tr>
+          </table>
+          <div class="table-wrap" @scroll="scrollEvent">
+            <table class="evaluate-table table-body">
+              <tbody>
+                <!-- 1基本要求 -->
                 <!-- 1-1资质/1-2 初次默认渲染 提高渲染速度 -->
                 <template>
                   <template>
@@ -824,12 +824,12 @@
                       <tr>
                         <td>37</td>
                         <td>
-                         餐饮服务人员必须经体检取得健康合格证后上岗并每年体检
+                          餐饮服务人员必须经体检取得健康合格证后上岗并每年体检
                         </td>
+                        <td>如有，100%持证上岗为符合</td>
                         <td>
-                         如有，100%持证上岗为符合
+                          查看证照，对照本人；如果由签约餐饮服务企业提供服务，则查看签约协议。
                         </td>
-                        <td>查看证照，对照本人；如果由签约餐饮服务企业提供服务，则查看签约协议。</td>
                         <td>
                           <CheckedGrade
                             v-model="tableData.data_37.value"
@@ -1627,7 +1627,9 @@
                       <td class="bold">
                         正确执行医嘱，对各种治疗严格执行查对制度和无菌技术要求
                       </td>
-                      <td>核对医嘱、记录和设备是否对应，设备是否齐备。如有1项不符合，为不符合。</td>
+                      <td>
+                        核对医嘱、记录和设备是否对应，设备是否齐备。如有1项不符合，为不符合。
+                      </td>
                       <td>查看医嘱、记录、现场设备</td>
                       <td>
                         <CheckedGrade
@@ -3823,12 +3825,30 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>195</td>
+                      <td>194</td>
                       <td>
                         举办老年学校应经过相关主管部门批准。评估老年人服务需求，有教学计划、教案教材、老师名单、学员花名册和教学评估记录；设立老年课堂、各类知识讲座内容丰富，提供的服务能满足老年人精神生活。
                       </td>
                       <td>如有，3项以上不符合为不符合。</td>
                       <td>查看文件、记录</td>
+                      <td>
+                        <CheckedGrade
+                          v-model="tableData.data_194.value"
+                        ></CheckedGrade>
+                      </td>
+                      <td>
+                        <CheckedText
+                          v-model="tableData.data_194.text"
+                        ></CheckedText>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>195</td>
+                      <td class="bold">
+                        按照老人需要制订服务计划并实施，服务完成率100，老人满意率≥80%
+                      </td>
+                      <td>1项不符合为不符合。</td>
+                      <td>现场查看、查看记录、现场调查</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_195.value"
@@ -3840,13 +3860,34 @@
                         ></CheckedText>
                       </td>
                     </tr>
+                  </template>
+
+                  <!-- 3-12购物服务 -->
+                  <template v-if="defer(23)">
+                    <tr class="part23 part-hash">
+                      <td rowspan="3" class="td-top">3-12购物服务</td>
+                      <td>196</td>
+                      <td class="bold">
+                        按照约定购物，准确记录购买的品种、数量，当面清点钱物，并核实、签字%
+                      </td>
+                      <td>有预约记录和执行记录，记录不全面为部分符合。</td>
+                      <td>查看记录</td>
+                      <td>
+                        <CheckedGrade
+                          v-model="tableData.data_196.value"
+                        ></CheckedGrade>
+                      </td>
+                      <td>
+                        <CheckedText
+                          v-model="tableData.data_196.text"
+                        ></CheckedText>
+                      </td>
+                    </tr>
                     <tr>
                       <td>197</td>
-                      <td class="bold">
-                        按照老人需要制订服务计划并实施，服务完成率100，老人满意率≥80%
-                      </td>
-                      <td>1项不符合为不符合。</td>
-                      <td>现场查看、查看记录、现场调查</td>
+                      <td>陪同购物时应注意老人安全，防止意外发生</td>
+                      <td>有相应的规范要求为符合。</td>
+                      <td>查看制度</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_197.value"
@@ -3858,18 +3899,11 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                  </template>
-
-                  <!-- 3-12购物服务 -->
-                  <template v-if="defer(23)">
-                    <tr class="part23 part-hash">
-                      <td rowspan="3" class="td-top">3-12购物服务</td>
+                    <tr>
                       <td>198</td>
-                      <td class="bold">
-                        按照约定购物，准确记录购买的品种、数量，当面清点钱物，并核实、签字%
-                      </td>
-                      <td>有预约记录和执行记录，记录不全面为部分符合。</td>
-                      <td>查看记录</td>
+                      <td class="bold">提供服务完成率100%，老人满意率≥80%</td>
+                      <td>1项不符合为不符合。</td>
+                      <td>现场查看、查看记录、现场调查</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_198.value"
@@ -3881,11 +3915,18 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                    <tr>
+                  </template>
+
+                  <!--3-13委托服务  -->
+                  <template v-if="defer(24)">
+                    <tr class="part24 part-hash">
+                      <td rowspan="3" class="td-top">3-13委托服务</td>
                       <td>199</td>
-                      <td>陪同购物时应注意老人安全，防止意外发生</td>
-                      <td>有相应的规范要求为符合。</td>
-                      <td>查看制度</td>
+                      <td class="bold">
+                        保护老人隐私，不向他人谈论老人私人信息
+                      </td>
+                      <td>如有，需100%签署相关协议为完全符合。</td>
+                      <td>查看合同协议</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_199.value"
@@ -3899,9 +3940,12 @@
                     </tr>
                     <tr>
                       <td>200</td>
-                      <td class="bold">提供服务完成率100%，老人满意率≥80%</td>
-                      <td>1项不符合为不符合。</td>
-                      <td>现场查看、查看记录、现场调查</td>
+                      <td>
+                        按照老年人需要制订服务计划并实施，包括：帮助老年人代写、代读书信；
+                        帮助老年人代领代缴各种物品和费用；提供服务的人员应准确记录物品种类、数量，当面清点钱物，并核实、签字。
+                      </td>
+                      <td>如有，提供3项以上服务为符合。</td>
+                      <td>查看记录</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_200.value"
@@ -3913,18 +3957,13 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                  </template>
-
-                  <!--3-13委托服务  -->
-                  <template v-if="defer(24)">
-                    <tr class="part24 part-hash">
-                      <td rowspan="3" class="td-top">3-13委托服务</td>
+                    <tr>
                       <td>201</td>
                       <td class="bold">
-                        保护老人隐私，不向他人谈论老人私人信息
+                        提供服务完成率100%，服务对象满意率≥80%
                       </td>
-                      <td>如有，需100%签署相关协议为完全符合。</td>
-                      <td>查看合同协议</td>
+                      <td>1项不符合为不符合。</td>
+                      <td>现场查看、查看记录、现场调查</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_201.value"
@@ -3936,14 +3975,19 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                    <tr>
+                  </template>
+
+                  <!-- 3-14交通服务 -->
+                  <template v-if="defer(25)">
+                    <tr class="part25 part-hash">
+                      <td rowspan="2" class="td-top">3-14交通服务</td>
                       <td>202</td>
-                      <td>
-                        按照老年人需要制订服务计划并实施，包括：帮助老年人代写、代读书信；
-                        帮助老年人代领代缴各种物品和费用；提供服务的人员应准确记录物品种类、数量，当面清点钱物，并核实、签字。
+                      <td class="bold">
+                        提供交通服务可采取自备车或协助叫车形式开展：自备车辆的保持完好，
+                        定期为车辆投保，做好车辆保养工作，确保老年人的安全，有定期车辆检修记录，司机持有驾驶执照；如无自备车辆的，可协助老年人和相关第三方联系，提供叫车服务，确保第三方资质。
                       </td>
-                      <td>如有，提供3项以上服务为符合。</td>
-                      <td>查看记录</td>
+                      <td>如有，3项以上不符合为不符合。</td>
+                      <td>现场查看、查看记录、合同</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_202.value"
@@ -3957,9 +4001,7 @@
                     </tr>
                     <tr>
                       <td>203</td>
-                      <td class="bold">
-                        提供服务完成率100%，服务对象满意率≥80%
-                      </td>
+                      <td class="bold">提供服务完成率100%，车辆完好率≥90%</td>
                       <td>1项不符合为不符合。</td>
                       <td>现场查看、查看记录、现场调查</td>
                       <td>
@@ -3975,17 +4017,18 @@
                     </tr>
                   </template>
 
-                  <!-- 3-14交通服务 -->
-                  <template v-if="defer(25)">
-                    <tr class="part25 part-hash">
-                      <td rowspan="2" class="td-top">3-14交通服务</td>
+                  <!--  3-15安宁服务-->
+                  <template v-if="defer(26)">
+                    <tr class="part26 part-hash">
+                      <td rowspan="5" class="td-top">3-15安宁服务</td>
                       <td>204</td>
                       <td class="bold">
-                        提供交通服务可采取自备车或协助叫车形式开展：自备车辆的保持完好，
-                        定期为车辆投保，做好车辆保养工作，确保老年人的安全，有定期车辆检修记录，司机持有驾驶执照；如无自备车辆的，可协助老年人和相关第三方联系，提供叫车服务，确保第三方资质。
+                        具备符合服务需求的相应环境，有必要的设施设备。
                       </td>
-                      <td>如有，3项以上不符合为不符合。</td>
-                      <td>现场查看、查看记录、合同</td>
+                      <td>
+                        如有，需要相对隔离的独立空间。设施设备需满足服务需求。
+                      </td>
+                      <td>现场查看</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_204.value"
@@ -3999,9 +4042,11 @@
                     </tr>
                     <tr>
                       <td>205</td>
-                      <td class="bold">提供服务完成率100%，车辆完好率≥90%</td>
-                      <td>1项不符合为不符合。</td>
-                      <td>现场查看、查看记录、现场调查</td>
+                      <td>
+                        医护人员做好症状的评估与观察，确定治疗原则，制订护理要点，提供相应医护服务。
+                      </td>
+                      <td>如有，需有相应的制度规范，工作要求。</td>
+                      <td>查看制度、服务记录</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_205.value"
@@ -4013,20 +4058,13 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                  </template>
-
-                  <!--  3-15安宁服务-->
-                  <template v-if="defer(26)">
-                    <tr class="part26 part-hash">
-                      <td rowspan="5" class="td-top">3-15安宁服务</td>
+                    <tr>
                       <td>206</td>
-                      <td class="bold">
-                        具备符合服务需求的相应环境，有必要的设施设备。
-                      </td>
                       <td>
-                        如有，需要相对隔离的独立空间。设施设备需满足服务需求。
+                        护理员做好环境、床单位管理，提供老年人所需的照料服务，使用轮椅、平车等辅助用具，做好评估与观察。
                       </td>
-                      <td>现场查看</td>
+                      <td>如有，需有相应的制度规范，工作要求。</td>
+                      <td>查看制度、服务记录</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_206.value"
@@ -4041,7 +4079,7 @@
                     <tr>
                       <td>207</td>
                       <td>
-                        医护人员做好症状的评估与观察，确定治疗原则，制订护理要点，提供相应医护服务。
+                        社会工作者或心理咨询师应做好心理社会评估与观察；对老年人和家属进行心理精神支持，关怀服务。应家属要求，协助处理老年人后事。
                       </td>
                       <td>如有，需有相应的制度规范，工作要求。</td>
                       <td>查看制度、服务记录</td>
@@ -4058,11 +4096,11 @@
                     </tr>
                     <tr>
                       <td>208</td>
-                      <td>
-                        护理员做好环境、床单位管理，提供老年人所需的照料服务，使用轮椅、平车等辅助用具，做好评估与观察。
+                      <td class="bold">
+                        提供服务完成率100%，相关第三方满意率≥80%
                       </td>
-                      <td>如有，需有相应的制度规范，工作要求。</td>
-                      <td>查看制度、服务记录</td>
+                      <td>1项不符合为不符合。</td>
+                      <td>现场查看、查看记录、现场调查</td>
                       <td>
                         <CheckedGrade
                           v-model="tableData.data_208.value"
@@ -4074,219 +4112,174 @@
                         ></CheckedText>
                       </td>
                     </tr>
-                    <tr>
-                      <td>209</td>
-                      <td>
-                        社会工作者或心理咨询师应做好心理社会评估与观察；对老年人和家属进行心理精神支持，关怀服务。应家属要求，协助处理老年人后事。
-                      </td>
-                      <td>如有，需有相应的制度规范，工作要求。</td>
-                      <td>查看制度、服务记录</td>
-                      <td>
-                        <CheckedGrade
-                          v-model="tableData.data_209.value"
-                        ></CheckedGrade>
-                      </td>
-                      <td>
-                        <CheckedText
-                          v-model="tableData.data_209.text"
-                        ></CheckedText>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>210</td>
-                      <td class="bold">
-                        提供服务完成率100%，相关第三方满意率≥80%
-                      </td>
-                      <td>1项不符合为不符合。</td>
-                      <td>现场查看、查看记录、现场调查</td>
-                      <td>
-                        <CheckedGrade
-                          v-model="tableData.data_210.value"
-                        ></CheckedGrade>
-                      </td>
-                      <td>
-                        <CheckedText
-                          v-model="tableData.data_210.text"
-                        ></CheckedText>
-                      </td>
-                    </tr>
                   </template>
                 </template>
-                </tbody>
+              </tbody>
+            </table>
 
-              </table>
-              <!-- 提示事项 -->
-              <div class="tip">
-                <span>注:</span>
-                <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
-                <div>
-                  2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
-                </div>
-              </div>
-              <!-- 最终结果统计表 -->
-              <table class="evaluate-table total-table">
-                <tr>
-                  <td>检查结果</td>
-                  <td class="text-left">
-                    检查结果
-                    <div>(项目指标清单)</div>
-                  </td>
-                  <td>其中基础指标(项)</td>
-                  <td>其中提升指标(项)</td>
-                  <td>合计(项)</td>
-                </tr>
-                <tr>
-                  <td>A</td>
-                  <td  class="text-left">{{sum.A.listStr}}</td>
-                  <td>{{sum.A.baseList.length}}</td>
-                  <td>{{sum.A.liftList.length}}</td>
-                  <td>{{sum.A.list.length}}</td>
-                </tr>
-                <tr>
-                  <td>B</td>
-                  <td  class="text-left">{{sum.B.listStr}}</td>
-                  <td>{{sum.B.baseList.length}}</td>
-                  <td>{{sum.B.liftList.length}}</td>
-                  <td>{{sum.B.list.length}}</td>
-                </tr>
-                <tr>
-                  <td>C</td>
-                  <td  class="text-left">{{sum.C.listStr}}</td>
-                  <td>{{sum.C.baseList.length}}</td>
-                  <td>{{sum.C.liftList.length}}</td>
-                  <td>{{sum.C.list.length}}</td>
-                </tr>
-              </table>
-              <!-- 签字 -->
-              <div class="sign-panel">
-                <div class="flex-between block">
-                  <div class="flex block">
-                    <span>负责专员签字：</span>
-                    <div>
-                      <div class="flex-sign">
-                        <span class="text-border">{{
-                          signData.checkMajor.name
-                        }}</span>
-                        <el-button
-                          v-if="!signData.checkMajor.sign"
-                          type="primary"
-                          @click="toSign('checkMajor')"
-                          >去签字</el-button
-                        >
-                        <img
-                          v-if="signData.checkMajor.sign"
-                          class="view-image"
-                          @click="toSign('checkMajor')"
-                          :src="signData.checkMajor.sign"
-                          width="95.5"
-                          height="38"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div  class="sign-right block">
-                    <div class="flex">
-                      <span>被检查养老院负责人签字：</span>
-                      <div>
-                        <div
-                          class="flex-sign"
-                          v-if="signData.beCheckedMajor.name"
-                        >
-                          <span
-                            class="text-border"
-                            @click="addBeCheckedMajor"
-                            >{{ signData.beCheckedMajor.name }}</span
-                          >
-                          <el-button
-                            type="primary"
-                            v-if="!signData.beCheckedMajor.sign"
-                            @click="toSign('beCheckedMajor')"
-                            >去签字</el-button
-                          >
-                          <img
-                            v-if="signData.beCheckedMajor.sign"
-                            class="view-image"
-                            :src="signData.beCheckedMajor.sign"
-                            width="95.5"
-                            height="38"
-                            @click="toSign('beCheckedMajor')"
-                          />
-                        </div>
-                        <div
-                          class="add-user"
-                          @click="addBeCheckedMajor"
-                          v-if="!signData.beCheckedMajor.name"
-                        >
-                          <span>+</span>添加
-                        </div>
-                      </div>
+            <!-- 最终结果统计表 -->
+            <table class="evaluate-table total-table">
+              <tr>
+                <td>检查结果</td>
+                <td class="text-left">
+                  检查结果
+                  <div>(项目指标清单)</div>
+                </td>
+                <td>其中基础指标(项)</td>
+                <td>其中提升指标(项)</td>
+                <td>合计(项)</td>
+              </tr>
+              <tr>
+                <td>A</td>
+                <td class="text-left">{{ sum.A.listStr }}</td>
+                <td>{{ sum.A.baseList.length }}</td>
+                <td>{{ sum.A.liftList.length }}</td>
+                <td>{{ sum.A.list.length }}</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td class="text-left">{{ sum.B.listStr }}</td>
+                <td>{{ sum.B.baseList.length }}</td>
+                <td>{{ sum.B.liftList.length }}</td>
+                <td>{{ sum.B.list.length }}</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td class="text-left">{{ sum.C.listStr }}</td>
+                <td>{{ sum.C.baseList.length }}</td>
+                <td>{{ sum.C.liftList.length }}</td>
+                <td>{{ sum.C.list.length }}</td>
+              </tr>
+            </table>
+            <!-- 签字 -->
+            <div class="sign-panel">
+              <div class="flex-between block">
+                <div class="flex block">
+                  <span>负责专员签字：</span>
+                  <div>
+                    <div class="flex-sign">
+                      <span class="text-border">{{
+                        signData.checkMajor.name
+                      }}</span>
+                      <el-button
+                        v-if="!signData.checkMajor.sign"
+                        type="primary"
+                        @click="toSign('checkMajor')"
+                        >去签字</el-button
+                      >
+                      <img
+                        v-if="signData.checkMajor.sign"
+                        class="view-image"
+                        @click="toSign('checkMajor')"
+                        :src="signData.checkMajor.sign"
+                        width="95.5"
+                        height="38"
+                      />
                     </div>
                   </div>
                 </div>
-                <div class="flex-between block">
-                  <div class="flex block">
-                    <span>专家组成员签字：</span>
+                <div class="sign-right block">
+                  <div class="flex">
+                    <span>被检查养老院负责人签字：</span>
                     <div>
                       <div
-                        class="flex-sign mb-20"
-                        v-for="(user, index) in signData.checkExpert"
-                        :key="index"
+                        class="flex-sign"
+                        v-if="signData.beCheckedMajor.name"
                       >
-                        <span class="text-border">{{ user.name }}</span>
-                        <span class="text-border">{{
-                          user.sex == 0 ? "男" : "女"
+                        <span class="text-border" @click="addBeCheckedMajor">{{
+                          signData.beCheckedMajor.name
                         }}</span>
-                        <span class="text-border">{{ user.phone }}</span>
                         <el-button
-                          v-if="!user.sign"
                           type="primary"
-                          @click="toSign(index)"
+                          v-if="!signData.beCheckedMajor.sign"
+                          @click="toSign('beCheckedMajor')"
                           >去签字</el-button
                         >
-
                         <img
-                          v-if="user.sign"
+                          v-if="signData.beCheckedMajor.sign"
                           class="view-image"
-                          @click="toSign(index)"
-                          :src="user.sign"
+                          :src="signData.beCheckedMajor.sign"
                           width="95.5"
                           height="38"
+                          @click="toSign('beCheckedMajor')"
                         />
-                           <span class="pl-10 remove-expert" @click="removeExpert(index)"
-                          >删除</span
-                        >
                       </div>
-                      <div class="add-user" @click="addExpertVisible = true">
+                      <div
+                        class="add-user"
+                        @click="addBeCheckedMajor"
+                        v-if="!signData.beCheckedMajor.name"
+                      >
                         <span>+</span>添加
                       </div>
                     </div>
                   </div>
-                  <div class="sign-right block">
-                    <div class="flex">
-                      <span class="mr-10">检查时间: </span>
-                      <div>
-                         <el-date-picker
-                          v-model="inspectTime"
-                          type="date"
-                          :editable="false"
-                          placeholder="选择日期">
-                        </el-date-picker>
-                      </div>
+                </div>
+              </div>
+              <div class="flex-between block">
+                <div class="flex block">
+                  <span>专家组成员签字：</span>
+                  <div>
+                    <div
+                      class="flex-sign mb-20"
+                      v-for="(user, index) in signData.checkExpert"
+                      :key="index"
+                    >
+                      <span class="text-border">{{ user.name }}</span>
+                      <span class="text-border">{{
+                        user.sex == 0 ? "男" : "女"
+                      }}</span>
+                      <span class="text-border">{{ user.phone }}</span>
+                      <el-button
+                        v-if="!user.sign"
+                        type="primary"
+                        @click="toSign(index)"
+                        >去签字</el-button
+                      >
+
+                      <img
+                        v-if="user.sign"
+                        class="view-image"
+                        @click="toSign(index)"
+                        :src="user.sign"
+                        width="95.5"
+                        height="38"
+                      />
+                      <span
+                        class="pl-10 remove-expert"
+                        @click="removeExpert(index)"
+                        >删除</span
+                      >
+                    </div>
+                    <div class="add-user" @click="addExpertVisible = true">
+                      <span>+</span>添加
+                    </div>
+                  </div>
+                </div>
+                <div class="sign-right block">
+                  <div class="flex">
+                    <span class="mr-10">检查时间: </span>
+                    <div>
+                      <el-date-picker
+                        v-model="inspectTime"
+                        type="date"
+                        :editable="false"
+                        placeholder="选择日期"
+                      >
+                      </el-date-picker>
                     </div>
                   </div>
                 </div>
               </div>
-               <div class="oper-btns">
-             <!-- <el-button type="primary"
+            </div>
+            <div class="oper-btns">
+              <!-- <el-button type="primary"
                           @click="download"
                           >下载</el-button> -->
-                          <el-button type="primary"
-                          class="f12"
-                          @click="submit"
-                          >提交</el-button>
-          </div>
+              <el-button type="primary" class="f12" @click="submit"
+                >提交</el-button
+              >
             </div>
-
+          </div>
         </div>
       </div>
       <div class="save">
@@ -4325,7 +4318,12 @@ import Sign from '@/components/sign.vue'
 import AddExpert from './add-expert.vue'
 import { _debounce } from '@/utils/utils'
 import { evaluateStatus } from '@/libs/constant'
-import { addEvaluate, updateEvaluate, getEvaluate, reviewEvaluate } from '@/api/check'
+import {
+  addEvaluate,
+  updateEvaluate,
+  getEvaluate,
+  reviewEvaluate
+} from '@/api/check'
 import { mapActions } from 'vuex'
 export default {
   components: {
@@ -5379,40 +5377,51 @@ export default {
           value: '',
           text: ''
         },
-        data_195: {
+        data_194: {
           type: 1,
           value: '',
           text: ''
         },
-        data_197: {
+        data_195: {
           type: 0,
           value: '',
           text: ''
         },
         // 3-12
+        data_196: {
+          type: 0,
+          value: '',
+          text: ''
+        },
+        data_197: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_198: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-13
         data_199: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_200: {
           type: 0,
           value: '',
           text: ''
         },
-        // 3-13
+        data_200: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_201: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-14
         data_202: {
-          type: 1,
+          type: 0,
           value: '',
           text: ''
         },
@@ -5421,20 +5430,19 @@ export default {
           value: '',
           text: ''
         },
-        // 3-14
+        // 3-15
         data_204: {
           type: 0,
           value: '',
           text: ''
         },
         data_205: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
-        // 3-15
         data_206: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
@@ -5444,16 +5452,6 @@ export default {
           text: ''
         },
         data_208: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_209: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_210: {
           type: 0,
           value: '',
           text: ''
@@ -5488,7 +5486,6 @@ export default {
         // 最终结果 0整改/ 1提升
         // 检查结果中有任何1项基础指标属于C（不符合），则检查结果为整改；养老院基础指标全部符合，则检查结果为提升
         result: ''
-
       }
     }
   },
@@ -5534,18 +5531,15 @@ export default {
       }
     }
   },
-  mounted () {
-  },
+  mounted () {},
   methods: {
-    ...mapActions([
-      'changeFullStatus'
-    ]),
+    ...mapActions(['changeFullStatus']),
 
     // 复查
     reviewCheck () {
       reviewEvaluate({
         projectId: this.projectId
-      }).then(res => {
+      }).then((res) => {
         const data = res.data
         this.getDataFromHttp(data)
         // 状态置为开始中
@@ -5556,7 +5550,7 @@ export default {
         // 清空所有的签名
         this.signData.checkMajor.sign = ''
         this.signData.beCheckedMajor.sign = ''
-        this.signData.checkExpert = this.signData.checkExpert.map(item => {
+        this.signData.checkExpert = this.signData.checkExpert.map((item) => {
           item.sign = ''
           return item
         })
@@ -5585,7 +5579,7 @@ export default {
     },
     // 获取检查详情
     getCheck () {
-      getEvaluate(this.assessId).then(res => {
+      getEvaluate(this.assessId).then((res) => {
         const data = res.data
         this.getDataFromHttp(data)
         // 获取详情后监听页面变化
@@ -5596,7 +5590,7 @@ export default {
     getSubmitData () {
       //  获取专家组列表
       const expertNames = []
-      this.signData.checkExpert.forEach(item => {
+      this.signData.checkExpert.forEach((item) => {
         expertNames.push(item.name)
       })
       const data = {
@@ -5622,7 +5616,7 @@ export default {
         const listIndex = []
         const baseIndex = []
         const liftIndex = []
-        keys.forEach(item => {
+        keys.forEach((item) => {
           if (this.tableData[item].value === v) {
             const index = item.split('_')[1]
             listIndex.push(index)
@@ -5661,28 +5655,34 @@ export default {
     // 监听页面数据变化
     watchDataChange () {
       const save = this.autoSave()
-      this.$watch('tableData', function () {
-        // tableData数据变化的同时 更新sum表格
-        this.getSum()
-        save()
-      },
-      {
-        deep: true
-      }
+      this.$watch(
+        'tableData',
+        function () {
+          // tableData数据变化的同时 更新sum表格
+          this.getSum()
+          save()
+        },
+        {
+          deep: true
+        }
       )
-      this.$watch('signData', function () {
-        save()
-      },
-      {
-        deep: true
-      }
+      this.$watch(
+        'signData',
+        function () {
+          save()
+        },
+        {
+          deep: true
+        }
       )
-      this.$watch('inspectTime', function () {
-        save()
-      },
-      {
-        deep: true
-      }
+      this.$watch(
+        'inspectTime',
+        function () {
+          save()
+        },
+        {
+          deep: true
+        }
       )
     },
     // 新建评估检查
@@ -5693,7 +5693,7 @@ export default {
       const data = this.getSubmitData()
       // 保存的时候 检查状态置为 检查中
       data.assessStatus = evaluateStatus[1].status
-      addEvaluate(data).then(res => {
+      addEvaluate(data).then((res) => {
         if (res.data) {
           this.assessId = res.data
           // 进入该页面的时候是未开始状态 需要先创建一个check 拿到assessId 之后的操作开始修改操作
@@ -5723,7 +5723,7 @@ export default {
       this.assessStatus = evaluateStatus[1].status
       // 生成存储json
       const data = this.getSubmitData()
-      updateEvaluate(data).then(res => {
+      updateEvaluate(data).then((res) => {
         this.msgSuccess('已为您保存')
       })
     },
@@ -5738,31 +5738,35 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'success'
-      }).then(() => {
-        // 提交之前 根据最终结果 计算出状态
-        // 如果最终结果为整改0 状态则为不合格   否则为已完成
-        // 已完成
-        if (this.sum.result) {
-          // 已完成
-          this.assessStatus = evaluateStatus[2].status
-        } else {
-          // 不合格
-          this.assessStatus = evaluateStatus[3].status
-        }
-        const data = this.getSubmitData()
-        updateEvaluate(data).then(res => {
-          this.msgSuccess('提交成功')
-          this.$router.push('/project-list/')
-        })
-      }).catch(() => {
-
       })
+        .then(() => {
+          // 提交之前 根据最终结果 计算出状态
+          // 如果最终结果为整改0 状态则为不合格   否则为已完成
+          // 已完成
+          if (this.sum.result) {
+            // 已完成
+            this.assessStatus = evaluateStatus[2].status
+          } else {
+            // 不合格
+            this.assessStatus = evaluateStatus[3].status
+          }
+          const data = this.getSubmitData()
+          updateEvaluate(data).then((res) => {
+            this.msgSuccess('提交成功')
+            this.$router.push('/project-list/')
+          })
+        })
+        .catch(() => {})
     },
     // 数据校验
     checkData () {
       const keys = Object.keys(this.tableData)
-      const noValueList = keys.filter(item => {
-        return this.tableData[item].value !== 'A' && this.tableData[item].value !== 'B' && this.tableData[item].value !== 'C'
+      const noValueList = keys.filter((item) => {
+        return (
+          this.tableData[item].value !== 'A' &&
+          this.tableData[item].value !== 'B' &&
+          this.tableData[item].value !== 'C'
+        )
       })
       const firstIndex = noValueList[0] && noValueList[0].split('_')[1]
       if (noValueList.length) {
@@ -5786,7 +5790,7 @@ export default {
         this.msgError('请添加专家组成员')
         return false
       }
-      const noSignExpertList = signData.checkExpert.filter(item => {
+      const noSignExpertList = signData.checkExpert.filter((item) => {
         return !item.sign
       })
       if (noSignExpertList.length) {
@@ -5863,7 +5867,7 @@ export default {
       // this.show[showPart] = true
       const jump = document.querySelector('.part' + hash)
       if (!jump) return
-      jump.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      document.getElementsByClassName('table-wrap')[0].scrollTop = jump.offsetTop
     },
     // 监听滚动条
     scrollEvent (e) {
@@ -5880,8 +5884,8 @@ export default {
           break
         }
       }
-    //   document.getElementById('thead').style.transform =
-    //  'translateY(' + scrollTop + 'px)'
+      //   document.getElementById('thead').style.transform =
+      //  'translateY(' + scrollTop + 'px)'
       // document.getElementsByClassName('fixed')[1].style.transform =
       //   'translateY(' + e.target.scrollTop + 'px)'
     }
