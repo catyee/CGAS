@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :title="title" :visible.sync="newCheckVisible"  :before-close="closeModal" width="450px">
+  <el-dialog :title="title" :visible.sync="newCheckVisible"  :before-close="closeModal" width="500px">
     <div class="mt-30 pb-30">
       <el-form
         label-width="130px"
@@ -42,6 +42,16 @@
             ></el-option>
           </el-select>
         </el-form-item>
+         <el-form-item label="检查类型" prop="assessType">
+          <el-select v-model="ruleForm.assessType" placeholder="请选择检查类型">
+            <el-option
+              v-for="item in checkTypes"
+              :label="item.label"
+              :value="item.type"
+              :key="item.type"
+            ></el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
     </div>
     <div slot="footer" class="dialog-footer">
@@ -51,7 +61,7 @@
   </el-dialog>
 </template>
 <script>
-import { orgType } from '@/libs/constant'
+import { orgType, checkTypes } from '@/libs/constant'
 import { getUserList } from '@/api/user'
 import { addProject, updateProject } from '@/api/project-list'
 export default {
@@ -63,6 +73,8 @@ export default {
   },
   data () {
     return {
+      // 评估类型
+      checkTypes: checkTypes,
       userId: this.$store.getters.userId,
       nickName: this.$store.getters.nickName,
       role: this.$store.getters.roles[0],
@@ -86,6 +98,14 @@ export default {
             trigger: 'blur'
           }
         ],
+        // 检查类型
+        assessType: [
+          {
+            required: true,
+            message: '请选择检查类型',
+            trigger: 'blur'
+          }
+        ],
         // 项目评估成员
         userId: [
           {
@@ -97,6 +117,7 @@ export default {
       },
       // 表单项
       ruleForm: {
+        assessType: null, // 检查类型
         assessStatus: 0, // 默认未开始
         // projectNumber: '', // 项目编号
         name: '', // 评估机构名称
@@ -107,10 +128,23 @@ export default {
     }
   },
   watch: {
-    checkData (v) {
-      if (Object.keys(v).length) {
-        this.ruleForm = Object.assign(this.ruleForm, v)
-      }
+    checkData: {
+      handler: function (v) {
+        if (Object.keys(v).length) {
+          this.ruleForm = Object.assign(this.ruleForm, v)
+        } else {
+          this.ruleForm = {
+            assessType: null, // 检查类型
+            assessStatus: 0, // 默认未开始
+            // projectNumber: '', // 项目编号
+            name: '', // 评估机构名称
+            type: null, // 机构性质
+            userId: null, // 负责专员
+            userName: ''
+          }
+        }
+      },
+      deep: true
     }
   },
   created () {
@@ -189,14 +223,15 @@ export default {
     closeModal () {
       this.$emit('close')
       // 关闭弹框之后 清空组件内数据
-      this.ruleForm = {
-        assessStatus: 0, // 默认未开始
-        // projectNumber: '', // 项目编号
-        name: '', // 评估机构名称
-        type: null, // 机构性质
-        userId: null, // 负责专员
-        userName: ''
-      }
+      // this.ruleForm = {
+      //   assessType: null,
+      //   assessStatus: 0, // 默认未开始
+      //   // projectNumber: '', // 项目编号
+      //   name: '', // 评估机构名称
+      //   type: null, // 机构性质
+      //   userId: null, // 负责专员
+      //   userName: ''
+      // }
     }
   }
 }

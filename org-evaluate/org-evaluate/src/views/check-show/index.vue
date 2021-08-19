@@ -3,9 +3,13 @@
     <div class="left" id="left">
       <div class="flex pt-16">
         <div class="title-line"></div>
-        <span class="pl-4 f14">评估</span>
+        <span class="pl-4 f14">评估<span class="f16 color-danger pointer">
+            <router-link to="/project-list">
+              >返回检查列表
+            </router-link>
+          </span></span>
       </div>
-      <div class="hash-list">
+      <div class="hash-list" v-if="type === 1">
         <el-menu :default-active="activeHash" @select="selectHash">
           <el-submenu index="1-1">
             <template slot="title">
@@ -56,6 +60,35 @@
           </el-submenu>
         </el-menu>
       </div>
+      <div class="hash-list" v-if="type === 2">
+       <el-menu :default-active="activeHash" @select="selectHash">
+          <el-menu-item index="1">一、住宿环境</el-menu-item>
+          <el-menu-item index="2"> 二、膳食环境</el-menu-item>
+          <el-menu-item index="3">三、医疗环境</el-menu-item>
+          <el-menu-item index="4">四、公共区域</el-menu-item>
+          <el-menu-item index="5">五、行政人事管理</el-menu-item>
+          <el-menu-item index="6">六、业务管理</el-menu-item>
+          <el-menu-item index="7">七、安全管理</el-menu-item>
+          <el-menu-item index="8">八、生活护理服务</el-menu-item>
+          <el-menu-item index="9">九、膳食服务</el-menu-item>
+          <el-menu-item index="10">十、社会工作及医疗服务</el-menu-item>
+        </el-menu>
+      </div>
+      <div class="hash-list" v-if="type === 3">
+        <el-menu :default-active="activeHash" @select="selectHash">
+          <el-menu-item index="1">一、机构管理</el-menu-item>
+          <el-menu-item index="2"> 二、住宿环境</el-menu-item>
+          <el-menu-item index="3">三、膳食环境</el-menu-item>
+          <el-menu-item index="4">四、医疗环境</el-menu-item>
+          <el-menu-item index="5">五、公共区域</el-menu-item>
+          <el-menu-item index="6">六、行政人事管理</el-menu-item>
+          <el-menu-item index="7">七、业务管理</el-menu-item>
+          <el-menu-item index="8">八、安全管理</el-menu-item>
+          <el-menu-item index="9">九、生活护理服务</el-menu-item>
+          <el-menu-item index="10">十、膳食服务</el-menu-item>
+          <el-menu-item index="11">十一、社会工作及医疗服务</el-menu-item>
+        </el-menu>
+      </div>
     </div>
     <div class="wrap">
       <div class="center-wrap mt-16">
@@ -82,7 +115,8 @@
               </div>
             </div>
           </div>
-          <table class="evaluate-table org-title-content">
+          <!-- 208项大检查 -->
+          <table class="evaluate-table org-title-content" v-if="type === 1">
             <tr class="text-bold evaluate-header2">
               <td>检查维度</td>
               <td>检查项目</td>
@@ -94,8 +128,55 @@
               <td>整改建议</td>
             </tr>
           </table>
+              <!-- 月度检查 -->
+          <table class="evaluate-table org-title-content month-table" v-if="type === 2">
+            <tr class="text-bold evaluate-header2">
+               <td>检查项目</td>
+              <td>序号</td>
+              <td>检查内容</td>
+              <td>检查细则</td>
+              <td>检查方式</td>
+              <td>检查结果</td>
+              <td>整改建议</td>
+            </tr>
+          </table>
+          <!-- 年度检查 -->
+          <table class="evaluate-table org-title-content year-table" v-if="type === 3">
+            <tr class="text-bold evaluate-header2">
+              <td>检查项目</td>
+              <td>序号</td>
+              <td>检查内容</td>
+              <td>检查细则</td>
+              <td>检查方式</td>
+              <td>检查单位</td>
+              <td>检查结果</td>
+              <td>整改建议</td>
+            </tr>
+          </table>
           <div class="table-wrap" @scroll="scrollEvent">
-            <ExportCheck
+            <!-- 208项大检查 -->
+            <ExportNormalCheck
+              v-if="type === 1"
+              id="downloadDom"
+              :tableData="tableData"
+              :sum="sum"
+              :orgName="orgName"
+              :inspectTime="inspectTime"
+              :signData="signData"
+            />
+             <!-- 年度检查 -->
+            <ExporYearCheck
+              v-if="type === 3"
+              id="downloadDom"
+              :tableData="tableData"
+              :sum="sum"
+              :orgName="orgName"
+              :inspectTime="inspectTime"
+              :signData="signData"
+            />
+              <!-- 月度检查 -->
+            <ExporMonthCheck
+              v-if="type === 2"
               id="downloadDom"
               :tableData="tableData"
               :sum="sum"
@@ -114,19 +195,22 @@
 </template>
 <script>
 import './index.scss'
-import Defer from './checkMixin'
 import { getEvaluate, exportTable } from '@/api/check'
 import { getHtml } from './export-style'
 import { baseUrl } from '@/baseUrl'
-import ExportCheck from './export-check.vue'
+import ExportNormalCheck from '../check-show/components/export-type-normal.vue'
+import ExporYearCheck from '../check-show/components/export-type-year.vue'
+import ExporMonthCheck from '../check-show/components/export-type-month.vue'
 import { mapActions } from 'vuex'
 export default {
   components: {
-    ExportCheck
+    ExportNormalCheck,
+    ExporYearCheck,
+    ExporMonthCheck
   },
-  mixins: [Defer()],
   data () {
     return {
+      type: null,
       orgName: '', // 机构名称
       // 检查时间
       inspectTime: null,
@@ -145,13 +229,13 @@ export default {
         // 专家组成员
         checkExpert: [
           {
-            name: '111',
+            name: '',
             sex: '',
-            phone: '123',
+            phone: '',
             sign: ''
           },
           {
-            name: '222',
+            name: '',
             sex: '',
             phone: '',
             sign: ''
@@ -1267,8 +1351,10 @@ export default {
     }
   },
   created () {
-    this.changeFullStatus()
+    this.changeFullStatus(true)
     this.assessId = this.$route.params.checkid
+    // 获取到检查类型
+    this.type = Number(this.$route.query.assessType)
     this.getCheck()
   },
   methods: {
@@ -1325,7 +1411,8 @@ export default {
       const jump = document.querySelector('.part' + hash)
 
       if (!jump) return
-      document.getElementsByClassName('table-wrap')[0].scrollTop = jump.offsetTop
+      document.getElementsByClassName('table-wrap')[0].scrollTop =
+        jump.offsetTop
       // jump.scrollIntoView({ block: 'start', behavior: 'smooth' })
     },
     // 监听滚动条

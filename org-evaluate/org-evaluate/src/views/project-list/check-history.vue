@@ -33,7 +33,32 @@
       </el-table>
     </el-dialog>
    <div style="display:none">
-        <ExportCheck id="downloadDom" :tableData="tableData" :sum="sum" :orgName="orgName" :inspectTime="inspectTime" :signData="signData"/>
+     <!-- 208项检查 -->
+        <ExportNormalCheck
+        id="downloadDom1"
+        v-if="assessType == 1"
+        :tableData="tableData"
+        :sum="sum" :orgName="orgName"
+        :inspectTime="inspectTime"
+        :signData="signData"/>
+      <!-- 月度检查 -->
+        <ExportMonthCheck
+        id="downloadDom2"
+         v-if="assessType == 2"
+        :tableData="tableData"
+        :sum="sum"
+        :orgName="orgName"
+        :inspectTime="inspectTime"
+        :signData="signData"/>
+        <!-- 年度检查 -->
+        <ExportYearCheck
+        id="downloadDom3"
+         v-if="assessType == 3"
+        :tableData="tableData"
+        :sum="sum"
+        :orgName="orgName"
+        :inspectTime="inspectTime"
+        :signData="signData"/>
    </div>
   </div>
 </template>
@@ -42,11 +67,18 @@ import { baseUrl } from '@/baseUrl'
 import { getEvaluate, exportTable } from '@/api/check'
 import { getHtml } from '@/views/check-show/export-style'
 import { evaluateStatus } from '@/libs/constant'
-import ExportCheck from '@/views/check-show/export-check.vue'
+import ExportNormalCheck from '@/views/check-show/components/export-type-normal.vue'
+import ExportMonthCheck from '@/views/check-show/components/export-type-month.vue'
+import ExportYearCheck from '@/views/check-show/components/export-type-year.vue'
 export default {
-  props: ['title', 'dialogTableVisible', 'gridData'],
+  props: ['title', 'dialogTableVisible', 'gridData', 'assessType'],
   components: {
-    ExportCheck
+    // 208项检查
+    ExportNormalCheck,
+    // 月度检查
+    ExportMonthCheck,
+    // 年度检查
+    ExportYearCheck
   },
   data () {
     return {
@@ -1201,7 +1233,8 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       try {
-        const evaluate = document.getElementById('downloadDom').innerHTML
+        const id = `downloadDom${this.assessType}`
+        const evaluate = document.getElementById(id).innerHTML
         const html = getHtml(evaluate)
         exportTable(html).then(
           (res) => {
@@ -1244,7 +1277,10 @@ export default {
     },
     // 查看
     toDetail (data) {
-      this.$router.push('/check-show/' + data.assessId)
+      this.$router.push({
+        path: '/check-show/' + data.assessId,
+        query: { assessType: this.assessType }
+      })
     }
   }
 }

@@ -27,3 +27,18 @@ export const evaluateStatus = [
     status: 3
   }
 ]
+
+export const checkTypes = [
+  {
+    label: '208项检查',
+    type: 1
+  },
+  {
+    label: '月度检查',
+    type: 2
+  },
+  {
+    label: '年度检查',
+    type: 3
+  }
+]

@@ -27,7 +27,6 @@ const user = {
     // 设置用户id
     SET_USERID: (state, userId) => {
       state.userId = userId
-      console.log(userId, '2222222222222222222222222222')
     }
   },
   actions: {
@@ -62,7 +61,6 @@ const user = {
           commit('SET_NAME', user.userName)
           commit('SET_NICKNAME', user.nickName)
           commit('SET_USERID', user.userId)
-          console.log('000000000000000000000000000')
           resolve(res)
         }).catch(error => {
           reject(error)

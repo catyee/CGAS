@@ -83,7 +83,7 @@
   padding-bottom: 200px;
   box-sizing: border-box;
   width: 100%;
-  height:100%;
+  height:500px;
   overflow-y: scroll;
 }
 .table-title{
@@ -329,6 +329,33 @@ padding-top: 20px;
    .org-title-l{
      width: 38%;
    }
-
  }
+ .wrap .year-table{
+  tr td:nth-child(1){
+    width: 5%;
+   }
+   tr td:nth-child(2){
+    width: 3%;
+   }
+   tr td:nth-child(3){
+    width: 25%;
+   }
+   tr td:nth-child(4){
+    width: 20%;
+   }
+   tr td:nth-child(5){
+    width: 10%;
+   }
+   tr td:nth-child(6){
+    width: 10%;
+   }
+   tr td:nth-child(7){
+    width: 15%;
+   }
+   tr td:nth-child(8){
+    width: 12%;
+   }
+  
+}
+
 }

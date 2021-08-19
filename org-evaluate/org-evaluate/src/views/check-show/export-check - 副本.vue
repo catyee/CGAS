@@ -3220,7 +3220,7 @@
 </template>
 <script>
 // import './index.scss'
-import Defer from './checkMixin'
+import Defer from '../check-show/components/checkMixin'
 export default {
   props: ['tableData', 'sum', 'orgName', 'inspectTime', 'signData'],
   mixins: [Defer()]

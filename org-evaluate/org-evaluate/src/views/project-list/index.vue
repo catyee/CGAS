@@ -67,6 +67,26 @@
           </el-select>
         </div>
       </div>
+       <div class="flex pr-16">
+        <div class="color-grey pr-5 f14 no-wrap">检查类型:</div>
+        <div>
+          <el-select
+            v-model="queryParams.assessType"
+            placeholder="请选择"
+            clearable
+            @clear="handleQuery"
+            @change="handleQuery"
+          >
+            <el-option
+              v-for="(item, index) in checkTypes"
+              :key="index"
+              :label="item.label"
+              :value="item.type"
+            >
+            </el-option>
+          </el-select>
+        </div>
+      </div>
       <div class="flex">
         <el-button type="primary" @click="handleQuery">查询</el-button>
       </div>
@@ -86,6 +106,11 @@
       >
         <el-table-column label="序号" type="index"> </el-table-column>
         <el-table-column label="项目编号" prop="projectNumber"> </el-table-column>
+        <el-table-column label="检查类型" prop="assessType">
+           <template slot-scope="scope">
+            {{ checkTypes[scope.row.assessType -1].label }}
+          </template>
+        </el-table-column>
         <el-table-column label="被检查机构名称" prop="name"> </el-table-column>
         <el-table-column label="负责专员" prop="userName"> </el-table-column>
         <el-table-column label="专家组成员" prop="expertNames">
@@ -157,16 +182,18 @@
       @initList="initList"
     ></pagination>
     <AddNewCheck :newCheckVisible="dialogShow" @close="dialogShow= false" @submit="submit" :title="checkModalTitle" :checkData="checkModalData"/>
-    <CheckHistory :dialogTableVisible="showHistory" :title="historyTitle"  :gridData="historyData" @close="showHistory = false"/>
+
+    <CheckHistory :dialogTableVisible="showHistory" :assessType="historyType" :title="historyTitle"  :gridData="historyData" @close="showHistory = false"/>
   </div>
 </template>
 <script>
 import './index.scss'
-import { evaluateStatus } from '@/libs/constant'
+import { evaluateStatus, checkTypes } from '@/libs/constant'
 import pagination from '@/components/pagination.vue'
 import AddNewCheck from './newCheck.vue'
 import CheckHistory from './check-history.vue'
 import { getProjectList, getCheckListByProjectId, deleteProject } from '@/api/project-list'
+import { mapActions } from 'vuex'
 export default {
   components: {
     AddNewCheck,
@@ -175,6 +202,7 @@ export default {
   },
   data () {
     return {
+      historyType: null, // 查看历史检查的类型
       checkModalData: {},
       checkModalTitle: '新建检查',
       role: this.$store.getters.roles[0],
@@ -191,9 +219,12 @@ export default {
       date: '',
       // 评估状态
       evaluateStatus: evaluateStatus,
+      // 评估类型
+      checkTypes: checkTypes,
       // 列表
       tableData: [],
       queryParams: {
+        assessType: null, // 检查类型
         // 页数
         pageNum: 1,
         // 每页的大小
@@ -211,9 +242,13 @@ export default {
     }
   },
   created () {
+    this.changeFullStatus(false)
     this.initList()
   },
   methods: {
+    ...mapActions([
+      'changeFullStatus'
+    ]),
     // 删除项目
     removeProject (data) {
       this.$confirm('您确定要删除吗?', '提示', {
@@ -237,15 +272,19 @@ export default {
       this.dialogShow = true
       this.checkModalData = data
     },
-    // 查看已经完成的且合格的
+    // 查看已经完成
     toCheckShow (data) {
-      this.$router.push('/check-show/' + data.lastAssessId)
+      this.$router.push({
+        path: '/check-show/' + data.lastAssessId,
+        query: { assessType: data.assessType }
+      })
     },
     // 复查
     review (data) {
       const passData = JSON.stringify(
         {
           projectId: data.projectId,
+          assessType: data.assessType,
           name: data.name,
           inspector: data.userName,
           assessStatus: data.assessStatus,
@@ -273,6 +312,7 @@ export default {
       const passData = JSON.stringify(
         {
           projectId: data.projectId,
+          assessType: data.assessType,
           name: data.name,
           inspector: data.userName,
           assessStatus: data.assessStatus,
@@ -293,6 +333,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          console.log(passData)
           this.$router.push({
             path: '/check/',
             query: { data: passData }
@@ -321,6 +362,8 @@ export default {
     addNewCheck () {
       this.checkModalTitle = '新建检查'
       this.dialogShow = true
+      // 清空新建检查的form表单 如果不处理 在新建的时候表单内会受到编辑的影响保留了数据
+      this.checkModalData = {}
     },
     // 按关键字搜索
     handleQuery () {
@@ -344,6 +387,7 @@ export default {
         this.showHistory = true
         this.historyTitle = data.name + '机构检查记录'
         this.historyData = res.data
+        this.historyType = data.assessType
       })
     }
   }

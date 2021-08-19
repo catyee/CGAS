@@ -22,6 +22,15 @@
 import { mapActions } from 'vuex'
 export default {
   computed: {
+    isFullScreen: {
+      get: function () {
+        return this.$store.state.menuhandle.isFullScreen
+      },
+      set: function (v) {
+        this.changeFullStatus(v)
+      }
+
+    },
     userName () {
       return this.$store.getters.name
     },
@@ -45,7 +54,7 @@ export default {
     ]),
     // 切换是否全屏
     screenChange () {
-      this.changeFullStatus()
+      this.isFullScreen = !this.isFullScreen
     },
     // 退出登录
     logout () {

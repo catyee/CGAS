@@ -8,8 +8,8 @@ const menuhandle = {
     }
   },
   actions: {
-    changeFullStatus ({ commit, state }) {
-      const status = !state.isFullScreen
+    changeFullStatus ({ commit }, isFull) {
+      const status = isFull
       commit('SET_SCREEN', status)
     }
   }
