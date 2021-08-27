@@ -3,8 +3,8 @@
     <table class="evaluate-table pb-30 month-table">
       <tr class="table-header">
         <td colspan="4">
-          <div class="input-line">
-            <span class="text-bold f16">机构名称：</span>
+          <div class="input-line text-bold f16">
+            <span class="">机构名称：</span>
             <span>{{ orgName }}</span>
           </div>
         </td>
@@ -21,7 +21,6 @@
         <td width="25%">检查内容</td>
         <td width="20%">检查细则</td>
         <td width="10%">检查方式</td>
-        <td width="10%">检查单位</td>
         <td width="15%">检查结果</td>
         <td width="12%">整改建议</td>
       </tr>

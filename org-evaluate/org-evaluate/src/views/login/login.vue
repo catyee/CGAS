@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-header pl-26">
       <i class="login-logo pr-9"></i>
-      <span class="title">养老机构指控检查</span>
+      <span class="title">养老机构质控检查</span>
     </div>
     <div class="input-panel">
       <div class="input-title bold f24 pb-39">密码登录</div>
@@ -57,7 +57,7 @@ export default {
     // 检验用户名
     var validateUsername = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('请输入登录手机号'))
       } else {
         callback()
       }
@@ -100,12 +100,13 @@ export default {
   methods: {
     // 点击忘记密码 弹框
     resetPwd () {
-      this.$prompt('请输入用户名', '申请重置密码', {
+      this.$prompt('请输入登录手机号', '申请重置密码', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputValidator: function (value) {
+          if (!value) return '请输入登录手机号'
           value = value.trim()
-          if (!value.length) return '请输入用户名'
+          if (!value.length) return '请输入登录手机号'
         }
       })
         .then(({ value }) => {
@@ -133,7 +134,14 @@ export default {
       })
         .then(() => {
           requestReset({ userName: this.resetUserName }).then(() => {
-            this.msgSuccess('操作成功')
+            this.$confirm('请寻求管理员协助，在负责专员界面重置密码', '重置密码申请已提交', {
+              distinguishCancelAndClose: true,
+              confirmButtonText: '确定',
+              customClass: 'title-tip',
+              center: true
+            })
+              .then(() => {
+              })
           })
         })
         .catch((action) => {

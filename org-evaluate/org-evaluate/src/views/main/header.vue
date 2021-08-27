@@ -2,7 +2,7 @@
   <div class="header height-60">
     <div class="header-title">
       <img src="@/assets/logo-header.svg" class="icon" />
-      <div class="f16 pl-9">养老机构指控检查 </div>
+      <div class="f16 pl-9">养老机构质控检查 </div>
     </div>
     <div class="header-right pr-16">
       <i class="el-icon-full-screen f28" title="全屏" @click="screenChange"></i>

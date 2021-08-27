@@ -49,6 +49,6 @@ export default {
   box-sizing: border-box;
   background-color: $body-deep-color;
   //overflow-y: hidden;
-  overflow: hidden;
+  overflow: scroll;
 }
 </style>

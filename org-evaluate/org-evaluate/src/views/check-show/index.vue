@@ -101,11 +101,11 @@
               2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
             </div>
           </div>
-          <div class="org-title-content">
+          <div class="org-title-content f16 text-bold">
             <div class="org-title">
               <div class="org-title-l">
                 <div class="input-line">
-                  <span class="text-bold f16">机构名称：</span>
+                  <span class="text-bold ">机构名称：</span>
                   <span>{{ orgName }}</span>
                 </div>
               </div>

@@ -3,8 +3,8 @@
     <table class="evaluate-table pb-30">
       <tr class="table-header">
         <td colspan="4">
-          <div class="input-line">
-            <span class="text-bold f16">机构名称：</span>
+          <div class="input-line text-bold f16">
+            <span class="">机构名称：</span>
             <span>{{ orgName }}</span>
           </div>
         </td>
