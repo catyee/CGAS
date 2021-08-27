@@ -34,8 +34,11 @@
       <div id="downloadDom">
         <table>
           <tr>
-            <td rowspan="2" width="10%">机构</td>
-            <td rowspan="2" width="15%">检查项目</td>
+            <td rowspan="2" class="clearfix" width="25%" colspan="2" id="lineTd" style="position:relative">
+              <span  class="linetd1">机构</span>
+              <span  class="linetd2">检查项目</span>
+            </td>
+            <!-- <td rowspan="2" width="15%">检查项目</td> -->
             <td colspan="4">检查情况</td>
             <td colspan="2">在C项(不符合指标)中</td>
             <td rowspan="2" width="10%">检查结果(整改/提升)</td>

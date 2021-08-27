@@ -71,7 +71,6 @@ service.interceptors.response.use(res => {
       }
     ).then(() => {
       store.dispatch('LogOut').then(() => {
-        console.log(window.location, 'llllllllllllllll')
         window.location.href = '/'
       })
     })

@@ -75,6 +75,9 @@ const user = {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           commit('SET_PERMISSIONS', [])
+          commit('SET_NAME', '')
+          commit('SET_NICKNAME', '')
+          commit('SET_USERID', '')
           removeToken()
           resolve()
         }).catch(error => {

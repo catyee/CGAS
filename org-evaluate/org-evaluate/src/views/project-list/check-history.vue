@@ -10,8 +10,18 @@
         <el-table-column label="序号" type="index" width="50">
         </el-table-column>
         <el-table-column property="date" label="检查结果">
-          <template>
-            <span>不合格</span>
+          <template slot-scope="scope">
+            <span
+              :class="{
+                'color-danger': scope.row.assessStatus === 3,
+                'color-green': scope.row.assessStatus === 1,
+              }"
+              >{{
+                !scope.row.assessStatus
+                  ? evaluateStatus[0]["label"]
+                  : evaluateStatus[scope.row.assessStatus]["label"]
+              }}</span
+            >
           </template>
         </el-table-column>
         <el-table-column
@@ -21,10 +31,32 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <div class="oper-btns">
-              <span class="color-green pointer" @click="toDetail(scope.row)"
+              <!-- <span
+                class="color-green pointer"
+                @click="createCheck(scope.row)"
+                v-show="
+                  (
+                    scope.row.assessStatus === evaluateStatus[1].status) &&
+                  role === 'common'
+                "
+                >去检查</span
+              > -->
+              <span
+                class="color-green pointer"
+                v-show="
+                  scope.row.assessStatus === evaluateStatus[2].status ||
+                  scope.row.assessStatus === evaluateStatus[3].status
+                "
+                @click="toDetail(scope.row)"
                 >查看报告</span
               >
-              <span class="color-green pointer" @click="getCheck(scope.row)"
+              <span
+                class="color-green pointer"
+                v-show="
+                  scope.row.assessStatus === evaluateStatus[2].status ||
+                  scope.row.assessStatus === evaluateStatus[3].status
+                "
+                @click="getCheck(scope.row)"
                 >下载</span
               >
             </div>
@@ -32,34 +64,38 @@
         </el-table-column>
       </el-table>
     </el-dialog>
-   <div style="display:none">
-     <!-- 208项检查 -->
-        <ExportNormalCheck
+    <div style="display: none">
+      <!-- 208项检查 -->
+      <ExportNormalCheck
         id="downloadDom1"
         v-if="assessType == 1"
         :tableData="tableData"
-        :sum="sum" :orgName="orgName"
+        :sum="sum"
+        :orgName="orgName"
         :inspectTime="inspectTime"
-        :signData="signData"/>
+        :signData="signData"
+      />
       <!-- 月度检查 -->
-        <ExportMonthCheck
+      <ExportMonthCheck
         id="downloadDom2"
-         v-if="assessType == 2"
+        v-if="assessType == 2"
         :tableData="tableData"
         :sum="sum"
         :orgName="orgName"
         :inspectTime="inspectTime"
-        :signData="signData"/>
-        <!-- 年度检查 -->
-        <ExportYearCheck
+        :signData="signData"
+      />
+      <!-- 年度检查 -->
+      <ExportYearCheck
         id="downloadDom3"
-         v-if="assessType == 3"
+        v-if="assessType == 3"
         :tableData="tableData"
         :sum="sum"
         :orgName="orgName"
         :inspectTime="inspectTime"
-        :signData="signData"/>
-   </div>
+        :signData="signData"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -82,6 +118,7 @@ export default {
   },
   data () {
     return {
+      // role: this.$store.getters.roles[0],
       evaluateStatus: evaluateStatus,
       orgName: '', // 机构名称
       // 检查时间
@@ -1108,40 +1145,51 @@ export default {
           value: '',
           text: ''
         },
-        data_195: {
+        data_194: {
           type: 1,
           value: '',
           text: ''
         },
-        data_197: {
+        data_195: {
           type: 0,
           value: '',
           text: ''
         },
         // 3-12
+        data_196: {
+          type: 0,
+          value: '',
+          text: ''
+        },
+        data_197: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_198: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-13
         data_199: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_200: {
           type: 0,
           value: '',
           text: ''
         },
-        // 3-13
+        data_200: {
+          type: 1,
+          value: '',
+          text: ''
+        },
         data_201: {
           type: 0,
           value: '',
           text: ''
         },
+        // 3-14
         data_202: {
-          type: 1,
+          type: 0,
           value: '',
           text: ''
         },
@@ -1150,20 +1198,19 @@ export default {
           value: '',
           text: ''
         },
-        // 3-14
+        // 3-15
         data_204: {
           type: 0,
           value: '',
           text: ''
         },
         data_205: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
-        // 3-15
         data_206: {
-          type: 0,
+          type: 1,
           value: '',
           text: ''
         },
@@ -1173,16 +1220,6 @@ export default {
           text: ''
         },
         data_208: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_209: {
-          type: 1,
-          value: '',
-          text: ''
-        },
-        data_210: {
           type: 0,
           value: '',
           text: ''
@@ -1220,7 +1257,38 @@ export default {
       }
     }
   },
+  computed: {
+    // userId () {
+    //   return this.$store.getters.userId
+    // },
+    // nickName () {
+    //   return this.$store.getters.nickName
+    // },
+    role () {
+      return this.$store.getters.roles[0]
+    }
+  },
   methods: {
+    // 新建检查评估
+    createCheck (data) {
+      const passData = JSON.stringify(
+        {
+          projectId: data.projectId,
+          assessType: data.assessType,
+          name: data.name,
+          inspector: data.userName,
+          assessStatus: data.assessStatus,
+          inspectTime: data.inspectTime ? data.inspectTime : data.createTime
+        }
+      )
+      // 移除掉存储的assessId
+      // 避免相互影响
+      localStorage.removeItem('assessId')
+      this.$router.push({
+        path: '/check/' + data.lastAssessId,
+        query: { data: passData }
+      })
+    },
     close () {
       this.$emit('close')
     },

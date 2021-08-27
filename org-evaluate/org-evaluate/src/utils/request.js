@@ -69,7 +69,7 @@ service.interceptors.response.use(res => {
       }
     ).then(() => {
       store.dispatch('LogOut').then(() => {
-        window.location.href = '/'
+        window.location.href = window.location.origin + '/org'
       })
     })
   } else if (code === 500) {

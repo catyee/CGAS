@@ -145,6 +145,7 @@
               >
               <span
                 @click="getHistory(scope.row)"
+                v-show="scope.row.assessStatus!== evaluateStatus[0].status"
                 class="color-green pointer"
                 >查看历史</span
               >
@@ -205,7 +206,7 @@ export default {
       historyType: null, // 查看历史检查的类型
       checkModalData: {},
       checkModalTitle: '新建检查',
-      role: this.$store.getters.roles[0],
+      //  role: this.$store.getters.roles[0],
       // 检查历史列表
       historyData: [],
       // 历史检查弹框标题
@@ -244,6 +245,11 @@ export default {
   created () {
     this.changeFullStatus(false)
     this.initList()
+  },
+  computed: {
+    role () {
+      return this.$store.getters.roles[0]
+    }
   },
   methods: {
     ...mapActions([
@@ -377,8 +383,7 @@ export default {
     // 根据项目id 获取项目下所有的检查历史
     getHistory (data) {
       getCheckListByProjectId({
-        projectId: data.projectId,
-        assessStatus: 3
+        projectId: data.projectId
       }).then(res => {
         if (!res.data.length) {
           this.msgInfo('没有检查历史')

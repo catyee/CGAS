@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <table class="evaluate-table pb-30 year-table">
+    <table class="evaluate-table pb-30 month-table">
       <tr class="table-header">
         <td colspan="4">
           <div class="input-line">

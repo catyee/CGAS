@@ -3,11 +3,11 @@
     <div class="left" id="left">
       <div class="flex pt-16">
         <div class="title-line"></div>
-        <span class="pl-4 f14">评估<span class="f16 color-danger pointer">
-            <router-link to="/project-list">
-              >返回检查列表
-            </router-link>
-          </span></span>
+        <span class="pl-4 f14"
+          >评估<span class="f16 color-danger pointer">
+            <router-link to="/project-list"> >返回检查列表 </router-link>
+          </span></span
+        >
       </div>
       <div class="hash-list" v-if="type === 1">
         <el-menu :default-active="activeHash" @select="selectHash">
@@ -61,7 +61,7 @@
         </el-menu>
       </div>
       <div class="hash-list" v-if="type === 2">
-       <el-menu :default-active="activeHash" @select="selectHash">
+        <el-menu :default-active="activeHash" @select="selectHash">
           <el-menu-item index="1">一、住宿环境</el-menu-item>
           <el-menu-item index="2"> 二、膳食环境</el-menu-item>
           <el-menu-item index="3">三、医疗环境</el-menu-item>
@@ -128,10 +128,13 @@
               <td>整改建议</td>
             </tr>
           </table>
-              <!-- 月度检查 -->
-          <table class="evaluate-table org-title-content month-table" v-if="type === 2">
+          <!-- 月度检查 -->
+          <table
+            class="evaluate-table org-title-content month-table"
+            v-if="type === 2"
+          >
             <tr class="text-bold evaluate-header2">
-               <td>检查项目</td>
+              <td>检查项目</td>
               <td>序号</td>
               <td>检查内容</td>
               <td>检查细则</td>
@@ -141,7 +144,10 @@
             </tr>
           </table>
           <!-- 年度检查 -->
-          <table class="evaluate-table org-title-content year-table" v-if="type === 3">
+          <table
+            class="evaluate-table org-title-content year-table"
+            v-if="type === 3"
+          >
             <tr class="text-bold evaluate-header2">
               <td>检查项目</td>
               <td>序号</td>
@@ -154,29 +160,38 @@
             </tr>
           </table>
           <div class="table-wrap" @scroll="scrollEvent">
-            <!-- 208项大检查 -->
-            <ExportNormalCheck
-              v-if="type === 1"
-              id="downloadDom"
-              :tableData="tableData"
-              :sum="sum"
-              :orgName="orgName"
-              :inspectTime="inspectTime"
-              :signData="signData"
-            />
-             <!-- 年度检查 -->
-            <ExporYearCheck
-              v-if="type === 3"
-              id="downloadDom"
-              :tableData="tableData"
-              :sum="sum"
-              :orgName="orgName"
-              :inspectTime="inspectTime"
-              :signData="signData"
-            />
-              <!-- 月度检查 -->
+            <div v-if="type === 1">
+              <!-- 208项大检查 -->
+              <ExportNormalCheck
+                key="normal"
+                id="downloadDom"
+                :tableData="tableData"
+                :sum="sum"
+                :orgName="orgName"
+                :inspectTime="inspectTime"
+                :signData="signData"
+              />
+            </div>
+            <div v-if="type === 3">
+               <!-- 年度检查 -->
+              <ExporYearCheck
+                key="year"
+                id="downloadDom"
+                :tableData="tableData"
+                :sum="sum"
+                :orgName="orgName"
+                :inspectTime="inspectTime"
+                :signData="signData"
+              />
+            </div>
+            <div >
+
+            </div>
+
+            <!-- 月度检查 -->
             <ExporMonthCheck
               v-if="type === 2"
+              key="month"
               id="downloadDom"
               :tableData="tableData"
               :sum="sum"

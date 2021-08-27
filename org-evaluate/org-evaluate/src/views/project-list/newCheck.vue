@@ -75,9 +75,9 @@ export default {
     return {
       // 评估类型
       checkTypes: checkTypes,
-      userId: this.$store.getters.userId,
-      nickName: this.$store.getters.nickName,
-      role: this.$store.getters.roles[0],
+      // userId: this.$store.getters.userId,
+      // nickName: this.$store.getters.nickName,
+      // role: this.$store.getters.roles[0],
       orgType: orgType, // 机构类型
       userList: [], // 负责专员列表
       // 表单校验规则
@@ -125,6 +125,17 @@ export default {
         userId: null, // 负责专员
         userName: ''
       }
+    }
+  },
+  computed: {
+    userId () {
+      return this.$store.getters.userId
+    },
+    nickName () {
+      return this.$store.getters.nickName
+    },
+    role () {
+      return this.$store.getters.roles[0]
     }
   },
   watch: {
@@ -205,14 +216,15 @@ export default {
             type: 'warning'
           })
             .then(() => {
+              console.log(222222222222222)
               this.addProject()
             })
-            .catch(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消'
-              })
-            })
+            // .catch(() => {
+            //   this.$message({
+            //     type: 'info',
+            //     message: '已取消'
+            //   })
+            // })
         } else {
           console.log('error submit!!')
           return false

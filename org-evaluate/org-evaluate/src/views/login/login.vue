@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-header pl-26">
       <i class="login-logo pr-9"></i>
-      <span class="title">机构评估系统</span>
+      <span class="title">养老机构指控检查</span>
     </div>
     <div class="input-panel">
       <div class="input-title bold f24 pb-39">密码登录</div>
