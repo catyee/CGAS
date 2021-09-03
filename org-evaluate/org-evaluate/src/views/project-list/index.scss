@@ -50,4 +50,26 @@
     .el-input__inner{
         font-size: 12PX;
     }
+    .el-select .el-input .el-select__caret{
+        font-size: 22px;
+        &:hover{
+            color: #C23731;
+        }
+    }
+    .el-select:hover{
+       .el-select__caret{
+        color: #C23731;
+       }
+    }
+    .el-date-editor  .el-icon-circle-close{
+        font-size: 22px;
+        &:hover{
+            color: #C23731;
+        }
+    }
+    .el-date-editor:hover{
+       .el-icon-circle-close{
+        color: #C23731;
+       }
+    }
 }

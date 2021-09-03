@@ -125,7 +125,7 @@
         </el-table-column>
         <el-table-column prop="assessStatus" label="状态">
           <template slot-scope="scope">
-            <span :class="{'color-danger': scope.row.assessStatus === 3,'color-green': scope.row.assessStatus === 1 }">{{ !scope.row.assessStatus ? evaluateStatus[0]['label'] : evaluateStatus[scope.row.assessStatus]['label']}}</span>
+            <span :class="{'color-danger': scope.row.assessStatus === 3|| scope.row.assessStatus === 4 ,'color-green': scope.row.assessStatus === 1 }">{{ !scope.row.assessStatus ? evaluateStatus[0]['label'] : evaluateStatus[scope.row.assessStatus]['label']}}</span>
           </template>
         </el-table-column>
         <el-table-column label="操作">
@@ -166,6 +166,12 @@
                  v-show="(!scope.row.assessStatus || scope.row.assessStatus === evaluateStatus[1].status) && role === 'common'"
                 >去检查</span
               >
+               <span
+                class="color-danger pointer"
+                @click="abandon(scope.row)"
+                 v-show="(scope.row.assessStatus === evaluateStatus[3].status)"
+                >废弃</span
+              >
               <span
                 class="color-danger pointer"
                 @click="review(scope.row)"
@@ -193,7 +199,7 @@ import { evaluateStatus, checkTypes } from '@/libs/constant'
 import pagination from '@/components/pagination.vue'
 import AddNewCheck from './newCheck.vue'
 import CheckHistory from './check-history.vue'
-import { getProjectList, getCheckListByProjectId, deleteProject } from '@/api/project-list'
+import { getProjectList, getCheckListByProjectId, deleteProject, updateProject } from '@/api/project-list'
 import { mapActions } from 'vuex'
 export default {
   components: {
@@ -255,6 +261,29 @@ export default {
     ...mapActions([
       'changeFullStatus'
     ]),
+    // 废弃
+    abandon (data) {
+      this.$confirm('您确定要废弃该项检查吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          updateProject({
+            projectId: data.projectId,
+            assessStatus: 4
+          }).then(res => {
+            this.msgSuccess('操作成功')
+            this.initList()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消'
+          })
+        })
+    },
     // 删除项目
     removeProject (data) {
       this.$confirm('您确定要删除吗?', '提示', {

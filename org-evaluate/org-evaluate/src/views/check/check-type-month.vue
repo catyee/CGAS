@@ -67,24 +67,24 @@
                 <template>
                   <tr class="part1 part-hash">
                     <td rowspan="3" class="td-top">一、住宿环境</td>
-                    <td>1</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_1.value === 'C'}">1</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_1.value === 'C'}">
                       卫生间环境整洁，设安全扶手，地板使用防滑材料或铺设防滑垫等，配有换气设备。服务对象接触到的各种设备无尖角凸出部分。
                     </td>
-                    <td>2项以上不符合为不符合，1项不符合为部分符合</td>
-                    <td>现场查看</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_1.value === 'C'}">2项以上不符合为不符合，1项不符合为部分符合</td>
+                    <td :class="{'warn-C': tableData.data_1.value === 'C'}">现场查看</td>
+                    <td :class="{'warn-C': tableData.data_1.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_1.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_1.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_1.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_2.value === 'C'}">
                     <td>2</td>
                     <td class="bold">居室自然通风，室内空气清新，无异味。</td>
                     <td>不通风，有异味为不符合</td>
@@ -100,7 +100,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_3.value === 'C'}">
                     <td>3</td>
                     <td class="bold">
                       居室、卫生间、活动室、餐厅、浴室等安装有紧急呼叫设备或配备可移动呼叫设备。紧急呼叫信号应能传输至相应护理站或值班室。
@@ -123,26 +123,26 @@
                 <template>
                   <tr class="part1 part-hash">
                     <td rowspan="4" class="td-top">二、膳食环境</td>
-                    <td>4</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_4.value === 'C'}">4</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_4.value === 'C'}">
                       食堂安装灭蚊蝇灯、挡鼠板、纱窗、防盗网；无苍蝇、老鼠、蟑螂和其他害虫。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_4.value === 'C'}">
                       未按要求安装设施，每缺一项为不符合；发现苍蝇、老鼠、蟑螂或其他害虫，2项以上为不符合
                     </td>
-                    <td>现场查看</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_4.value === 'C'}">现场查看</td>
+                    <td :class="{'warn-C': tableData.data_4.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_4.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_4.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_4.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_5.value === 'C'}">
                     <td>5</td>
                     <td class="bold">
                       厨房设有排污设施或隔油设备，保持清洁；有垃圾分类设施并保持其密闭;餐厨垃圾每日处理。
@@ -160,7 +160,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_6.value === 'C'}">
                     <td>6</td>
                     <td class="bold">
                       厨房和就餐区各种设备、炊具、用具整洁卫生;做好餐
@@ -181,7 +181,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_7.value === 'C'}">
                     <td>7</td>
                     <td class="bold">
                       有冷冻冷藏和储藏设备;生熟食品分开存放;食品留样，有专用留样柜,留样量不少于125克，留样时间不少于48小时。
@@ -206,24 +206,24 @@
                 <template>
                   <tr class="part3 part-hash">
                     <td rowspan="2" class="td-top">三、医疗环境</td>
-                    <td>8</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_8.value === 'C'}">8</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_8.value === 'C'}">
                       机构有专门的药品存放空间，储存设备;配备常用外伤包扎物品、消毒用品、体温表、血压计、非处方急救药品（如救心丸、云南白药、藿香正气水等）。
                     </td>
-                    <td>每缺1项为基本不符合</td>
-                    <td>现场查看</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_8.value === 'C'}">每缺1项为基本不符合</td>
+                    <td :class="{'warn-C': tableData.data_8.value === 'C'}">现场查看</td>
+                    <td :class="{'warn-C': tableData.data_8.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_8.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_8.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_8.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_9.value === 'C'}">
                     <td>9</td>
                     <td class="bold">
                       机构对老年人自带药必须进行统一管理，有独立的药品存放空间和储存设备。
@@ -246,24 +246,24 @@
                 <template>
                   <tr class="part4 part-hash">
                     <td rowspan="3" class="td-top">四、公共区域</td>
-                    <td>10</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_10.value === 'C'}">10</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_10.value === 'C'}">
                       设有老年人能力评估室，评估室按老年人生活能力评估规范要求配置，提供文字介绍。
                     </td>
-                    <td>无评估室为不符合；有评估室但不达标的为部分符合</td>
-                    <td>现场查看</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_10.value === 'C'}">无评估室为不符合；有评估室但不达标的为部分符合</td>
+                    <td :class="{'warn-C': tableData.data_10.value === 'C'}">现场查看</td>
+                    <td :class="{'warn-C': tableData.data_10.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_10.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_10.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_10.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_11.value === 'C'}">
                     <td>11</td>
                     <td class="bold">
                       洗衣房布局合理，污净分开，地面采取防滑措施；有浸泡池消毒设施；有洗衣、消毒、叠衣、存放的空间。
@@ -281,7 +281,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_12.value === 'C'}">
                     <td>12</td>
                     <td class="bold">
                       及时维修更换居室、护理区域等设施、设备和物品。
@@ -306,26 +306,26 @@
                 <template>
                   <tr class="part5 part-hash">
                     <td rowspan="4" class="td-top">五、行政人事管理</td>
-                    <td>13</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_13.value === 'C'}">13</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_13.value === 'C'}">
                       护理人员与生活能力完好的服务对象，配备比例不低于１∶８；与轻度及中度失能的服务对象，配备比例不低于１∶５；与重度失能的服务对象，配备比例不低于１∶３。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_13.value === 'C'}">
                       护理人员配备三项要求，1项不达标的为部分符合，2项及以上不达标的为不符合
                     </td>
-                    <td>查看入住老人和护理人员名单，计算比例</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_13.value === 'C'}">查看入住老人和护理人员名单，计算比例</td>
+                    <td :class="{'warn-C': tableData.data_13.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_13.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_13.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_13.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_14.value === 'C'}">
                     <td>14</td>
                     <td class="bold">
                       定期开展人员培训，1个季度至少进行1次（内容包括以人为本、爱老尊老、管理服务技能以及相关政策法规）；新入职人员必须进行上岗培训；办理健康合格证。
@@ -345,7 +345,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_15.value === 'C'}">
                     <td>15</td>
                     <td class="bold">
                       有工作人员职业道德准则或行为规范并落实。
@@ -363,7 +363,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_16.value === 'C'}">
                     <td>16</td>
                     <td class="bold">
                       工作人员熟悉
@@ -389,21 +389,21 @@
                 <template>
                   <tr class="part6 part-hash">
                     <td rowspan="1" class="td-top">六、业务管理</td>
-                    <td>17</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_17.value === 'C'}">17</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_17.value === 'C'}">
                       建立在院服务对象档案管理库，要有生活档案和健康档案，包括入院服务对象健康评估、能力评估
                       （入住评估、常规评估、即时评估）、入住协议（其中包括不得侵犯老年人肖像权、不得泄露老年人隐私等）、监护人和服务对象身份证明、监护人联系方式、在院记录等相关资料，请假、出院或死亡７天内档案必须入库。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_17.value === 'C'}">
                       未建立档案管理库不符合；档案资料每缺2项以上的为不符合。
                     </td>
-                    <td>查看制度、文件</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_17.value === 'C'}">查看制度、文件</td>
+                    <td :class="{'warn-C': tableData.data_17.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_17.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_17.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_17.text"
                       ></CheckedText>
@@ -414,24 +414,24 @@
                 <template>
                   <tr class="part7 part-hash">
                     <td rowspan="4" class="td-top">七、安全管理</td>
-                    <td>18</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_18.value === 'C'}">18</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_18.value === 'C'}">
                       机构内各区域要配备相应的消防器材，并保持完好；所有安全疏散通道、应急照明和出口均设消防安全指示标志，并保持安全出口、疏散通道、消防车通道畅通；走廊、房间醒目处有消防疏散示意图；有各类设施安全操作规范，简洁、明了、完整；工作人员会正确使用、检查消防设施设备。
                     </td>
-                    <td>其中1项不达标为部分符合，2项及以上为不符合</td>
-                    <td>现场查看、现场抽查工作人员演示</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_18.value === 'C'}">其中1项不达标为部分符合，2项及以上为不符合</td>
+                    <td :class="{'warn-C': tableData.data_18.value === 'C'}">现场查看、现场抽查工作人员演示</td>
+                    <td :class="{'warn-C': tableData.data_18.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_18.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_18.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_18.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_19.value === 'C'}">
                     <td>19</td>
                     <td class="bold">
                       机构主要负责人每月至少组织一次安全（防火）检查和风险管控措施及方案的落实情况；安全管理人员每周进行一次风险管控检查；护理人员每两小时进行一次防火巡查，每天对安全风险控制措施落实情况进行一次全面检查；制定消防演练、应急疏散和灭火预案；每半年至少组织一次消防演练和消防安全教育培训；每季度主要负责人要组织召开一次对消防和安全工作会议。
@@ -449,7 +449,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_20.value === 'C'}">
                     <td>20</td>
                     <td class="bold">
                       对消防设施、特种设备进行日常维修保养，定期自检。
@@ -467,7 +467,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_21.value === 'C'}">
                     <td>21</td>
                     <td class="bold">
                       服务对象居室不能有火种、刀具、剪指刀、过期食品、药品等，护理人员每天检查１次。
@@ -490,27 +490,27 @@
                 <template>
                   <tr class="part8 part-hash">
                     <td rowspan="6" class="td-top">八、生活护理服务</td>
-                    <td>22</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_22.value === 'C'}">22</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_22.value === 'C'}">
                       每天清洁居室卫生１次；室内物品摆放整齐有序，无障碍物；墙壁、门窗清洁无灰尘；桌面、地面无垃圾；每周进行1次卫生检查；每季度灭
                       “四害”１次。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_22.value === 'C'}">
                       不整洁或物品摆放无序、无卫生检查记录、无灭四害记录其中1项为部分符合，2项及以上为不符合
                     </td>
-                    <td>现场查看，查看记录</td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_22.value === 'C'}">现场查看，查看记录</td>
+                    <td :class="{'warn-C': tableData.data_22.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_22.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_22.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_22.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_23.value === 'C'}">
                     <td>23</td>
                     <td class="bold">
                       服务对象干净整洁，保持衣着、皮肤、头发、口腔、手脚、会阴清洁，身上无异味；保持头发短、胡子短、指甲短。
@@ -528,7 +528,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_24.value === 'C'}">
                     <td>24</td>
                     <td class="bold">
                       床上用品 （床单、被套、枕套）
@@ -547,7 +547,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_25.value === 'C'}">
                     <td>25</td>
                     <td class="bold">
                       护理员着装整洁，佩戴岗位标识上岗，举止文明，微笑服务。
@@ -565,7 +565,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_26.value === 'C'}">
                     <td>26</td>
                     <td class="bold">
                       护理人员24小时值班，并做好交接班；协助服务对象按时服药。
@@ -583,7 +583,7 @@
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_27.value === 'C'}">
                     <td>27</td>
                     <td class="bold">
                       护理人员能够协助服务对象穿脱衣、口腔清洁、身体清洁
@@ -607,23 +607,23 @@
                 <template>
                   <tr class="part9 part-hash">
                     <td rowspan="1" class="td-top">九、膳食服务</td>
-                    <td>28</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_28.value === 'C'}">28</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_28.value === 'C'}">
                       食谱每周至少更换一次并上墙；膳食部门每月召开
                       １次膳食管理会议听取服务对象及家属意见。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_28.value === 'C'}">
                       未更新食谱、未召开会议、无整改措施和记录，有其中1项为部分符合，2项及以上为不符合
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_28.value === 'C'}">
                       查看每周食谱更新情况、会议记录、整改记录，现场询问3保老人
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_28.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_28.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_28.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_28.text"
                       ></CheckedText>
@@ -634,29 +634,29 @@
                 <template>
                   <tr class="part10 part-hash">
                     <td rowspan="2" class="td-top">十、社会工作及医疗服务</td>
-                    <td>29</td>
-                    <td class="bold">
+                    <td :class="{'warn-C': tableData.data_29.value === 'C'}">29</td>
+                    <td class="bold" :class="{'warn-C': tableData.data_29.value === 'C'}">
                       制订月、季度、年度活动计划，组织和引导老年人开展小型文体娱乐活动，每周不少于
                       １次，大型文体娱乐活动每季度不少于１次。
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       未按要求开展活动、无活动图文记录、无老人反馈记录，有其中1项为部分符合，2项及以上为不符合
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       查看活动图文、反馈记录、视频资 料；现场询问3名 以上老人
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       <CheckedGrade
                         v-model="tableData.data_29.value"
                       ></CheckedGrade>
                     </td>
-                    <td>
+                    <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       <CheckedText
                         v-model="tableData.data_29.text"
                       ></CheckedText>
                     </td>
                   </tr>
-                  <tr>
+                  <tr :class="{'warn-C': tableData.data_30.value === 'C'}">
                     <td>30</td>
                     <td class="bold">
                       每月组织服务对象进行一次健康讲座；合作医疗机构每星期诊疗
@@ -682,7 +682,7 @@
             </table>
 
             <!-- 最终结果统计表 -->
-            <table class="evaluate-table total-table">
+            <table class="total-table">
               <tr>
                 <td>检查结果</td>
                 <td class="text-left">

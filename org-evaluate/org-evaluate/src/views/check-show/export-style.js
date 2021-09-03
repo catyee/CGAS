@@ -129,6 +129,9 @@ export function getHtml (element) {
       }
       .text-left{
         text-align:left;
+      }     
+      .warn-C{
+        background-color: #fcc;
       }
   </style>
   </head>

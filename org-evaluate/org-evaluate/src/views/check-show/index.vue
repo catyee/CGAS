@@ -116,7 +116,7 @@
             </div>
           </div>
           <!-- 208项大检查 -->
-          <table class="evaluate-table org-title-content" v-if="type === 1">
+          <table class="evaluate-table org-title-content normal-table" v-if="type === 1">
             <tr class="text-bold evaluate-header2">
               <td>检查维度</td>
               <td>检查项目</td>

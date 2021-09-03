@@ -25,6 +25,10 @@ export const evaluateStatus = [
   {
     label: '不合格',
     status: 3
+  },
+  {
+    label: '已废弃',
+    status: 4
   }
 ]
 

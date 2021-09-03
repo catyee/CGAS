@@ -20,6 +20,7 @@
           class="ml-30"
           v-model="dateRange"
           @change="changeDate"
+          :clearable="false"
           type="daterange"
           value-format="yyyy-MM-dd"
           range-separator="至"
@@ -197,6 +198,7 @@ import { checkTypes } from '@/libs/constant'
 import { getSumList, exportTable } from '@/api/check'
 import { getHtml } from './export-style'
 import { baseUrl } from '@/baseUrl'
+import filter from '@/utils/filter'
 
 import {
   monthFirstDay,
@@ -321,7 +323,8 @@ export default {
     // 日期切换
     changeDate (v) {
       this.beginTime = v[0]
-      this.endTime = v[1]
+      const endTime = v[1]
+      this.endTime = filter.formatDate(new Date(endTime).getTime() + 24 * 60 * 60 * 1000, 'YYYY-mm-dd')
       this.getSumList()
     }
   }

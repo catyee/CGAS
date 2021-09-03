@@ -216,15 +216,14 @@ export default {
             type: 'warning'
           })
             .then(() => {
-              console.log(222222222222222)
               this.addProject()
             })
-            // .catch(() => {
-            //   this.$message({
-            //     type: 'info',
-            //     message: '已取消'
-            //   })
-            // })
+            .catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消'
+              })
+            })
         } else {
           console.log('error submit!!')
           return false
