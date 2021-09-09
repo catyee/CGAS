@@ -48,12 +48,12 @@
             <td>A项数量</td>
             <td>B项数量</td>
             <td>C项数量</td>
-            <td>未检查项目数量</td>
+            <td>D项数量</td>
             <td>基础指标数量</td>
             <td>基础指标序号</td>
           </tr>
           <tr>
-            <td :rowspan="YangLaoYuanData.rowspan">服务社会老年人的养老院</td>
+            <td :rowspan="YangLaoYuanData.rowspan">民办养老院</td>
             <template v-if="YangLaoYuanData.td1.name">
               <td>{{ YangLaoYuanData.td1.name }}</td>
               <td>
@@ -74,7 +74,12 @@
                   YangLaoYuanData.td1.sum.C.list.length
                 }}
               </td>
-              <td>0</td>
+              <td>
+                 {{
+                  YangLaoYuanData.td1.sum &&
+                  YangLaoYuanData.td1.sum.D.list.length
+                }}
+              </td>
               <td>
                 {{
                   YangLaoYuanData.td1.sum &&
@@ -102,7 +107,7 @@
               <td>{{ item.sum.A.list.length }}</td>
               <td>{{ item.sum.B.list.length }}</td>
               <td>{{ item.sum.C.list.length }}</td>
-              <td>0</td>
+              <td>{{ item.sum.D.list.length }}</td>
               <td>{{ item.sum.C.baseList.length }}</td>
               <td>{{ item.sum.C.baseList.baseStr }}</td>
               <td>{{ item.sum.result === 0 ? "整改" : "提升" }}</td>
@@ -130,7 +135,12 @@
                   JingLaoYuanData.td1.sum.C.list.length
                 }}
               </td>
-              <td>0</td>
+              <td>
+                 {{
+                  JingLaoYuanData.td1.sum &&
+                  JingLaoYuanData.td1.sum.D.list.length
+                }}
+              </td>
               <td>
                 {{
                   JingLaoYuanData.td1.sum &&
@@ -158,7 +168,7 @@
               <td>{{ item.sum.A.list.length }}</td>
               <td>{{ item.sum.B.list.length }}</td>
               <td>{{ item.sum.C.list.length }}</td>
-              <td>0</td>
+              <td>{{ item.sum.D.list.length }}</td>
               <td>{{ item.sum.C.baseList.length }}</td>
               <td>{{ item.sum.C.baseList.baseStr }}</td>
               <td>{{ item.sum.C.baseList.result === 0 ? "整改" : "提升" }}</td>

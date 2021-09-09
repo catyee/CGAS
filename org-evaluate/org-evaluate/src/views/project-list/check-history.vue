@@ -1223,6 +1223,27 @@ export default {
           type: 0,
           value: '',
           text: ''
+        },
+        // 康复服务
+        data_209: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_210: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_211: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_212: {
+          type: 0,
+          value: '',
+          text: ''
         }
       },
       // 最终的统计信息
@@ -1245,6 +1266,14 @@ export default {
         },
         C: {
           list: [], // 所有的C项目
+          listStr: '',
+          liftList: [],
+          liftStr: '',
+          baseStr: '',
+          baseList: [] // 基础指标序号
+        },
+        D: {
+          list: [], // 所有的D项目
           listStr: '',
           liftList: [],
           liftStr: '',

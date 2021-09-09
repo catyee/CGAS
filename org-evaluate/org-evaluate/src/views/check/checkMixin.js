@@ -11,6 +11,7 @@ export default function (count = 27) {
   return {
     data () {
       return {
+        assessType: null,
         displayPriority: 3,
         orgName: '', // 机构名称
         assessStatus: null, // 0： 未开始 调新建接口 1：检查中 调修改接口和获取详情接口 2：已完成 调获取详情接口 3：不合格 调获取详情接口和新建接口
@@ -79,6 +80,14 @@ export default function (count = 27) {
           },
           C: {
             list: [], // 所有的C项目
+            listStr: '',
+            liftList: [],
+            liftStr: '',
+            baseStr: '',
+            baseList: [] // 基础指标序号
+          },
+          D: {
+            list: [], // 所有的D项目
             listStr: '',
             liftList: [],
             liftStr: '',
@@ -167,9 +176,53 @@ export default function (count = 27) {
       canvasClear () {
         this.$refs.sign.canvasClear()
       },
-      // 添加专家组成员
+      // 添加检查组成员
       addCheckExpert (v) {
         this.signData.checkExpert.push(v)
+      },
+      // 修改组长姓名
+      addCheckMajorName () {
+        this.$prompt('姓名', '', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputValidator: function (value) {
+            value = value && value.trim()
+            if (!value || !value.length) return '姓名不能为空'
+          }
+        })
+          .then(({ value }) => {
+            this.signData.checkMajor.name = value
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消输入'
+            })
+          })
+      },
+
+      // 添加专家组 检查组
+      addExpert () {
+        this.$prompt('姓名', '', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputValidator: function (value) {
+            value = value && value.trim()
+            if (!value || !value.length) return '姓名不能为空'
+          }
+        })
+          .then(({ value }) => {
+            this.addCheckExpert({
+              name: value
+            })
+            // this.signData.beCheckedMajor.name = value
+          })
+          .catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消输入'
+            })
+          })
       },
       // 添加被检查养老院负责人
       addBeCheckedMajor () {
@@ -202,7 +255,8 @@ export default function (count = 27) {
           return (
             this.tableData[item].value !== 'A' &&
           this.tableData[item].value !== 'B' &&
-          this.tableData[item].value !== 'C'
+          this.tableData[item].value !== 'C' &&
+          this.tableData[item].value !== 'D'
           )
         })
         const firstIndex = noValueList[0] && noValueList[0].split('_')[1]
@@ -212,7 +266,7 @@ export default function (count = 27) {
         }
         const signData = this.signData
         if (!signData.checkMajor.sign) {
-          this.msgError('请负责专员签字')
+          this.msgError('请组长签字')
           return false
         }
         if (!signData.beCheckedMajor.name) {
@@ -224,14 +278,14 @@ export default function (count = 27) {
           return false
         }
         if (!signData.checkExpert.length) {
-          this.msgError('请添加专家组成员')
+          this.msgError('请添加检查组成员')
           return false
         }
         const noSignExpertList = signData.checkExpert.filter((item) => {
           return !item.sign
         })
         if (noSignExpertList.length) {
-          this.msgError('请专家组成员' + noSignExpertList[0].name + '签字')
+          this.msgError('请检查组成员' + noSignExpertList[0].name + '签字')
           return false
         }
         return true
@@ -300,6 +354,43 @@ export default function (count = 27) {
           if (result.tableData) {
             this.tableData = result.tableData
           }
+          if (this.assessType === 1) {
+            // 因为后期208项大检查改成了212检查 为了避免数据出错 且避免删除测试数据重新创建 所以这里进行了hack
+            if (!this.tableData.data_209) {
+              this.$set(this.tableData, 'data_209', {
+                type: 1,
+                value: '',
+                text: ''
+              })
+            }
+            if (!this.tableData.data_210) {
+              this.$set(this.tableData, 'data_210', {
+                type: 1,
+                value: '',
+                text: ''
+              })
+            }
+            if (!this.tableData.data_211) {
+              this.$set(this.tableData, 'data_211', {
+                type: 1,
+                value: '',
+                text: ''
+              })
+            }
+            if (!this.tableData.data_212) {
+              this.$set(this.tableData, 'data_212', {
+                type: 0,
+                value: '',
+                text: ''
+              })
+            }
+          } else {
+            this.tableData.data_209 && delete this.tableData.data_209
+            this.tableData.data_210 && delete this.tableData.data_210
+            this.tableData.data_211 && delete this.tableData.data_211
+            this.tableData.data_212 && delete this.tableData.data_212
+          }
+
           if (result.signData) {
             this.signData = result.signData
           }
@@ -320,7 +411,7 @@ export default function (count = 27) {
       },
       // 生成最终的提交数据
       getSubmitData () {
-      //  获取专家组列表
+      //  获取检查组列表
         const expertNames = []
         this.signData.checkExpert.forEach((item) => {
           expertNames.push(item.name)
@@ -374,6 +465,7 @@ export default function (count = 27) {
         this.sum.A = getList('A')
         this.sum.B = getList('B')
         this.sum.C = getList('C')
+        this.sum.D = getList('D')
         // 最终结果 0整改/ 1提升
         // 检查结果中有任何1项基础指标属于C（不符合），则检查结果为整改；养老院基础指标全部符合，则检查结果为提升
         if (this.sum.C.baseList.length) {
@@ -390,7 +482,7 @@ export default function (count = 27) {
         this.$watch(
           'tableData',
           function () {
-          // tableData数据变化的同时 更新sum表格
+            // tableData数据变化的同时 更新sum表格
             this.getSum()
             save()
           },
@@ -472,7 +564,8 @@ export default function (count = 27) {
       }
       this.assessId = this.$route.params.checkid
       data = JSON.parse(data)
-
+      // 获取到检查类型
+      this.assessType = data.assessType
       // 获取评估状态
       this.assessStatus = data.assessStatus
       // 默认取值检查时间
@@ -480,7 +573,7 @@ export default function (count = 27) {
       // 获取项目id
       this.projectId = data.projectId
       // 负责人
-      this.signData.checkMajor.name = data.inspector
+      //  this.signData.checkMajor.name = data.inspector
       // 默认取值机构名称
       this.orgName = data.name
 

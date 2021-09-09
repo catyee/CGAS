@@ -4,7 +4,7 @@
       <div class="flex pt-16">
         <div class="title-line"></div>
         <span class="pl-4 f14"
-          >评估<span class="f16 color-danger pointer">
+          >检查<span class="f16 color-danger pointer">
             <router-link to="/project-list"> >返回检查列表 </router-link>
           </span></span
         >
@@ -95,10 +95,10 @@
         <div class="center" id="print">
           <!-- 提示事项 -->
           <div class="tip brakpage">
-            <span>注:</span>
+            <span>填写说明:</span>
             <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
             <div>
-              2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
+              2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C；检查结果不适用的，填写D。
             </div>
           </div>
           <div class="org-title-content f16 text-bold">
@@ -124,7 +124,7 @@
               <td>检查内容</td>
               <td>检查细则</td>
               <td>检查方式</td>
-              <td>检查结果</td>
+              <td style="text-align:center;">检查结果</td>
               <td>整改建议</td>
             </tr>
           </table>
@@ -139,7 +139,7 @@
               <td>检查内容</td>
               <td>检查细则</td>
               <td>检查方式</td>
-              <td>检查结果</td>
+              <td style="text-align:center;">检查结果</td>
               <td>整改建议</td>
             </tr>
           </table>
@@ -155,7 +155,7 @@
               <td>检查细则</td>
               <td>检查方式</td>
               <td>检查单位</td>
-              <td>检查结果</td>
+              <td style="text-align:center;">检查结果</td>
               <td>整改建议</td>
             </tr>
           </table>
@@ -1331,6 +1331,27 @@ export default {
           type: 0,
           value: '',
           text: ''
+        },
+        // 康复服务
+        data_209: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_210: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_211: {
+          type: 1,
+          value: '',
+          text: ''
+        },
+        data_212: {
+          type: 0,
+          value: '',
+          text: ''
         }
       },
       // 最终的统计信息
@@ -1353,6 +1374,14 @@ export default {
         },
         C: {
           list: [], // 所有的C项目
+          listStr: '',
+          liftList: [],
+          liftStr: '',
+          baseStr: '',
+          baseList: [] // 基础指标序号
+        },
+        D: {
+          list: [], // 所有的D项目
           listStr: '',
           liftList: [],
           liftStr: '',
@@ -1384,6 +1413,35 @@ export default {
           const result = JSON.parse(data.result)
           if (result.tableData) {
             this.tableData = result.tableData
+          }
+          // 因为后期208项大检查改成了212检查 为了避免数据出错 且避免删除测试数据重新创建 所以这里进行了hack
+          if (!this.tableData.data_209) {
+            this.$set(this.tableData, 'data_209', {
+              type: 1,
+              value: '',
+              text: ''
+            })
+          }
+          if (!this.tableData.data_210) {
+            this.$set(this.tableData, 'data_210', {
+              type: 1,
+              value: '',
+              text: ''
+            })
+          }
+          if (!this.tableData.data_211) {
+            this.$set(this.tableData, 'data_211', {
+              type: 1,
+              value: '',
+              text: ''
+            })
+          }
+          if (!this.tableData.data_212) {
+            this.$set(this.tableData, 'data_212', {
+              type: 0,
+              value: '',
+              text: ''
+            })
           }
           if (result.signData) {
             this.signData = result.signData

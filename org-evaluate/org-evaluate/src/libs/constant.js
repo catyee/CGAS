@@ -1,8 +1,8 @@
-export const checkedGrade = ['A', 'B', 'C']
+export const checkedGrade = ['A', 'B', 'C', 'D']
 export const orgType = [
   {
     type: 1,
-    name: '服务社会老年人的养老院'
+    name: '民办养老院'
   },
   {
     type: 2,
@@ -34,7 +34,7 @@ export const evaluateStatus = [
 
 export const checkTypes = [
   {
-    label: '208项检查',
+    label: '212项检查',
     type: 1
   },
   {

@@ -3,7 +3,7 @@
     <div class="left" id="left">
       <div class="flex pt-16">
         <div class="title-line"></div>
-        <span class="pl-4 f14">评估<span class="f16 color-danger pointer">
+        <span class="pl-4 f14">检查<span class="f16 color-danger pointer">
             <router-link to="/project-list">
               >返回检查列表
             </router-link>
@@ -29,10 +29,10 @@
         <div class="center">
           <!-- 提示事项 -->
           <div class="tip">
-            <span>注:</span>
+            <span>填写说明:</span>
             <div>1.标黑字体的指标属于基础指标，其余指标属于提升指标。</div>
             <div>
-              2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C。
+              2.检查结果为符合的，填写A；检查结果为部分符合的，填写B；检查结果为不符合的，填写C；检查结果不适用的，填写D。
             </div>
           </div>
           <div class="org-title-content text-bold f16">
@@ -395,7 +395,7 @@
                       （入住评估、常规评估、即时评估）、入住协议（其中包括不得侵犯老年人肖像权、不得泄露老年人隐私等）、监护人和服务对象身份证明、监护人联系方式、在院记录等相关资料，请假、出院或死亡７天内档案必须入库。
                     </td>
                     <td :class="{'warn-C': tableData.data_17.value === 'C'}">
-                      未建立档案管理库不符合；档案资料每缺2项以上的为不符合。
+                      未建立档案管理库不符合；档案资料每缺2项以上的为不符合。
                     </td>
                     <td :class="{'warn-C': tableData.data_17.value === 'C'}">查看制度、文件</td>
                     <td :class="{'warn-C': tableData.data_17.value === 'C'}">
@@ -714,17 +714,27 @@
                 <td>{{ sum.C.liftList.length }}</td>
                 <td>{{ sum.C.list.length }}</td>
               </tr>
+               <tr>
+                <td>D</td>
+                <td class="text-left">{{ sum.D.listStr }}</td>
+                <td>{{ sum.D.baseList.length }}</td>
+                <td>{{ sum.D.liftList.length }}</td>
+                <td>{{ sum.D.list.length }}</td>
+              </tr>
             </table>
             <!-- 签字 -->
             <div class="sign-panel">
               <div class="flex-between block">
                 <div class="flex block">
-                  <span>负责专员签字：</span>
+                  <span>组长签字：</span>
                   <div>
-                    <div class="flex-sign">
-                      <span class="text-border">{{
+                    <div class="flex-sign"  v-if="signData.checkMajor.name">
+                      <!-- <span class="text-border">{{
                         signData.checkMajor.name
-                      }}</span>
+                      }}</span> -->
+                         <span class="text-border" @click="addCheckMajorName">{{
+                          signData.checkMajor.name
+                        }}</span>
                       <el-button
                         v-if="!signData.checkMajor.sign"
                         type="primary"
@@ -740,6 +750,13 @@
                         height="38"
                       />
                     </div>
+                     <div
+                        class="add-user"
+                        @click="addCheckMajorName"
+                        v-if="!signData.checkMajor.name"
+                      >
+                        <span>+</span>添加
+                      </div>
                   </div>
                 </div>
                 <div class="sign-right block">
@@ -781,7 +798,7 @@
               </div>
               <div class="flex-between block">
                 <div class="flex block">
-                  <span>专家组成员签字：</span>
+                  <span>检查组签字：</span>
                   <div>
                     <div
                       class="flex-sign mb-20"
@@ -789,10 +806,10 @@
                       :key="index"
                     >
                       <span class="text-border">{{ user.name }}</span>
-                      <span class="text-border">{{
+                      <!-- <span class="text-border">{{
                         user.sex == 0 ? "男" : "女"
-                      }}</span>
-                      <span class="text-border">{{ user.phone }}</span>
+                      }}</span> -->
+                      <!-- <span class="text-border">{{ user.phone }}</span> -->
                       <el-button
                         v-if="!user.sign"
                         type="primary"
@@ -814,7 +831,7 @@
                         >删除</span
                       >
                     </div>
-                    <div class="add-user" @click="addExpertVisible = true">
+                    <div class="add-user" @click="addExpert">
                       <span>+</span>添加
                     </div>
                   </div>
@@ -865,12 +882,12 @@
       </el-dialog>
     </div>
     <!-- 添加专家组成员 -->
-    <AddExpert
+    <!-- <AddExpert
       :userData="currentExpert"
       :show="addExpertVisible"
       @closeModal="addExpertVisible = false"
       @addExpert="addCheckExpert"
-    ></AddExpert>
+    ></AddExpert> -->
   </div>
 </template>
 <script>
@@ -879,7 +896,7 @@ import CheckedGrade from './checked-grade.vue'
 import CheckedText from './checked-text.vue'
 import Defer from './checkMixin'
 import Sign from '@/components/sign.vue'
-import AddExpert from './add-expert.vue'
+// import AddExpert from './add-expert.vue'
 
 export default {
   components: {
@@ -887,8 +904,8 @@ export default {
     CheckedGrade,
     // 整改建议输入组件
     CheckedText,
-    Sign,
-    AddExpert
+    Sign
+    // AddExpert
   },
   mixins: [Defer()],
   data () {

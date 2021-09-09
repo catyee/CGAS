@@ -18,7 +18,11 @@ export default {
     // 必须监听prop的变化 否则当prop数据变化时 数据不同同步到这里
     bindValue: {
       handler (v) {
-        this.radioValue = v
+        if (v) {
+          this.radioValue = v
+        } else {
+          this.radioValue = ''
+        }
       },
       immediate: true,
       deep: true
