@@ -178,7 +178,7 @@
             <td rowspan="2">合计</td>
             <td colspan="8">
               检查养老机构总数<span class="count">({{ totalCount }})</span
-              >个，其中:社会老年人的养老院<span class="count"
+              >个，其中:民办养老院<span class="count"
                 >({{ YangLaoYuanData.count }})</span
               >个,敬老院<span class="count">({{ JingLaoYuanData.count }})</span
               >个
@@ -190,7 +190,7 @@
                 >({{
                   YangLaoYuanData.failCount + JingLaoYuanData.failCount
                 }})</span
-              >个，其中：社会养老人的养老院<span class="count"
+              >个，其中：民办养老院<span class="count"
                 >({{ YangLaoYuanData.failCount }})</span
               >个，敬老院<span class="count"
                 >({{ JingLaoYuanData.failCount }})</span
