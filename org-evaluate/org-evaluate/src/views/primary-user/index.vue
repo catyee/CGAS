@@ -3,7 +3,7 @@
     <div class="selector">
       <div class="flex pr-16">
         <div class="title-line"></div>
-        <span class="pl-2 f14">负责专员</span>
+        <span class="pl-2 f14">检查账号</span>
       </div>
       <!-- <div class="flex pr-16">
         <div class="color-grey pr-5 f14 no-wrap">用户名称:</div>
@@ -43,7 +43,7 @@
           >
         </div>
         <div class="oper-right pr-16">
-          <el-button type="primary" @click="addNew">新建负责专员</el-button>
+          <el-button type="primary" @click="addNew">新建检查账号</el-button>
         </div>
       </div>
       <el-table
@@ -205,7 +205,7 @@ export default {
         { label: '男', value: '1' },
         { label: '女', value: '0' }
       ],
-      pannelTitle: '新建负责专员',
+      pannelTitle: '新建检查账号',
       selectedIds: [], // 选中项的id
       selectedIdsStr: '', // 选中项id的拼接字符串
       // getList查询参数
@@ -216,7 +216,7 @@ export default {
         pageSize: 20,
         // 查询参数
         nickName: '',
-        // 只显示负责专员的用户
+        // 只显示检查账号的用户
         roleIds: 2
       },
       // 总条数
@@ -231,7 +231,7 @@ export default {
         userName: '',
         sex: '',
         status: '0', // 0 正常 1停用 默认正常
-        roleIds: [2], // 新增默认必传 负责专员
+        roleIds: [2], // 新增默认必传 检查账号
         passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
       }
     }
@@ -306,11 +306,11 @@ export default {
         userName: '',
         sex: '',
         status: '0', // 0 正常 1停用 默认正常
-        roleIds: [2], // 新增默认必传 负责专员
+        roleIds: [2], // 新增默认必传 检查账号
         passwdStatus: 0 // 新增默认必传 0正常 不需要申请重置 1需要申请重置
       }
       this.showAddUser = true
-      this.pannelTitle = '新建负责专员'
+      this.pannelTitle = '新建检查账号'
     },
     // 修改用户信息
     edit (user) {
@@ -410,7 +410,7 @@ export default {
     },
     // 批量启用用户
     enableUser () {
-      this.$confirm('此操作将启用选中的负责专员, 是否继续?', '提示', {
+      this.$confirm('此操作将启用选中的检查账号, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -429,7 +429,7 @@ export default {
     },
     // 批量禁用用户
     disableUser () {
-      this.$confirm('此操作将禁用选中的负责专员, 是否继续?', '提示', {
+      this.$confirm('此操作将禁用选中的检查账号, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -448,7 +448,7 @@ export default {
     },
     // 删除用户
     handleDelete (id) {
-      this.$confirm('此操作将永久删除该负责专员, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该检查账号, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -477,7 +477,7 @@ export default {
         const text = this.ruleForm.userId ? '修改' : '创建'
         // 验证通过
         if (valid) {
-          this.$confirm(`您确定要${text}该负责专员信息吗?`, '提示', {
+          this.$confirm(`您确定要${text}该检查账号信息吗?`, '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'

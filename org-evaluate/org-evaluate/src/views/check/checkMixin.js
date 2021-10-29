@@ -11,6 +11,7 @@ export default function (count = 27) {
   return {
     data () {
       return {
+        inspector: '', // 检查账号
         assessType: null,
         displayPriority: 3,
         orgName: '', // 机构名称
@@ -265,10 +266,10 @@ export default function (count = 27) {
           return false
         }
         const signData = this.signData
-        if (!signData.checkMajor.sign) {
-          this.msgError('请组长签字')
-          return false
-        }
+        // if (!signData.checkMajor.sign) {
+        //   this.msgError('请组长签字')
+        //   return false
+        // }
         if (!signData.beCheckedMajor.name) {
           this.msgError('请添加被检查养老院负责人并签字')
           return false
@@ -278,14 +279,14 @@ export default function (count = 27) {
           return false
         }
         if (!signData.checkExpert.length) {
-          this.msgError('请添加检查组成员')
+          this.msgError('请添加检查人员成员')
           return false
         }
         const noSignExpertList = signData.checkExpert.filter((item) => {
           return !item.sign
         })
         if (noSignExpertList.length) {
-          this.msgError('请检查组成员' + noSignExpertList[0].name + '签字')
+          this.msgError('请检查人员' + noSignExpertList[0].name + '签字')
           return false
         }
         return true
@@ -393,6 +394,7 @@ export default function (count = 27) {
 
           if (result.signData) {
             this.signData = result.signData
+            this.signData.checkMajor.name = this.inspector
           }
           this.orgName = result.orgName
         }
@@ -573,7 +575,8 @@ export default function (count = 27) {
       // 获取项目id
       this.projectId = data.projectId
       // 负责人
-      //  this.signData.checkMajor.name = data.inspector
+      this.signData.checkMajor.name = data.inspector
+      this.inspector = data.inspector
       // 默认取值机构名称
       this.orgName = data.name
 

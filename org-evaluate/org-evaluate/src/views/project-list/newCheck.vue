@@ -32,8 +32,8 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="负责专员" prop="userId">
-          <el-select v-model="ruleForm.userId" placeholder="请选择负责专员">
+        <el-form-item label="检查账号" prop="userId">
+          <el-select v-model="ruleForm.userId" placeholder="请选择检查账号">
             <el-option
               v-for="item in userList"
               :label="item.nickName"
@@ -79,7 +79,7 @@ export default {
       // nickName: this.$store.getters.nickName,
       // role: this.$store.getters.roles[0],
       orgType: orgType, // 机构类型
-      userList: [], // 负责专员列表
+      userList: [], // 检查账号列表
       // 表单校验规则
       rules: {
         // 被评估机构名称
@@ -110,7 +110,7 @@ export default {
         userId: [
           {
             required: true,
-            message: '请选择负责专员',
+            message: '请选择检查账号',
             trigger: 'blur'
           }
         ]
@@ -122,7 +122,7 @@ export default {
         // projectNumber: '', // 项目编号
         name: '', // 评估机构名称
         type: null, // 机构性质
-        userId: null, // 负责专员
+        userId: null, // 检查账号
         userName: ''
       }
     }
@@ -150,7 +150,7 @@ export default {
             // projectNumber: '', // 项目编号
             name: '', // 评估机构名称
             type: null, // 机构性质
-            userId: null, // 负责专员
+            userId: null, // 检查账号
             userName: ''
           }
         }
@@ -179,7 +179,7 @@ export default {
         pageSize: 999999,
         // 查询参数
         nickName: '',
-        // 只显示负责专员的用户
+        // 只显示检查账号的用户
         roleIds: 2
       }
       getUserList(queryParams).then((res) => {
@@ -240,7 +240,7 @@ export default {
       //   // projectNumber: '', // 项目编号
       //   name: '', // 评估机构名称
       //   type: null, // 机构性质
-      //   userId: null, // 负责专员
+      //   userId: null, // 检查账号
       //   userName: ''
       // }
     }

@@ -7,7 +7,7 @@ export default {
     role () {
       const role = this.$store.getters.roles[0]
       if (role === 'common') {
-        return '负责专员'
+        return '检查账号'
       }
       if (role === 'admin') {
         return '民政局'

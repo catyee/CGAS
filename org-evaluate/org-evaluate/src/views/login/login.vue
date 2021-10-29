@@ -134,7 +134,7 @@ export default {
       })
         .then(() => {
           requestReset({ userName: this.resetUserName }).then(() => {
-            this.$confirm('请寻求管理员协助，在负责专员界面重置密码', '重置密码申请已提交', {
+            this.$confirm('请寻求管理员协助，在检查账号界面重置密码', '重置密码申请已提交', {
               distinguishCancelAndClose: true,
               confirmButtonText: '确定',
               customClass: 'title-tip',

@@ -125,10 +125,10 @@
                     <td rowspan="4" class="td-top">二、膳食环境</td>
                     <td :class="{'warn-C': tableData.data_4.value === 'C'}">4</td>
                     <td class="bold" :class="{'warn-C': tableData.data_4.value === 'C'}">
-                      食堂安装灭蚊蝇灯、挡鼠板、纱窗、防盗网；无苍蝇、老鼠、蟑螂和其他害虫。
+                    食堂安装灭蚊蝇灯、挡鼠板、纱窗、防盗网；无苍蝇、老鼠、蟑螂和其它害虫。
                     </td>
                     <td :class="{'warn-C': tableData.data_4.value === 'C'}">
-                      未按要求安装设施，每缺一项为不符合；发现苍蝇、老鼠、蟑螂或其他害虫，2项以上为不符合
+                     未按要求安装设施，每缺一项为不符合；发现苍蝇、老鼠、蟑螂或其它害虫，2项以上为不符合
                     </td>
                     <td :class="{'warn-C': tableData.data_4.value === 'C'}">现场查看</td>
                     <td :class="{'warn-C': tableData.data_4.value === 'C'}">
@@ -163,8 +163,7 @@
                   <tr :class="{'warn-C': tableData.data_6.value === 'C'}">
                     <td>6</td>
                     <td class="bold">
-                      厨房和就餐区各种设备、炊具、用具整洁卫生;做好餐
-                      （饮）具消毒。
+                     厨房和就餐区各种设备、炊具、用具整洁卫生;做好餐 （饮）具消毒。
                     </td>
                     <td>
                       不卫生、不整洁、消毒不符合要求其中有1项不达标为不符合
@@ -308,7 +307,7 @@
                     <td rowspan="4" class="td-top">五、行政人事管理</td>
                     <td :class="{'warn-C': tableData.data_13.value === 'C'}">13</td>
                     <td class="bold" :class="{'warn-C': tableData.data_13.value === 'C'}">
-                      护理人员与生活能力完好的服务对象，配备比例不低于１∶８；与轻度及中度失能的服务对象，配备比例不低于１∶５；与重度失能的服务对象，配备比例不低于１∶３。
+                      护理人员与生活能力完好的服务对象，配备比例不低于1:8；与轻度及中度失能的服务对象，配备比例不低于1:5；与重度失能的服务对象，配备比例不低于1:3。
                     </td>
                     <td :class="{'warn-C': tableData.data_13.value === 'C'}">
                       护理人员配备三项要求，1项不达标的为部分符合，2项及以上不达标的为不符合
@@ -350,8 +349,8 @@
                     <td class="bold">
                       有工作人员职业道德准则或行为规范并落实。
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td>有一项不达标为不符合</td>
+                    <td>查看制度、抽查询问护理员</td>
                     <td>
                       <CheckedGrade
                         v-model="tableData.data_15.value"
@@ -366,8 +365,7 @@
                   <tr :class="{'warn-C': tableData.data_16.value === 'C'}">
                     <td>16</td>
                     <td class="bold">
-                      工作人员熟悉
-                      《养老机构服务质量基本规范》和工作流程，严格开展考评，至少每半年一次，并及时改进工作，有考评记录和改进措施；对服务对象要做到“七知道”（姓名、照料重点、爱好、疾病、家庭、治疗、心理）。
+                      工作人员熟悉《养老机构服务质量基本规范》和工作流程，严格开展考评，至少每半年一次，并及时改进工作，有考评记录和改进措施；对服务对象要做到“七知道”（姓名、照料重点、爱好、疾病、家庭、治疗、心理）。
                     </td>
                     <td>
                       无考评记录、改进措施、抽查护理员准确率低于80%的其中1项为部分符合，2项及以上为不符合
@@ -391,8 +389,7 @@
                     <td rowspan="1" class="td-top">六、业务管理</td>
                     <td :class="{'warn-C': tableData.data_17.value === 'C'}">17</td>
                     <td class="bold" :class="{'warn-C': tableData.data_17.value === 'C'}">
-                      建立在院服务对象档案管理库，要有生活档案和健康档案，包括入院服务对象健康评估、能力评估
-                      （入住评估、常规评估、即时评估）、入住协议（其中包括不得侵犯老年人肖像权、不得泄露老年人隐私等）、监护人和服务对象身份证明、监护人联系方式、在院记录等相关资料，请假、出院或死亡７天内档案必须入库。
+                     建立在院服务对象档案管理库，要有生活档案和健康档案，包括入院服务对象健康评估、能力评估 （入住评估、常规评估、即时评估）、入住协议（其中包括不得侵犯老年人肖像权、不得泄露老年人隐私等）、监护人和服务对象身份证明、监护人联系方式、在院记录等相关资料，请假、出院或死亡7天内档案必须入库。
                     </td>
                     <td :class="{'warn-C': tableData.data_17.value === 'C'}">
                       未建立档案管理库不符合；档案资料每缺2项以上的为不符合。
@@ -470,7 +467,7 @@
                   <tr :class="{'warn-C': tableData.data_21.value === 'C'}">
                     <td>21</td>
                     <td class="bold">
-                      服务对象居室不能有火种、刀具、剪指刀、过期食品、药品等，护理人员每天检查１次。
+                      服务对象居室不能有火种、刀具、剪指刀、过期食品、药品等，护理人员每天检查1次。
                     </td>
                     <td>其中有1项为部分符合，有2项及以上的为不符合</td>
                     <td>查看相关记录，现场抽查</td>
@@ -492,8 +489,7 @@
                     <td rowspan="6" class="td-top">八、生活护理服务</td>
                     <td :class="{'warn-C': tableData.data_22.value === 'C'}">22</td>
                     <td class="bold" :class="{'warn-C': tableData.data_22.value === 'C'}">
-                      每天清洁居室卫生１次；室内物品摆放整齐有序，无障碍物；墙壁、门窗清洁无灰尘；桌面、地面无垃圾；每周进行1次卫生检查；每季度灭
-                      “四害”１次。
+                      每天清洁居室卫生1次；室内物品摆放整齐有序，无障碍物；墙壁、门窗清洁无灰尘；桌面、地面无垃圾；每周进行1次卫生检查；每季度灭 “四害”1次。
                     </td>
                     <td :class="{'warn-C': tableData.data_22.value === 'C'}">
                       不整洁或物品摆放无序、无卫生检查记录、无灭四害记录其中1项为部分符合，2项及以上为不符合
@@ -531,8 +527,7 @@
                   <tr :class="{'warn-C': tableData.data_24.value === 'C'}">
                     <td>24</td>
                     <td class="bold">
-                      床上用品 （床单、被套、枕套）
-                      清洁无异味，服务对象离床立即折叠整齐。
+                      床上用品（床单、被套、枕套）清洁无异味，服务对象离床立即折叠整齐。
                     </td>
                     <td>5张床及以上未达要求的为不符合</td>
                     <td>现场查看</td>
@@ -586,11 +581,10 @@
                   <tr :class="{'warn-C': tableData.data_27.value === 'C'}">
                     <td>27</td>
                     <td class="bold">
-                      护理人员能够协助服务对象穿脱衣、口腔清洁、身体清洁
-                      （床上擦浴）、预防压疮、轮椅转移、喂饭、鼻饲、喂水、睡眠照料、更换尿不湿、床上体位转移、更换床上用品。
+                     护理人员能够协助服务对象穿脱衣、口腔清洁、身体清洁 （床上擦浴）、预防压疮、轮椅转移、喂饭、鼻饲、喂水、睡眠照料、更换尿不湿、床上体位转移、更换床上用品。
                     </td>
                     <td>2项及以上不达标的为不符合</td>
-                    <td>现场随机抽查2名 以上护理员，不少 于2项内容进行考 核</td>
+                    <td>现场随机抽查2名 以上护理员，不少于2项内容进行考核</td>
                     <td>
                       <CheckedGrade
                         v-model="tableData.data_27.value"
@@ -609,8 +603,7 @@
                     <td rowspan="1" class="td-top">九、膳食服务</td>
                     <td :class="{'warn-C': tableData.data_28.value === 'C'}">28</td>
                     <td class="bold" :class="{'warn-C': tableData.data_28.value === 'C'}">
-                      食谱每周至少更换一次并上墙；膳食部门每月召开
-                      １次膳食管理会议听取服务对象及家属意见。
+                     食谱每周至少更换一次并上墙；膳食部门每月召开1次膳食管理会议听取服务对象及家属意见。
                     </td>
                     <td :class="{'warn-C': tableData.data_28.value === 'C'}">
                       未更新食谱、未召开会议、无整改措施和记录，有其中1项为部分符合，2项及以上为不符合
@@ -636,14 +629,13 @@
                     <td rowspan="2" class="td-top">十、社会工作及医疗服务</td>
                     <td :class="{'warn-C': tableData.data_29.value === 'C'}">29</td>
                     <td class="bold" :class="{'warn-C': tableData.data_29.value === 'C'}">
-                      制订月、季度、年度活动计划，组织和引导老年人开展小型文体娱乐活动，每周不少于
-                      １次，大型文体娱乐活动每季度不少于１次。
+                     制定月度、季度、年度活动计划，组织和引导老年人开展小型文体娱乐活动，每周不少于1次，大型文体娱乐活动每季度不少于1次。
                     </td>
                     <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       未按要求开展活动、无活动图文记录、无老人反馈记录，有其中1项为部分符合，2项及以上为不符合
                     </td>
                     <td :class="{'warn-C': tableData.data_29.value === 'C'}">
-                      查看活动图文、反馈记录、视频资 料；现场询问3名 以上老人
+                      查看活动图文、反馈记录、视频资料；现场询问3名以上老人
                     </td>
                     <td :class="{'warn-C': tableData.data_29.value === 'C'}">
                       <CheckedGrade
@@ -659,12 +651,11 @@
                   <tr :class="{'warn-C': tableData.data_30.value === 'C'}">
                     <td>30</td>
                     <td class="bold">
-                      每月组织服务对象进行一次健康讲座；合作医疗机构每星期诊疗
-                      １次，根据服务对象病情变化实际情况及时转诊。
+                     每月组织服务对象进行一次健康讲座；合作医疗机构每周诊疗1次，根据服务对象病情变化实际情况及时转诊。
                     </td>
                     <td>未按要求组织学习、无诊疗记录的，有2项及以上为不符合</td>
                     <td>
-                      查看活动图文、反馈记录、视频资 料；现场询问3名 以上老人
+                    查看活动图文、反馈记录、视频资料；现场询问3名以上老人
                     </td>
                     <td>
                       <CheckedGrade
@@ -725,13 +716,13 @@
             <!-- 签字 -->
             <div class="sign-panel">
               <div class="flex-between block">
-                <div class="flex block">
-                  <span>组长签字：</span>
+                <!-- <div class="flex block">
+                  <span>检查账号：</span>
                   <div>
-                    <div class="flex-sign"  v-if="signData.checkMajor.name">
-                      <!-- <span class="text-border">{{
+                    <div class="flex-sign">
+                      <span class="text-border">{{
                         signData.checkMajor.name
-                      }}</span> -->
+                      }}</span>
                          <span class="text-border" @click="addCheckMajorName">{{
                           signData.checkMajor.name
                         }}</span>
@@ -758,7 +749,7 @@
                         <span>+</span>添加
                       </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="sign-right block">
                   <div class="flex">
                     <span>被检查养老院负责人签字：</span>
@@ -798,7 +789,7 @@
               </div>
               <div class="flex-between block">
                 <div class="flex block">
-                  <span>检查组签字：</span>
+                  <span>检查人员签字：</span>
                   <div>
                     <div
                       class="flex-sign mb-20"

@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="flex pr-16">
-        <div class="color-grey pr-5 f14 no-wrap">专家组成员:</div>
+        <div class="color-grey pr-5 f14 no-wrap">检查人员:</div>
         <div>
           <el-input
             v-model="queryParams.expertNames"
@@ -112,8 +112,8 @@
           </template>
         </el-table-column>
         <el-table-column label="被检查机构名称" prop="name"> </el-table-column>
-        <el-table-column label="负责专员" prop="userName"> </el-table-column>
-        <el-table-column label="专家组成员" prop="expertNames">
+        <el-table-column label="检查账号" prop="userName"> </el-table-column>
+        <el-table-column label="检查人员" prop="expertNames">
           <template slot-scope="scope">
             {{ scope.row.expertNames && scope.row.expertNames.length ? scope.row.expertNames: '暂无'}}
           </template>
@@ -238,7 +238,7 @@ export default {
         pageSize: 10,
         // 查询关键字
         name: null,
-        // 负责专员id
+        // 检查账号id
         userId: null,
         // 专家组
         expertNames: '',
